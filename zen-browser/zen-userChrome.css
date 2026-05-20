@@ -127,7 +127,7 @@ toolbarbutton#tabs-newtab-button {
 }
 
 .urlbar-background {
-  background-color: var(--base) !important;
+  background-color: var(--overlay) !important;
 }
 
 #urlbar-input-container {
@@ -194,3 +194,45 @@ hbox#titlebar {
 	fill: var(--text) !important;
 }
 
+/* --- Fixing Select Dropdowns colors on Webpages --- */
+
+#ContentSelectDropdown,
+#ContentSelectDropdown > menupopup,
+#ContentSelectDropdownPopup,
+#ContentSelectDropdownPopup .menupopup-arrowscrollbox,
+#ContentSelectDropdownPopup .panel-arrowcontent {
+  --arrowpanel-background: var(--overlay) !important;
+  --arrowpanel-color: var(--text) !important;
+  --arrowpanel-border-color: transparent !important;
+  --panel-border-color: transparent !important;
+  background-color: var(--overlay) !important;
+  background-image: none !important;
+  --content-select-background-image: none !important;
+  color: var(--text) !important;
+  border: none !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+#ContentSelectDropdown menupopup menuitem,
+#ContentSelectDropdownPopup richlistitem,
+#ContentSelectDropdownPopup .ContentSelectDropdown-item {
+  color: var(--text) !important;
+  background-color: transparent !important;
+}
+
+#ContentSelectDropdown menupopup menuitem[_moz-menuactive="true"],
+#ContentSelectDropdownPopup richlistitem[_moz-menuactive="true"],
+#ContentSelectDropdownPopup .ContentSelectDropdown-item[_moz-menuactive="true"],
+#ContentSelectDropdownPopup richlistitem:hover,
+#ContentSelectDropdownPopup .ContentSelectDropdown-item:hover {
+  background-color: var(--subtle) !important;
+  color: var(--primary) !important;
+}
+
+#ContentSelectDropdown menupopup menuitem[selected="true"],
+#ContentSelectDropdownPopup richlistitem[selected="true"],
+#ContentSelectDropdownPopup .ContentSelectDropdown-item[selected="true"] {
+  background-color: var(--muted) !important;
+  color: var(--primary) !important;
+}
