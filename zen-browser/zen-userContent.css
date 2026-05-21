@@ -125,6 +125,31 @@
 	}
 }
 
+/* Variables and styles specific to about:logins */
+@-moz-document url-prefix("about:logins") {
+  :root {
+    --background-color-box: {{colors.surface_container.default.hex}} !important;
+    --in-content-box-background: {{colors.surface_container.default.hex}} !important;
+    --background-color-canvas: {{colors.surface_container_highest.default.hex}} !important;
+  }
+
+  header {
+    background-color: {{colors.surface_container_lowest.default.hex}} !important;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="search"],
+  input:not([type="checkbox"]):not([type="radio"]) {
+    padding: 8px 12px !important;
+  }
+
+  /* Restore left padding for the search input to avoid icon overlap */
+  input.filter:not([type="checkbox"]):not([type="radio"]) {
+    padding-left: 32px !important;
+  }
+}
+
 /* Toggle button styling for addons, preferences and newtab */
 @-moz-document url-prefix("about:addons"), url-prefix("about:preferences"), url-prefix("about:newtab"), url-prefix("about:home") {
   moz-toggle {
@@ -220,10 +245,6 @@
 	}
 }
 
-/* Pane UI button visibility issue fix */
-#PanelUI-menu-button[open] .toolbarbutton-icon {
-  fill: {{colors.primary.default.hex}} !important;
-}
 
 /* Custom text selection styling */
 ::selection {
@@ -263,4 +284,21 @@
   border: 1px solid color-mix(in srgb, {{colors.surface_container_highest.default.hex}} 20%, transparent) !important;
   backdrop-filter: blur(10px);
   transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+/* Variables and styles specific to about:neterror */
+@-moz-document url-prefix("about:neterror") {
+  :root {
+    --in-content-primary-button-background: {{colors.secondary.default.hex}} !important;
+    --in-content-primary-button-background-hover: color-mix(in srgb, {{colors.secondary.default.hex}} 80%, transparent) !important;
+    --in-content-primary-button-background-active: color-mix(in srgb, {{colors.secondary.default.hex}} 60%, transparent) !important;
+    --in-content-primary-button-text-color: {{colors.surface_container_lowest.default.hex}} !important;
+    --button-background-color-primary: {{colors.secondary.default.hex}} !important;
+    --button-background-color-primary-hover: color-mix(in srgb, {{colors.secondary.default.hex}} 80%, transparent) !important;
+    --button-background-color-primary-active: color-mix(in srgb, {{colors.secondary.default.hex}} 60%, transparent) !important;
+    --button-text-color-primary: {{colors.surface_container_lowest.default.hex}} !important;
+    --button-text-color-primary-hover: {{colors.surface_container_lowest.default.hex}} !important;
+    --button-border-color-primary: transparent !important;
+    --button-border-color-primary-hover: transparent !important;
+  }
 }

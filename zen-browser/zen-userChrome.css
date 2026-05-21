@@ -11,18 +11,15 @@
 }
 
 :root {
-  /* --- Core Palette Overrides --- */
-  --zen-colors-primary: var(--primary) !important;
-  --zen-primary-color: var(--base) !important;
-  --zen-colors-secondary: var(--surface) !important;
-  --zen-colors-tertiary: var(--overlay) !important;
-  --zen-colors-border: var(--primary) !important;
-
-  /* --- Internal Zen Color Variables --- */
+  /* Match scrollbars with userContent.css safely by inheriting */
+  scrollbar-color: var(--primary) transparent !important;
+  
+  /* --- Zen Color Variables --- */
   --zen-primary-color: var(--primary) !important;
   --zen-colors-primary: var(--base) !important;
   --zen-colors-secondary: var(--surface) !important;
   --zen-colors-tertiary: var(--base) !important;
+  --zen-colors-border: var(--primary) !important;
 
   /* --- Backgrounds --- */
   --toolbar-bgcolor: var(--base) !important;
@@ -118,10 +115,6 @@ toolbarbutton#tabs-newtab-button {
 }
 /* --- URL Bar --- */
 
-#urlbar-input {
-  color: var(--text) !important;
-}
-
 #urlbar-input::selection {
   background-color: var(--primary) !important;
   color: var(--on_primary) !important;
@@ -158,9 +151,6 @@ toolbarbutton#tabs-newtab-button {
   color: var(--primary) !important;
 }
 
-#PanelUI-menu-button[open] .toolbarbutton-icon {
-  fill: var(--primary) !important;
-}
 
 #permissions-granted-icon {
   color: var(--base) !important;
@@ -268,7 +258,7 @@ panel button:hover,
 window[role="dialog"] button:hover,
 window[windowtype="alert:alert"] button:hover,
 .dialog-button-box button:hover {
-  background-color: color-mix(in srgb, var(--overlay) 70%, transparent) !important;
+  background-color: color-mix(in srgb, var(--overlay) 90%, black) !important;
 }
 /* Style the Primary/Accept/OK button */
 dialog button[dlgtype="accept"],
@@ -292,7 +282,7 @@ window[role="dialog"] button[default="true"]:hover,
 window[windowtype="alert:alert"] button[default="true"]:hover,
 .dialog-button-box button[dlgtype="accept"]:hover,
 .dialog-button-box button.primary:hover {
-  background-color: color-mix(in srgb, var(--secondary) 70%, transparent) !important;
+  background-color: color-mix(in srgb, var(--secondary) 90%, black) !important;
 }
 
 /* Style dialog text links */
@@ -308,7 +298,7 @@ window[windowtype="alert:alert"] button[default="true"]:hover,
 [type="checkbox"],
 *|input[type="radio"],
 [type="radio"] {
-  accent-color: {{colors.primary.default.hex}} !important;
+  accent-color: var(--primary) !important;
 }
 
 /* Custom text selection styling */
@@ -338,4 +328,76 @@ toolbarbutton.zen-glance-sidebar-close.toolbarbutton-1:hover,
 toolbarbutton.zen-glance-sidebar-open.toolbarbutton-1:hover,
 toolbarbutton.zen-glance-sidebar-split.toolbarbutton-1:hover {
 	background-color: color-mix(in srgb, var(--muted) 90%, black) !important;
+}
+
+/* --- Extensions Hover Style --- */
+.subviewbutton:hover,
+.unified-extensions-item:hover,
+.unified-extensions-item-action-button:hover {
+  background-color: color-mix(in srgb, var(--overlay) 90%, black) !important;
+}
+
+/* --- Autocomplete Popup (Login/Password Dropdown) --- */
+#PopupAutoComplete {
+  --panel-background: var(--overlay) !important;
+  --panel-color: var(--text) !important;
+  --panel-border-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+panel[type="autocomplete-richlistbox"],
+#PopupAutoComplete > richlistbox,
+.autocomplete-richlistbox {
+  background-color: var(--overlay) !important;
+  color: var(--text) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  overflow-y: auto !important;
+}
+
+/* Individual autocomplete items */
+.autocomplete-richlistbox richlistitem,
+.autocomplete-richlistitem {
+  background-color: transparent !important;
+  color: var(--text) !important;
+  border: none !important;
+}
+
+/* Hover state */
+.autocomplete-richlistbox richlistitem:hover,
+.autocomplete-richlistitem:hover {
+  background-color: var(--muted) !important;
+  color: var(--text) !important;
+}
+
+/* Selected / focused state */
+.autocomplete-richlistbox richlistitem[selected],
+.autocomplete-richlistitem[selected] {
+  background-color: var(--primary) !important;
+  color: var(--base) !important;
+}
+
+/* Inner text and icon elements in selected items */
+.autocomplete-richlistbox richlistitem[selected] *,
+.autocomplete-richlistitem[selected] * {
+  color: var(--base) !important;
+  fill: var(--base) !important;
+}
+
+/* Settings gear icon in selected autocomplete items */
+.autocomplete-richlistbox richlistitem[selected] .ac-secondary-action,
+.autocomplete-richlistitem[selected] .ac-secondary-action {
+  background-color: transparent !important;
+  fill: var(--base) !important;
+  color: var(--base) !important;
+  -moz-context-properties: fill, fill-opacity !important;
+}
+
+/* Footer and warning areas in the popup */
+#PopupAutoComplete .autocomplete-richlistbox-popup,
+#PopupAutoComplete .popup-notification-body {
+  background-color: var(--overlay) !important;
+  color: var(--text) !important;
 }
