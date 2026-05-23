@@ -106,7 +106,7 @@
     stroke: {{colors.primary.default.hex}} !important;
   }
 
-	vbox.navigation {
+	vbox.navigation, vbox#updateSettingsContainer.info-box-container {
 		background: {{colors.surface_container.default.hex}} !important;
 		color: {{colors.on_surface.default.hex}} !important;
 	}
@@ -232,11 +232,18 @@
   }
 }
 
-@-moz-document url-prefix("about:cache") {
+@-moz-document url-prefix("about:cache"), url-prefix("about:profiles") {
 	td {
 		background-color: {{colors.surface_container_low.default.hex}} !important;
 		color: {{colors.on_surface.default.hex}} !important;
 	}
+}
+
+@-moz-document url-prefix("about:profiles") {
+  div.action-box {
+    background-color: {{colors.surface_container.default.hex}} !important;
+    color: {{colors.on_surface.default.hex}} !important;
+  }
 }
 
 @-moz-document url-prefix("about:home") {

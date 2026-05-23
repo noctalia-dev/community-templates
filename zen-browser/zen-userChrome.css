@@ -151,6 +151,16 @@ toolbarbutton#tabs-newtab-button {
   color: var(--primary) !important;
 }
 
+#zen-toast-container .zen-toast,
+#zen-toast-container > .zen-toast,
+.zen-toast {
+  background-color: color-mix(in srgb, var(--overlay) 85%, transparent) !important;
+  background-image: none !important;
+  backdrop-filter: blur(8px) !important;
+  --zen-primary-color: var(--overlay) !important;
+  --zen-dialog-background: var(--overlay) !important;
+}
+
 
 #permissions-granted-icon {
   color: var(--base) !important;
