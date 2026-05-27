@@ -1,0 +1,7 @@
+[catalog.hyprtoolkit]
+name = "Hyprtoolkit"
+category = "system"
+
+[templates.hyprtoolkit]
+input_path = "hyprtoolkit.conf"
+output_path = "~/.config/hypr/hyprtoolkit.conf"
