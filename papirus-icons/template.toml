@@ -1,0 +1,8 @@
+[catalog.papirus-icons]
+name = "Papirus Icon Theme"
+category = "misc"
+
+[templates.papirus_icons]
+input_path = "colors"
+output_path = "~/.cache/noctalia/papirus/papirus-colors"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
