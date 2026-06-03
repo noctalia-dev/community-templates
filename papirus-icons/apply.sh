@@ -53,5 +53,5 @@ set -euo pipefail
   fi
  
   # 6. Apply icons instantly
-  [[ -n "$closest" ]] && "$(dirname "$0")/papirus-folders" -C "$closest" || echo "Error: Failed to apply papirus-folders"
+  [[ -n "$closest" ]] && bash "$(dirname "$0")/papirus-folders" -C "$closest" || echo "Error: Failed to apply papirus-folders"
 }
