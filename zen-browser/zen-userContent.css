@@ -1,13 +1,18 @@
 * {
-  --base:           {{colors.surface_container_lowest.default.hex}};
-  --surface:        {{colors.surface_container_low.default.hex}};
-  --overlay:        {{colors.surface_container.default.hex}};
-  --muted:          {{colors.surface_container_high.default.hex}};
-  --subtle:         {{colors.surface_container_highest.default.hex}};
-  --text:           {{colors.on_surface.default.hex}};
-  --secondary:      {{colors.secondary.default.hex}};
-  --primary:        {{colors.primary.default.hex}};
-  --on_primary:     {{colors.on_primary.default.hex}};
+  --base:             {{colors.background.default.hex}};
+  --surface:          {{colors.surface_container_low.default.hex}};
+  --overlay:          {{colors.surface_container.default.hex}};
+	--hl_low:           {{colors.surface_container_high.default.hex}};
+	--hl_med:           {{colors.surface_container_highest.default.hex}};
+	--hl_high:          {{colors.surface_bright.default.hex}};
+	--outline:          {{colors.outline_variant.default.hex}};
+  --muted:            {{colors.outline.default.hex}};
+  --subtle:           {{colors.on_surface_variant.default.hex}};
+  --text:             {{colors.on_surface.default.hex}};
+	--primary:          {{colors.primary.default.hex}};
+  --secondary:        {{colors.secondary.default.hex}};
+	--tertiary:         {{colors.tertiary.default.hex}};
+	--error:            {{colors.error.default.hex}};
 }
 
 /* Common variables affecting all pages */
@@ -15,7 +20,7 @@
   :root {
     --in-content-page-color: var(--secondary) !important;
     --color-accent-primary: var(--primary) !important;
-    background-color: var(--on_primary) !important;
+    background-color: var(--surface) !important;
     --in-content-page-background: var(--overlay) !important;
   }
 
@@ -26,14 +31,9 @@
   .sticky-container,
   #search-container {
     background-color: var(--base) !important;
-    background: var(--base) !important;
   }
 
   moz-toggle {
-    --toggle-background-color: var(--muted) !important;
-    --toggle-background-color-pressed: var(--primary) !important;
-    --toggle-background-color-hover: var(--muted) !important;
-    --toggle-background-color-active: var(--muted) !important;
     --toggle-background-color-pressed-hover: var(--primary) !important;
     --toggle-background-color-pressed-active: var(--primary) !important;
     --toggle-border-color: transparent !important;
@@ -50,31 +50,31 @@
   input[type="text"],
   input[type="search"],
   input:not([type="checkbox"]):not([type="radio"]) {
-    background-color: var(--muted) !important;
+    background-color: var(--overlay) !important;
     color: var(--text) !important;
-    border-color: var(--subtle) !important;
+    border-color: var(--outline) !important;
     border-radius: 8px !important;
     --input-text-background-color: var(--text) !important;
     --input-text-color: var(--text) !important;
-    --input-text-border-color: var(--subtle) !important;
+    --input-text-border-color: var(--outline) !important;
     --input-text-border-radius: 8px !important;
   }
 
   /* Message Bar styling */
   moz-message-bar {
     --message-bar-background-color: var(--overlay) !important;
-    --message-bar-border-color: var(--subtle) !important;
+    --message-bar-border-color: var(--outline) !important;
     --message-bar-icon-color: var(--primary) !important;
     background-color: var(--overlay) !important;
   }
   
   select#input {
-    background: var(--subtle) !important;
+    background: var(--overlay) !important;
     color: var(--text) !important;
   }
   
   .toggle-button {
-    background-color: var(--muted) !important;
+    background-color: var(--hl_med) !important;
     border-color: transparent !important;
   }
 
@@ -93,7 +93,7 @@
   .toggle-button[aria-pressed="true"]::before,
   .toggle-button[checked]::before,
   .toggle-button:checked::before {
-    background-color: var(--on_primary) !important;
+    background-color: var(--base) !important;
   }
 }
 
@@ -101,8 +101,8 @@
 @-moz-document url("about:newtab"), url("about:home") {
   :root {
     --newtab-background-color: var(--overlay) !important;
-    --newtab-background-color-secondary: var(--muted) !important;
-    --newtab-element-hover-color: var(--muted) !important;
+    --newtab-background-color-secondary: var(--surface) !important;
+    --newtab-element-hover-color: var(--hl_low) !important;
     --newtab-text-primary-color: var(--text) !important;
     --newtab-wordmark-color: var(--text) !important;
     --newtab-primary-action-background: var(--primary) !important;
@@ -119,8 +119,6 @@
     --zen-colors-tertiary: var(--surface) !important;
     --in-content-text-color: var(--text) !important;
     --link-color: var(--secondary) !important;
-    --zen-colors-primary: var(--muted) !important;
-    --in-content-box-background: var(--muted) !important;
     --zen-primary-color: var(--primary) !important;
     
     /* Cover dialogs that use default in-content variables */
@@ -129,7 +127,7 @@
   }
   
   div.container {
-    background: var(--surface) !important;
+    background: var(--overlay) !important;
     color: var(--text) !important;
   }
   
@@ -140,8 +138,22 @@
 
   button,
   groupbox menulist {
-    background: var(--muted) !important;
+    background: var(--overlay) !important;
     color: var(--text) !important;
+  }
+
+  .dialogBox[dialogtype="accept"],
+  button[dialogtype="accept"],
+  .dialog-button-box button[dlgtype="accept"],
+  #searchSection dialog button,
+  #privacySection dialog button,
+  #syncSection dialog button,
+  moz-button[accent] {
+    background-color: var(--secondary) !important;
+    color: var(--base) !important;
+  }
+  moz-button[accent]:hover {
+    background-color: color-mix(in srgb, var(--secondary) 70%, black) !important;
   }
 
   moz-card, .main-content {
@@ -175,9 +187,9 @@
     color: var(--base) !important;
   }
 
-  /* Hover states for Settings and Remove buttons */
+  Hover states for Settings and Remove buttons
   richlistitem button:hover {
-    background-color: var(--subtle) !important;
+    background-color: var(--hl_low) !important;
   }
   
   /* Sub-dialog popup frame (this wrapper is in the about:preferences document) */
@@ -186,7 +198,7 @@
   .dialogBox,
   .dialog-content-box {
     background-color: var(--base) !important;
-    border: 1px solid var(--subtle) !important;
+    border: 1px solid var(--outline) !important;
     border-radius: 8px !important;
   }
   
@@ -196,10 +208,9 @@
     transition: background-color 0.2s ease !important;
   }
   button.dialogClose:hover {
-    background-color: var(--subtle) !important;
+    background-color: var() !important;
   }
 
-  /* Back arrow button */
   .back-button,
   .subcategory-back-button,
   .page-back-button,
@@ -223,7 +234,6 @@
     align-items: center !important;
   }
 
-  /* Reset inner elements of moz-button back buttons */
   moz-button.back-button::part(button),
   moz-button.subcategory-back-button::part(button),
   moz-button.page-back-button::part(button),
@@ -266,7 +276,7 @@
   moz-button[ghost="true"]:hover::part(button),
   moz-button[type="ghost"]:hover::part(button),
   button:has(img[src*="arrow-left.svg"]):hover {
-    background-color: var(--subtle) !important;
+    background-color: var(--hl_med) !important;
     border-radius: 4px !important;
   }
 }
@@ -302,14 +312,14 @@
   }
 
   separator {
-    border-color: var(--subtle) !important;
+    border-color: var(--outline) !important;
   }
 
   /* Text input for container name / sizes / urls */
   *|input:not([type="checkbox"]):not([type="radio"]), *|textarea {
     background-color: var(--surface) !important;
     color: var(--text) !important;
-    border-color: var(--subtle) !important;
+    border-color: var(--outline) !important;
     border-radius: 6px !important;
     transition: border-color 0.15s ease !important;
   }
@@ -325,7 +335,7 @@
   menulist, *|select {
     background-color: var(--surface) !important;
     color: var(--text) !important;
-    border: 1px solid var(--subtle) !important;
+    border: 1px solid var(--outline) !important;
     border-radius: 6px !important;
   }
 
@@ -343,7 +353,7 @@
   richlistbox {
     background-color: var(--surface) !important;
     color: var(--text) !important;
-    border-color: var(--subtle) !important;
+    border-color: var(--outline) !important;
   }
 
   richlistitem {
@@ -379,7 +389,7 @@
     box-sizing: border-box !important;
     width: 16px !important;
     height: 16px !important;
-    border: 2px solid var(--subtle) !important;
+    border: 1px solid var(--outline) !important;
     background-color: transparent !important;
     flex-shrink: 0 !important;
   }
@@ -418,14 +428,14 @@
 
   /* Done / Cancel buttons */
   button, dialog::part(button) {
-    background-color: var(--muted) !important;
+    background-color: var(--overlay) !important;
     color: var(--text) !important;
     border-radius: 6px !important;
     margin-top: 16px !important;
   }
 
   button:hover {
-    background-color: var(--subtle) !important;
+    background-color: var(--hl_med) !important;
   }
 }
 
@@ -462,7 +472,7 @@
   *|input:not([type="checkbox"]):not([type="radio"]) {
     background-color: var(--surface) !important;
     color: var(--text) !important;
-    border: 1px solid var(--subtle) !important;
+    border: 1px solid var(--outline) !important;
     border-radius: 6px !important;
     transition: border-color 0.15s ease !important;
   }
@@ -487,7 +497,7 @@
   }
 
   button:hover {
-    box-shadow: 0 0 0 1px var(--subtle) !important;
+    box-shadow: 0 0 0 1px var(--hl_low) !important;
     background-color: transparent !important;
   }
 }
@@ -506,11 +516,12 @@
 }
 
 /* Variables and styles specific to about:logins */
+/* Stopped working, needs fix */
 @-moz-document url-prefix("about:logins") {
   :root {
     --background-color-box: var(--overlay) !important;
     --in-content-box-background: var(--overlay) !important;
-    --background-color-canvas: var(--subtle) !important;
+    --background-color-canvas: var(--error) !important;
   }
 
   header {
@@ -531,6 +542,7 @@
 }
 
 /* Variables and styles specific to about:protections */
+/* Stopped working, needs fix */
 @-moz-document url-prefix("about:protections") {
   :root {
     --zen-primary-color: var(--base) !important;
@@ -556,7 +568,7 @@
 /* Variables and styles specific to about:config */
 @-moz-document url-prefix("about:config") {
   div#toolbar {
-    background: var(--primary) !important;
+    background: var(--surface) !important;
   }
 
   button#warningButton {
@@ -572,7 +584,7 @@
 
 @-moz-document url-prefix("about:cache"), url-prefix("about:profiles") {
 	td {
-		background-color: var(--surface) !important;
+		background-color: var(--overlay) !important;
 		color: var(--text) !important;
 	}
 }
@@ -625,7 +637,7 @@
 .personalize-button {
   background-color: color-mix(in srgb, var(--subtle) 40%, transparent) !important;
   color: var(--text) !important;
-  border: 1px solid color-mix(in srgb, var(--subtle) 20%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--outline) 20%, transparent) !important;
   backdrop-filter: blur(10px);
   transition: background-color 0.2s ease, transform 0.2s ease !important;
 }
