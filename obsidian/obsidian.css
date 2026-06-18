@@ -64,9 +64,9 @@
 
   /* Tags */
   --tag-color:                  {{colors.secondary.default.hex}};
-  --tag-background:             {{colors.secondary.default.hex | set_alpha 0.12}};
+  --tag-background:             {{colors.secondary.default.rgba | set_alpha 0.12}};
   --tag-color-hover:            {{colors.secondary.default.hex | lighten 0.1}};
-  --tag-background-hover:       {{colors.secondary.default.hex | set_alpha 0.2}};
+  --tag-background-hover:       {{colors.secondary.default.rgba | set_alpha 0.2}};
 
   /* Headings */
   --h1-color:                   {{colors.primary.default.hex}};
@@ -212,9 +212,9 @@
 
   /* Tags */
   --tag-color:                  {{colors.secondary.light.hex}};
-  --tag-background:             {{colors.secondary.light.hex | set_alpha 0.1}};
+  --tag-background:             {{colors.secondary.light.rgba | set_alpha 0.1}};
   --tag-color-hover:            {{colors.secondary.light.hex | darken 0.08}};
-  --tag-background-hover:       {{colors.secondary.light.hex | set_alpha 0.18}};
+  --tag-background-hover:       {{colors.secondary.light.rgba | set_alpha 0.18}};
 
   /* Headings */
   --h1-color:                   {{colors.primary.light.hex}};
