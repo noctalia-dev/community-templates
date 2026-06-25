@@ -2,11 +2,12 @@
 * @name Noctalia System24
 * @description A fork of 'System24' for Noctalia Shell
 * @author Ezequielgk
-* @version 2.0.0
+* @version 2.0.1
 */
 
 @import url('https://refact0r.github.io/system24/build/system24.css');
 
+/* --- BASE VARIABLES --- */
 body {
   --font: '';
   --code-font: '';
@@ -33,18 +34,25 @@ body {
   --dms-icon-svg-size: 90%;
 }
 
+/* --- ROOT COLORS & BORDERS --- */
 :root {
   --colors: on;
 
-  /* Text */
+  --radius-xs: 0px !important;
+  --radius-sm: 0px !important;
+  --radius-md: 0px !important;
+  --radius-lg: 0px !important;
+  --radius-xl: 0px !important;
+  --radius-xxl: 0px !important;
+  --radius-round: 0px !important;
+
   --text-0: {{colors.surface.default.hex}};
   --text-1: {{colors.on_surface.default.hex}};
-  --text-2: {{colors.on_surface.default.hex}};
-  --text-3: color-mix(in srgb, {{colors.on_surface.default.hex}} 70%, {{colors.outline.default.hex}});
-  --text-4: color-mix(in srgb, {{colors.on_surface.default.hex}} 50%, {{colors.outline.default.hex}});
-  --text-5: color-mix(in srgb, {{colors.on_surface.default.hex}} 35%, {{colors.outline.default.hex}});
+  --text-2: color-mix(in srgb, {{colors.on_surface.default.hex}} 90%, transparent);
+  --text-3: color-mix(in srgb, {{colors.on_surface.default.hex}} 75%, transparent);
+  --text-4: color-mix(in srgb, {{colors.on_surface.default.hex}} 60%, transparent);
+  --text-5: color-mix(in srgb, {{colors.on_surface.default.hex}} 45%, transparent);
 
-  /* Backgrounds */
   --bg-1: {{colors.surface.default.hex}};
   --bg-2: {{colors.surface_variant.default.hex}};
   --bg-3: {{colors.surface_variant.default.hex}};
@@ -54,7 +62,6 @@ body {
   --active: {{colors.surface_variant.default.hex}};
   --message-hover: {{colors.surface_variant.default.hex}};
 
-  /* Primary & Accents */
   --accent-1: {{colors.primary.default.hex}};
   --accent-2: var(--accent-1);
   --accent-3: {{colors.secondary.default.hex}};
@@ -62,12 +69,10 @@ body {
   --accent-5: {{colors.tertiary.default.hex}};
   --accent-6: var(--accent-1);
 
-  /* Borders */
   --border-light: color-mix(in srgb, var(--accent-1) 10%, transparent);
   --border: color-mix(in srgb, var(--accent-1) 18%, transparent);
   --border-active: color-mix(in srgb, var(--accent-1) 60%, transparent);
 
-  /* Muted & Internals */
   --accent-muted: color-mix(in srgb, var(--accent-1) 15%, transparent);
   --list-inactive: var(--accent-muted);
   --icon-muted: var(--accent-muted);
@@ -75,7 +80,6 @@ body {
   --list-active: var(--accent-1);
   --pill-active: var(--accent-1);
 
-  /* Status */
   --online: {{colors.primary.default.hex}};
   --idle: {{colors.tertiary.default.hex}};
   --dnd: {{colors.error.default.hex}};
@@ -83,9 +87,12 @@ body {
   --offline: {{colors.outline.default.hex}};
 }
 
-/* ===================== /
-/ SELECTIONS            /
-/ ===================== */
+/* --- GLOBAL RESET --- */
+*, *::before, *::after {
+  border-radius: 0px !important;
+}
+
+/* --- SELECTIONS & HIGHLIGHTS --- */
 .modeSelected-3DmyhH .content-1gYQeQ,
 .selected-1-Z6gm {
   background: color-mix(in srgb, var(--accent-1) 16%, transparent) !important;
@@ -95,24 +102,16 @@ body {
   background: var(--accent-muted) !important;
 }
 
-/* ===================== /
-/ ACTIVITY / FRIENDS    /
-/ ===================== */
 .activityItem-1Z9CTr,
 .friendSelected-3cwmD7 {
   background: color-mix(in srgb, var(--accent-1) 18%, transparent) !important;
 }
 
-/* ===================== /
-/ HEADER BORDER         /
-/ ===================== */
+/* --- GENERAL UI ELEMENTS --- */
 .title-31SJ6t {
   border-bottom: 1px solid var(--border-light) !important;
 }
 
-/* ===================== /
-/ HOME ICON             /
-/ ===================== */
 .tutorialContainer-1pL9QS svg {
   color: var(--icon-muted) !important;
 }
@@ -121,107 +120,91 @@ body {
   color: var(--accent-1) !important;
 }
 
-/* ===================== /
-/ INTERFACE OVERRIDES   /
-/ ===================== */
-
-/* Dividers */
 [class*="divider"]:not([class*="isUnread"]) {
   border-color: var(--bg-2) !important;
 }
 
-/* Profile Banners */
 [class*="bannerButton"], 
 [class*="bannerColor"] {
   color: var(--text-1) !important;
 }
 
-/* Prevent scaling animation on Home/DMS icon */
 [class*="guildsnav"] [class*="wrapper"][data-list-item-id='guildsnav___home']:hover > [class*="childWrapper"]::before,
 [class*="guildsnav"] [class*="wrapper"][data-list-item-id='guildsnav___home'][class*="selected"] > [class*="childWrapper"]::before {
   transform: rotate(-360deg) scale(1) !important;
 }
 
-/* Timestamps */
+/* --- TEXT & TYPOGRAPHY --- */
 [class*="timestamp"],
 [class*="timestampInline"],
-[class*="timestamp"] time {
-  color: var(--text-4) !important;
-}
-
-/* Forum/Thread Titles */
-[class*="postTitleText"],
-[class*="postTitleText"] [class*="highlight"] {
-  color: var(--text-2) !important;
-}
-
-/* Message Content */
-[class*="messageContent"] {
-  color: var(--text-3) !important;
-}
-[class*="messageContent"] [class*="highlight"] {
-  color: var(--text-2) !important;
-}
-
-/* Slowmode Text */
+[class*="timestamp"] time,
 [class*="cooldownText"] {
   color: var(--text-4) !important;
 }
 
-/* Checkboxes */
-[class*="checkboxIndicator"] {
-  background-color: transparent !important;
-  border-color: var(--text-4) !important;
-  transition: border-color 0.2s ease;
-}
-[class*="checkboxOption"]:hover [class*="checkboxIndicator"] {
-  background-color: color-mix(in srgb, var(--accent-1) 20%, transparent) !important;
-  border-color: var(--accent-1) !important;
-}
-[class*="checkboxOption"][data-selected="true"] [class*="checkboxIndicator"],
-[class*="checkboxOption"][data-selected] [class*="checkboxIndicator"] {
-  background-color: transparent !important;
-  border-color: var(--accent-1) !important;
-}
-[class*="checkboxOption"][data-selected="true"] [class*="checkStroke"],
-[class*="checkboxOption"][data-selected="true"] [class*="dot"] {
-  color: var(--accent-3) !important;
+[class*="postTitleText"],
+[class*="postTitleText"] [class*="highlight"],
+[class*="messageContent"] [class*="highlight"] {
+  color: var(--text-2) !important;
 }
 
-/* Slate Nodes */
+[class*="messageContent"],
 [data-slate-node="element"],
 [data-slate-node="text"],
 [data-slate-string="true"] {
   color: var(--text-3) !important;
 }
 
-/* Badges */
-[class*="eyebrow"][class*="badge"][class*="expressive"] {
-  color: var(--accent-1) !important;
-  background-color: color-mix(in srgb, var(--accent-1) 15%, transparent) !important;
+.channelMention:hover {
+  color: var(--text-1) !important;
 }
 
-/* Radios */
+/* --- INTERACTIVE CONTROLS --- */
+[class*="checkboxIndicator"] {
+  background-color: transparent !important;
+  border-color: var(--text-4) !important;
+  transition: border-color 0.2s ease;
+}
+
+[class*="checkboxOption"]:hover [class*="checkboxIndicator"] {
+  background-color: color-mix(in srgb, var(--accent-1) 20%, transparent) !important;
+  border-color: var(--accent-1) !important;
+}
+
+[class*="checkboxOption"][data-selected="true"] [class*="checkboxIndicator"],
+[class*="checkboxOption"][data-selected] [class*="checkboxIndicator"] {
+  background-color: transparent !important;
+  border-color: var(--accent-1) !important;
+}
+
+[class*="checkboxOption"][data-selected="true"] [class*="checkStroke"],
+[class*="checkboxOption"][data-selected="true"] [class*="dot"] {
+  color: var(--accent-3) !important;
+}
+
 [class*="outerRadioBase"] {
   fill: var(--bg-1) !important;
   stroke: var(--border) !important;
   stroke-width: 1px;
   transition: stroke 0.2s ease;
 }
+
 [class*="outerRadioBase"]:hover {
   stroke: var(--accent-1) !important;
 }
-[class*="outerRadioFill"] {
+
+[class*="outerRadioFill"],
+[class*="innerDotRadio"] {
   fill: var(--bg-1) !important;
   stroke: var(--border) !important;
   opacity: 0;
   transition: opacity 0.2s ease;
 }
+
 [class*="innerDotRadio"] {
   fill: var(--accent-3) !important;
-  opacity: 0;
-  transition: opacity 0.2s ease;
 }
+
 [class*="radioSelection"][data-selected="true"] [class*="outerRadioFill"],
 [class*="radioSelection"][data-selected="true"] [class*="innerDotRadio"],
 [class*="radioSelection"][aria-checked="true"] [class*="outerRadioFill"],
@@ -231,114 +214,153 @@ body {
   opacity: 1 !important;
 }
 
-/* Channel Mentions */
-.channelMention:hover {
-  color: var(--text-1) !important;
+[class*="pollContainer_"] [class*="selected__"] [class*="radioForeground_"] {
+  fill: var(--accent-3) !important;
 }
 
-/* Unread Indicators & Bars */
+[class*="pollContainer_"] [class*="selected__"],
+[class*="pollContainer_"] [class*="votedStyles_"] [class*="answerInner_"] {
+  border: 2px solid var(--active) !important;
+}
+
+[class*="votedStyles_"] [class*="votePercentageBar_"] {
+  background-color: var(--active-2) !important;
+  opacity: 0.5;
+}
+
+[class*="pollContainer_"] [class*="answerSelectionIcon_"] circle {
+  fill: var(--accent-3) !important;
+}
+
+[class*="pollContainer_"] [class*="votedStyles_"] [class*="answerSelectionIcon_"] path {
+  fill: var(--bg-1) !important;
+}
+
+[class*="pollContainer_"] [class*="answer__"]:not([class*="votedStyles_"]) [class*="answerSelectionIcon_"] path {
+  fill: var(--accent-1) !important;
+}
+
+[class*="pollContainer_"] [class*="votesData_"] {
+  color: var(--text-2) !important;
+}
+
+/* --- ICONS, BADGES & NOTIFICATIONS --- */
+[class*="eyebrow"][class*="badge"][class*="expressive"] {
+  color: var(--accent-1) !important;
+  background-color: color-mix(in srgb, var(--accent-1) 15%, transparent) !important;
+}
+
+[class*="inviteButton_"] svg path,
+[class*="actionIcon_"] path[d^="M14.5 8a3 3 0"] {
+  fill: var(--accent-1) !important;
+  color: var(--accent-1) !important;
+}
+
+[class*="inviteButton_"]:hover svg path {
+  fill: var(--accent-3) !important;
+  color: var(--accent-3) !important;
+}
+
 [class*="unreadTop"],
 [class*="unreadBottom"],
 [class*="unreadMentionsIndicator"] {
   background-color: transparent !important;
 }
+
 [class*="unreadBar"],
 [class*="unreadMentionsBar"] {
   background-color: var(--accent-1) !important;
   border: 1px solid var(--border);
 }
+
 [class*="unreadBar"][class*="mention"],
 [class*="unreadMentionsBar"][class*="mention"] {
   background-color: var(--accent-1) !important;
 }
+
 [class*="unreadBar"][class*="unread"],
 [class*="unreadMentionsBar"][class*="unread"] {
   background-color: var(--bg-1) !important;
   border-color: var(--accent-1) !important;
 }
+
 [class*="unreadBar"] [class*="text"],
 [class*="unreadMentionsBar"] [class*="text"] {
   color: var(--text-1) !important;
   font-weight: 700;
 }
 
-/* Polls */
-[class*="pollContainer_"] [class*="selected__"] [class*="radioForeground_"] {
-  fill: var(--accent-3) !important;
-}
-[class*="pollContainer_"] [class*="selected__"] {
-  border: 2px solid var(--active) !important;
-}
-[class*="votedStyles_"] [class*="votePercentageBar_"] {
-  background-color: var(--active-2) !important;
-  opacity: 0.5;
-}
-[class*="pollContainer_"] [class*="answerSelectionIcon_"] circle {
-  fill: var(--accent-3) !important;
-}
-[class*="pollContainer_"] [class*="votedStyles_"] [class*="answerSelectionIcon_"] path {
-  fill: var(--bg-1) !important;
-}
-[class*="pollContainer_"] [class*="answer__"]:not([class*="votedStyles_"]) [class*="answerSelectionIcon_"] path {
-  fill: var(--accent-1) !important;
-}
-[class*="pollContainer_"] [class*="votesData_"] {
-  color: var(--text-2) !important;
-}
-[class*="pollContainer_"] [class*="votedStyles_"] [class*="answerInner_"] {
-  border: 2px solid var(--active) !important;
-}
-
-/* Server Invites */
-[class*="inviteButton_"] svg path,
-[class*="actionIcon_"] path[d^="M14.5 8a3 3 0"] {
-  fill: var(--accent-1) !important;
-  color: var(--accent-1) !important;
-}
-[class*="inviteButton_"]:hover svg path {
-  fill: var(--accent-3) !important;
-  color: var(--accent-3) !important;
-}
-
-/* ===================== /
-/ CHANNEL CONTRAST      /
-/ ===================== */
-
-/* 1. Read channels (Set to requested 90% opacity for clear visibility) */
+/* --- CHANNELS LIST --- */
 [class*="link_"] * {
-  color: color-mix(in srgb, {{colors.on_surface.default.hex}} 80%, transparent) !important;
-  opacity: 0.90 !important;
+  color: {{colors.on_surface.default.hex}} !important;
+  opacity: 0.65 !important;
 }
 
-/* 2. Unread channels */
 [class*="modeUnread_"] [class*="link_"] *,
 [class*="modeUnreadImportant_"] [class*="link_"] * {
   color: {{colors.on_surface.default.hex}} !important;
   opacity: 1 !important;
 }
+
 [class*="modeUnread_"] [class*="name_"],
 [class*="modeUnreadImportant_"] [class*="name_"] {
-  font-weight: 600 !important;
+  font-weight: 700 !important;
 }
 
-/* 3. Selected channel */
 [class*="modeSelected_"] [class*="link_"] * {
   color: {{colors.on_surface.default.hex}} !important;
   opacity: 1 !important;
 }
 
-/* 4. Muted channels */
 [class*="modeMuted_"] [class*="link_"] * {
-  color: color-mix(in srgb, {{colors.on_surface.default.hex}} 45%, transparent) !important;
-  opacity: 0.55 !important;
+  color: {{colors.on_surface.default.hex}} !important;
+  opacity: 0.30 !important;
 }
 
-/* 5. Direct messages (Set to requested 90% opacity for clear visibility) */
+/* --- DIRECT MESSAGES --- */
 [class*="privateChannels_"] [class*="channel_"] * {
-  color: color-mix(in srgb, {{colors.on_surface.default.hex}} 80%, transparent) !important;
-  opacity: 0.90 !important;
+  color: {{colors.on_surface.default.hex}} !important;
+  opacity: 0.95 !important;
 }
-[class*="privateChannels_"] [class*="selected_"] * {
+
+[class*="privateChannels_"] [class*="selected_"] *,
+[class*="privateChannels_"] [class*="channel_"]:hover * {
   color: {{colors.on_surface.default.hex}} !important;
   opacity: 1 !important;
+}
+
+[class*="privateChannels_"] [class*="numberBadge_"] {
+  background-color: var(--accent-1) !important;
+  opacity: 1 !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+[class*="privateChannels_"] [class*="numberBadge_"] * {
+  color: var(--bg-1) !important;
+  opacity: 1 !important;
+  font-weight: 900 !important;
+  font-size: 11px !important;
+}
+
+/* --- SERVER SIDEBAR --- */
+[class*="guilds_"] [class*="wrapper_"] {
+  opacity: 0.80 !important;
+  transition: opacity 0.2s ease;
+}
+
+[class*="guilds_"] [class*="wrapper_"]:hover,
+[class*="guilds_"] [class*="selected_"] [class*="wrapper_"] {
+  opacity: 1 !important;
+}
+
+[class*="guilds_"] [class*="item_"] {
+  background-color: var(--accent-1) !important;
+  width: 4px !important;
+  border-radius: 0px !important;
 }
