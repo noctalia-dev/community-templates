@@ -1,0 +1,7 @@
+[catalog.lazygit]
+name = "lazygit"
+category = "misc"
+
+[templates.lazygit]
+input_path = "config.yml"
+output_path = "$XDG_CONFIG_HOME/lazygit/config.yml"
