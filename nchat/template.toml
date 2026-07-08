@@ -3,5 +3,5 @@ name = "nchat"
 category = "misc"
 
 [templates.nchat]
-input_path = "nchat.conf"
+input_path = "color.conf"
 output_path = "$XDG_CONFIG_HOME/nchat/color.conf"
