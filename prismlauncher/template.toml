@@ -4,4 +4,4 @@ category = "misc"
 
 [templates.prismlauncher]
 input_path = 'prismlauncher.json'
-output_path = '~/.local/share/PrismLauncher/themes/Matugen/theme.json'
+output_path = '$XDG_DATA_HOME/PrismLauncher/themes/Matugen/theme.json'

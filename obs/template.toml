@@ -4,4 +4,4 @@ category = "misc"
 
 [templates.obs]
 input_path = 'matugen.obt'
-output_path = '~/.config/obs-studio/themes/matugen.obt'
+output_path = '$XDG_CONFIG_HOME/obs-studio/themes/matugen.obt'

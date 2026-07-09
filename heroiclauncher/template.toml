@@ -4,4 +4,4 @@ category = "misc"
 
 [templates.heroic]
 input_path = 'heroic.css'
-output_path = '~/.config/heroic/themes/matugen.css'
+output_path = '$XDG_CONFIG_HOME/heroic/themes/matugen.css'
