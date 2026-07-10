@@ -2,7 +2,7 @@
 name = "Pear Desktop"
 category = "audio"
 
-[templates.pear]
+[templates.pear-desktop]
 input_path = "pearColors.css"
 output_path = "$XDG_CONFIG_HOME/.config/YouTube Music/noctalia.css"
 post_hook = "bash '{{ config_dir }}/apply.sh'"
