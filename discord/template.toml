@@ -26,17 +26,17 @@ output_path = "$XDG_CONFIG_HOME/webcord/themes/noctalia-material.theme.css"
 input_path = "discord-system24.css"
 output_path = "$XDG_CONFIG_HOME/webcord/themes/discord-system24.css"
 
-[templates.discord_midnight_armcord]
+[templates.discord_midnight_legcord]
 input_path = "discord-midnight.css"
-output_path = "$XDG_CONFIG_HOME/armcord/themes/noctalia.theme.css"
+output_path = "$XDG_CONFIG_HOME/legcord/themes/noctalia.theme.css"
 
-[templates.discord_material_armcord]
+[templates.discord_material_legcord]
 input_path = "discord-material.css"
-output_path = "$XDG_CONFIG_HOME/armcord/themes/noctalia-material.theme.css"
+output_path = "$XDG_CONFIG_HOME/legcord/themes/noctalia-material.theme.css"
 
-[templates.discord_system24_armcord]
+[templates.discord_system24_legcord]
 input_path = "discord-system24.css"
-output_path = "$XDG_CONFIG_HOME/armcord/themes/discord-system24.css"
+output_path = "$XDG_CONFIG_HOME/legcord/themes/discord-system24.css"
 
 [templates.discord_midnight_equibop]
 input_path = "discord-midnight.css"
