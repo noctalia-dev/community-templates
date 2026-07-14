@@ -6,3 +6,7 @@ category = "misc"
 input_path = "yazi.toml"
 output_path = "$XDG_CONFIG_HOME/yazi/flavors/noctalia.yazi/flavor.toml"
 post_hook = "bash '{{ config_dir }}/apply.sh'"
+
+[templates.yazi-syntax]
+input_path = "yazi.tmTheme"
+output_path = "$XDG_CONFIG_HOME/yazi/flavors/noctalia.yazi/tmtheme.xml"
