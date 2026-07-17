@@ -3,6 +3,6 @@ name = "lazygit"
 category = "misc"
 
 [templates.lazygit]
-input_path = "config.yml"
-output_path = "theme.yml"
+input_path = "lazygit.yml"
+output_path = "$XDG_CONFIG_HOME/lazygit/themes/noctalia.yml"
 post_hook = "bash '{{ config_dir }}/apply.sh'"
