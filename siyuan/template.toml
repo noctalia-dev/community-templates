@@ -1,6 +1,6 @@
 [catalog.siyuan]
 name = "Siyuan"
-category = "productivity"
+category = "misc"
 
 [templates.siyuan]
 input_path = "siyuan.css"
