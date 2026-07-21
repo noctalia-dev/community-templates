@@ -1,0 +1,13 @@
+[catalog.siyuan]
+name = "Siyuan"
+category = "productivity"
+
+[templates.siyuan]
+input_path = "siyuan.css"
+output_path = [ "~/Documents/SiYuan/conf/appearance/themes/noctalia-siyuan/theme.css" ];
+requires_path = "~/Documents/SiYuan"
+
+[templates.siyuan-home]
+input_path = "siyuan.css"
+output_path = [ "~/SiYuan/conf/appearance/themes/noctalia-siyuan/theme.css" ];
+requires_path = "~/SiYuan"
