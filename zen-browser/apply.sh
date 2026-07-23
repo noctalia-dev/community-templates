@@ -16,7 +16,7 @@ find "${XDG_CONFIG_HOME:-$HOME/.config}/zen" "$HOME/.zen" -mindepth 2 -maxdepth 
         user_js="$profile_dir/user.js"
 
         mkdir -p "$chrome_dir"
-        touch "$user_chrome" "$user_content" "$user_js"
+        touch "$user_chrome" "$user_content"
 
         sed -i '/zen-browser\/zen-userChrome\.css/d' "$user_chrome"
         sed -i '/zen-browser\/zen-userContent\.css/d' "$user_content"
@@ -31,9 +31,14 @@ find "${XDG_CONFIG_HOME:-$HOME/.config}/zen" "$HOME/.zen" -mindepth 2 -maxdepth 
             printf '%s\n' "$line_content" >>"$user_content"
         fi
 
-        sed -i '/toolkit\.legacyUserProfileCustomizations\.stylesheets/d' "$user_js"
-        sed -i '/devtools\.chrome\.enabled/d' "$user_js"
-        printf '%s\n' \
-            'user_pref("devtools.chrome.enabled", true);' \
-            'user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);' >>"$user_js"
+        if { [ -e "$user_js" ] && [ -w "$user_js" ]; } || { [ ! -e "$user_js" ] && [ -w "$profile_dir" ]; }; then
+            touch "$user_js"
+            sed -i '/toolkit\.legacyUserProfileCustomizations\.stylesheets/d' "$user_js"
+            sed -i '/devtools\.chrome\.enabled/d' "$user_js"
+            printf '%s\n' \
+                'user_pref("devtools.chrome.enabled", true);' \
+                'user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);' >>"$user_js"
+        else
+            echo "Skipping user.js (not writable): $user_js" >&2
+        fi
     done
