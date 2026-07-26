@@ -1,6 +1,6 @@
 [catalog.antigravity]
 name = "Antigravity"
-category = "misc"
+category = "ai"
 
 [templates.antigravity]
 input_path = "antigravity.json"

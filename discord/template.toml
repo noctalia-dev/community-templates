@@ -1,6 +1,6 @@
 [catalog.discord]
 name = "Discord"
-category = "misc"
+category = "chat"
 
 [templates.discord_midnight_vesktop]
 input_path = "discord-midnight.css"

@@ -126,5 +126,8 @@ END {
 }
 ' "$config_file" > "$tmp_file"
 
-# Replace the original config file atomically
-mv "$tmp_file" "$config_file"
+# Write through a symlink instead of replacing it via mv.
+if ! cmp -s "$config_file" "$tmp_file"; then
+    cat "$tmp_file" >"$config_file"
+fi
+rm -f "$tmp_file"

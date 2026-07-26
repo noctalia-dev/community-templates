@@ -1,6 +1,6 @@
 [catalog.nchat]
 name = "nchat"
-category = "misc"
+category = "chat"
 
 [templates.nchat]
 input_path = "color.conf"

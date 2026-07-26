@@ -1,6 +1,6 @@
 [catalog.bat]
 name = "bat"
-category = "misc"
+category = "terminal"
 
 [templates.bat]
 input_path = "bat.tmTheme"

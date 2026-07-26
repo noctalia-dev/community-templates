@@ -10,10 +10,20 @@ theme_line="--theme=noctalia"
 mkdir -p "$themes_dir"
 touch "$config_file" "$theme_file"
 
+write_if_changed() {
+    local target="$1" tmp="$2"
+    if ! cmp -s "$target" "$tmp"; then
+        cat "$tmp" >"$target"
+    fi
+    rm -f "$tmp"
+}
+
 if ! grep -Fxq -- "$theme_line" "$config_file"; then
-    sed -i '/^--theme=/d' "$config_file"
-    [ -s "$config_file" ] && [ -n "$(tail -c1 "$config_file")" ] && echo >>"$config_file"
-    printf '%s\n' "$theme_line" >>"$config_file"
+    tmp_file="$(mktemp "${config_file}.tmp.XXXXXX")"
+    sed '/^--theme=/d' "$config_file" >"$tmp_file"
+    [ -s "$tmp_file" ] && [ -n "$(tail -c1 "$tmp_file")" ] && echo >>"$tmp_file"
+    printf '%s\n' "$theme_line" >>"$tmp_file"
+    write_if_changed "$config_file" "$tmp_file"
 fi
 
 if command -v bat >/dev/null 2>&1; then

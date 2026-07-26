@@ -1,6 +1,6 @@
 [catalog.pi-agent]
 name = "Pi Agent"
-category = "misc"
+category = "ai"
 
 [templates.pi-agent]
 input_path = "pi-theme.json"

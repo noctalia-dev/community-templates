@@ -1,6 +1,6 @@
 [catalog.lazygit]
 name = "lazygit"
-category = "misc"
+category = "terminal"
 
 [templates.lazygit]
 input_path = "lazygit.yml"

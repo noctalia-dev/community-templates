@@ -1,6 +1,6 @@
 [catalog.opencode]
 name = "Opencode"
-category = "misc"
+category = "ai"
 
 [templates.opencode]
 input_path = 'opencode.json'

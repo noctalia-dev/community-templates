@@ -1,6 +1,6 @@
 [catalog.yazi]
 name = "Yazi"
-category = "misc"
+category = "terminal"
 
 [templates.yazi]
 input_path = "yazi.toml"

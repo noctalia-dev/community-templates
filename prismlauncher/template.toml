@@ -1,6 +1,6 @@
 [catalog.prismlauncher]
 name = "Prism Launcher"
-category = "misc"
+category = "gaming"
 
 [templates.prismlauncher]
 input_path = 'prismlauncher.json'

@@ -12,13 +12,17 @@ from typing import Any
 
 DEFAULT_ROOT = Path(__file__).resolve().parents[2]
 
-# Shared with the built-in templates, so community entries group with them in the
-# settings list instead of inventing a category of one.
+# Shared allowlist so community entries group cleanly in the settings store
+# instead of inventing a category of one. Includes the built-in set plus a few
+# community-dense buckets (ai, chat, gaming).
 CATEGORIES = {
+    "ai",
     "audio",
     "browser",
+    "chat",
     "compositor",
     "editor",
+    "gaming",
     "launcher",
     "system",
     "terminal",

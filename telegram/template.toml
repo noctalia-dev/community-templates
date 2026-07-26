@@ -1,6 +1,6 @@
 [catalog.telegram]
 name = "Telegram"
-category = "misc"
+category = "chat"
 
 [templates.telegram]
 input_path = "telegram.tdesktop-theme"

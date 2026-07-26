@@ -1,6 +1,6 @@
 [catalog.steam]
 name = "Steam"
-category = "misc"
+category = "gaming"
 
 [templates.steam]
 input_path = "steam.css"

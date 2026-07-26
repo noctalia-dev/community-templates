@@ -1,6 +1,6 @@
 [catalog.heroiclauncher]
 name = "Heroic Launcher"
-category = "misc"
+category = "gaming"
 
 [templates.heroiclauncher]
 input_path = 'heroic.css'

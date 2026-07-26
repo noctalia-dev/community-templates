@@ -37,6 +37,6 @@
 ## Checklist
 
 - [ ] The directory name matches the `[catalog.<id>]` id in `template.toml`.
-- [ ] `category` is one of: `audio`, `browser`, `compositor`, `editor`, `launcher`, `system`, `terminal`, `misc`.
+- [ ] `category` is one of: `ai`, `audio`, `browser`, `chat`, `compositor`, `editor`, `gaming`, `launcher`, `system`, `terminal`, `misc`.
 - [ ] Every `input_path` names a file that exists in this directory.
 - [ ] No generated output or app-specific personal config is committed.

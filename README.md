@@ -38,9 +38,8 @@ output_path = "$XDG_CONFIG_HOME/fuzzel/themes/noctalia"  # where the rendered fi
 post_hook   = "bash '{{ config_dir }}/apply.sh'"         # optional, runs after the write
 ```
 
-`category` must be one of `audio`, `browser`, `compositor`, `editor`, `launcher`, `system`, `terminal`, `misc`. These
-are the same categories Noctalia's built-in templates use, so community entries group with them instead of each
-inventing a category of one.
+`category` must be one of `ai`, `audio`, `browser`, `chat`, `compositor`, `editor`, `gaming`, `launcher`, `system`,
+`terminal`, `misc`. Prefer an existing bucket over inventing a category of one; keep `misc` for true one-offs.
 
 An app can declare **several entries**. That is how `discord/` renders three styles across nine Discord clients: one
 `[templates.<entry>]` table per output, all under a single `[catalog.discord]`.

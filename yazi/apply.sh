@@ -4,9 +4,6 @@ set -euo pipefail
 config_file="${XDG_CONFIG_HOME:-$HOME/.config}/yazi/theme.toml"
 config_dir="$(dirname "$config_file")"
 
-# Temporary file used so we rewrite safely, then replace the original at the end.
-tmp_file="$(mktemp)"
-
 mkdir -p "$config_dir"
 
 # If the config does not exist yet, create a minimal one and stop here.
@@ -18,6 +15,9 @@ light = "noctalia"
 EOF
     exit 0
 fi
+
+# Temporary file used so we rewrite safely, then replace the original at the end.
+tmp_file="$(mktemp)"
 
 awk '
 BEGIN {
@@ -116,5 +116,8 @@ END {
 }
 ' "$config_file" >"$tmp_file"
 
-# Replace the original config with the rewritten version.
-mv "$tmp_file" "$config_file"
+# Write through a symlink instead of replacing it via mv.
+if ! cmp -s "$config_file" "$tmp_file"; then
+    cat "$tmp_file" >"$config_file"
+fi
+rm -f "$tmp_file"
