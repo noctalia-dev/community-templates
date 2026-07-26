@@ -1,0 +1,17 @@
+# fastfetch
+
+Themes [fastfetch](https://github.com/fastfetch-cli/fastfetch) — sets `display.color.keys`,
+`display.color.title`, `display.percent.color.{green,yellow,red}` and `logo.color.{1,2}`.
+
+fastfetch's config (`~/.config/fastfetch/config.jsonc`) has no include/merge directive, so
+`apply.sh` merges the rendered color object into the user's real config directly (`jq -s '.[0] *
+.[1]'`), preserving everything else in it (modules list, custom module config, etc.).
+
+**Idempotency note**: the merge is guarded by comparing only the `logo`/`display` sub-objects
+semantically (`jq -S`), not the whole file's raw bytes — a naive whole-file `cmp` after a `jq`
+merge will never actually match hand-formatted JSON (`jq` re-serializes with its own canonical
+formatting), which silently defeats the guard and rewrites the file on every apply regardless of
+whether colors changed. Verified idempotent: running `apply.sh` twice with unchanged colors
+leaves the file's mtime and content completely untouched.
+
+Tested against fastfetch 2.66.0.
