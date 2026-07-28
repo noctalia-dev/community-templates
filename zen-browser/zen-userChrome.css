@@ -443,7 +443,7 @@ panel[type="autocomplete-richlistbox"],
 
 /* --- Bookmark Panel Folder Tree Styling --- */
 #editBMPanel_folderTree {
-  background-color: var(--subtle) !important;
+  background-color: var(--base) !important;
   background-image: none !important;
   color: var(--text) !important;
   border-radius: 8px !important;
