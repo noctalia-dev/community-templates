@@ -30,13 +30,17 @@
 @define-color theme_selected_fg_color   {{colors.on_primary.default.hex}};
 @define-color borders                   {{colors.outline.default.hex}};
 
-/* selected-color/extreme-selected-color are Noctalia's yellow accent, but
-   GIMP's own theme always pairs them with @fg-color (white) text and never
-   swaps to a dark color, unlike how Noctalia's other templates use on_primary
-   for text on a primary-colored background. Every selector below is where
-   GIMP's common.css actually uses one of those two as a background (grep
-   confirmed, not guessed), overridden here to keep the yellow but fix
-   contrast, instead of desaturating the accent away entirely. */
+/* selected-color and extreme-selected-color are both Noctalia's yellow
+   accent. GIMP's own theme always pairs them with @fg-color (white) text
+   and never swaps to a dark color the way Noctalia's other templates use
+   on_primary on top of a primary-colored background, so every selector
+   below (grep confirmed against GIMP's own common.css, not guessed) needs
+   an explicit override to stay readable. Icons get their own rule further
+   down: confirmed live that GTK's symbolic-icon `color` does not reliably
+   inherit through a wildcard descendant selector the way plain text does,
+   even though GIMP's own CSS proves the property itself works
+   (.minimize image { color: ...; } is the pattern that inspired this),
+   so icons are targeted directly instead of relying on inheritance. */
 .view:selected,
 .view row:selected,
 menuitem *:hover,
@@ -49,8 +53,15 @@ GimpDeviceStatus widget:selected box,
 button:checked,
 button.titlebutton:hover,
 spinbutton button:hover,
-.sidebar-row:selected, .sidebar-row:selected *,
+.sidebar-row:selected,
+.sidebar-row:selected label,
 list row:selected {
+  color: {{colors.on_primary.default.hex}};
+}
+.sidebar-row:selected image,
+.sidebar-row:selected icon,
+toolbutton button.flat:checked image,
+toolbutton button.flat:checked icon {
   color: {{colors.on_primary.default.hex}};
 }
 
