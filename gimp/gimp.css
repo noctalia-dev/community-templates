@@ -30,17 +30,43 @@
 @define-color theme_selected_fg_color   {{colors.on_primary.default.hex}};
 @define-color borders                   {{colors.outline.default.hex}};
 
-/* selected-color and extreme-selected-color are both Noctalia's yellow
-   accent. GIMP's own theme always pairs them with @fg-color (white) text
-   and never swaps to a dark color the way Noctalia's other templates use
-   on_primary on top of a primary-colored background, so every selector
-   below (grep confirmed against GIMP's own common.css, not guessed) needs
-   an explicit override to stay readable. Icons get their own rule further
-   down: confirmed live that GTK's symbolic-icon `color` does not reliably
-   inherit through a wildcard descendant selector the way plain text does,
-   even though GIMP's own CSS proves the property itself works
-   (.minimize image { color: ...; } is the pattern that inspired this),
-   so icons are targeted directly instead of relying on inheritance. */
+/* Most of GIMP's UI reuses selected-color/extreme-selected-color as a full
+   background fill for selection/hover/checked states. Left as bright
+   Noctalia yellow, that fill makes GIMP's own default (light) icon
+   rendering invisible on several widgets, confirmed live and not fixable
+   by recoloring the icon directly (tried extensively: direct color
+   targeting, wildcard inheritance, -gtk-icon-shadow; `filter` isn't even
+   a valid GTK3 CSS property at all, confirmed via a real parse error).
+
+   Real prior art settles this cleanly: community GIMP dark+accent themes
+   (e.g. github.com/bunnywaffle/GIMP-3-Themes, "Black Green Glow") never
+   use a bright accent as a full selection fill either, only as a thin
+   border stripe on top of a still-dark background. Applying that same
+   pattern here: every selector below keeps a dark, subtle background
+   (hover-color) and gets the yellow as a left border accent instead. No
+   per-widget icon or text color override is needed this way, since GIMP's
+   own default text/icon rendering already works fine against a dark
+   background, that's the entire point.
+
+   Uses box-shadow, not a real border: GIMP's own common.css already
+   renders a bottom accent bar this way in several places (e.g. `menubar >
+   menuitem:hover { box-shadow: inset 0 -3px @stronger-border-color; }`),
+   and stronger-border-color is mapped to Noctalia's outline role (a
+   blue-purple tone) elsewhere in this file, which is exactly the stray
+   blue bar seen live alongside an earlier version of this fix that used a
+   real `border` property instead: two separate indicators stacking, not
+   one. Matching GIMP's own mechanism here replaces that blue bar outright
+   instead of adding a second one next to it.
+
+   One deliberate exception, kept as a full yellow fill instead (below):
+   toolbox tool selection. Confirmed working with a full fill plus a dark
+   icon override, and that's the preferred look there specifically. The
+   Preferences category sidebar is a GtkTreeView (confirmed by its expander
+   chevrons), matched by `.view:selected` below, not a GtkListBox `list
+   row`, so it stays with this box-shadow treatment; pulling it out into a
+   full-fill override was tried and also recolored the page's title-bar
+   header the same way (both fall back to the same GTK theme variables),
+   which looked wrong, so left as-is. */
 .view:selected,
 .view row:selected,
 menuitem *:hover,
@@ -53,32 +79,29 @@ GimpDeviceStatus widget:selected box,
 button:checked,
 button.titlebutton:hover,
 spinbutton button:hover {
+  background-color: {{colors.surface_container_high.default.hex}};
+  background-image: none;
+  color: {{colors.on_surface.default.hex}};
+  border-width: 0;
+  box-shadow: inset 0 -3px {{colors.primary.default.hex}};
+}
+
+/* Full yellow fill for the toolbox, matching selected-color's real value
+   (unchanged from GIMP's own base rule, no override needed for the
+   background itself). Text/icon color need the explicit dark override
+   GIMP's own CSS never provides. The small corner triangle marking a tool
+   group (e.g. on the Paintbrush/Pencil/Airbrush group) stays whatever
+   color GIMP draws it: confirmed no dedicated icon asset exists for it
+   anywhere in GIMP's own icon set, so it's a fixed-color overlay drawn
+   directly in GIMP's C code, not a themeable CSS node. */
+toolbutton button.flat:hover,
+toolbutton button.flat:checked,
+toolbutton button.flat:checked:hover {
   color: {{colors.on_primary.default.hex}};
 }
 toolbutton button.flat:checked image,
 toolbutton button.flat:checked icon {
   color: {{colors.on_primary.default.hex}};
-}
-
-/* The Preferences category sidebar is a plain GtkListBox (`list row:selected`,
-   not `.sidebar-row` as first assumed, confirmed live after `.sidebar-row`
-   overrides had zero visible effect). Its row icon (confirmed: a real
-   symbolic icon exists, gimp-prefs-system-resources-symbolic.svg, so this
-   isn't a missing-symbolic-variant problem) does not respond to any CSS
-   color targeting tried on it directly. The toolbox tool-selection icon,
-   using the exact same selected-color variable, recolors correctly by
-   contrast, so this is a real difference in how GIMP's own code renders
-   this one specific widget, not a CSS specificity or selector mistake. Given
-   that, keep selected-color itself as Noctalia's yellow everywhere it
-   correctly renders (toolbox, tabs, hovers), and give only this one row's
-   background a narrow, separate exception dark enough for its icon to stay
-   visible regardless of what actually colors it. */
-list row:selected, list row:selected * {
-  background-color: {{colors.on_primary.default.hex}};
-}
-list row:selected,
-list row:selected label {
-  color: {{colors.on_surface.default.hex}};
 }
 
 /* GIMP's own theme has no general rule for GtkPopoverMenu backgrounds

@@ -49,5 +49,6 @@ regardless of any host `~/.config` access.
 ## Testing
 
 Tested against GIMP 3.2.4 (Flatpak). Verified visually across three passes: main window and
-toolbox, right-click context menus, and the Preferences dialog specifically (the hardest case,
-since it touches nearly every one of GIMP's 17 variables plus the GTK fallback ones).
+toolbox (`screenshot.png`), right-click context menus, and the Preferences dialog specifically
+(`screenshot-preferences.png`), the hardest case since it touches nearly every one of GIMP's 17
+variables plus the GTK fallback ones.
