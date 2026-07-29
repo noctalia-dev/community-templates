@@ -28,6 +28,14 @@ Two things needed more than a plain 1:1 color swap:
   too, as a safety net, since the system `gtk.css` those would normally come from never loads
   inside a Flatpak sandbox.
 
+## Requires GIMP's own "Default" base theme
+
+GIMP has two selectable base themes (Preferences > Interface > Theme): `Default` and `System`.
+This template is built against `Default` (`themes/Default/gimp-dark.css`), the one this personal
+override's own 17 variables and extra selectors are checked against. `System` imports a
+different, much smaller CSS file with no guarantee it uses the same variable names, not tested
+or supported here. If colors look wrong after enabling this template, check Preferences first.
+
 ## Native install
 
 `gimp.css` lives at `~/.config/GIMP/3.2/gimp.css`.

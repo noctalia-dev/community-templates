@@ -52,17 +52,33 @@ GimpDeviceStatus widget:selected,
 GimpDeviceStatus widget:selected box,
 button:checked,
 button.titlebutton:hover,
-spinbutton button:hover,
-.sidebar-row:selected,
-.sidebar-row:selected label,
-list row:selected {
+spinbutton button:hover {
   color: {{colors.on_primary.default.hex}};
 }
-.sidebar-row:selected image,
-.sidebar-row:selected icon,
 toolbutton button.flat:checked image,
 toolbutton button.flat:checked icon {
   color: {{colors.on_primary.default.hex}};
+}
+
+/* The Preferences category sidebar is a plain GtkListBox (`list row:selected`,
+   not `.sidebar-row` as first assumed, confirmed live after `.sidebar-row`
+   overrides had zero visible effect). Its row icon (confirmed: a real
+   symbolic icon exists, gimp-prefs-system-resources-symbolic.svg, so this
+   isn't a missing-symbolic-variant problem) does not respond to any CSS
+   color targeting tried on it directly. The toolbox tool-selection icon,
+   using the exact same selected-color variable, recolors correctly by
+   contrast, so this is a real difference in how GIMP's own code renders
+   this one specific widget, not a CSS specificity or selector mistake. Given
+   that, keep selected-color itself as Noctalia's yellow everywhere it
+   correctly renders (toolbox, tabs, hovers), and give only this one row's
+   background a narrow, separate exception dark enough for its icon to stay
+   visible regardless of what actually colors it. */
+list row:selected, list row:selected * {
+  background-color: {{colors.on_primary.default.hex}};
+}
+list row:selected,
+list row:selected label {
+  color: {{colors.on_surface.default.hex}};
 }
 
 /* GIMP's own theme has no general rule for GtkPopoverMenu backgrounds
