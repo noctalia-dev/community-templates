@@ -1,0 +1,124 @@
+/* Noctalia theme override for Inkscape's own personal-override hook.
+   Inkscape ships ui/user.css empty by default, imported automatically:
+   "This is a CSS override that users can provide to override Inkscape's
+   and theme styles." No extra setup needed once this file is in place.
+
+   Inkscape's default active theme (Minwaita-Inkscape, its own bundled
+   GTK3 theme fork) hardcodes literal hex colors throughout instead of
+   using shared @define-color roles (confirmed: 763 literal hex values
+   vs only 35 named-color uses), so redefining GTK's standard theme_*
+   names alone is not enough, unlike GIMP. user.css loads at a higher
+   GTK style-provider priority than the active theme (confirmed against
+   Inkscape's own src/ui/themes.cpp), so it wins for anything it directly
+   targets. Every selector below was confirmed live via targeted color
+   probes, cross-checked against Inkscape's real source (gitlab.com/
+   inkscape/inkscape) for the exact widget names/IDs, not guessed from
+   the theme file alone. */
+
+@define-color theme_bg_color            {{colors.surface.default.hex}};
+@define-color theme_fg_color            {{colors.on_surface.default.hex}};
+@define-color theme_fd_color            {{colors.on_surface.default.hex}};
+@define-color theme_base_color          {{colors.surface_container.default.hex}};
+@define-color theme_text_color          {{colors.on_surface.default.hex}};
+@define-color theme_selected_bg_color   {{colors.primary.default.hex}};
+@define-color theme_selected_fg_color   {{colors.on_primary.default.hex}};
+@define-color theme_unfocused_fg_color  {{colors.on_surface_variant.default.hex}};
+@define-color theme_tooltip_bg_color    {{colors.surface_container_high.default.hex}};
+@define-color theme_tooltip_fg_color    {{colors.on_surface.default.hex}};
+@define-color insensitive_fg_color      {{colors.outline_variant.default.hex}};
+@define-color borders                   {{colors.outline.default.hex}};
+
+@define-color error_color   {{colors.error.default.hex}};
+@define-color warning_color {{colors.primary.default.hex}};
+@define-color success_color {{colors.tertiary.default.hex}};
+
+/* Root window chrome: menu bar, and the outer scrolled/paned wrapper
+   backgrounds that show through in the gaps between docked panels. */
+menubar,
+scrolledwindow,
+.background {
+  background-color: {{colors.surface.default.hex}};
+  color: {{colors.on_surface.default.hex}};
+}
+
+/* Docked panel (Layers, Fill & Stroke, etc.) tab strip and body. */
+notebook header {
+  background-color: {{colors.surface_container_high.default.hex}};
+  color: {{colors.on_surface.default.hex}};
+}
+notebook header tabs tab:checked {
+  background-color: {{colors.surface_container_high.default.hex}};
+  background-image: none;
+  color: {{colors.on_surface.default.hex}};
+  box-shadow: inset 0 -3px {{colors.primary.default.hex}};
+}
+#NotebookPage {
+  background-color: {{colors.surface.default.hex}};
+  color: {{colors.on_surface.default.hex}};
+}
+
+/* Vertical toolbox: each tool icon is a GtkRadioButton.square-button
+   inside a GtkFlowBox (confirmed via share/ui/toolbar-tool.ui). */
+button.square-button {
+  background-color: {{colors.surface.default.hex}};
+  color: {{colors.on_surface.default.hex}};
+}
+button.square-button:hover {
+  background-color: {{colors.surface_container_high.default.hex}};
+}
+button.square-button:checked,
+button.square-button:checked:hover {
+  background-color: {{colors.primary.default.hex}};
+  color: {{colors.on_primary.default.hex}};
+}
+button.square-button:checked image {
+  color: {{colors.on_primary.default.hex}};
+}
+
+/* Horizontal tool-options bar: each tool gets its own uniquely-named
+   toolbar widget (confirmed via src/ui/toolbar/toolbars.cpp's
+   set_name(data.name + "Toolbar") call), so every one is listed. */
+#SelectToolbar,
+#NodeToolbar,
+#BooleansToolbar,
+#MarkerToolbar,
+#RectToolbar,
+#ArcToolbar,
+#StarToolbar,
+#SpiralToolbar,
+#PencilToolbar,
+#PenToolbar,
+#CalligraphicToolbar,
+#TextToolbar,
+#GradientToolbar,
+#MeshToolbar,
+#ZoomToolbar,
+#MeasureToolbar,
+#DropperToolbar,
+#TweakToolbar,
+#SprayToolbar,
+#ConnectorToolbar,
+#PagesToolbar,
+#PaintbucketToolbar,
+#EraserToolbar,
+#LPEToolToolbar,
+#ObjectPickerToolbar {
+  background-color: {{colors.surface.default.hex}};
+  color: {{colors.on_surface.default.hex}};
+}
+
+entry {
+  background-color: {{colors.surface_container.default.hex}};
+  color: {{colors.on_surface.default.hex}};
+  border-color: {{colors.outline.default.hex}};
+}
+entry:focus {
+  border-color: {{colors.primary.default.hex}};
+  box-shadow: inset 0 0 0 1px {{colors.primary.default.hex}};
+}
+
+/* Status bar along the bottom of the canvas. */
+#DesktopStatusBar {
+  background-color: {{colors.surface.default.hex}};
+  color: {{colors.on_surface.default.hex}};
+}
