@@ -1,4 +1,4 @@
-# Inkscape (WORK IN PROGRESS, not ready for PR yet)
+# Inkscape
 
 Inkscape ships its own personal-override CSS hook, `ui/user.css`, empty by default and imported
 automatically ("This is a CSS override that users can provide to override Inkscape's and theme
@@ -38,12 +38,37 @@ solid-color CSS probe and a screenshot — never assumed from the theme file alo
   `set_name(toolName + "Toolbar")`. Every tool from `toolbars.cpp`'s own registry is listed.
 - `entry` / `entry:focus` — number/text entry fields (X, Y, W, H, etc.).
 - `#DesktopStatusBar` — the bottom status bar.
+- `#\33 DBoxToolbar` — the 3D Box tool's options bar. CSS identifiers can't start with a digit,
+  so this needs the CSS escape for a leading "3" (`\33` is the escaped hex code point), confirmed
+  via `toolbars.cpp`'s own tool-name registry (`"3DBox"` + `"Toolbar"` suffix).
+- `.view` / `.view:selected` — the Preferences dialog's category sidebar, a `GtkTreeView`, not a
+  `GtkListBox` (same widget type as the GIMP template's own Preferences sidebar). Base background
+  and the selected-row left-edge accent bar both needed separate rules.
+- `menu menuitem:hover` / `menuitem:selected` — right-click context menus and menubar dropdowns.
+  Needs the `menu` ancestor in the selector to match Minwaita-Inkscape's own specificity; a bare
+  `menuitem:hover` silently loses that fight.
+- `button.flat:checked` (+ `label` variants) — Preferences > Color Selector's picker toggle
+  buttons. A real contrast bug (near-white text on a yellow `:checked` background), same class of
+  issue as the GIMP toolbox and the separate `pywalfox#171` sidebar-highlight fix.
+- `scale trough` / `scale fill` (plain, not just `:backdrop`) — the actual widget `InkScale::on_draw`
+  delegates its background painting to (`src/ui/widget/ink-spinscale.cpp`), used by the Blur/Opacity
+  sliders. The plain (focused-window) state was the real remaining gap for a long stretch of this
+  work, since every screenshot taken to verify it was itself in `:backdrop` state.
+- `notebook > stack:not(:only-child)` — the docked-panel notebook's own content-stack background,
+  which shows through as a visible gray strip between a dock panel and the command toolbar when
+  more than one stack child exists. Confirmed by exact pixel-color match against the theme's own
+  values, after two wrong guesses (`paned > separator`, `scrollbar.left/.right` border).
+- `:backdrop` variants throughout — the window is unfocused far more often in daily use than
+  expected (any dialog taking focus, alt-tabbing), and Minwaita-Inkscape defines a fully separate
+  stock-colored rule set for that state that the plain (focused) selectors above don't cover.
 
 ## Known gap
 
-`#3DBoxToolbar` is deliberately left out: CSS identifiers starting with a digit are invalid
-(`#3DBoxToolbar` would need an escape like `#\33 DBoxToolbar`), not yet tried. The 3D Box tool's
-options bar stays unthemed until this is resolved.
+Inkscape's canvas "desk" (pasteboard) color is a real user preference stored as an XML attribute
+in `preferences.xml`, not reachable via `user.css` at all — the canvas is a custom-drawn widget,
+not GTK chrome. A `post_hook`-based fix (patching the XML directly, same architecture as the
+Blender template's own `post_hook`) was built and verified working, then intentionally left out of
+this PR — out of scope for this template's first pass. Revisit separately if wanted later.
 
 ## Requires Inkscape's own "Minwaita-Inkscape" base theme
 
@@ -64,7 +89,8 @@ Same file, inside the sandbox's own isolated config:
 
 ## Status
 
-Verified live against Inkscape 1.4.4 (Flatpak) with no CSS parse errors: menu bar, toolbox
-(full accent fill + dark icon on the active tool), tool-options bar entries, docked panel tabs
-(box-shadow accent) and body, status bar. Not yet verified: Preferences dialog, right-click context
-menus, the 3D Box tool gap above. Not yet opened as a PR — still being refined.
+Verified live against Inkscape 1.4.4 (Flatpak), no CSS parse errors: menu bar, toolbox, tool-options
+bar, docked panel tabs and body, status bar, Preferences dialog (sidebar navigation and Color
+Selector), right-click context menus and menubar dropdowns, scrollbars, the docked-panel/toolbar
+boundary, and the systemic `:backdrop` (unfocused-window) state across all of the above. Screenshots
+above are from a live themed session on this machine, not a synthetic test palette.
