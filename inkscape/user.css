@@ -229,6 +229,42 @@ togglebutton:checked label {
   color: {{colors.on_surface.default.hex}};
 }
 
+/* Scrollbars: track and slider (thumb) both stock gray by default. */
+scrollbar,
+scrollbar:backdrop {
+  background-color: {{colors.surface_container.default.hex}};
+}
+scrollbar slider {
+  background-color: {{colors.outline.default.hex}};
+}
+scrollbar slider:hover,
+scrollbar slider:hover:active {
+  background-color: {{colors.primary.default.hex}};
+}
+scrollbar slider:backdrop {
+  background-color: {{colors.outline_variant.default.hex}};
+}
+
+/* Generic (non-flat, non-square-button) buttons: combobox dropdown
+   buttons (Blend mode, font pickers, etc.), dialog buttons like Apply/OK
+   that aren't covered by the toolbox/Color-Selector-specific rules above. */
+button,
+button:backdrop {
+  background-color: {{colors.surface_container_high.default.hex}};
+  background-image: none;
+  color: {{colors.on_surface.default.hex}};
+  border-color: {{colors.outline.default.hex}};
+}
+button:hover {
+  background-color: {{colors.surface_container.default.hex}};
+}
+
+/* Docked-panel resize divider: dark already, but its hover/drag-active
+   state falls back to stock blue. */
+paned > separator:selected {
+  background-image: image({{colors.primary.default.hex}});
+}
+
 /* Fill & Stroke's Blend mode / Blur / Opacity row: confirmed via
    src/ui/widget/filter-effect-chooser.cpp's set_name("SimpleFilterModifier"). */
 #SimpleFilterModifier,
