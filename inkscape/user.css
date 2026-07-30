@@ -82,6 +82,16 @@ notebook header tabs tab:backdrop:checked {
   background-color: {{colors.surface.default.hex}};
   color: {{colors.on_surface.default.hex}};
 }
+/* notebook > stack's own background shows through in the gap when a
+   dock notebook has more than one child stack -- this is the real
+   source of the thin gray strip between the docked panel and the
+   command toolbar column (confirmed by exact pixel-color match against
+   the theme's own #232729/#252a2c values, not the paned separator or
+   scrollbar border guessed first). */
+notebook > stack:not(:only-child),
+notebook > stack:not(:only-child):backdrop {
+  background-color: {{colors.surface.default.hex}};
+}
 
 /* scale trough/fill are what InkScale::on_draw actually delegates its
    background painting to (confirmed via src/ui/widget/ink-spinscale.cpp
