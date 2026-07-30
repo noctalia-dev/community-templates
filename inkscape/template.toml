@@ -11,21 +11,3 @@ requires_path = "~/.config/inkscape"
 input_path = "user.css"
 output_path = "~/.var/app/org.inkscape.Inkscape/config/inkscape/ui/user.css"
 requires_path = "~/.var/app/org.inkscape.Inkscape"
-
-# Inkscape's canvas "desk" (pasteboard) color is a real user preference
-# stored as an XML attribute in preferences.xml, not reachable via
-# user.css -- the canvas is a custom-drawn widget, not GTK chrome.
-# Separate entries (not folded into the CSS ones above) since this
-# writes to preferences.xml, not ui/user.css, and needs its own
-# render-then-run post_hook, same pattern as the Blender template.
-[templates.inkscape-desk-color]
-input_path = "set-desk-color.sh"
-output_path = "~/.cache/noctalia/inkscape_desk_color_rendered.sh"
-post_hook = "bash ~/.cache/noctalia/inkscape_desk_color_rendered.sh"
-requires_path = "~/.config/inkscape"
-
-[templates.inkscape-desk-color-flatpak]
-input_path = "set-desk-color.sh"
-output_path = "~/.cache/noctalia/inkscape_desk_color_rendered.sh"
-post_hook = "bash ~/.cache/noctalia/inkscape_desk_color_rendered.sh"
-requires_path = "~/.var/app/org.inkscape.Inkscape"
