@@ -248,10 +248,30 @@ iconview:backdrop {
   color: {{colors.on_surface.default.hex}};
 }
 
-/* Scrollbars: track and slider (thumb) both stock gray by default. */
+/* Scrollbars: track and slider (thumb) both stock gray by default. Each
+   edge also has its own stock-gray border (scrollbar.left/.right/.top/
+   .bottom) that stayed untouched -- this is the actual source of the
+   thin vertical gray line between the docked panel and the far-right
+   toolbar column (confirmed via GTK Inspector; that line is a panel's
+   own scrollbar sitting right at that boundary, not a paned divider,
+   which was the wrong widget guessed first). Longhand border-*-color
+   used to match the theme's own per-edge selector specificity without
+   needing to redeclare width/style. */
 scrollbar,
 scrollbar:backdrop {
   background-color: {{colors.surface_container.default.hex}};
+}
+scrollbar.top {
+  border-bottom-color: {{colors.surface_container.default.hex}};
+}
+scrollbar.bottom {
+  border-top-color: {{colors.surface_container.default.hex}};
+}
+scrollbar.left {
+  border-right-color: {{colors.surface_container.default.hex}};
+}
+scrollbar.right {
+  border-left-color: {{colors.surface_container.default.hex}};
 }
 scrollbar slider {
   background-color: {{colors.outline.default.hex}};
@@ -278,8 +298,16 @@ button:hover {
   background-color: {{colors.surface_container.default.hex}};
 }
 
-/* Docked-panel resize divider: dark already, but its hover/drag-active
-   state falls back to stock blue. */
+/* Docked-panel resize divider: default (idle) state is a stock neutral
+   gray, clearly visible against our navy background -- confirmed via
+   direct pixel sampling, not assumed "already dark enough" like the
+   hover state's fix wrongly assumed. Scoped to this one specific
+   selector only, not the broad .frame class (that broad version was
+   tried and reverted earlier for lighting up borders everywhere
+   unintentionally). */
+paned > separator {
+  background-image: image({{colors.surface_container.default.hex}});
+}
 paned > separator:selected {
   background-image: image({{colors.primary.default.hex}});
 }
