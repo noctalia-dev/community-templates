@@ -33,33 +33,78 @@
 @define-color success_color {{colors.tertiary.default.hex}};
 
 /* Root window chrome: menu bar, and the outer scrolled/paned wrapper
-   backgrounds that show through in the gaps between docked panels. */
+   backgrounds that show through in the gaps between docked panels.
+   :backdrop variants included throughout this file -- the window is
+   unfocused (:backdrop state) far more often than expected in daily use
+   (any dialog taking focus, alt-tabbing, etc.), and Minwaita-Inkscape
+   defines a completely separate stock-colored rule set for that state
+   that none of the plain selectors below would otherwise override. */
 menubar,
+menubar:backdrop,
 scrolledwindow,
-.background {
+scrolledwindow:backdrop,
+.background,
+.background:backdrop {
   background-color: {{colors.surface.default.hex}};
   color: {{colors.on_surface.default.hex}};
 }
 
+/* Right-click context menus and menubar dropdowns: background/text
+   already inherited correctly, but the hovered/selected row falls back
+   to stock GTK blue -- same class of gap as the Preferences sidebar and
+   Color Selector toggle buttons below, same left-bar treatment. Needs
+   the `menu` ancestor to match Minwaita-Inkscape's own specificity
+   (`menu menuitem:hover` beats a bare `menuitem:hover`). */
+menu menuitem:hover,
+menu menuitem:selected,
+menuitem:hover,
+menuitem:selected {
+  background-color: {{colors.surface_container_high.default.hex}};
+  color: {{colors.on_surface.default.hex}};
+  box-shadow: inset 3px 0 0 0 {{colors.primary.default.hex}};
+}
+
 /* Docked panel (Layers, Fill & Stroke, etc.) tab strip and body. */
-notebook header {
+notebook header,
+notebook header:backdrop {
   background-color: {{colors.surface_container_high.default.hex}};
   color: {{colors.on_surface.default.hex}};
 }
-notebook header tabs tab:checked {
+notebook header tabs tab:checked,
+notebook header tabs tab:backdrop:checked {
   background-color: {{colors.surface_container_high.default.hex}};
   background-image: none;
   color: {{colors.on_surface.default.hex}};
   box-shadow: inset 0 -3px {{colors.primary.default.hex}};
 }
-#NotebookPage {
+#NotebookPage,
+#NotebookPage:backdrop {
   background-color: {{colors.surface.default.hex}};
   color: {{colors.on_surface.default.hex}};
 }
 
+/* Bottom-of-panel widget rows (Blend mode / Blur / Opacity sliders under
+   Fill & Stroke, and similar rows elsewhere) fall back to a plain stock
+   gray box in :backdrop state -- same root cause as the rest of this
+   file's :backdrop additions, just a different stock fallback color. */
+scale trough:backdrop,
+scale fill:backdrop,
+progressbar trough:backdrop,
+progressbar:backdrop trough,
+switch:backdrop,
+.inline-toolbar:backdrop,
+searchbar:backdrop,
+.location-bar:backdrop,
+window.workbench docktabstrip:backdrop {
+  background-color: {{colors.surface_container_high.default.hex}};
+  color: {{colors.on_surface.default.hex}};
+  border-color: {{colors.outline.default.hex}};
+}
+
 /* Vertical toolbox: each tool icon is a GtkRadioButton.square-button
    inside a GtkFlowBox (confirmed via share/ui/toolbar-tool.ui). */
-button.square-button {
+button.square-button,
+button.square-button:backdrop {
   background-color: {{colors.surface.default.hex}};
   color: {{colors.on_surface.default.hex}};
 }
@@ -67,17 +112,23 @@ button.square-button:hover {
   background-color: {{colors.surface_container_high.default.hex}};
 }
 button.square-button:checked,
-button.square-button:checked:hover {
+button.square-button:checked:hover,
+button.square-button:backdrop:checked {
   background-color: {{colors.primary.default.hex}};
   color: {{colors.on_primary.default.hex}};
 }
-button.square-button:checked image {
+button.square-button:checked image,
+button.square-button:backdrop:checked image {
   color: {{colors.on_primary.default.hex}};
 }
 
 /* Horizontal tool-options bar: each tool gets its own uniquely-named
    toolbar widget (confirmed via src/ui/toolbar/toolbars.cpp's
-   set_name(data.name + "Toolbar") call), so every one is listed. */
+   set_name(data.name + "Toolbar") call), so every one is listed.
+   #3DBoxToolbar needs a CSS escape since identifiers can't start with a
+   digit -- \33 is the escaped hex code point for "3", followed by the
+   mandatory whitespace terminator. */
+#\33 DBoxToolbar,
 #SelectToolbar,
 #NodeToolbar,
 #BooleansToolbar,
@@ -102,12 +153,39 @@ button.square-button:checked image {
 #PaintbucketToolbar,
 #EraserToolbar,
 #LPEToolToolbar,
-#ObjectPickerToolbar {
+#ObjectPickerToolbar,
+#\33 DBoxToolbar:backdrop,
+#SelectToolbar:backdrop,
+#NodeToolbar:backdrop,
+#BooleansToolbar:backdrop,
+#MarkerToolbar:backdrop,
+#RectToolbar:backdrop,
+#ArcToolbar:backdrop,
+#StarToolbar:backdrop,
+#SpiralToolbar:backdrop,
+#PencilToolbar:backdrop,
+#PenToolbar:backdrop,
+#CalligraphicToolbar:backdrop,
+#TextToolbar:backdrop,
+#GradientToolbar:backdrop,
+#MeshToolbar:backdrop,
+#ZoomToolbar:backdrop,
+#MeasureToolbar:backdrop,
+#DropperToolbar:backdrop,
+#TweakToolbar:backdrop,
+#SprayToolbar:backdrop,
+#ConnectorToolbar:backdrop,
+#PagesToolbar:backdrop,
+#PaintbucketToolbar:backdrop,
+#EraserToolbar:backdrop,
+#LPEToolToolbar:backdrop,
+#ObjectPickerToolbar:backdrop {
   background-color: {{colors.surface.default.hex}};
   color: {{colors.on_surface.default.hex}};
 }
 
-entry {
+entry,
+entry:backdrop {
   background-color: {{colors.surface_container.default.hex}};
   color: {{colors.on_surface.default.hex}};
   border-color: {{colors.outline.default.hex}};
@@ -117,8 +195,54 @@ entry:focus {
   box-shadow: inset 0 0 0 1px {{colors.primary.default.hex}};
 }
 
+/* Color Selector page's picker-type toggle buttons (Preferences > Interface
+   > Color Selector): plain flat Gtk::ToggleButton widgets, no custom class
+   or ID (confirmed via src/ui/dialog/inkscape-preferences.cpp). Covering
+   the selectors GTK3 flat-button theming plausibly resolves to, targeting
+   the label directly rather than relying on inheritance, same technique
+   already proven for the toolbox's checked-state icon color. */
+button.flat:checked,
+button.flat:checked label,
+button:checked label,
+togglebutton:checked,
+togglebutton:checked label {
+  color: {{colors.on_primary.default.hex}};
+}
+
+/* Preferences dialog's category sidebar is a GtkTreeView, not a
+   GtkListBox (same widget type as GIMP's own Preferences sidebar, see
+   community-templates#58) -- confirmed live via a solid-color probe,
+   .view:selected is the real match. Left-edge accent bar on a raised
+   dark background, not a full fill, matching the box-shadow convention
+   already used for notebook tabs elsewhere in this file. */
+.view:selected,
+.view:backdrop:selected {
+  background-color: {{colors.surface_container_high.default.hex}};
+  color: {{colors.on_surface.default.hex}};
+  box-shadow: inset 3px 0 0 0 {{colors.primary.default.hex}};
+}
+
 /* Status bar along the bottom of the canvas. */
-#DesktopStatusBar {
+#DesktopStatusBar,
+#DesktopStatusBar:backdrop {
+  background-color: {{colors.surface.default.hex}};
+  color: {{colors.on_surface.default.hex}};
+}
+
+/* Fill & Stroke's Blend mode / Blur / Opacity row: confirmed via
+   src/ui/widget/filter-effect-chooser.cpp's set_name("SimpleFilterModifier"). */
+#SimpleFilterModifier,
+#SimpleFilterModifier:backdrop {
+  background-color: {{colors.surface.default.hex}};
+  color: {{colors.on_surface.default.hex}};
+}
+/* Blur/Opacity are each a combined slider+entry "SpinScale" widget
+   (src/ui/widget/spin-scale.cpp's set_name), not a plain Gtk::Scale --
+   its own node needs a background, the trough alone isn't the full row. */
+#SpinScale,
+#SpinScale:backdrop,
+#DualSpinScale,
+#DualSpinScale:backdrop {
   background-color: {{colors.surface.default.hex}};
   color: {{colors.on_surface.default.hex}};
 }
