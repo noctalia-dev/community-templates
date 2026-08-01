@@ -28,8 +28,8 @@ its original `shade()`/`alpha()`/alias formula, which then correctly recomputes 
 within this file's own top-to-bottom cascade.
 
 The grey scale uses only 8 real Noctalia role colors, stepped rather than smoothly interpolated.
-A smooth 21-stop gradient would need invented in-between tones with no single matching color
-role. Each named color still colors a distinct flat UI region, not a continuous gradient surface,
+A smooth 21-stop gradient would require inventing in-between tones with no single matching
+color role. Each named color still colors a distinct flat UI region, not a continuous gradient surface,
 so the step boundaries aren't visible in practice.
 
 Deliberately left untouched: `graph_red`/`graph_green`/`graph_blue` (the RGB histogram channel

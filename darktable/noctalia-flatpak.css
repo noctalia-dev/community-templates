@@ -36,9 +36,9 @@
 
    The grey scale below intentionally uses only 8 real Noctalia role colors
    (stepped, not smoothly interpolated) -- a smooth 21-stop gradient would
-   need invented in-between tones that don't correspond to any single
-   a single Noctalia color placeholder, which the hardcoded-colors rule
-   for this repo doesn't allow. Each named color in darktable's own palette
+   require inventing in-between tones that don't correspond to a single
+   Noctalia color placeholder, which the hardcoded-colors rule for this
+   repo doesn't allow. Each named color in darktable's own palette
    still colors a distinct flat UI region, not a continuous gradient surface,
    so the step boundaries aren't visible in practice. */
 
