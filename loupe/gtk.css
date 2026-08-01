@@ -1,0 +1,35 @@
+/* Noctalia theme for Loupe (GNOME Image Viewer), a libadwaita/GTK4 app.
+   Unlike GTK3 apps (which each define their own ad-hoc set of @define-color
+   names), libadwaita apps share a small, stable, documented set of named
+   colors (window_bg_color, accent_color, etc.) that most GNOME apps read
+   the same way, so this file only needs to redefine those, not reverse
+   engineer an app-specific palette.
+
+   Delivered via the standard GTK4 user override path
+   ($XDG_CONFIG_HOME/gtk-4.0/gtk.css), confirmed live that this actually
+   loads for Loupe specifically inside its Flatpak sandbox. Not every
+   libadwaita/GTK4 Flatpak app honors this the same way -- a GTK4 app
+   (Lutris) hit a confirmed, upstream-declined relative-@import limitation
+   in a different investigation, do not assume this works for a new
+   GTK4 app without testing it directly first. */
+
+@define-color window_bg_color {{colors.surface.default.hex}};
+@define-color window_fg_color {{colors.on_surface.default.hex}};
+@define-color view_bg_color {{colors.surface_container.default.hex}};
+@define-color view_fg_color {{colors.on_surface.default.hex}};
+@define-color headerbar_bg_color {{colors.on_primary.default.hex}};
+@define-color headerbar_fg_color {{colors.on_surface.default.hex}};
+@define-color headerbar_border_color {{colors.on_surface.default.hex}};
+@define-color headerbar_backdrop_color {{colors.surface.default.hex}};
+@define-color card_bg_color {{colors.surface_container_high.default.hex}};
+@define-color card_fg_color {{colors.on_surface.default.hex}};
+@define-color popover_bg_color {{colors.surface_container_high.default.hex}};
+@define-color popover_fg_color {{colors.on_surface.default.hex}};
+@define-color dialog_bg_color {{colors.surface_container.default.hex}};
+@define-color dialog_fg_color {{colors.on_surface.default.hex}};
+@define-color accent_color {{colors.primary.default.hex}};
+@define-color accent_bg_color {{colors.primary.default.hex}};
+@define-color accent_fg_color {{colors.on_primary.default.hex}};
+@define-color destructive_color {{colors.error.default.hex}};
+@define-color destructive_bg_color {{colors.error.default.hex}};
+@define-color destructive_fg_color {{colors.on_primary.default.hex}};
