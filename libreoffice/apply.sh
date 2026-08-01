@@ -53,17 +53,17 @@ rm -f "$OXT_PATH"
 # above so the next run (once LibreOffice is closed) installs the current
 # colors, and a restart is already required to see any change regardless.
 if pgrep -x soffice.bin >/dev/null 2>&1; then
-  echo "noctalia libreoffice: LibreOffice is running, skipping extension install this run (it would corrupt the existing install). Close LibreOffice and re-apply the theme, or just restart it once, to pick up the new colors." >&2
+  # The .oxt above is already rebuilt with the current colors, only the
+  # install step is skipped here. A restart alone does NOT pick up anything
+  # new, the previously-installed extension is still what's registered.
+  # Close LibreOffice, then re-run the theme apply (or wait for the next
+  # theme change) to actually install this build.
+  echo "noctalia libreoffice: LibreOffice is running, skipping extension install this run (installing while it's open has been confirmed to corrupt the existing install). Close LibreOffice, then re-apply the theme to actually install these colors, a restart alone will not pick them up." >&2
   exit 0
 fi
 
 EXT_ID="dev.noctalia.libreoffice.theme"
-UNOPKG="$(command -v unopkg || true)"
-if [ -z "$UNOPKG" ]; then
-  UNOPKG_CMD=(flatpak run --command=/app/libreoffice/program/unopkg org.libreoffice.LibreOffice)
-else
-  UNOPKG_CMD=("$UNOPKG")
-fi
+INSTALLED_ANY=0
 
 # `add --force` alone has been confirmed live to leave the extension in a
 # broken state (a stale cache index pointing at a deleted temp dir, `list`
@@ -71,6 +71,30 @@ fi
 # with "file opening ... NOT_EXISTING" until the cache is cleared by hand).
 # Explicitly removing the old registration first, ignoring failure since it
 # may not be installed yet, avoids relying on --force to do that atomically.
-"${UNOPKG_CMD[@]}" remove "$EXT_ID" >/dev/null 2>&1 || true
-"${UNOPKG_CMD[@]}" add --force "$OXT_PATH" 2>&1 \
-  || echo "noctalia libreoffice: unopkg install failed" >&2
+
+# Install to every LibreOffice found, not just whichever `unopkg` a plain
+# PATH lookup happens to resolve first. A machine with both a native
+# LibreOffice (providing `unopkg` on PATH) and the Flatpak (the tested
+# target) installed would otherwise only get themed on whichever one won
+# that lookup, silently leaving the other one unthemed.
+if command -v unopkg >/dev/null 2>&1; then
+  unopkg remove "$EXT_ID" >/dev/null 2>&1 || true
+  if unopkg add --force "$OXT_PATH" 2>&1; then
+    INSTALLED_ANY=1
+  else
+    echo "noctalia libreoffice: native unopkg install failed" >&2
+  fi
+fi
+
+if flatpak info org.libreoffice.LibreOffice >/dev/null 2>&1; then
+  flatpak run --command=/app/libreoffice/program/unopkg org.libreoffice.LibreOffice remove "$EXT_ID" >/dev/null 2>&1 || true
+  if flatpak run --command=/app/libreoffice/program/unopkg org.libreoffice.LibreOffice add --force "$OXT_PATH" 2>&1; then
+    INSTALLED_ANY=1
+  else
+    echo "noctalia libreoffice: Flatpak unopkg install failed" >&2
+  fi
+fi
+
+if [ "$INSTALLED_ANY" -eq 0 ]; then
+  echo "noctalia libreoffice: no LibreOffice installation found (neither native unopkg on PATH nor the org.libreoffice.LibreOffice Flatpak)" >&2
+fi
