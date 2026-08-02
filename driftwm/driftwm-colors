@@ -1,0 +1,4 @@
+bg_color = "{{colors.terminal_background.default.hex}}"
+fg_color = "{{colors.terminal_foreground.default.hex}}"
+border_color = "{{colors.terminal_normal_black.default.hex}}"
+border_color_focused = "{{colors.primary.default.hex}}"
