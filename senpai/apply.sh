@@ -5,21 +5,24 @@ config_dir_xdg="${XDG_CONFIG_HOME:-$HOME/.config}/senpai"
 config_file="$config_dir_xdg/senpai.scfg"
 theme_file="$config_dir_xdg/themes/noctalia.scfg"
 
-mkdir -p "$config_dir_xdg"
-[ -f "$config_file" ] || touch "$config_file"
+if [ ! -f "$config_file" ]; then
+    echo "Error: senpai config not found: $config_file (create it first, this hook only edits an existing config)" >&2
+    exit 1
+fi
 
 if [ ! -f "$theme_file" ]; then
-    echo "Warning: senpai theme file not found: $theme_file" >&2
-    exit 0
+    echo "Error: senpai theme file not found: $theme_file" >&2
+    exit 1
 fi
 
 theme_block="$(cat "$theme_file")"
 tmp_file="$(mktemp)"
+trap 'rm -f "$tmp_file"' EXIT
 
 awk -v theme_data="$theme_block" '
 BEGIN { in_colors = 0; depth = 0; saw_colors = 0 }
 {
-    if (!in_colors && $0 ~ /^colors[[:space:]]*\{[[:space:]]*$/) {
+    if (!in_colors && $0 ~ /^[[:space:]]*colors[[:space:]]*\{[[:space:]]*$/) {
         in_colors = 1
         saw_colors = 1
         depth = 1
@@ -45,4 +48,3 @@ END {
 if ! cmp -s "$config_file" "$tmp_file"; then
     cat "$tmp_file" >"$config_file"
 fi
-rm -f "$tmp_file"
