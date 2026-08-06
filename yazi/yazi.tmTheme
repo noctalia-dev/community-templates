@@ -30,13 +30,13 @@
           <key>accent</key>
           <string>{{colors.primary.default.hex}}</string>
           <key>selection</key>
-          <string>#9399b240</string>
+          <string>{{colors.surface_container_highest.default.hex}}40</string>
           <key>activeGuide</key>
           <string>{{colors.terminal_normal_black.default.hex}}</string>
           <key>findHighlight</key>
-          <string>#3e5767</string>
+          <string>{{colors.secondary_container.default.hex}}</string>
           <key>gutterForeground</key>
-          <string>#7f849c</string>
+          <string>{{colors.outline.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -58,7 +58,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#9399b2</string>
+          <string>{{colors.on_surface_variant.default.hex}}</string>
           <key>fontStyle</key>
           <string/>
         </dict>
@@ -71,7 +71,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#9399b2</string>
+          <string>{{colors.on_surface_variant.default.hex}}</string>
           <key>fontStyle</key>
           <string>italic</string>
         </dict>
@@ -225,7 +225,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#eba0ac</string>
+          <string>{{colors.tertiary_fixed_dim.default.hex}}</string>
           <key>fontStyle</key>
           <string>italic</string>
         </dict>
@@ -269,7 +269,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#89dceb</string>
+          <string>{{colors.terminal_normal_cyan.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -467,7 +467,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#89dceb</string>
+          <string>{{colors.terminal_normal_cyan.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -478,7 +478,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#eba0ac</string>
+          <string>{{colors.tertiary_fixed_dim.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -691,7 +691,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#eba0ac</string>
+          <string>{{colors.tertiary_fixed_dim.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -735,7 +735,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#f2cdcd</string>
+          <string>{{colors.on_tertiary_container.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -757,7 +757,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#f2cdcd</string>
+          <string>{{colors.on_tertiary_container.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -871,7 +871,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#eba0ac</string>
+          <string>{{colors.tertiary_fixed_dim.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -893,7 +893,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#eba0ac</string>
+          <string>{{colors.tertiary_fixed_dim.default.hex}}</string>
           <key>fontStyle</key>
           <string/>
         </dict>
@@ -1027,7 +1027,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#eba0ac</string>
+          <string>{{colors.tertiary_fixed_dim.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -1049,7 +1049,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#89dceb</string>
+          <string>{{colors.terminal_normal_cyan.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -1060,7 +1060,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#f2cdcd</string>
+          <string>{{colors.on_tertiary_container.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -1140,7 +1140,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#74c7ec</string>
+          <string>{{colors.terminal_normal_blue.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -1149,7 +1149,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#b4befe</string>
+          <string>{{colors.primary_fixed_dim.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -1180,7 +1180,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#a6adc8</string>
+          <string>{{colors.outline_variant.default.hex}}</string>
           <key>fontStyle</key>
           <string>strikethrough</string>
         </dict>
@@ -1204,7 +1204,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#b4befe</string>
+          <string>{{colors.primary_fixed_dim.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -1226,7 +1226,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#89dceb</string>
+          <string>{{colors.terminal_normal_cyan.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -1237,7 +1237,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#9399b2</string>
+          <string>{{colors.on_surface_variant.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -1316,7 +1316,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#b4befe</string>
+          <string>{{colors.primary_fixed_dim.default.hex}}</string>
           <key>fontStyle</key>
           <string/>
         </dict>
@@ -1353,7 +1353,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#eba0ac</string>
+          <string>{{colors.tertiary_fixed_dim.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -1375,7 +1375,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#89dceb</string>
+          <string>{{colors.terminal_normal_cyan.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -1408,7 +1408,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#89dceb</string>
+          <string>{{colors.terminal_normal_cyan.default.hex}}</string>
           <key>fontStyle</key>
           <string>italic</string>
         </dict>
@@ -1456,7 +1456,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#89dceb</string>
+          <string>{{colors.terminal_normal_cyan.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -1535,7 +1535,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#eba0ac</string>
+          <string>{{colors.tertiary_fixed_dim.default.hex}}</string>
           <key>fontStyle</key>
           <string>italic</string>
         </dict>
@@ -1872,7 +1872,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#89dceb</string>
+          <string>{{colors.terminal_normal_cyan.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -1894,7 +1894,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#eba0ac</string>
+          <string>{{colors.tertiary_fixed_dim.default.hex}}</string>
         </dict>
       </dict>
       <dict>
@@ -2039,7 +2039,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#9399b2</string>
+          <string>{{colors.on_surface_variant.default.hex}}</string>
         </dict>
       </dict>
       <dict>
