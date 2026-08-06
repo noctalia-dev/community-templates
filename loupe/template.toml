@@ -2,10 +2,6 @@
 name = "Loupe"
 category = "misc"
 
-[templates.loupe]
-input_path = "gtk.css"
-output_path = "$XDG_CONFIG_HOME/gtk-4.0/gtk.css"
-
 [templates.loupe-flatpak]
 input_path = "gtk.css"
 output_path = "~/.var/app/org.gnome.Loupe/config/gtk-4.0/gtk.css"

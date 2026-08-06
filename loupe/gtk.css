@@ -1,35 +1,60 @@
 /* Noctalia theme for Loupe (GNOME Image Viewer), a libadwaita/GTK4 app.
-   Unlike GTK3 apps (which each define their own ad-hoc set of @define-color
-   names), libadwaita apps share a small, stable, documented set of named
-   colors (window_bg_color, accent_color, etc.) that most GNOME apps read
-   the same way, so this file only needs to redefine those, not reverse
-   engineer an app-specific palette.
 
-   Delivered via the standard GTK4 user override path
-   ($XDG_CONFIG_HOME/gtk-4.0/gtk.css), confirmed live that this actually
-   loads for Loupe specifically inside its Flatpak sandbox. Not every
-   libadwaita/GTK4 Flatpak app honors this the same way -- a GTK4 app
-   (Lutris) hit a confirmed, upstream-declined relative-@import limitation
-   in a different investigation, do not assume this works for a new
-   GTK4 app without testing it directly first. */
+   Flatpak-only, deliberately no native entry. $XDG_CONFIG_HOME/gtk-4.0/gtk.css
+   is GTK4's system-wide user override path -- Noctalia's own builtin `gtk4`
+   template already writes there, and already covers every named color a
+   libadwaita app like Loupe needs. A native install gets themed correctly
+   with zero extra work once that builtin template is enabled; a separate
+   native Loupe entry here would just re-declare the same file for no benefit.
 
-@define-color window_bg_color {{colors.surface.default.hex}};
-@define-color window_fg_color {{colors.on_surface.default.hex}};
-@define-color view_bg_color {{colors.surface_container.default.hex}};
-@define-color view_fg_color {{colors.on_surface.default.hex}};
-@define-color headerbar_bg_color {{colors.on_primary.default.hex}};
-@define-color headerbar_fg_color {{colors.on_surface.default.hex}};
-@define-color headerbar_border_color {{colors.on_surface.default.hex}};
-@define-color headerbar_backdrop_color {{colors.surface.default.hex}};
-@define-color card_bg_color {{colors.surface_container_high.default.hex}};
-@define-color card_fg_color {{colors.on_surface.default.hex}};
-@define-color popover_bg_color {{colors.surface_container_high.default.hex}};
-@define-color popover_fg_color {{colors.on_surface.default.hex}};
-@define-color dialog_bg_color {{colors.surface_container.default.hex}};
-@define-color dialog_fg_color {{colors.on_surface.default.hex}};
+   The Flatpak sandbox can't see that host file though (its own isolated
+   config lives at ~/.var/app/org.gnome.Loupe/config/gtk-4.0/gtk.css), so
+   Flatpak Loupe genuinely needs its own copy. Per review feedback, this
+   mirrors the official builtin gtk4.css template's own real values
+   (/usr/share/noctalia/assets/templates/gtk/gtk4.css) rather than a
+   hand-rolled subset, so Flatpak Loupe ends up looking identical to every
+   native GTK4 app on the system, not alien.
+
+   Confirmed live that this actually loads for Loupe specifically inside its
+   Flatpak sandbox. Not every libadwaita/GTK4 Flatpak app honors this the
+   same way -- a GTK4 app (Lutris) hit a confirmed, upstream-declined
+   relative-@import limitation in a different investigation
+   (flatpak/flatpak#3901), do not assume this works for a new GTK4 app
+   without testing it directly first. */
+
 @define-color accent_color {{colors.primary.default.hex}};
 @define-color accent_bg_color {{colors.primary.default.hex}};
 @define-color accent_fg_color {{colors.on_primary.default.hex}};
-@define-color destructive_color {{colors.error.default.hex}};
+
 @define-color destructive_bg_color {{colors.error.default.hex}};
-@define-color destructive_fg_color {{colors.on_primary.default.hex}};
+@define-color destructive_fg_color {{colors.on_error.default.hex}};
+
+@define-color error_bg_color {{colors.error.default.hex}};
+@define-color error_fg_color {{colors.on_error.default.hex}};
+
+@define-color window_bg_color {{colors.surface.default.hex}};
+@define-color window_fg_color {{colors.on_surface.default.hex}};
+
+@define-color view_bg_color {{colors.surface.default.hex}};
+@define-color view_fg_color {{colors.on_surface.default.hex}};
+
+@define-color headerbar_bg_color {{colors.surface.default.hex}};
+@define-color headerbar_fg_color {{colors.on_surface.default.hex}};
+@define-color headerbar_backdrop_color @window_bg_color;
+
+@define-color popover_bg_color {{colors.surface_container.default.hex}};
+@define-color popover_fg_color {{colors.on_surface.default.hex}};
+
+@define-color card_bg_color {{colors.surface_container.default.hex}};
+@define-color card_fg_color {{colors.on_surface.default.hex}};
+
+@define-color dialog_bg_color {{colors.surface.default.hex}};
+@define-color dialog_fg_color {{colors.on_surface.default.hex}};
+
+/* Backdrop/unfocused states */
+@define-color theme_unfocused_fg_color @window_fg_color;
+@define-color theme_unfocused_text_color @view_fg_color;
+@define-color theme_unfocused_bg_color @window_bg_color;
+@define-color theme_unfocused_base_color @window_bg_color;
+@define-color theme_unfocused_selected_bg_color @accent_bg_color;
+@define-color theme_unfocused_selected_fg_color @accent_fg_color;

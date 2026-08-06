@@ -2,13 +2,26 @@
 
 Tested against Loupe 50.0 (Flatpak, `org.gnome.Loupe`).
 
-## Why this is simpler than a GTK3 app
+## Flatpak only, deliberately no native entry
 
-Loupe is libadwaita/GTK4. Unlike GTK3 apps, where every app defines its own ad-hoc set of
-`@define-color` names, libadwaita apps share a small, stable, documented set of named colors
-(`window_bg_color`, `accent_color`, `card_bg_color`, and so on) that most GNOME apps read the
-same way. This template only needs to redefine those, not reverse engineer an app-specific
-palette the way Inkscape or darktable needed.
+`$XDG_CONFIG_HOME/gtk-4.0/gtk.css` is GTK4's system-wide user override path — Noctalia's own
+builtin `gtk4` template already writes there, and already defines every named color a
+libadwaita app like Loupe needs. A native install gets themed correctly with zero extra work
+once that builtin template is enabled; a separate native `[templates.loupe]` entry targeting the
+same file would just re-declare it for no benefit, and risks silently wiping whatever the builtin
+template wrote if it ever rendered in the other order. So this template only ships the Flatpak
+variant.
+
+## Flatpak needs its own copy, mirroring the official template
+
+The Flatpak sandbox can't see that host file — Loupe's own isolated config lives at
+`~/.var/app/org.gnome.Loupe/config/gtk-4.0/gtk.css`. `gtk.css` here mirrors the official builtin
+`gtk4.css` template's own real values (`/usr/share/noctalia/assets/templates/gtk/gtk4.css`)
+rather than a hand-rolled subset, so Flatpak Loupe ends up looking identical to every native
+GTK4 app on the system instead of alien — sidebar/overview colors are dropped since Loupe (a
+single-view image viewer) has no such UI elements, everything else matches the official template
+directly, including using `on_error` (not `on_primary`) for `destructive_fg_color` and the
+official `@window_bg_color` reference-variable pattern for backdrop states.
 
 ## Not every GTK4 Flatpak app honors this the same way
 
@@ -20,23 +33,8 @@ just because it shares a runtime with one that does, or one that does not, test 
 an unmistakable color first (`window { background-color: #ff0000; }`) before writing a real
 palette.
 
-## The native entry shares a path with Noctalia's own builtin `gtk4` template
-
-`$XDG_CONFIG_HOME/gtk-4.0/gtk.css` is not Loupe-specific, it is GTK4's system-wide user override
-path. On a native (non-Flatpak) install, this is the exact same file Noctalia's own builtin
-`gtk4` template already writes to (confirmed live: it holds `@import url("noctalia.css");`).
-Shipped anyway, for consistency with every other template in this repo, but be aware this is a
-structurally different situation from Inkscape/darktable/GIMP, which each have a real app-specific
-theme file. If Noctalia's builtin `gtk4` template is enabled, whichever one renders last wins for
-any native GTK4 app on the system, not just Loupe.
-
-## Native install
-
-`~/.config/gtk-4.0/gtk.css`.
-
 ## Flatpak install (`org.gnome.Loupe`)
 
-Same relative layout, inside the sandbox's own isolated config:
 `~/.var/app/org.gnome.Loupe/config/gtk-4.0/gtk.css`. No `flatpak override` needed.
 
 ## Status
