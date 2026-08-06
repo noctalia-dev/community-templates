@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
 colors_file="${XDG_CACHE_HOME:-$HOME/.cache}/noctalia-driftwm-colors"
 driftwm_config="${XDG_CONFIG_HOME:-$HOME/.config}/driftwm/config.toml"
 
