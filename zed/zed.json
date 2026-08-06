@@ -596,7 +596,7 @@
           "{{colors.secondary.dark.hex}}",
           "{{colors.tertiary.dark.hex}}"
         ],
-        "background.appearance": "opaque",
+        "background.appearance": "transparent",
         "border": "{{colors.outline_variant.dark.hex}}",
         "border.variant": "{{colors.outline.dark.hex}}",
         "border.focused": "{{colors.primary.dark.hex}}",
@@ -888,7 +888,7 @@
           "{{colors.secondary.light.hex}}",
           "{{colors.tertiary.light.hex}}"
         ],
-        "background.appearance": "opaque",
+        "background.appearance": "transparent",
         "border": "{{colors.outline_variant.light.hex}}",
         "border.variant": "{{colors.outline.light.hex}}",
         "border.focused": "{{colors.primary.light.hex}}",
