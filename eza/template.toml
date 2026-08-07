@@ -1,0 +1,7 @@
+[catalog.eza]
+name = "eza"
+category = "terminal"
+
+[templates.eza]
+input_path = "eza.yml"
+output_path = "$XDG_CONFIG_HOME/eza/theme.yml"
