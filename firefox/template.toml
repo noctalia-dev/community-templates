@@ -1,0 +1,13 @@
+[catalog.firefox]
+name = "Firefox"
+category = "browser"
+
+[templates.firefox_chrome]
+input_path = "firefox-userChrome.css"
+output_path = "$XDG_CACHE_HOME/noctalia/firefox/firefox-userChrome.css"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
+
+[templates.firefox_content]
+input_path = "firefox-userContent.css"
+output_path = "$XDG_CACHE_HOME/noctalia/firefox/firefox-userContent.css"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
