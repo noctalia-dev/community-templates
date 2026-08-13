@@ -1,0 +1,13 @@
+[catalog.librewolf]
+name = "LibreWolf"
+category = "browser"
+
+[templates.librewolf_chrome]
+input_path = "librewolf-userChrome.css"
+output_path = "$XDG_CACHE_HOME/noctalia/librewolf/librewolf-userChrome.css"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
+
+[templates.librewolf_content]
+input_path = "librewolf-userContent.css"
+output_path = "$XDG_CACHE_HOME/noctalia/librewolf/librewolf-userContent.css"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
