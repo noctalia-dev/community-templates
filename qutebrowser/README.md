@@ -4,24 +4,30 @@ Matugen template that themes qutebrowser (completion menu, hints, tabs, statusba
 
 ## Setup
 
-1. Copy `template.py` into your qutebrowser config folder:
-   ```bash
+**If you're using Noctalia's community-templates catalog:** just enable the `qutebrowser` template from the catalog — the repo (including `template.py` and `reload.sh`) is cloned to `~/.cache/noctalia/community-templates/` automatically, so `templates.toml` and the hook path already resolve correctly. Skip to step 3.
+
+**Manual / standalone setup:**
+
+1. Copy `template.py` and `reload.sh` into your qutebrowser config folder:
+```bash
    mkdir -p ~/.config/qutebrowser/noctalia
    cp template.py ~/.config/qutebrowser/noctalia/template.py
-   ```
+   cp reload.sh ~/.config/qutebrowser/noctalia/reload.sh
+```
 
 2. Register it with matugen by adding this to your Noctalia user templates config (`~/.config/noctalia/templates.toml`):
-   ```toml
+```toml
    [theme.templates.user.qutebrowser]
    input_path  = "~/.config/qutebrowser/noctalia/template.py"
    output_path = "~/.config/qutebrowser/noctalia/colors.py"
-   post_hook   = "sh ~/.cache/noctalia/community-templates/qutebrowser/reload.sh"
-   ```
+   post_hook   = "sh ~/.config/qutebrowser/noctalia/reload.sh"
+```
+   (Point `post_hook` at wherever you actually placed `reload.sh` — the catalog default of `~/.cache/noctalia/community-templates/qutebrowser/reload.sh` only exists if you installed via the catalog.)
 
 3. Tell qutebrowser to load the generated file by adding this line near the top of your `~/.config/qutebrowser/config.py`:
-   ```python
+```python
    config.source('noctalia/colors.py')
-   ```
+```
 
 4. Trigger a theme regeneration (change wallpaper, or re-select the current one) so matugen renders `template.py` into `colors.py` for the first time.
 
