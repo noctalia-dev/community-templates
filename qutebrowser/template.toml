@@ -5,5 +5,4 @@ category = "browser"
 [templates.qutebrowser]
 input_path = "template.py"
 output_path = "$XDG_CONFIG_HOME/qutebrowser/noctalia/colors.py"
-post_hook = "pgrep -x qutebrowser >/dev/null && qutebrowser :config-source"
-
+post_hook = "sh ~/.cache/noctalia/community-templates/qutebrowser/reload.sh"
