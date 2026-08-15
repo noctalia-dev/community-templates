@@ -10,12 +10,12 @@ Matugen template that themes qutebrowser (completion menu, hints, tabs, statusba
    cp template.py ~/.config/qutebrowser/noctalia/template.py
    ```
 
-2. Register it with matugen by adding this to your Noctalia user templates config (`~/.config/noctalia/user-templates.toml`):
+2. Register it with matugen by adding this to your Noctalia user templates config (`~/.config/noctalia/templates.toml`):
    ```toml
    [theme.templates.user.qutebrowser]
    input_path  = "~/.config/qutebrowser/noctalia/template.py"
    output_path = "~/.config/qutebrowser/noctalia/colors.py"
-   post_hook   = "pgrep -x qutebrowser >/dev/null && qutebrowser :config-source"
+   post_hook   = "sh ~/.cache/noctalia/community-templates/qutebrowser/reload.sh"
    ```
 
 3. Tell qutebrowser to load the generated file by adding this line near the top of your `~/.config/qutebrowser/config.py`:
