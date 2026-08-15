@@ -15,6 +15,7 @@ Matugen template that themes qutebrowser (completion menu, hints, tabs, statusba
    [theme.templates.user.qutebrowser]
    input_path  = "~/.config/qutebrowser/noctalia/template.py"
    output_path = "~/.config/qutebrowser/noctalia/colors.py"
+   post_hook   = "qutebrowser :config-source"
    ```
 
 3. Tell qutebrowser to load the generated file by adding this line near the top of your `~/.config/qutebrowser/config.py`:
@@ -24,7 +25,7 @@ Matugen template that themes qutebrowser (completion menu, hints, tabs, statusba
 
 4. Trigger a theme regeneration (change wallpaper, or re-select the current one) so matugen renders `template.py` into `colors.py` for the first time.
 
-5. Reload qutebrowser's config with `:config-source`, or restart it.
+That's it — no manual reload needed after the first run. `post_hook` sends `:config-source` to qutebrowser's IPC socket every time the theme regenerates, so an already-running instance picks up the new colors automatically. If qutebrowser isn't running when the hook fires, this simply launches a fresh instance instead (harmless, just not instant theming until you actually open the browser).
 
 Your color scheme should now update automatically every time Noctalia's theme regenerates.
 
