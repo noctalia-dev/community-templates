@@ -1,0 +1,9 @@
+[catalog.herdr]
+name = "Herdr"
+category = "terminal"
+
+[templates.herdr]
+input_path = "theme.toml"
+output_path = "$XDG_CACHE_HOME/noctalia/herdr/theme.toml"
+post_hook = "bash '{{ config_dir }}/apply.sh' {{ mode }}"
+requires_path = "~/.config/herdr/config.toml"
