@@ -2,6 +2,10 @@
 
 Matugen template that themes qutebrowser (completion menu, hints, tabs, statusbar, prompts, messages, downloads bar) to match your current Noctalia color scheme.
 
+> Note: Some palettes don't work really well with the theming. Some built-in themes, like Noctalia (dark) give you unreadable foreground tab color after the script runs the QB theme. Some wallpaper palettes like yellow (dark) and blue (light) give you the same issue. One of the fix that I thought was that you can give the tabs same color as pinned tabs across all themes, but then again it won't provide you a good look with vertical tabs or it'll get too bright for the dark-mode users (whom I honestly don't want to piss, lol :3). But I am hopeful that most of the community-palettes should work.
+
+> If in any case you really want to change the colors, then you can always go to the **Tabs** section (search for `## Tabs`) in `template.py` and edit the values of **Selected/Unselected Foreground/Background Even/Odd** tabs. I hope I find a workaround in the future and push the update or somehow get possessed by a ghost with good design knowledge so that I can fix it. But for now, this has to be done manually, and for that I am sorry :/
+
 ## Setup
 
 **If you're using Noctalia's community-templates catalog:** just enable the `qutebrowser` template from the catalog — the repo (including `template.py` and `reload.sh`) is cloned to `~/.local/state/noctalia/community-templates/` automatically, so `templates.toml` and the hook path already resolve correctly. Skip to step 3 once you're confirmed :)
@@ -82,3 +86,12 @@ This has to live in `template.py` itself, not in the generated `colors.py`. Sinc
 - Tested with qutebrowser v3.7.0 / QtWebEngine 6.11.
 
 > **Tip:** `:config-source` re-runs your entire `config.py` from top to bottom, not just the colors. If `config.load_autoconfig(True)` is called near the *top* of your `config.py`, any settings you toggle at runtime (`:config-cycle`, `:set`, etc. — saved to `autoconfig.yml`) will get overwritten by whatever hardcoded values come after it in the file, resetting things like dark mode or tab position back to your defaults every time the theme regenerates. Move `config.load_autoconfig(True)` to the **bottom** of `config.py`, after all your other settings, so your current session state loads last and wins.
+
+> Also if you're using Niri, you might have to put this in your `rules.kdl` as well... (DISCLAIMER: won't work in `niri 26.04` version, to check your Niri version use `niri --version`)
+```kdl
+// --- QuteBrowser ---
+window-rule {
+match app-id="org.qutebrowser.qutebrowser"
+focus-on-xdg-activate false
+}
+```
