@@ -72,6 +72,11 @@
   --lwt-sidebar-background-color: var(--base) !important;
 }
 
+#zen-browser-background {
+  --zen-main-browser-background: var(--base) !important;
+  --zen-main-browser-background-old: var(--base) !important;
+}
+
 /* --- Sidebar & Layout --- */
 
 #navigator-toolbox,
