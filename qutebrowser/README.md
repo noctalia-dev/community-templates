@@ -4,7 +4,7 @@ Matugen template that themes qutebrowser (completion menu, hints, tabs, statusba
 
 ## Setup
 
-**If you're using Noctalia's community-templates catalog:** just enable the `qutebrowser` template from the catalog — the repo (including `template.py` and `reload.sh`) is cloned to `~/.cache/noctalia/community-templates/` automatically, so `templates.toml` and the hook path already resolve correctly. Skip to step 3.
+**If you're using Noctalia's community-templates catalog:** just enable the `qutebrowser` template from the catalog — the repo (including `template.py` and `reload.sh`) is cloned to `~/.local/state/noctalia/community-templates/` automatically, so `templates.toml` and the hook path already resolve correctly. Skip to step 3 once you're confirmed :)
 
 **Manual / standalone setup:**
 
@@ -22,7 +22,8 @@ Matugen template that themes qutebrowser (completion menu, hints, tabs, statusba
    output_path = "~/.config/qutebrowser/noctalia/colors.py"
    post_hook   = "sh ~/.config/qutebrowser/noctalia/reload.sh"
 ```
-   (Point `post_hook` at wherever you actually placed `reload.sh` — the catalog default of `~/.cache/noctalia/community-templates/qutebrowser/reload.sh` only exists if you installed via the catalog.)
+   (Point `post_hook` at wherever you actually placed `reload.sh`. If installing via the catalog, resolve the path dynamically instead of hardcoding it, since the clone location has moved between Noctalia versions:
+   `post_hook = "sh \"${XDG_STATE_HOME:-$HOME/.local/state}/noctalia/community-templates/qutebrowser/reload.sh\""`)
 
 3. Tell qutebrowser to load the generated file by adding this line near the top of your `~/.config/qutebrowser/config.py`:
 ```python
@@ -31,9 +32,33 @@ Matugen template that themes qutebrowser (completion menu, hints, tabs, statusba
 
 4. Trigger a theme regeneration (change wallpaper, or re-select the current one) so matugen renders `template.py` into `colors.py` for the first time.
 
-That's it — no manual reload needed after the first run. The `post_hook` first checks whether qutebrowser is already running (`pgrep -x qutebrowser`); only if it finds a running instance does it send `:config-source` over qutebrowser's IPC socket to reload the new colors. If qutebrowser isn't open, the hook does nothing and won't launch a new window — so theme changes never interrupt you with an unwanted qutebrowser window popping up.
+That's it — no manual reload needed after the first run. The `post_hook` first checks whether qutebrowser is already running (`pgrep -f qutebrowser`, which matches the full command line rather than just the short process name — some installs launch qutebrowser through a wrapper, which `pgrep -x` can miss); only if it finds a running instance does it send `:config-source` over qutebrowser's IPC socket to reload the new colors. If qutebrowser isn't open, the hook does nothing and won't launch a new window — so theme changes never interrupt you with an unwanted qutebrowser window popping up. Thanks to @VuiMuich for pointing out this issue :)
 
 Your color scheme should now update automatically every time Noctalia's theme regenerates, but only while qutebrowser is actually open.
+
+> **Tip:** If you use light/dark mode switching too (which also fires a reload script on qutebrowser), the same IPC command can end up stealing window focus depending on your window manager/compositor. The fix, per a qutebrowser maintainer in [discussion #6212](https://github.com/qutebrowser/qutebrowser/discussions/6212), is to set `new_instance_open_target` to `tab-silent` in your `config.py`, so sending IPC commands to a running instance doesn't raise/focus the window:
+> ```python
+> c.new_instance_open_target = 'tab-silent'
+> ```
+> Note this is still somewhat WM/compositor-dependent — it's the known workaround, not a guaranteed fix on every setup. Thanks to @VuiMuich for flagging this one too :)
+
+### `reload.sh`
+
+```sh
+#!/bin/sh
+COLORS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/qutebrowser/noctalia/colors.py"
+
+# Skip if colors.py hasn't changed since the last time this script ran
+[ "$COLORS_FILE" -nt "$0" ] || exit 0
+touch "$0"
+
+pgrep -f qutebrowser >/dev/null && qutebrowser :config-source
+```
+
+Make sure it's executable after copying or editing:
+```bash
+chmod +x ~/.config/qutebrowser/noctalia/reload.sh
+```
 
 ## Why a helper function is in the template
 
