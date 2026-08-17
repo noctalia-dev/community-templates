@@ -11,7 +11,7 @@ gui:
     optionsTextColor:
       - "{{colors.on_surface_variant.default.hex}}"
     selectedLineBgColor:
-      - "{{colors.on_surface_variant.default.hex}}"
+      - "{{colors.surface_container_high.default.hex}}"
     inactiveViewSelectedLineBgColor:
       - bold
     cherryPickedCommitFgColor:
