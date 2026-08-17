@@ -245,37 +245,37 @@ c.colors.tabs.indicator.stop = secondary
 # Color for the tab indicator on errors.
 c.colors.tabs.indicator.error = error
 # Foreground color of unselected odd tabs.
-c.colors.tabs.odd.fg = hex_to_rgba(secondary, 0.9)
+c.colors.tabs.odd.fg = hex_to_rgba(on_primary_container, 0.6)
 # Background color of unselected odd tabs.
-c.colors.tabs.odd.bg = hex_to_rgba(surface_container_high, 1.0)
+c.colors.tabs.odd.bg = hex_to_rgba(primary_container, 1.0)
 # Foreground color of unselected even tabs.
-c.colors.tabs.even.fg = hex_to_rgba(secondary, 0.9)
+c.colors.tabs.even.fg = hex_to_rgba(on_primary_container, 0.6)
 # Background color of unselected even tabs.
-c.colors.tabs.even.bg = hex_to_rgba(surface_container_high, 1.0)
+c.colors.tabs.even.bg = hex_to_rgba(primary_container, 1.0)
 # Foreground color of selected odd tabs.
-c.colors.tabs.selected.odd.fg = on_primary_container
+c.colors.tabs.selected.odd.fg = primary
 # Background color of selected odd tabs.
 c.colors.tabs.selected.odd.bg = hex_to_rgba(primary_container, 0.4)
 # Foreground color of selected even tabs.
-c.colors.tabs.selected.even.fg = on_primary_container
+c.colors.tabs.selected.even.fg = primary
 # Background color of selected even tabs.
 c.colors.tabs.selected.even.bg = hex_to_rgba(primary_container, 0.4)
 # Foreground color of pinned unselected odd tabs.
-c.colors.tabs.pinned.odd.fg = hex_to_rgba(on_secondary, 1.0)
+c.colors.tabs.pinned.odd.fg = hex_to_rgba(on_tertiary_container, 0.6)
 # Background color of pinned unselected odd tabs.
-c.colors.tabs.pinned.odd.bg = hex_to_rgba(secondary, 0.8)
+c.colors.tabs.pinned.odd.bg = hex_to_rgba(tertiary_container, 1.0)
 # Foreground color of pinned unselected even tabs.
-c.colors.tabs.pinned.even.fg = hex_to_rgba(on_secondary, 1.0)
+c.colors.tabs.pinned.even.fg = hex_to_rgba(on_tertiary_container, 0.6)
 # Background color of pinned unselected even tabs.
-c.colors.tabs.pinned.even.bg = hex_to_rgba(secondary, 0.8)
+c.colors.tabs.pinned.even.bg = hex_to_rgba(tertiary_container, 1.0)
 # Foreground color of pinned selected odd tabs.
-c.colors.tabs.pinned.selected.odd.fg = on_primary_container
+c.colors.tabs.pinned.selected.odd.fg = tertiary
 # Background color of pinned selected odd tabs.
-c.colors.tabs.pinned.selected.odd.bg = hex_to_rgba(primary_container, 0.4)
+c.colors.tabs.pinned.selected.odd.bg = hex_to_rgba(tertiary_container, 0.4)
 # Foreground color of pinned selected even tabs.
-c.colors.tabs.pinned.selected.even.fg = on_primary_container
+c.colors.tabs.pinned.selected.even.fg = tertiary
 # Background color of pinned selected even tabs.
-c.colors.tabs.pinned.selected.even.bg = hex_to_rgba(primary_container, 0.4)
+c.colors.tabs.pinned.selected.even.bg = hex_to_rgba(tertiary_container, 0.4)
 
 # Background color for webpages if unset (or empty to use the theme's color).
 c.colors.webpage.bg = surface
