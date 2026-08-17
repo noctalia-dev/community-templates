@@ -2,6 +2,8 @@
 
 Matugen template that themes qutebrowser (completion menu, hints, tabs, statusbar, prompts, messages, downloads bar) to match your current Noctalia color scheme.
 
+> Note: Some palettes might not work well or as intended. Please change the color scheme or try out a different template then. Else you can go to `~/.config/qutebrowser/noctalia/template.py` and tweak the colors yourself.
+
 ## Setup
 
 **If you're using Noctalia's community-templates catalog:** just enable the `qutebrowser` template from the catalog — the repo (including `template.py` and `reload.sh`) is cloned to `~/.local/state/noctalia/community-templates/` automatically, so `templates.toml` and the hook path already resolve correctly. Skip to step 3 once you're confirmed :)
@@ -82,3 +84,12 @@ This has to live in `template.py` itself, not in the generated `colors.py`. Sinc
 - Tested with qutebrowser v3.7.0 / QtWebEngine 6.11.
 
 > **Tip:** `:config-source` re-runs your entire `config.py` from top to bottom, not just the colors. If `config.load_autoconfig(True)` is called near the *top* of your `config.py`, any settings you toggle at runtime (`:config-cycle`, `:set`, etc. — saved to `autoconfig.yml`) will get overwritten by whatever hardcoded values come after it in the file, resetting things like dark mode or tab position back to your defaults every time the theme regenerates. Move `config.load_autoconfig(True)` to the **bottom** of `config.py`, after all your other settings, so your current session state loads last and wins.
+
+> Also if you're using Niri, you might have to put this in your `rules.kdl` as well... (DISCLAIMER: won't work in `niri 26.04` version, to check your Niri version use `niri --version`)
+```kdl
+// --- QuteBrowser ---
+window-rule {
+match app-id="org.qutebrowser.qutebrowser"
+focus-on-xdg-activate false
+}
+```
