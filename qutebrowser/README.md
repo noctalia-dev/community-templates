@@ -2,9 +2,7 @@
 
 Matugen template that themes qutebrowser (completion menu, hints, tabs, statusbar, prompts, messages, downloads bar) to match your current Noctalia color scheme.
 
-> Note: Some palettes don't work really well with the theming. Some built-in themes, like Noctalia (dark) give you unreadable foreground tab color after the script runs the QB theme. Some wallpaper palettes like yellow (dark) and blue (light) give you the same issue. One of the fix that I thought was that you can give the tabs same color as pinned tabs across all themes, but then again it won't provide you a good look with vertical tabs or it'll get too bright for the dark-mode users (whom I honestly don't want to piss, lol :3). But I am hopeful that most of the community-palettes should work.
-
-> If in any case you really want to change the colors, then you can always go to the **Tabs** section (search for `## Tabs`) in `template.py` and edit the values of **Selected/Unselected Foreground/Background Even/Odd** tabs. I hope I find a workaround in the future and push the update or somehow get possessed by a ghost with good design knowledge so that I can fix it. But for now, this has to be done manually, and for that I am sorry :/
+> Note: Some palettes might not work well or as intended. Please change the color scheme or try out a different template then. Else you can go to `~/.config/qutebrowser/noctalia/template.py` and tweak the colors yourself.
 
 ## Setup
 
