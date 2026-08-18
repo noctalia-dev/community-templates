@@ -25,13 +25,13 @@
         "element.background": "{{colors.surface_container.dark.hex}}",
         "element.hover": "{{colors.surface_container_high.dark.hex}}",
         "element.active": "{{colors.surface_container_highest.dark.hex}}",
-        "element.selected": "{{colors.secondary_container.dark.hex}}",
+        "element.selected": "{{colors.surface_container_highest.dark.hex}}",
         "element.disabled": "{{colors.surface_variant.dark.hex}}",
         "drop_target.background": "{{colors.primary_container.dark.hex}}80",
         "ghost_element.background": null,
         "ghost_element.hover": "{{colors.surface_container.dark.hex}}80",
         "ghost_element.active": "{{colors.surface_container_high.dark.hex}}",
-        "ghost_element.selected": "{{colors.secondary_container.dark.hex}}80",
+        "ghost_element.selected": "{{colors.surface_container_highest.dark.hex}}80",
         "ghost_element.disabled": "{{colors.surface_variant.dark.hex}}60",
         "text": "{{colors.on_surface.dark.hex}}",
         "text.muted": "{{colors.on_surface_variant.dark.hex}}",
@@ -203,7 +203,7 @@
             "font_weight": null
           },
           "number": {
-            "color": "{{colors.tertiary_fixed.dark.hex}}",
+            "color": "{{colors.tertiary.dark.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -223,7 +223,7 @@
             "font_weight": null
           },
           "punctuation.bracket": {
-            "color": "{{colors.secondary_fixed.dark.hex}}",
+            "color": "{{colors.secondary.dark.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -248,12 +248,12 @@
             "font_weight": null
           },
           "string.escape": {
-            "color": "{{colors.tertiary_fixed_dim.dark.hex}}",
+            "color": "{{colors.tertiary.dark.hex}}",
             "font_style": null,
             "font_weight": null
           },
           "string.regex": {
-            "color": "{{colors.tertiary_fixed.dark.hex}}",
+            "color": "{{colors.tertiary.dark.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -278,7 +278,7 @@
             "font_weight": null
           },
           "type": {
-            "color": "{{colors.primary_fixed.dark.hex}}",
+            "color": "{{colors.primary.dark.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -317,13 +317,13 @@
         "element.background": "{{colors.surface_container.light.hex}}",
         "element.hover": "{{colors.surface_container_high.light.hex}}",
         "element.active": "{{colors.surface_container_highest.light.hex}}",
-        "element.selected": "{{colors.secondary_container.light.hex}}",
+        "element.selected": "{{colors.surface_container_highest.light.hex}}",
         "element.disabled": "{{colors.surface_variant.light.hex}}",
         "drop_target.background": "{{colors.primary_container.light.hex}}80",
         "ghost_element.background": null,
         "ghost_element.hover": "{{colors.surface_container.light.hex}}80",
         "ghost_element.active": "{{colors.surface_container_high.light.hex}}",
-        "ghost_element.selected": "{{colors.secondary_container.light.hex}}80",
+        "ghost_element.selected": "{{colors.surface_container_highest.light.hex}}80",
         "ghost_element.disabled": "{{colors.surface_variant.light.hex}}60",
         "text": "{{colors.on_surface.light.hex}}",
         "text.muted": "{{colors.on_surface_variant.light.hex}}",
@@ -495,7 +495,7 @@
             "font_weight": null
           },
           "number": {
-            "color": "{{colors.on_tertiary_container.light.hex}}",
+            "color": "{{colors.tertiary.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -515,7 +515,7 @@
             "font_weight": null
           },
           "punctuation.bracket": {
-            "color": "{{colors.on_secondary_container.light.hex}}",
+            "color": "{{colors.secondary.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -540,12 +540,12 @@
             "font_weight": null
           },
           "string.escape": {
-            "color": "{{colors.on_tertiary_container.light.hex}}",
+            "color": "{{colors.tertiary.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
           "string.regex": {
-            "color": "{{colors.on_tertiary_container.light.hex}}",
+            "color": "{{colors.tertiary.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -570,7 +570,7 @@
             "font_weight": null
           },
           "type": {
-            "color": "{{colors.on_primary_container.light.hex}}",
+            "color": "{{colors.primary.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -609,13 +609,13 @@
         "element.background": "{{colors.surface_container.dark.hex}}",
         "element.hover": "{{colors.surface_container_high.dark.hex}}",
         "element.active": "{{colors.surface_container_highest.dark.hex}}",
-        "element.selected": "{{colors.secondary_container.dark.hex}}",
+        "element.selected": "{{colors.surface_container_highest.dark.hex}}",
         "element.disabled": "{{colors.surface_variant.dark.hex}}",
         "drop_target.background": "{{colors.primary_container.dark.hex}}80",
         "ghost_element.background": null,
         "ghost_element.hover": "{{colors.surface_container.dark.hex}}80",
         "ghost_element.active": "{{colors.surface_container_high.dark.hex}}",
-        "ghost_element.selected": "{{colors.secondary_container.dark.hex}}80",
+        "ghost_element.selected": "{{colors.surface_container_highest.dark.hex}}80",
         "ghost_element.disabled": "{{colors.surface_variant.dark.hex}}60",
         "text": "{{colors.on_surface.dark.hex}}",
         "text.muted": "{{colors.on_surface_variant.dark.hex}}",
@@ -787,7 +787,7 @@
             "font_weight": null
           },
           "number": {
-            "color": "{{colors.tertiary_fixed.dark.hex}}",
+            "color": "{{colors.tertiary.dark.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -807,7 +807,7 @@
             "font_weight": null
           },
           "punctuation.bracket": {
-            "color": "{{colors.secondary_fixed.dark.hex}}",
+            "color": "{{colors.secondary.dark.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -832,12 +832,12 @@
             "font_weight": null
           },
           "string.escape": {
-            "color": "{{colors.tertiary_fixed_dim.dark.hex}}",
+            "color": "{{colors.tertiary.dark.hex}}",
             "font_style": null,
             "font_weight": null
           },
           "string.regex": {
-            "color": "{{colors.tertiary_fixed.dark.hex}}",
+            "color": "{{colors.tertiary.dark.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -862,7 +862,7 @@
             "font_weight": null
           },
           "type": {
-            "color": "{{colors.primary_fixed.dark.hex}}",
+            "color": "{{colors.primary.dark.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -901,13 +901,13 @@
         "element.background": "{{colors.surface_container.light.hex}}",
         "element.hover": "{{colors.surface_container_high.light.hex}}",
         "element.active": "{{colors.surface_container_highest.light.hex}}",
-        "element.selected": "{{colors.secondary_container.light.hex}}",
+        "element.selected": "{{colors.surface_container_highest.light.hex}}",
         "element.disabled": "{{colors.surface_variant.light.hex}}",
         "drop_target.background": "{{colors.primary_container.light.hex}}80",
         "ghost_element.background": null,
         "ghost_element.hover": "{{colors.surface_container.light.hex}}80",
         "ghost_element.active": "{{colors.surface_container_high.light.hex}}",
-        "ghost_element.selected": "{{colors.secondary_container.light.hex}}80",
+        "ghost_element.selected": "{{colors.surface_container_highest.light.hex}}80",
         "ghost_element.disabled": "{{colors.surface_variant.light.hex}}60",
         "text": "{{colors.on_surface.light.hex}}",
         "text.muted": "{{colors.on_surface_variant.light.hex}}",
@@ -1079,7 +1079,7 @@
             "font_weight": null
           },
           "number": {
-            "color": "{{colors.on_tertiary_container.light.hex}}",
+            "color": "{{colors.tertiary.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -1099,7 +1099,7 @@
             "font_weight": null
           },
           "punctuation.bracket": {
-            "color": "{{colors.on_secondary_container.light.hex}}",
+            "color": "{{colors.secondary.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -1124,12 +1124,12 @@
             "font_weight": null
           },
           "string.escape": {
-            "color": "{{colors.on_tertiary_container.light.hex}}",
+            "color": "{{colors.tertiary.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
           "string.regex": {
-            "color": "{{colors.on_tertiary_container.light.hex}}",
+            "color": "{{colors.tertiary.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -1154,7 +1154,7 @@
             "font_weight": null
           },
           "type": {
-            "color": "{{colors.on_primary_container.light.hex}}",
+            "color": "{{colors.primary.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
