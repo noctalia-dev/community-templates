@@ -495,7 +495,7 @@
             "font_weight": null
           },
           "number": {
-            "color": "{{colors.tertiary_fixed.light.hex}}",
+            "color": "{{colors.on_tertiary_container.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -515,7 +515,7 @@
             "font_weight": null
           },
           "punctuation.bracket": {
-            "color": "{{colors.secondary_fixed.light.hex}}",
+            "color": "{{colors.on_secondary_container.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -540,12 +540,12 @@
             "font_weight": null
           },
           "string.escape": {
-            "color": "{{colors.tertiary_fixed_dim.light.hex}}",
+            "color": "{{colors.on_tertiary_container.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
           "string.regex": {
-            "color": "{{colors.tertiary_fixed.light.hex}}",
+            "color": "{{colors.on_tertiary_container.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -570,7 +570,7 @@
             "font_weight": null
           },
           "type": {
-            "color": "{{colors.primary_fixed.light.hex}}",
+            "color": "{{colors.on_primary_container.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -1079,7 +1079,7 @@
             "font_weight": null
           },
           "number": {
-            "color": "{{colors.tertiary_fixed.light.hex}}",
+            "color": "{{colors.on_tertiary_container.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -1099,7 +1099,7 @@
             "font_weight": null
           },
           "punctuation.bracket": {
-            "color": "{{colors.secondary_fixed.light.hex}}",
+            "color": "{{colors.on_secondary_container.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -1124,12 +1124,12 @@
             "font_weight": null
           },
           "string.escape": {
-            "color": "{{colors.tertiary_fixed_dim.light.hex}}",
+            "color": "{{colors.on_tertiary_container.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
           "string.regex": {
-            "color": "{{colors.tertiary_fixed.light.hex}}",
+            "color": "{{colors.on_tertiary_container.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
@@ -1154,7 +1154,7 @@
             "font_weight": null
           },
           "type": {
-            "color": "{{colors.primary_fixed.light.hex}}",
+            "color": "{{colors.on_primary_container.light.hex}}",
             "font_style": null,
             "font_weight": null
           },
