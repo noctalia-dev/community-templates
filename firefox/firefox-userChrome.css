@@ -1,0 +1,543 @@
+@media (prefers-color-scheme: dark) {
+  * {
+    --base:             {{colors.background.dark.hex}};
+    --surface:          {{colors.surface_container_low.dark.hex}};
+    --overlay:          {{colors.surface_container.dark.hex}};
+    --hl_low:           {{colors.surface_container_high.dark.hex}};
+    --hl_med:           {{colors.surface_container_highest.dark.hex}};
+    --hl_high:          {{colors.surface_bright.dark.hex}};
+    --outline:          {{colors.outline_variant.dark.hex}};
+    --muted:            {{colors.outline.dark.hex}};
+    --subtle:           {{colors.on_surface_variant.dark.hex}};
+    --text:             {{colors.on_surface.dark.hex}};
+    --primary:          {{colors.primary.dark.hex}};
+    --secondary:        {{colors.secondary.dark.hex}};
+    --tertiary:         {{colors.tertiary.dark.hex}};
+    --error:            {{colors.error.dark.hex}};
+  }
+}
+@media (prefers-color-scheme: light) {
+  * {
+    --base:             {{colors.background.light.hex}};
+    --surface:          {{colors.surface_container_low.light.hex}};
+    --overlay:          {{colors.surface_container.light.hex}};
+    --hl_low:           {{colors.surface_container_high.light.hex}};
+    --hl_med:           {{colors.surface_container_highest.light.hex}};
+    --hl_high:          {{colors.surface_bright.light.hex}};
+    --outline:          {{colors.outline_variant.light.hex}};
+    --muted:            {{colors.outline.light.hex}};
+    --subtle:           {{colors.on_surface_variant.light.hex}};
+    --text:             {{colors.on_surface.light.hex}};
+    --primary:          {{colors.primary.light.hex}};
+    --secondary:        {{colors.secondary.light.hex}};
+    --tertiary:         {{colors.tertiary.light.hex}};
+    --error:            {{colors.error.light.hex}};
+  }
+}
+
+:root {
+  /* --- Window & Toolbars --- */
+  --lwt-accent-color: var(--base) !important;
+  --lwt-accent-color-inactive: var(--base) !important;
+  --lwt-text-color: var(--text) !important;
+  --toolbar-bgcolor: var(--base) !important;
+  --toolbar-color: var(--text) !important;
+  --toolbox-bgcolor: var(--base) !important;
+  --toolbox-bgcolor-inactive: var(--base) !important;
+
+  /* --- Fields (URL bar, search bar) --- */
+  --toolbar-field-background-color: var(--surface) !important;
+  --toolbar-field-color: var(--text) !important;
+  --toolbar-field-focus-background-color: var(--surface) !important;
+  --toolbar-field-focus-color: var(--text) !important;
+  --toolbar-field-border-color: transparent !important;
+  --toolbar-field-focus-border-color: var(--primary) !important;
+
+  /* --- Tabs --- */
+  --tab-selected-bgcolor: var(--hl_med) !important;
+  --tab-selected-textcolor: var(--text) !important;
+  --tab-hover-background-color: var(--hl_low) !important;
+
+  /* --- Toolbar buttons --- */
+  --toolbarbutton-icon-fill: var(--primary) !important;
+  --toolbarbutton-hover-background: var(--hl_med) !important;
+  --toolbarbutton-active-background: var(--hl_low) !important;
+
+  /* --- Buttons (generic) --- */
+  --button-background-color: var(--hl_low) !important;
+  --button-background-color-hover: var(--hl_med) !important;
+  --button-background-color-active: var(--hl_med) !important;
+  --button-color: var(--text) !important;
+
+  /* --- Panels & Menus --- */
+  --arrowpanel-background: var(--overlay) !important;
+  --arrowpanel-color: var(--text) !important;
+  --arrowpanel-border-color: var(--outline) !important;
+  --panel-background: var(--overlay) !important;
+  --panel-color: var(--text) !important;
+  --panel-border-color: var(--outline) !important;
+  --panel-separator-color: var(--outline) !important;
+
+  /* --- Sidebar --- */
+  --sidebar-background-color: var(--surface) !important;
+  --sidebar-text-color: var(--text) !important;
+  --sidebar-border-color: var(--outline) !important;
+
+  /* --- URL bar results --- */
+  --urlbar-box-bgcolor: var(--hl_low) !important;
+  --urlbar-box-hover-bgcolor: var(--hl_med) !important;
+  --urlbar-box-active-bgcolor: var(--hl_low) !important;
+  --urlbar-box-text-color: var(--text) !important;
+  --urlbarView-highlight-background: var(--primary) !important;
+  --urlbarView-highlight-color: var(--base) !important;
+  --urlbarView-hover-background: var(--hl_med) !important;
+
+  /* --- Misc --- */
+  --chrome-content-separator-color: var(--outline) !important;
+  --focus-outline-color: var(--primary) !important;
+}
+
+/* --- Window, Toolbars & Titlebar --- */
+#main-window,
+#titlebar,
+#navigator-toolbox,
+#toolbar-menubar,
+#TabsToolbar,
+#nav-bar,
+#PersonalToolbar {
+  background-color: var(--base) !important;
+  color: var(--text) !important;
+}
+
+#navigator-toolbox {
+  border-bottom: 1px solid var(--outline) !important;
+}
+
+/* Background behind web content (avoids white flash) */
+#browser,
+#tabbrowser-tabbox,
+.tabbrowser-tabpanels,
+.browserContainer,
+.browserStack {
+  background-color: var(--base) !important;
+}
+
+/* --- Tabs --- */
+.tabbrowser-tab .tab-background {
+  background-color: var(--surface) !important;
+  border-radius: 8px !important;
+}
+
+.tabbrowser-tab:hover > .tab-stack > .tab-background {
+  background-color: var(--hl_low) !important;
+}
+
+.tab-background[selected],
+.tab-background[multiselected] {
+  background-color: var(--hl_med) !important;
+}
+
+.tab-text {
+  color: var(--text) !important;
+}
+
+.tabbrowser-tab[selected] .tab-icon-image,
+.tabbrowser-tab[multiselected] .tab-icon-image {
+  fill: var(--primary) !important;
+}
+
+.tab-close-button {
+  fill: var(--muted) !important;
+}
+
+.tab-close-button:hover {
+  background-color: var(--hl_med) !important;
+  fill: var(--text) !important;
+}
+
+/* --- Toolbar & Navigation Icons --- */
+#back-button .toolbarbutton-icon,
+#forward-button .toolbarbutton-icon,
+#reload-button .toolbarbutton-icon,
+#stop-button .toolbarbutton-icon,
+#PanelUI-menu-button .toolbarbutton-icon,
+#unified-extensions-button .toolbarbutton-icon,
+#nav-bar-overflow-button .toolbarbutton-icon,
+#new-tab-button .toolbarbutton-icon,
+#alltabs-button .toolbarbutton-icon,
+#firefox-view-button .toolbarbutton-icon {
+  fill: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+#back-button[disabled] .toolbarbutton-icon,
+#forward-button[disabled] .toolbarbutton-icon {
+  opacity: 0.3 !important;
+}
+
+/* --- URL Bar --- */
+#urlbar-background {
+  background-color: var(--surface) !important;
+}
+
+#urlbar[focused] #urlbar-background {
+  background-color: var(--surface) !important;
+  border-color: var(--primary) !important;
+  outline: 1px solid var(--primary) !important;
+  outline-offset: -1px;
+}
+
+#urlbar-input {
+  color: var(--text) !important;
+}
+
+#urlbar-input::selection {
+  background-color: var(--primary) !important;
+  color: var(--base) !important;
+}
+
+#identity-icon,
+#tracking-protection-icon,
+#permissions-granted-icon,
+#star-button .urlbar-icon,
+#page-action-buttons .urlbar-icon {
+  fill: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+.urlbarView-url {
+  color: var(--primary) !important;
+}
+
+#urlbar-results {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
+}
+
+.urlbarView-row:not([selected]) :is(.urlbarView-title, .urlbarView-action) {
+  color: var(--text) !important;
+}
+
+/* --- Sidebar --- */
+#sidebar-box {
+  background-color: var(--surface) !important;
+}
+
+#sidebar,
+.sidebar-panel {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
+}
+
+#sidebar-header {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
+  border-bottom: 1px solid var(--outline) !important;
+}
+
+#sidebar-splitter {
+  background-color: var(--base) !important;
+}
+
+#sidebar treechildren::-moz-tree-row(selected) {
+  background-color: var(--primary) !important;
+}
+
+#sidebar treechildren::-moz-tree-row(hover) {
+  background-color: var(--hl_med) !important;
+}
+
+#sidebar treechildren::-moz-tree-cell-text {
+  color: var(--text) !important;
+}
+
+#sidebar treechildren::-moz-tree-cell-text(selected) {
+  color: var(--base) !important;
+}
+
+#sidebar treechildren::-moz-tree-image {
+  fill: var(--text) !important;
+}
+
+#sidebar treechildren::-moz-tree-image(selected) {
+  fill: var(--base) !important;
+}
+
+/* --- Find Bar --- */
+findbar {
+  background-color: var(--base) !important;
+  color: var(--text) !important;
+  border-top: 1px solid var(--outline) !important;
+}
+
+findbar .findbar-textbox {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--outline) !important;
+}
+
+/* --- Status Panel --- */
+#statuspanel-label {
+  background-color: var(--overlay) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--outline) !important;
+}
+
+/* --- Panels & Menus --- */
+panel,
+menupopup {
+  --panel-background: var(--overlay) !important;
+  --panel-color: var(--text) !important;
+  --panel-border-color: var(--outline) !important;
+}
+
+.subviewbutton:hover,
+.subviewbutton:focus-visible,
+.unified-extensions-item:hover,
+.unified-extensions-item-action-button:hover {
+  background-color: var(--hl_med) !important;
+  color: var(--text) !important;
+}
+
+/* Context menus */
+menu[_moz-menuactive="true"]:not([disabled="true"]),
+menuitem[_moz-menuactive="true"]:not([disabled="true"]) {
+  background-color: var(--primary) !important;
+  color: var(--base) !important;
+}
+
+menu[_moz-menuactive="true"]:not([disabled="true"]) :is(.menu-text, .menu-iconic-text, .menu-accel),
+menuitem[_moz-menuactive="true"]:not([disabled="true"]) :is(.menu-text, .menu-iconic-text, .menu-accel) {
+  color: var(--base) !important;
+}
+
+/* --- Notification / Permission Popup --- */
+.popup-notification-body {
+  background-color: var(--overlay) !important;
+  color: var(--text) !important;
+}
+
+/* --- Fixing Select Dropdowns on Webpages --- */
+#ContentSelectDropdown,
+#ContentSelectDropdown > menupopup {
+  --arrowpanel-background: var(--overlay) !important;
+  --arrowpanel-color: var(--text) !important;
+  --arrowpanel-border-color: transparent !important;
+  --panel-border-color: transparent !important;
+  background-color: var(--overlay) !important;
+  color: var(--text) !important;
+  border: none !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+#ContentSelectDropdown menupopup menuitem {
+  color: var(--text) !important;
+  background-color: transparent !important;
+}
+
+#ContentSelectDropdown menupopup menuitem[_moz-menuactive="true"] {
+  background-color: var(--hl_low) !important;
+}
+
+#ContentSelectDropdown menupopup menuitem[selected="true"] {
+  background-color: var(--hl_med) !important;
+}
+
+#ContentSelectDropdown menupopup menuitem[_moz-menuactive="true"] *,
+#ContentSelectDropdown menupopup menuitem[selected="true"] * {
+  color: var(--primary) !important;
+}
+
+/* --- Autocomplete Popup (Login/Password Dropdown) --- */
+#PopupAutoComplete {
+  --panel-background: var(--overlay) !important;
+  --panel-color: var(--text) !important;
+  --panel-border-color: transparent !important;
+  --panel-padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+#PopupAutoComplete > richlistbox,
+panel[type="autocomplete-richlistbox"],
+.autocomplete-richlistbox {
+  background-color: transparent !important;
+  color: var(--text) !important;
+  border: none !important;
+  overflow-y: auto !important;
+  padding: 8px 8px !important;
+}
+
+.autocomplete-richlistbox richlistitem,
+.autocomplete-richlistitem {
+  background-color: var(--overlay) !important;
+  color: var(--text) !important;
+  border: none !important;
+}
+
+.autocomplete-richlistbox richlistitem:hover,
+.autocomplete-richlistitem:hover {
+  background-color: var(--hl_high) !important;
+  color: var(--text) !important;
+}
+
+.autocomplete-richlistbox richlistitem[selected],
+.autocomplete-richlistitem[selected] {
+  background-color: var(--primary) !important;
+  color: var(--base) !important;
+}
+
+.autocomplete-richlistbox richlistitem[selected] *,
+.autocomplete-richlistitem[selected] * {
+  color: var(--base) !important;
+  fill: var(--base) !important;
+}
+
+.autocomplete-richlistbox richlistitem[selected] .ac-secondary-action,
+.autocomplete-richlistitem[selected] .ac-secondary-action {
+  background-color: transparent !important;
+  fill: var(--base) !important;
+  color: var(--base) !important;
+  -moz-context-properties: fill, fill-opacity !important;
+}
+
+/* --- Download Panel --- */
+.downloadButton {
+  background-color: transparent !important;
+  color: var(--text) !important;
+  border: 1px solid transparent !important;
+}
+
+.downloadButton:hover {
+  background-color: var(--hl_low) !important;
+  color: var(--text) !important;
+}
+
+#downloadsListBox > richlistitem[state="1"][exists].hoveringMainArea:hover,
+#downloadsListBox > richlistitem.openWhenFinished.hoveringMainArea:hover,
+#downloadsListBox > richlistitem[verdict]:hover,
+#downloadsListBox > richlistitem.openWhenFinished:hover {
+  background-color: transparent !important;
+  color: var(--text) !important;
+}
+
+/* --- Dialog Windows & Buttons --- */
+dialog {
+  background: var(--base) !important;
+  color: var(--text) !important;
+}
+
+dialog button,
+panel button,
+window[role="dialog"] button,
+window[windowtype="alert:alert"] button {
+  appearance: none !important;
+  background-color: var(--overlay) !important;
+  color: var(--text) !important;
+  border-radius: 4px !important;
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent) !important;
+}
+
+dialog button:hover:not(.downloadButton),
+panel button:hover:not(.downloadButton),
+window[role="dialog"] button:hover:not(.downloadButton),
+window[windowtype="alert:alert"] button:hover:not(.downloadButton) {
+  background-color: var(--hl_low) !important;
+}
+
+.dialog-button.primary,
+dialog button.primary,
+dialog button[default="true"],
+panel button.primary,
+panel button[default="true"],
+window[role="dialog"] button[default="true"],
+window[windowtype="alert:alert"] button[default="true"] {
+  background-color: var(--secondary) !important;
+  color: var(--base) !important;
+}
+
+.dialog-button.primary:hover,
+dialog button.primary:hover,
+dialog button[default="true"]:hover,
+panel button.primary:hover,
+panel button[default="true"]:hover,
+window[role="dialog"] button[default="true"]:hover,
+window[windowtype="alert:alert"] button[default="true"]:hover {
+  background-color: color-mix(in srgb, var(--secondary) 90%, black) !important;
+}
+
+.text-link {
+  color: var(--secondary) !important;
+}
+
+.text-link:hover {
+  color: color-mix(in srgb, var(--secondary) 70%, transparent) !important;
+}
+
+/* --- Checkboxes & Radios in chrome UI --- */
+*|input[type="checkbox"],
+[type="checkbox"],
+*|input[type="radio"],
+[type="radio"] {
+  accent-color: var(--primary) !important;
+}
+
+/* Custom text selection styling */
+::selection {
+  background-color: var(--primary) !important;
+  color: var(--base) !important;
+}
+
+/* --- Bookmark Panel Folder Tree --- */
+#editBMPanel_folderTree {
+  background-color: var(--base) !important;
+  background-image: none !important;
+  color: var(--text) !important;
+  border-radius: 8px !important;
+}
+
+#editBMPanel_folderTree treechildren::-moz-tree-row {
+  background-color: transparent !important;
+}
+
+#editBMPanel_folderTree treechildren::-moz-tree-row(selected) {
+  background-color: var(--primary) !important;
+}
+
+#editBMPanel_folderTree treechildren::-moz-tree-cell-text {
+  color: var(--text) !important;
+}
+
+#editBMPanel_folderTree treechildren::-moz-tree-cell-text(selected) {
+  color: var(--base) !important;
+}
+
+#editBMPanel_folderTree treechildren::-moz-tree-image {
+  fill: var(--text) !important;
+}
+
+#editBMPanel_folderTree treechildren::-moz-tree-image(selected) {
+  fill: var(--base) !important;
+}
+
+#editBMPanel_folderTree treechildren::-moz-tree-twisty {
+  fill: var(--text) !important;
+}
+
+#editBMPanel_folderTree treechildren::-moz-tree-twisty(selected) {
+  fill: var(--base) !important;
+}
+
+/* --- About Dialog (Help > About Firefox) --- */
+@-moz-document url("chrome://browser/content/aboutDialog.xhtml") {
+  #aboutDialogContainer,
+  #clientBox {
+    background-color: var(--base) !important;
+  }
+
+  #bottomBox {
+    background-color: var(--overlay) !important;
+  }
+}
