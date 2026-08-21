@@ -5,3 +5,4 @@ category = "terminal"
 [templates.tmux]
 input_path = "tmux.conf"
 output_path = "$XDG_CONFIG_HOME/tmux/themes/noctalia.conf"
+post_hook = "bash '{{ config_dir }}/reload.sh'"
