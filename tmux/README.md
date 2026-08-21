@@ -1,23 +1,12 @@
 # tmux
 
-Noctalia colors for native tmux styles, without changing status content or layout.
-
-## Setup
-
-Add this after any other theme configuration:
+Source the generated theme after other tmux theme configuration:
 
 ```tmux
 source-file -q ~/.config/tmux/themes/noctalia.conf
 ```
 
-For a custom `XDG_CONFIG_HOME`:
+With a custom `XDG_CONFIG_HOME`, replace `~/.config` with its value.
 
-```tmux
-source-file -q "$XDG_CONFIG_HOME/tmux/themes/noctalia.conf"
-```
-
-The post-hook reloads the default tmux server. Named sockets need to source the
-file themselves. Other themes and formats with embedded colors may override it.
-
-The generated file exposes its Material color roles as `@noctalia_*` user
-options for custom status formats.
+The hook reloads only the default server; running named-socket servers must
+source the file themselves. Colors embedded in custom status formats are not replaced.
