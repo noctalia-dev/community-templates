@@ -13,7 +13,6 @@ if [ ! -f "$theme_file" ]; then
   exit 1
 fi
 
-# Reload an existing server without starting one just to apply a theme.
 if tmux list-sessions >/dev/null 2>&1; then
   tmux source-file "$theme_file"
 fi
