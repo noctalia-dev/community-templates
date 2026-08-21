@@ -42,6 +42,18 @@ if ! cmp -s "$config_file" "$tmp_file"; then
   cat "$tmp_file" >"$config_file"
 fi
 
-if tmux list-sessions >/dev/null 2>&1; then
-  tmux source-file "$theme_file"
-fi
+socket_dir="${TMUX_TMPDIR:-/tmp}/tmux-$(id -u)"
+
+for socket_path in "$socket_dir"/*; do
+  [ -S "$socket_path" ] || continue
+
+  config_files="$(
+    tmux -N -S "$socket_path" display-message -p '#{config_files}' 2>/dev/null
+  )" || continue
+
+  case ",$config_files," in
+    *",$config_file,"*)
+      tmux -N -S "$socket_path" source-file "$theme_file"
+      ;;
+  esac
+done
