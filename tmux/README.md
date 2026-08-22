@@ -5,5 +5,5 @@
 Inactive tabs use their own background by default. To make them inherit the status bar background, add this before the Noctalia `source-file` line in your tmux config:
 
 ```tmux
-set -g @noctalia_inactive_tabs_match_status on
+set -g @noctalia_inactive_tabs_use_background off
 ```
