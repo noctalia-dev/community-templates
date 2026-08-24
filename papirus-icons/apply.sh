@@ -20,6 +20,17 @@ set -euo pipefail
   # 3. Extract the mapping array
   MAPPING="${lines[${#lines[@]}-1]}"
 
+  # 3b. Derive dark/light from the surface (background) color's luminance, and point GTK's icon theme at the matching Papirus variant.
+  SURFACE="${lines[1]//[# ]/}"
+  if [[ ${#SURFACE} -ge 6 ]]; then
+    SURFACE=${SURFACE:0:6}
+    SR=$((16#${SURFACE:0:2})); SG=$((16#${SURFACE:2:2})); SB=$((16#${SURFACE:4:2}))
+    LUMA=$(( (SR*299 + SG*587 + SB*114) / 1000 ))
+    ICON_VARIANT="Papirus-Dark"; (( LUMA >= 128 )) && ICON_VARIANT="Papirus-Light"
+    command -v gsettings >/dev/null 2>&1 && \
+      gsettings set org.gnome.desktop.interface icon-theme "$ICON_VARIANT" 2>/dev/null || true
+  fi
+
   # 4. Math calculation (HSV-based)
   closest=$(
     awk -v r="$TR" -v g="$TG" -v b="$TB" -v m="$MAPPING" '
@@ -84,17 +95,16 @@ set -euo pipefail
     }
   ')
 
-  # 5. Ensure user icon directory is created so papirus-folders doesn't need to be called as root
-  if [[ ! -d $HOME/.local/share/icons/Papirus ]]; then
-    mkdir -p "$HOME/.local/share/icons"
+  # 5/6. Recolor every installed Papirus variant, not just the base one so Papirus-Dark and Papirus-Light stay in sync too
+  [[ -n "$closest" ]] || { echo "Error: no matching folder color found" 1>&2; exit 0; }
 
-    if [[ -d "/usr/share/icons/Papirus" ]]; then
-      cp -r "/usr/share/icons/Papirus" "$HOME/.local/share/icons/"
-    else
-      echo "Error: Papirus Icons are not installed" 1>&2; exit 1
+  for variant in Papirus Papirus-Dark Papirus-Light; do
+    [[ -d "/usr/share/icons/$variant" ]] || continue
+    if [[ ! -d "$HOME/.local/share/icons/$variant" ]]; then
+      mkdir -p "$HOME/.local/share/icons"
+      cp -r "/usr/share/icons/$variant" "$HOME/.local/share/icons/"
     fi
-  fi
-
-  # 6. Apply icons instantly
-  [[ -n "$closest" ]] && "$(dirname "$0")/papirus-folders" -C "$closest" || echo "Error: Failed to apply papirus-folders"
+    "$(dirname "$0")/papirus-folders" -t "$variant" -C "$closest" \
+      || echo "Error: papirus-folders failed for $variant" 1>&2
+  done
 }
