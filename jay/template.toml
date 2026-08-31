@@ -1,0 +1,8 @@
+[catalog.jay]
+name = "Jay"
+category = "compositor"
+
+[templates.jay]
+input_path = "jay.toml"
+output_path = "$XDG_CACHE_HOME/noctalia/templates/jay-theme.toml"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
