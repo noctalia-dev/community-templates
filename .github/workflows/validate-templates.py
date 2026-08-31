@@ -38,6 +38,7 @@ ENTRY_FIELDS = {
     "output_path_dynamic",
     "pre_hook",
     "post_hook",
+    "hook_async",
     "post_action",
     "requires_path",
     "compare_to",
