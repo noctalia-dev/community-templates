@@ -15,7 +15,13 @@ write_if_changed() {
     rm -f "$tmp"
 }
 
-find "${XDG_CONFIG_HOME:-$HOME/.config}/zen" "$HOME/.zen" -mindepth 2 -maxdepth 2 -type f -name "prefs.js" -print0 2>/dev/null |
+zen_dirs=()
+for d in "${XDG_CONFIG_HOME:-$HOME/.config}/zen" "$HOME/.zen"; do
+    [ -d "$d" ] && zen_dirs+=("$d")
+done
+[ "${#zen_dirs[@]}" -eq 0 ] && exit 0
+
+find "${zen_dirs[@]}" -mindepth 2 -maxdepth 2 -type f -name "prefs.js" -print0 |
     while IFS= read -r -d '' prefs_file; do
         profile_dir=$(dirname "$prefs_file")
         chrome_dir="$profile_dir/chrome"
@@ -26,20 +32,15 @@ find "${XDG_CONFIG_HOME:-$HOME/.config}/zen" "$HOME/.zen" -mindepth 2 -maxdepth 
         mkdir -p "$chrome_dir"
         touch "$user_chrome" "$user_content" "$user_js"
 
+        # @import must come before any other CSS rule, so prepend it
         tmp_chrome="$(mktemp "${user_chrome}.tmp.XXXXXX")"
-        sed '/zen-browser\/zen-userChrome\.css/d' "$user_chrome" >"$tmp_chrome"
-        if ! grep -Fq "$line_chrome" "$tmp_chrome"; then
-            [ -s "$tmp_chrome" ] && [ -n "$(tail -c1 "$tmp_chrome")" ] && echo >>"$tmp_chrome"
-            printf '%s\n' "$line_chrome" >>"$tmp_chrome"
-        fi
+        printf '%s\n' "$line_chrome" >"$tmp_chrome"
+        sed '/zen-browser\/zen-userChrome\.css/d' "$user_chrome" >>"$tmp_chrome"
         write_if_changed "$user_chrome" "$tmp_chrome"
 
         tmp_content="$(mktemp "${user_content}.tmp.XXXXXX")"
-        sed '/zen-browser\/zen-userContent\.css/d' "$user_content" >"$tmp_content"
-        if ! grep -Fq "$line_content" "$tmp_content"; then
-            [ -s "$tmp_content" ] && [ -n "$(tail -c1 "$tmp_content")" ] && echo >>"$tmp_content"
-            printf '%s\n' "$line_content" >>"$tmp_content"
-        fi
+        printf '%s\n' "$line_content" >"$tmp_content"
+        sed '/zen-browser\/zen-userContent\.css/d' "$user_content" >>"$tmp_content"
         write_if_changed "$user_content" "$tmp_content"
 
         tmp_js="$(mktemp "${user_js}.tmp.XXXXXX")"
