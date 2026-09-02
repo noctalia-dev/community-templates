@@ -80,12 +80,16 @@ roles stretched over a dozen token types. These are functional, not chrome.
 
 ## Native install
 
-Same `unopkg` mechanism, invoked directly (`apply.sh` detects whether `unopkg` is already on
-`PATH` and uses it, falling back to the Flatpak `flatpak run --command=` form only if not).
-**Not verified live** on this machine, only Flatpak LibreOffice is installed here. The install
-command itself is the same either way, only how it's invoked differs, but if something about a
-native install's `unopkg`/extension-cache path differs from what's documented above, this hasn't
-been caught yet the way the Flatpak-specific issues above were.
+Same `unopkg` mechanism, invoked directly. `apply.sh` resolves `unopkg` from `PATH` first, then
+falls back to the official TDF install layout (`/opt/libreoffice*/program/unopkg`,
+`/usr/lib/libreoffice/program/unopkg`, `/usr/lib64/libreoffice/program/unopkg`) so the official
+`.deb`/`.rpm` packages, which do **not** put `unopkg` on `PATH`, are detected too. If no native
+`unopkg` is found it falls back to the Flatpak `flatpak run --command=` form.
+
+**Verified live** against LibreOffice 26.2.4.2 from the official TDF `.deb` packages on
+Kali Linux (amd64), including a clean-PATH run where `command -v unopkg` returned nothing and
+`/opt/libreoffice26.2/program/unopkg` was picked up by the fallback; the extension installed
+and registered correctly.
 
 ## Flatpak install (`org.libreoffice.LibreOffice`)
 
