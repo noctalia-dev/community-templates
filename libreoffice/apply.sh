@@ -41,7 +41,20 @@ PYEOF
 cp "$CONFIG_DIR/Paths.xcu" "$BUILD_DIR/pkg/Paths.xcu"
 cp "$CONFIG_DIR/description.xml" "$BUILD_DIR/pkg/description.xml"
 cp "$CONFIG_DIR/pkg-description.en" "$BUILD_DIR/pkg/pkg-description.en"
-cp "$CONFIG_DIR/META-INF/manifest.xml" "$BUILD_DIR/pkg/META-INF/manifest.xml"
+
+# Write the package manifest inline rather than copying it from the template directory.
+# The template distribution pipeline only ships top-level files, so the
+# META-INF/manifest.xml that used to live here was never delivered to users and
+# the previous `cp` aborted under set -euo pipefail before the .oxt was built.
+# The manifest is static and small, so generating it here keeps the template
+# self-contained and removes the only subdirectory dependency.
+cat > "$BUILD_DIR/pkg/META-INF/manifest.xml" <<'MANIFEST'
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest:manifest xmlns:manifest="http://openoffice.org/2001/manifest">
+  <manifest:file-entry manifest:full-path="Theme_Colors.xcu" manifest:media-type="application/vnd.sun.star.configuration-data"/>
+  <manifest:file-entry manifest:full-path="Paths.xcu" manifest:media-type="application/vnd.sun.star.configuration-data"/>
+</manifest:manifest>
+MANIFEST
 
 rm -f "$OXT_PATH"
 (cd "$BUILD_DIR/pkg" && zip -qr "$OXT_PATH" .)
@@ -77,12 +90,29 @@ INSTALLED_ANY=0
 # LibreOffice (providing `unopkg` on PATH) and the Flatpak (the tested
 # target) installed would otherwise only get themed on whichever one won
 # that lookup, silently leaving the other one unthemed.
-if command -v unopkg >/dev/null 2>&1; then
-  unopkg remove "$EXT_ID" >/dev/null 2>&1 || true
-  if unopkg add --force "$OXT_PATH" 2>&1; then
+#
+# Native detection here also covers the official TDF `.deb`/`.rpm` layout,
+# which installs into /opt/libreoffice<major>.<minor>/ and does NOT place
+# `unopkg` on PATH. `command -v unopkg` alone misses it, so fall back to the
+# known install dirs before concluding there is no native install.
+UNOPKG="$(command -v unopkg || true)"
+if [ -z "$UNOPKG" ]; then
+  for candidate in /opt/libreoffice*/program/unopkg \
+                   /usr/lib/libreoffice/program/unopkg \
+                   /usr/lib64/libreoffice/program/unopkg; do
+    if [ -x "$candidate" ]; then
+      UNOPKG="$candidate"
+      break
+    fi
+  done
+fi
+
+if [ -n "$UNOPKG" ]; then
+  "$UNOPKG" remove "$EXT_ID" >/dev/null 2>&1 || true
+  if "$UNOPKG" add --force "$OXT_PATH" 2>&1; then
     INSTALLED_ANY=1
   else
-    echo "noctalia libreoffice: native unopkg install failed" >&2
+    echo "noctalia libreoffice: native unopkg install failed ($UNOPKG)" >&2
   fi
 fi
 
