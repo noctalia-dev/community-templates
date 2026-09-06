@@ -1,0 +1,12 @@
+{
+  "name": "noctalia",
+  "displayName": "Noctalia",
+  "theme": "ui",
+  "version": "1.0.0",
+  "description": "Noctalia palette theme for Mailspring",
+  "license": "MIT",
+  "engines": {
+    "mailspring": "*"
+  },
+  "private": true
+}
