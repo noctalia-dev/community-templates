@@ -14,11 +14,11 @@ if [ ! -f "$theme_file" ]; then
 fi
 
 tmp_file="$(mktemp)"
+stripped_config_file="$(mktemp)"
 
 # Check [ui] section exists.
 if grep -q "^\[ui\]$" "$config_file"; then
   # Remove theme (may not be set). Then insert theme.
-  stripped_config_file="$(mktemp)"
   awk '!/^application\\themes=|^canvas\\background*/' "$config_file" >"$stripped_config_file"
   awk -v theme_file="$theme_file" '/^\[ui\]$/{print; while(getline line < theme_file) print line; next}1' "$stripped_config_file" >"$tmp_file"
 
