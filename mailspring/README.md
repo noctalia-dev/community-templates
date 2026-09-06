@@ -8,7 +8,9 @@ Mailspring themes are **packages**: a directory under the Mailspring config dir 
 so a theme recolors the whole app just by reassigning those variables. This template renders
 both files straight into `packages/noctalia/`, for a native and a Flatpak install.
 
-![Mailspring with the Noctalia theme](screenshot.png)
+![Mailspring with the Noctalia theme, dark palette](screenshot.png)
+
+![Mailspring with the Noctalia theme, light palette](light-screenshot.png)
 
 ## What it themes
 
@@ -71,6 +73,7 @@ Pick another theme in Preferences → Appearance, disable the template in Noctal
 | `template.toml` | Noctalia manifest: four renders (two files × native/Flatpak) |
 | `package.json` | Mailspring theme package manifest (static) |
 | `ui-variables.less` | The themed variables plus dark-palette fixups |
-| `screenshot.png` | Preferences → Appearance with the theme applied |
+| `screenshot.png` | Preferences → Appearance, dark palette |
+| `light-screenshot.png` | Preferences → Appearance, light palette |
 
 Tested against Mailspring 1.23.0 (Flatpak `com.getmailspring.Mailspring`).
