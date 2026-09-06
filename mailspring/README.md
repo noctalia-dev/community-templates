@@ -8,6 +8,8 @@ Mailspring themes are **packages**: a directory under the Mailspring config dir 
 so a theme recolors the whole app just by reassigning those variables. This template renders
 both files straight into `packages/noctalia/`, for a native and a Flatpak install.
 
+![Mailspring with the Noctalia theme](screenshot.png)
+
 ## What it themes
 
 | Mailspring variable | Noctalia token |
@@ -48,8 +50,11 @@ package on disk. **Restart Mailspring after a palette or mode change** to see th
 
 ## Notes
 
-- Turn **off** "Use system accent color" in Preferences → Appearance. The theme sets the
-  accent from the palette; the system accent overrides it.
+- "Use system accent color" in Preferences → Appearance can be left on or off. Mailspring's
+  base theme derives the accent from `var(--system-accent, …)`, but this theme assigns a
+  literal palette color, so the setting has nothing to override.
+- Radio buttons, checkboxes and sliders are Chromium's native controls; the theme sets
+  `accent-color` so they follow the palette too.
 - The template does not touch `config.json`. Mailspring rewrites that file from memory while
   it runs, so an outside edit is silently lost — which is why the theme is selected by hand
   once, in the app.
@@ -66,5 +71,6 @@ Pick another theme in Preferences → Appearance, disable the template in Noctal
 | `template.toml` | Noctalia manifest: four renders (two files × native/Flatpak) |
 | `package.json` | Mailspring theme package manifest (static) |
 | `ui-variables.less` | The themed variables plus dark-palette fixups |
+| `screenshot.png` | Preferences → Appearance with the theme applied |
 
 Tested against Mailspring 1.23.0 (Flatpak `com.getmailspring.Mailspring`).

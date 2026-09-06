@@ -106,6 +106,14 @@
 @menu-item-color-selected: {{ colors.primary.default.hex }};
 @menu-text-color-selected: {{ colors.on_primary.default.hex }};
 
+// Native form controls --------------------------------------------------
+// Radio buttons, checkboxes and range sliders are drawn by Chromium, not by
+// Mailspring's stylesheets, so they ignore the variables above and fall back to
+// the browser accent. accent-color hands them the palette.
+:root {
+  accent-color: @accent-primary;
+}
+
 // Dark-palette fixups -----------------------------------------------------
 // A handful of things variables cannot reach: Mailspring ships dark-on-light PNG icons, mail
 // labels with baked-in colors, and shadows drawn for a white page. Mailspring's own ui-dark
