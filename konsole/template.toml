@@ -1,0 +1,9 @@
+[catalog.konsole]
+name = "Konsole"
+category = "terminal"
+
+[templates.konsole]
+input_path  = "noctalia.colorscheme"
+output_path = "$XDG_DATA_HOME/konsole/noctalia.colorscheme"
+pre_hook    = "bash '{{ config_dir }}/pre-apply.sh'"
+post_hook   = "bash '{{ config_dir }}/apply.sh'"
