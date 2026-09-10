@@ -5,3 +5,7 @@ category = "gaming"
 [templates.prismlauncher]
 input_path = 'prismlauncher.json'
 output_path = '$XDG_DATA_HOME/PrismLauncher/themes/Matugen/theme.json'
+
+[templates.prismlauncher_flatpak]
+input_path = 'prismlauncher.json'
+output_path = '~/.var/app/org.prismlauncher.PrismLauncher/data/PrismLauncher/themes/Matugen/theme.json'
