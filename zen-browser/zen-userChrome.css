@@ -121,16 +121,26 @@
   opacity: 0.3 !important;
 }
 
-toolbar .toolbarbutton-1 {
-  &:not([disabled]) {
-    &:is([open], [checked]) > :is(
-    .toolbarbutton-icon,
-    .toolbarbutton-text,
-    .toolbarbutton-badge-stack
-    ) {
-      fill: color-mix(in srgb, var(--text) 40%, transparent) !important;
-    }
-  }
+/* Cover standard buttons added through Customize toolbar. */
+toolbar .toolbarbutton-1:not([disabled]):not([aria-disabled="true"]) {
+  --toolbarbutton-icon-fill: var(--primary) !important;
+}
+
+toolbar .toolbarbutton-1:not([disabled]):not([aria-disabled="true"]) > .toolbarbutton-icon,
+toolbar .toolbarbutton-1:not([disabled]):not([aria-disabled="true"]) > .toolbarbutton-badge-stack > .toolbarbutton-icon {
+  -moz-context-properties: fill, fill-opacity !important;
+  fill: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+toolbar .toolbarbutton-1:not([disabled]):not([aria-disabled="true"]):is([open], [checked]) > :is(
+  .toolbarbutton-icon,
+  .toolbarbutton-text,
+  .toolbarbutton-badge-stack
+),
+toolbar .toolbarbutton-1:not([disabled]):not([aria-disabled="true"]):is([open], [checked]) > .toolbarbutton-badge-stack > .toolbarbutton-icon {
+  fill: color-mix(in srgb, var(--text) 40%, transparent) !important;
+  color: color-mix(in srgb, var(--text) 40%, transparent) !important;
 }
 
 .tab-text {
