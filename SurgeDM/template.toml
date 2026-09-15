@@ -1,0 +1,8 @@
+[catalog.SurgeDM]
+name = "SurgeDM"
+category = "terminal"
+
+[templates.SurgeDM]
+input_path = "surge.toml"
+output_path = "$XDG_CONFIG_HOME/surge/themes/noctalia.toml"
+post_hook = ""
