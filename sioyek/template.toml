@@ -1,0 +1,8 @@
+[catalog.sioyek]
+name = "Sioyek"
+category = "editor"
+
+[templates.sioyek]
+input_path = "sioyek.config"
+output_path = "$XDG_CONFIG_HOME/sioyek/themes/noctalia.config"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
