@@ -1,24 +1,56 @@
 :root,
-body.web,
-body.web *,
-.dark,
-.dark *,
-.dark.original,
-.dark.original *,
-.dark.color-refresh,
-.dark.color-refresh *,
-.x9ux0ua.x9ux0ua,
-.x9ux0ua.x9ux0ua * {
+body,
+body * {
 
     /* Accent */
     --WDS-accent: {{ colors.primary.default.hex }} !important;
     --WDS-accent-RGB: {{ colors.primary.default.rgb_csv }} !important;
+
+    /* Palette roles for multi-tone empty-state illustrations */
+    --karere-illustration-primary: {{ colors.primary.default.hex }} !important;
+    --karere-illustration-light: {{ colors.secondary.default.hex }} !important;
+    --karere-illustration-highlight: {{ colors.tertiary.default.hex }} !important;
+    --karere-illustration-neutral: {{ colors.on_surface.default.hex }} !important;
+    --karere-illustration-outline: {{ colors.on_primary.default.hex }} !important;
 
     --WDS-accent-deemphasized: {{ colors.primary_container.default.hex }} !important;
     --WDS-accent-deemphasized-RGB: {{ colors.primary_container.default.rgb_csv }} !important;
 
     --WDS-content-on-accent: {{ colors.on_primary.default.hex }} !important;
     --WDS-content-on-accent-RGB: {{ colors.on_primary.default.rgb_csv }} !important;
+
+    /* Positive states: archive empty state and unread-message badges */
+    --WDS-accent-emphasized: {{ colors.primary.default.hex }} !important;
+    --WDS-accent-emphasized-RGB: {{ colors.primary.default.rgb_csv }} !important;
+
+    --WDS-secondary-positive: {{ colors.primary.default.hex }} !important;
+    --WDS-secondary-positive-RGB: {{ colors.primary.default.rgb_csv }} !important;
+    --WDS-secondary-positive-deemphasized: {{ colors.primary_container.default.hex }} !important;
+    --WDS-secondary-positive-deemphasized-RGB: {{ colors.primary_container.default.rgb_csv }} !important;
+
+    --WDS-green-400: {{ colors.primary.default.hex }} !important;
+    --WDS-green-400-RGB: {{ colors.primary.default.rgb_csv }} !important;
+    --WDS-green-500: {{ colors.primary.default.hex }} !important;
+    --WDS-green-500-RGB: {{ colors.primary.default.rgb_csv }} !important;
+    --WDS-persistent-activity-indicator: {{ colors.primary.default.hex }} !important;
+    --WDS-persistent-activity-indicator-RGB: {{ colors.primary.default.rgb_csv }} !important;
+    --WDS-persistent-always-branded: {{ colors.primary.default.hex }} !important;
+    --WDS-persistent-always-branded-RGB: {{ colors.primary.default.rgb_csv }} !important;
+
+    --badge-success-background-color: {{ colors.primary.default.hex }} !important;
+    --text-badge-success-background: {{ colors.primary.default.hex }} !important;
+    --badge-background-color-green: {{ colors.primary.default.hex }} !important;
+    --badge-pending: {{ colors.primary.default.hex }} !important;
+
+    /* Voice-message playback progress and playhead */
+    --audio-progress-incoming: {{ colors.primary.default.hex }} !important;
+    --audio-progress-outgoing: {{ colors.primary.default.hex }} !important;
+    --audio-progress-played-incoming: {{ colors.primary.default.hex }} !important;
+    --audio-progress-played-outgoing: {{ colors.primary.default.hex }} !important;
+    --ptt-thumb-incoming-unplayed: {{ colors.primary.default.hex }} !important;
+    --ptt-thumb-incoming-played: {{ colors.primary.default.hex }} !important;
+    --ptt-thumb-outgoing-unplayed: {{ colors.primary.default.hex }} !important;
+    --ptt-thumb-outgoing-played: {{ colors.primary.default.hex }} !important;
 
     /* Background */
     --WDS-background-wash-plain: {{ colors.surface.default.hex }} !important;
@@ -50,6 +82,7 @@ body.web *,
     --WDS-surface-elevated-emphasized-RGB: {{ colors.surface_container_high.default.rgb_csv }} !important;
 
     --WDS-surface-pressed: {{ colors.surface_container_highest.default.hex }} !important;
+    --WDS-surface-pressed-RGB: {{ colors.surface_container_highest.default.rgb_csv }} !important;
 
     /* Navigation/list selection */
     --WDS-components-surface-nav-bar: {{ colors.surface.default.hex }} !important;
@@ -172,8 +205,48 @@ body.web *,
  */
 html,
 body,
-#app,
-._ak9y,
-._ak9t {
+#app {
     background-color: {{ colors.surface.default.hex }} !important;
+}
+
+/*
+ * WhatsApp's empty-state SVGs use hard-coded brand colors. Scope their
+ * recoloring to stable empty-state containers rather than generated classes
+ * or every SVG in the application.
+ */
+:is(
+    [data-testid="no-filtered-chats-container"],
+    [data-testid="all-chats-archived-container"]
+) svg [fill="#25d366" i] {
+    fill: var(--karere-illustration-primary) !important;
+}
+
+:is(
+    [data-testid="no-filtered-chats-container"],
+    [data-testid="all-chats-archived-container"]
+) svg [fill="#e6ffda" i],
+:is(
+    [data-testid="no-filtered-chats-container"],
+    [data-testid="all-chats-archived-container"]
+) svg [fill="#fcf5eb" i] {
+    fill: var(--karere-illustration-light) !important;
+}
+
+[data-testid="no-filtered-chats-container"] svg [fill="#afe966" i] {
+    fill: var(--karere-illustration-highlight) !important;
+}
+
+[data-testid="no-filtered-chats-container"] svg :is(
+    [fill="white" i],
+    [fill="#fff" i],
+    [fill="#ffffff" i]
+) {
+    fill: var(--karere-illustration-neutral) !important;
+}
+
+:is(
+    [data-testid="no-filtered-chats-container"],
+    [data-testid="all-chats-archived-container"]
+) svg [stroke="#111b21" i] {
+    stroke: var(--karere-illustration-outline) !important;
 }
