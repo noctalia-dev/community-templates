@@ -11,11 +11,11 @@
     "secondary": "{{ colors.on_surface_variant.light.hex }}",
     "dim": "{{ colors.outline.light.hex }}",
     "accent": "{{ colors.primary.light.hex }}",
-    "accent_hover": "{{ colors.primary_container.light.hex }}",
+    "accent_hover": "{{ colors.primary.light.hex | darken 1 }}",
     "on_accent": "{{ colors.on_primary.light.hex }}",
     "danger": "{{ colors.error.light.hex }}",
-    "warning": "{{ colors.tertiary.light.hex }}",
+    "warning": "{{ colors.terminal_normal_yellow.light.hex }}",
     "overlay": "{{ colors.surface_container_highest.light.hex }}",
-    "shadow": "{{ colors.shadow.light.hex }}"
+    "shadow": "{{ colors.shadow.light.hex }}33"
   }
 }

@@ -48,6 +48,8 @@ noctalia theme --list-templates
 noctalia msg templates-apply
 ```
 
-Check that the output is valid JSON, select `noctalia.json` in Spotifast, and
-run `spotifast reload-themes`. Test both dark and light Noctalia modes, and
-apply the template twice to verify that the output remains valid.
+Template application is asynchronous, so wait for `noctalia msg
+templates-apply` to finish rendering before checking the output. Select
+`noctalia.json` in Spotifast and run `spotifast reload-themes`. Test both dark
+and light Noctalia modes, and apply the template twice to verify that the
+output remains valid.
