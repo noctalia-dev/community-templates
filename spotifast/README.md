@@ -1,7 +1,7 @@
 # Spotifast
 
 Themes [Spotifast](https://github.com/crmne/spotifast) with the active
-Noctalia palette. Requires Spotifast 0.8.0 or newer.
+Noctalia palette. Requires Spotifast 0.9.1 or newer.
 
 ## Setup
 
@@ -17,7 +17,5 @@ want all surfaces to retain the Noctalia colors.
 
 ## Output paths
 
-- Native: `$XDG_CONFIG_HOME/fastpotify/themes/noctalia.json`
-- Flatpak: `~/.var/app/rocks.spotifast.Spotifast/config/fastpotify/themes/noctalia.json`
-
-The `fastpotify` directory is intentional and retained for compatibility.
+- Native: `$XDG_CONFIG_HOME/spotifast/themes/noctalia.json`
+- Flatpak: `~/.var/app/rocks.spotifast.Spotifast/config/spotifast/themes/noctalia.json`
