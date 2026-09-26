@@ -1,0 +1,9 @@
+[catalog.musicfox]
+name = "Musicfox"
+category = "audio"
+
+[templates.musicfox]
+input_path = "musicfox.toml"
+output_path = "$XDG_CONFIG_HOME/go-musicfox/themes/noctalia.toml"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
+requires_path = "$XDG_CONFIG_HOME/go-musicfox"
