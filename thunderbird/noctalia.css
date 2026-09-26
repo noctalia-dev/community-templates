@@ -1,0 +1,59 @@
+/* Noctalia palette for Thunderbird.
+ *
+ * Rendered by the Noctalia template engine into
+ *   $XDG_CACHE_HOME/noctalia/thunderbird/noctalia.css
+ * and imported from the profile's userChrome.css by apply.sh.
+ *
+ * Thunderbird's chrome is themed through its layout variables (see
+ * chrome://messenger/skin/layout.css): background 0..4 build the pane
+ * hierarchy, color 0..3 the text, border 0..2 the separators. Overriding
+ * those reaches toolbars, folder pane, message list, message header and
+ * cards at once. These live in userChrome, not userContent, so message
+ * bodies keep their own colors.
+ */
+
+:root {
+  --layout-background-0: {{ colors.surface.default.hex }} !important;
+  --layout-background-1: {{ colors.surface_container_low.default.hex }} !important;
+  --layout-background-2: {{ colors.surface_container.default.hex }} !important;
+  --layout-background-3: {{ colors.surface_container_high.default.hex }} !important;
+  --layout-background-4: {{ colors.surface_container_highest.default.hex }} !important;
+
+  --layout-color-0: {{ colors.on_surface.default.hex }} !important;
+  --layout-color-1: {{ colors.on_surface.default.hex }} !important;
+  --layout-color-2: {{ colors.on_surface_variant.default.hex }} !important;
+  --layout-color-3: {{ colors.outline.default.hex }} !important;
+
+  --layout-border-0: {{ colors.outline_variant.default.hex }} !important;
+  --layout-border-1: {{ colors.outline_variant.default.hex }} !important;
+  --layout-border-2: {{ colors.outline.default.hex }} !important;
+
+  --color-accent-primary: {{ colors.primary.default.hex }} !important;
+  --toolbarbutton-icon-fill-attention: {{ colors.primary.default.hex }} !important;
+
+  /* Selected folder / message rows. */
+  --selected-item-color: {{ colors.primary_container.default.hex }} !important;
+  --selected-item-text-color: {{ colors.on_primary_container.default.hex }} !important;
+  --sidebar-highlight-background-color: {{ colors.primary_container.default.hex }} !important;
+  --sidebar-highlight-text-color: {{ colors.on_primary_container.default.hex }} !important;
+}
+
+/* --- Slim chrome ------------------------------------------------------- */
+
+/* The vertical Spaces strip and the classic menu bar are pure chrome on a
+ * tiling setup; both stay reachable through the app menu / keyboard. */
+#spacesToolbar,
+#toolbar-menubar {
+  display: none !important;
+}
+
+:root {
+  --tab-min-height: 28px !important;
+  --unified-toolbar-minimal-height: 26px !important;
+  --list-item-min-height: 22px !important;
+  --tree-row-padding: 2px !important;
+}
+
+#unifiedToolbar {
+  padding-block: 2px !important;
+}

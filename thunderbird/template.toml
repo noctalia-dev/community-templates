@@ -1,0 +1,11 @@
+[catalog.thunderbird]
+name = "Thunderbird"
+category = "misc"
+
+# Noctalia renders the palette into Thunderbird's chrome via userChrome.css.
+# apply.sh wires the rendered file into every profile and enables userChrome;
+# see README.md for the read-only profile handling.
+[templates.thunderbird]
+input_path = "noctalia.css"
+output_path = "$XDG_CACHE_HOME/noctalia/thunderbird/noctalia.css"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
