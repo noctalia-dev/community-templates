@@ -2,6 +2,8 @@
 
 Keeps [Thunderbird](https://www.thunderbird.net/) in sync with the Noctalia palette.
 
+![Thunderbird with the Noctalia theme, dark palette](screenshot.png)
+
 ## What it themes
 
 Noctalia renders its palette into Thunderbird's chrome through `userChrome.css`.
