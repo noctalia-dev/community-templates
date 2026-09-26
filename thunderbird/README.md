@@ -27,6 +27,10 @@ bar underline and the toolbar separators go transparent, so regions are divided
 by tonal surface steps instead. Card outlines keep a subtle `outline_variant`
 border.
 
+The chrome also leans on Firefox's Nova redesign: tabs are floating pills with
+a soft gradient on the active tab, and the three panes become rounded cards on a
+dimmer frame, so content is inset rather than edge to edge.
+
 Message bodies and the compose window are not themed. They render in their own
 documents outside the reach of `userChrome.css`, and Noctalia only ships a
 `userChrome` template, not a `userContent` one.

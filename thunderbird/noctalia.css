@@ -80,9 +80,62 @@
   border-radius: 9999px !important;
 }
 
-/* Softer M3 corners on the tab strip. */
+/* --- Firefox Nova inspired chrome ------------------------------------- */
+
+/* Floating tab pills: uniform radius, a gap between tabs, a soft gradient on
+ * the active tab, no accent line underneath. */
+#tabs-toolbar {
+  --tabs-toolbar-background-color: transparent !important;
+  --tabs-toolbar-box-shadow: none !important;
+  padding-inline: 6px !important;
+}
+
 .tabmail-tab {
-  border-radius: 12px 12px 0 0 !important;
+  border-radius: 8px !important;
+  margin-inline-end: 4px !important;
+  margin-block: 4px !important;
+}
+
+.tabmail-tab .tab-background {
+  border-radius: 8px !important;
+}
+
+.tabmail-tab .tab-background[selected] {
+  background-color: {{ colors.surface_container_highest.default.hex }} !important;
+  background-image: linear-gradient(
+    135deg,
+    color-mix(in srgb, {{ colors.primary_container.default.hex }} 40%, {{ colors.surface_container_highest.default.hex }}),
+    {{ colors.surface_container_high.default.hex }}
+  ) !important;
+  box-shadow: 0 1px 4px -2px rgba(0, 0, 0, 0.45) !important;
+}
+
+.tabmail-tab:hover .tab-background:not([selected]) {
+  background-color: {{ colors.surface_container_high.default.hex }} !important;
+}
+
+.tab-line {
+  display: none !important;
+}
+
+/* Framed content: the three panes become rounded cards on a dimmer frame,
+ * like Nova's inset web content. */
+body#paneLayout {
+  gap: 6px !important;
+  padding: 6px !important;
+  background-color: {{ colors.surface_dim.default.hex }} !important;
+}
+
+#paneLayout #folderPane {
+  background-color: {{ colors.surface_container_low.default.hex }} !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+#paneLayout :is(#threadPane, #messagePane) {
+  background-color: {{ colors.surface.default.hex }} !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
 }
 
 /* --- Slim chrome ------------------------------------------------------- */
