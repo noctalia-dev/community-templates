@@ -24,9 +24,15 @@
   --layout-color-2: {{ colors.on_surface_variant.default.hex }} !important;
   --layout-color-3: {{ colors.outline.default.hex }} !important;
 
-  --layout-border-0: {{ colors.outline_variant.default.hex }} !important;
-  --layout-border-1: {{ colors.outline_variant.default.hex }} !important;
-  --layout-border-2: {{ colors.outline.default.hex }} !important;
+  /* M3 separates regions by tonal surface, not by hairlines, so the
+   * structural borders go transparent. Interactive borders and card
+   * outlines stay on --layout-border-2 / --tree-card-border. */
+  --layout-border-0: transparent !important;
+  --layout-border-1: transparent !important;
+  --layout-border-2: {{ colors.outline_variant.default.hex }} !important;
+  --chrome-content-separator-color: transparent !important;
+  --tabs-tabbar-border-size: 0 !important;
+  --toolbarseparator-color: transparent !important;
 
   --color-accent-primary: {{ colors.primary.default.hex }} !important;
   --toolbarbutton-icon-fill-attention: {{ colors.primary.default.hex }} !important;

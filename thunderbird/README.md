@@ -22,6 +22,11 @@ message cards one tonal step above the page. The Spaces rail gets a circular
 active indicator behind the icon, the tab strip softer corners, and the search
 field a filled container.
 
+Separators follow the same rule: the structural hairlines between panes, the tab
+bar underline and the toolbar separators go transparent, so regions are divided
+by tonal surface steps instead. Card outlines keep a subtle `outline_variant`
+border.
+
 Message bodies and the compose window are not themed. They render in their own
 documents outside the reach of `userChrome.css`, and Noctalia only ships a
 `userChrome` template, not a `userContent` one.
