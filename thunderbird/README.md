@@ -74,3 +74,14 @@ instead.
 Remove the import line from `chrome/userChrome.css`, the
 `toolkit.legacyUserProfileCustomizations.stylesheets` line from `user.js`, and
 disable the template in Noctalia.
+
+## Switching the palette while Thunderbird is running
+
+`userChrome.css` is a startup stylesheet: Thunderbird loads it, and the
+`@import` it points at, when a window is created and does not re-read it
+cleanly afterwards. Changing the palette while Thunderbird is running can
+therefore leave the chrome half-restyled until it is restarted.
+
+Noctalia also renders the imported file in place while Thunderbird may be
+reading it, and that write is not atomic, so a running instance can catch a
+truncated file. Restart Thunderbird after a theme change.
