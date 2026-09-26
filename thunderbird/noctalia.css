@@ -36,6 +36,31 @@
   --selected-item-text-color: {{ colors.on_primary_container.default.hex }} !important;
   --sidebar-highlight-background-color: {{ colors.primary_container.default.hex }} !important;
   --sidebar-highlight-text-color: {{ colors.on_primary_container.default.hex }} !important;
+
+  /* Message cards sit one tonal step above the page, like M3 cards. */
+  --tree-card-background: {{ colors.surface_container_low.default.hex }} !important;
+  --tree-card-border: {{ colors.outline_variant.default.hex }} !important;
+}
+
+/* --- Material 3 shape -------------------------------------------------- */
+
+/* Thunderbird defaults to a 3px radius on buttons, inputs, list rows and
+ * cards. M3 uses pills for buttons and inputs and 12dp for cards/panels, so
+ * overriding the radius variables lifts the whole chrome to the M3 shape
+ * scale. Buttons also become filled tonal (secondary container). */
+:root {
+  --button-border-radius: 20px !important;
+  --border-radius-medium: 12px !important;
+  --border-radius-large: 16px !important;
+  --input-search-border-radius: 9999px !important;
+  --listbox-border-radius: 12px !important;
+  --panel-border-radius: 12px !important;
+
+  --button-background-color: {{ colors.secondary_container.default.hex }} !important;
+  --button-text-color: {{ colors.on_secondary_container.default.hex }} !important;
+  --button-border-color: transparent !important;
+
+  --focus-outline-color: {{ colors.primary.default.hex }} !important;
 }
 
 /* --- Slim chrome ------------------------------------------------------- */
