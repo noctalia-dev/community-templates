@@ -61,6 +61,22 @@
   --button-border-color: transparent !important;
 
   --focus-outline-color: {{ colors.primary.default.hex }} !important;
+
+  /* Filled search field and navigation rail surface. */
+  --search-bar-background: {{ colors.surface_container_high.default.hex }} !important;
+  --search-bar-focus-background: {{ colors.surface_container_highest.default.hex }} !important;
+  --search-bar-border-color: transparent !important;
+  --spaces-bg-color: {{ colors.surface.default.hex }} !important;
+}
+
+/* Navigation rail: circular active indicator behind the icon (M3). */
+.spaces-toolbar-button {
+  border-radius: 9999px !important;
+}
+
+/* Softer M3 corners on the tab strip. */
+.tabmail-tab {
+  border-radius: 12px 12px 0 0 !important;
 }
 
 /* --- Slim chrome ------------------------------------------------------- */

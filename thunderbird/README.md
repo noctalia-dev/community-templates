@@ -18,7 +18,9 @@ the tab bar, unified toolbar and list rows are made more compact.
 
 On top of the palette it applies Material 3 shape and surfaces: pill buttons and
 inputs, 12dp cards and panels, filled tonal buttons (`secondary_container`) and
-message cards one tonal step above the page.
+message cards one tonal step above the page. The Spaces rail gets a circular
+active indicator behind the icon, the tab strip softer corners, and the search
+field a filled container.
 
 Message bodies and the compose window are not themed. They render in their own
 documents outside the reach of `userChrome.css`, and Noctalia only ships a
