@@ -74,6 +74,6 @@ the template in Noctalia.
 | `manifest.json` | Chromium theme manifest with Noctalia colors/tints |
 | `apply.sh` | Idempotent hook: prints one-time install instructions |
 
-> Note: the `pywalfox` / `pywalfox-beta4` community templates theme *Firefox*
+> Note: the `pywalfox` community template themes *Firefox*
 > via an extension; this template is the Chromium equivalent of the CSS-based
 > `firefox/` and `zen-browser/` templates.
