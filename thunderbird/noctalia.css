@@ -119,10 +119,11 @@
 }
 
 /* Framed content: the three panes become rounded cards on a dimmer frame,
- * like Nova's inset web content. */
+ * like Nova's inset web content. The tone steps are widened on purpose so the
+ * framing also reads in dark mode. */
 body#paneLayout {
-  gap: 6px !important;
-  padding: 6px !important;
+  gap: 8px !important;
+  padding: 8px !important;
   background-color: {{ colors.surface_dim.default.hex }} !important;
 }
 
@@ -130,12 +131,14 @@ body#paneLayout {
   background-color: {{ colors.surface_container_low.default.hex }} !important;
   border-radius: 12px !important;
   overflow: hidden !important;
+  box-shadow: 0 0 0 1px {{ colors.outline_variant.default.hex }} !important;
 }
 
 #paneLayout :is(#threadPane, #messagePane) {
-  background-color: {{ colors.surface.default.hex }} !important;
+  background-color: {{ colors.surface_container.default.hex }} !important;
   border-radius: 12px !important;
   overflow: hidden !important;
+  box-shadow: 0 0 0 1px {{ colors.outline_variant.default.hex }} !important;
 }
 
 /* --- Slim chrome ------------------------------------------------------- */
