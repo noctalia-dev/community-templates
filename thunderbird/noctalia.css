@@ -40,10 +40,8 @@
 
 /* --- Slim chrome ------------------------------------------------------- */
 
-/* The vertical Spaces strip and the classic menu bar are pure chrome on a
- * tiling setup; both stay reachable through the app menu / keyboard.
- * Delete these two selectors to bring the Spaces strip back. */
-#spacesToolbar,
+/* The classic menu bar is pure chrome on a tiling setup; it stays reachable
+ * through the Alt key and the app menu. */
 #toolbar-menubar {
   display: none !important;
 }

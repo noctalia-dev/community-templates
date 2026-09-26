@@ -13,9 +13,8 @@ folder pane, message list, message header and cards in one place:
 - selected folder and message rows (`--selected-item-*`)
 - the accent color (`--color-accent-primary`)
 
-It also trims the chrome for tiling setups: the vertical Spaces strip and the
-classic menu bar are hidden, and the tab bar, unified toolbar and list rows are
-made more compact.
+It also trims the chrome for tiling setups: the classic menu bar is hidden and
+the tab bar, unified toolbar and list rows are made more compact.
 
 Message bodies and the compose window are not themed. They render in their own
 documents outside the reach of `userChrome.css`, and Noctalia only ships a
