@@ -31,8 +31,11 @@ file_panel_border = "{{colors.outline.default.hex}}"
 file_panel_border_active = "{{colors.primary.default.hex}}"
 file_panel_top_directory_icon = "{{colors.primary.default.hex}}"
 file_panel_top_path = "{{colors.primary.default.hex}}"
-file_panel_item_selected_fg = "{{colors.on_primary_container.default.hex}}"
-file_panel_item_selected_bg = "{{colors.primary_container.default.hex}}"
+# Selection styling mirrors the regular row so the current entry is not
+# highlighted separately. lipgloss still applies the style, but with the same
+# foreground and background the visual result is identical to an unselected row.
+file_panel_item_selected_fg = "{{colors.on_surface.default.hex}}"
+file_panel_item_selected_bg = "{{colors.surface.default.hex}}"
 
 #-- Footer
 footer_fg = "{{colors.on_surface_variant.default.hex}}"
@@ -41,18 +44,22 @@ footer_border = "{{colors.outline.default.hex}}"
 footer_border_active = "{{colors.primary.default.hex}}"
 
 #-- Sidebar
-sidebar_fg = "{{colors.on_surface_variant.default.hex}}"
-sidebar_bg = "{{colors.surface_container.default.hex}}"
+# Same background as file_panel and footer (uniform panel surface). Visual
+# separation is carried by the borders (`outline` inactive / `tertiary`
+# active). The current-directory entry in the sidebar uses the same foreground
+# and background as the regular row so the folder name is not highlighted.
+sidebar_fg = "{{colors.on_surface.default.hex}}"
+sidebar_bg = "{{colors.surface.default.hex}}"
 sidebar_title = "{{colors.primary.default.hex}}"
 sidebar_border = "{{colors.outline.default.hex}}"
 sidebar_border_active = "{{colors.tertiary.default.hex}}"
-sidebar_item_selected_fg = "{{colors.on_secondary_container.default.hex}}"
-sidebar_item_selected_bg = "{{colors.secondary_container.default.hex}}"
+sidebar_item_selected_fg = "{{colors.on_surface.default.hex}}"
+sidebar_item_selected_bg = "{{colors.surface.default.hex}}"
 sidebar_divider = "{{colors.outline_variant.default.hex}}"
 
 #-- Modals
 modal_fg = "{{colors.on_surface.default.hex}}"
-modal_bg = "{{colors.surface_container_high.default.hex}}"
+modal_bg = "{{colors.surface.default.hex}}"
 modal_border_active = "{{colors.primary.default.hex}}"
 modal_cancel_fg = "{{colors.on_error_container.default.hex}}"
 modal_cancel_bg = "{{colors.error_container.default.hex}}"
