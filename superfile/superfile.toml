@@ -31,10 +31,11 @@ file_panel_border = "{{colors.outline.default.hex}}"
 file_panel_border_active = "{{colors.primary.default.hex}}"
 file_panel_top_directory_icon = "{{colors.primary.default.hex}}"
 file_panel_top_path = "{{colors.primary.default.hex}}"
-# Selection styling mirrors the regular row so the current entry is not
-# highlighted separately. lipgloss still applies the style, but with the same
-# foreground and background the visual result is identical to an unselected row.
-file_panel_item_selected_fg = "{{colors.on_surface.default.hex}}"
+# Selection distinguishes the foreground only, keeping the surface uniform
+# with the regular row. Mirrors the upstream catppuccin-mocha theme, where
+# `file_panel_item_selected_fg` differs from `file_panel_fg` while sharing
+# the same background — a subtler highlight than changing the row surface.
+file_panel_item_selected_fg = "{{colors.primary.default.hex}}"
 file_panel_item_selected_bg = "{{colors.surface.default.hex}}"
 
 #-- Footer
@@ -46,14 +47,16 @@ footer_border_active = "{{colors.primary.default.hex}}"
 #-- Sidebar
 # Same background as file_panel and footer (uniform panel surface). Visual
 # separation is carried by the borders (`outline` inactive / `tertiary`
-# active). The current-directory entry in the sidebar uses the same foreground
-# and background as the regular row so the folder name is not highlighted.
+# active). The current-directory entry uses the primary accent for its
+# foreground while keeping the surface uniform with the rest of the row,
+# mirroring the file-panel selection style and the upstream catppuccin-mocha
+# convention (distinguish fg only).
 sidebar_fg = "{{colors.on_surface.default.hex}}"
 sidebar_bg = "{{colors.surface.default.hex}}"
 sidebar_title = "{{colors.primary.default.hex}}"
 sidebar_border = "{{colors.outline.default.hex}}"
 sidebar_border_active = "{{colors.tertiary.default.hex}}"
-sidebar_item_selected_fg = "{{colors.on_surface.default.hex}}"
+sidebar_item_selected_fg = "{{colors.primary.default.hex}}"
 sidebar_item_selected_bg = "{{colors.surface.default.hex}}"
 sidebar_divider = "{{colors.outline_variant.default.hex}}"
 
