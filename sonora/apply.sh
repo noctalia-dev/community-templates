@@ -15,7 +15,7 @@ case "${1:-}" in
         ;;
 esac
 
-theme_file="$config_dir/noctalia-theme.json"
+theme_file="$config_dir/themes/noctalia.json"
 settings_file="$config_dir/settings.json"
 
 if ! command -v jq >/dev/null 2>&1; then
@@ -33,12 +33,23 @@ if [ ! -f "$settings_file" ]; then
     exit 1
 fi
 
+# Older versions of this template wrote the palette into settings.json, and those inline
+# colors win over the theme file, so they are dropped here.
+rm -f -- "$config_dir/noctalia-theme.json"
+
 temporary="$(mktemp "${settings_file}.tmp.XXXXXX")"
 trap 'rm -f -- "$temporary"' EXIT
 
-jq --indent 2 --slurpfile theme "$theme_file" \
-    '.appearance = ((.appearance // {}) * $theme[0])' \
-    "$settings_file" >"$temporary"
+jq --indent 2 --slurpfile theme "$theme_file" '
+    ($theme[0].theme | keys | map([.])) as $colors
+    | .appearance = ((.appearance // {})
+        | .theme = "noctalia"
+        | .adaptive_theme = false
+        | if (.theme_overrides | type) == "object"
+          then .theme_overrides |= delpaths($colors)
+          else .
+          end)
+' "$settings_file" >"$temporary"
 chmod --reference="$settings_file" "$temporary"
 
 if cmp -s "$settings_file" "$temporary"; then
