@@ -9,7 +9,10 @@ requires_path = "~/.vscode"
 
 [templates.vscode_codium]
 input_path = "vscode.json"
-output_path = "~/.vscode-oss/extensions/noctalia.noctaliatheme-0.0.5-universal/themes/NoctaliaTheme-color-theme.json"
+output_path = [
+	"~/.vscode-oss/extensions/noctalia.noctaliatheme-0.0.5-universal/themes/NoctaliaTheme-color-theme.json",
+	"~/.vscode-oss/extensions/noctalia.noctaliatheme-0.0.5/themes/NoctaliaTheme-color-theme.json",
+]
 requires_path = "~/.vscode-oss"
 
 [templates.antigravity_ide]
