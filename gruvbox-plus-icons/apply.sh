@@ -1,18 +1,7 @@
 #!/usr/bin/env bash
 # Gruvbox Plus folder icons — dynamic folder color for Noctalia.
-# Recolors the Gruvbox Plus folder icons with the theme's primary color: the
-# blue folder variants are the template, their body colors are replaced with
-# sed, and the result is written to the folder aliases (folder.svg, ...).
-# The glyph (the drawing on top of the folder) gets the folder color shifted in
-# luminance until it has GLYPH_CONTRAST against it, so every hue looks alike.
-#
-#   - If Gruvbox-Plus-Dark/Light is already in $XDG_DATA_HOME/icons or ~/.icons
-#     (manual copy or git clone), that copy is used.
-#   - Otherwise (package manager) the system theme is copied there once, under
-#     the same name, so no theme change is needed. The system copy is never touched.
-# The original folder-<color>*.svg variants are never modified, so the result
-# is always derived from them and re-running is safe.
 set -euo pipefail
+shopt -s nullglob
 
 COLOR_FILE="$(cd "$(dirname "$0")" && pwd)/colors-final"
 DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
@@ -24,11 +13,20 @@ msg() { printf 'gruvbox-plus-icons: %s\n' "$*" >&2; }
 
 [[ -f "$COLOR_FILE" ]] || exit 0
 mapfile -t lines <"$COLOR_FILE"
-FRONT="${lines[0]//[# ]/}" BACK="${lines[1]//[# ]/}" SURFACE="${lines[2]//[# ]/}"
+
+# Ensure the color file has all required lines
+((${#lines[@]} >= 3)) || exit 0
+
+FRONT="${lines[0]//[# ]/}"
+BACK="${lines[1]//[# ]/}"
+SURFACE="${lines[2]//[# ]/}"
+
 for c in "$FRONT" "$BACK" "$SURFACE"; do
   [[ "$c" =~ ^[0-9a-fA-F]{6}$ ]] || exit 0
 done
-FRONT="${FRONT,,}" BACK="${BACK,,}"
+
+FRONT="${FRONT,,}"
+BACK="${BACK,,}"
 
 # Same hue as the folder, darker (or lighter when it is too dark to go darker)
 # until the WCAG contrast ratio against it is GLYPH_CONTRAST. Works in linear light.
@@ -76,25 +74,45 @@ find_system_dir() {
 }
 
 # folder-blue.svg -> folder.svg, folder-blue-docs.svg -> folder-docs.svg, ...
-# Prints "changed" when at least one alias was rewritten.
+# Recolor icons in parallel across available CPU cores for maximum performance.
 recolor() { # <places/scalable dir>
-  local dir="$1" f name alias tmp
+  local dir="$1" f name alias tmp changed_flag="$dir/.changed_flag"
   [[ -f "$dir/folder-$BASE.svg" ]] || { msg "folder-$BASE.svg not found in $dir"; return 1; }
-  for f in "$dir"/*-"$BASE".svg "$dir"/*-"$BASE"-*.svg; do
+
+  rm -f "$changed_flag"
+
+  for f in "$dir"/*-$BASE.svg "$dir"/*-$BASE-*.svg; do
     [[ -f "$f" ]] || continue
-    name="${f##*/}"
-    if [[ "$name" == "bookmarks-$BASE.svg" ]]; then alias=folder-bookmark.svg; else alias="${name/-$BASE/}"; fi
-    tmp="$dir/.$alias.tmp"
-    # The glyph is the back-colored element next to the glyph's highlight/shadow
-    # (opacity .1 before it, opacity .05 after it); everything else is the folder body.
-    sed -E -z \
-      -e "s,fill=\"#$BASE_BACK\"(/?>[[:space:]]*<path[^>]*fill=\"#282828\" opacity=\"\\.05\"),fill=\"@G@\"\\1,g" \
-      -e "s,(opacity=\"\\.1\"/?>[[:space:]]*<path[^>]*)fill=\"#$BASE_BACK\",\\1fill=\"@G@\",g" \
-      -e "s,#$BASE_BACK,@B@,g" -e "s,#$BASE_FRONT,@F@,g" \
-      -e "s,@B@,#$BACK,g" -e "s,@F@,#$FRONT,g" -e "s,@G@,#$GLYPH,g" \
-      "$f" >"$tmp"
-    if cmp -s "$tmp" "$dir/$alias"; then rm -f "$tmp"; else mv -f "$tmp" "$dir/$alias"; echo changed; fi
+    (
+      name="${f##*/}"
+      if [[ "$name" == "bookmarks-$BASE.svg" ]]; then
+        alias="folder-bookmark.svg"
+      else
+        alias="${name/-$BASE/}"
+      fi
+
+      tmp="$dir/.$alias.tmp"
+
+      # The glyph is the back-colored element next to the glyph's highlight/shadow
+      # (opacity .1 before it, opacity .05 after it); everything else is the folder body.
+      sed -E -z \
+        -e "s,fill=\"#$BASE_BACK\"(/?>[[:space:]]*<path[^>]*fill=\"#282828\" opacity=\"\\.05\"),fill=\"@G@\"\\1,g" \
+        -e "s,(opacity=\"\\.1\"/?>[[:space:]]*<path[^>]*)fill=\"#$BASE_BACK\",\\1fill=\"@G@\",g" \
+        -e "s,#$BASE_BACK,@B@,g" -e "s,#$BASE_FRONT,@F@,g" \
+        -e "s,@B@,#$BACK,g" -e "s,@F@,#$FRONT,g" -e "s,@G@,#$GLYPH,g" \
+        "$f" >"$tmp"
+
+      if cmp -s "$tmp" "$dir/$alias"; then
+        rm -f "$tmp"
+      else
+        mv -f "$tmp" "$dir/$alias"
+        touch "$changed_flag"
+      fi
+    ) &
   done
+  wait
+
+  [[ -f "$changed_flag" ]] && { rm -f "$changed_flag"; echo "changed"; }
 }
 
 installed=()
@@ -106,12 +124,16 @@ for variant in "${VARIANTS[@]}"; do
     mkdir -p "$DATA_HOME/icons"
     cp -a --reflink=auto "$sys" "$dir"
   fi
+
   scalable="$dir/places/scalable"
   [[ -w "$scalable" ]] || { msg "$scalable is not writable"; status=1; continue; }
+
   result="$(recolor "$scalable")" || { status=1; continue; }
+
   if [[ -n "$result" ]] && command -v gtk-update-icon-cache >/dev/null; then
     gtk-update-icon-cache -f -q "$dir" 2>/dev/null || true
   fi
+
   installed+=("$variant")
 done
 
@@ -120,14 +142,16 @@ if ((${#installed[@]} == 0)); then
   exit 1
 fi
 
-# Follow dark/light, but only if Gruvbox Plus is already the active icon theme.
-current="$(gsettings get org.gnome.desktop.interface icon-theme 2>/dev/null || true)"
-if [[ "$current" == *Gruvbox-Plus* ]]; then
-  luma=$(((0x${SURFACE:0:2} * 299 + 0x${SURFACE:2:2} * 587 + 0x${SURFACE:4:2} * 114) / 1000))
-  want=Gruvbox-Plus-Dark
-  ((luma >= 128)) && want=Gruvbox-Plus-Light
-  if [[ " ${installed[*]} " == *" $want "* && "$current" != "'$want'" ]]; then
-    gsettings set org.gnome.desktop.interface icon-theme "$want" 2>/dev/null || true
+# Follow dark/light mode preference if gsettings is available
+if command -v gsettings >/dev/null; then
+  current="$(gsettings get org.gnome.desktop.interface icon-theme 2>/dev/null || true)"
+  if [[ "$current" == *Gruvbox-Plus* ]]; then
+    luma=$(((0x${SURFACE:0:2} * 299 + 0x${SURFACE:2:2} * 587 + 0x${SURFACE:4:2} * 114) / 1000))
+    want=Gruvbox-Plus-Dark
+    ((luma >= 128)) && want=Gruvbox-Plus-Light
+    if [[ " ${installed[*]} " == *" $want "* && "$current" != "'$want'" ]]; then
+      gsettings set org.gnome.desktop.interface icon-theme "$want" 2>/dev/null || true
+    fi
   fi
 fi
 
