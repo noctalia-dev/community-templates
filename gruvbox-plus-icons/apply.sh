@@ -112,7 +112,11 @@ recolor() { # <places/scalable dir>
   done
   wait
 
-  [[ -f "$changed_flag" ]] && { rm -f "$changed_flag"; echo "changed"; }
+  if [[ -f "$changed_flag" ]]; then
+    rm -f "$changed_flag"
+    echo "changed"
+  fi
+  return 0
 }
 
 installed=()
