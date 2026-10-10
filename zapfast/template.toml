@@ -1,6 +1,6 @@
 [catalog.zapfast]
 name = "Zapfast"
-category = "audio"
+category = "chat"
 
 [templates.zapfast]
 input_path_modes = { dark = "zapfast-dark.json", light = "zapfast-light.json" }
