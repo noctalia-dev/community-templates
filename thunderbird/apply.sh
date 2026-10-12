@@ -17,6 +17,7 @@ warn() { echo "thunderbird: $*" >&2; }
 
 roots=()
 for root in \
+    "${XDG_CONFIG_HOME:-$HOME/.config}/thunderbird" \
     "$HOME/.thunderbird" \
     "$HOME/.var/app/org.mozilla.Thunderbird/.thunderbird" \
     "$HOME/snap/thunderbird/common/.thunderbird"; do

@@ -57,8 +57,9 @@ documents outside the reach of `userChrome.css`, and Noctalia only ships a
 ## How the wiring works
 
 `apply.sh` looks for `prefs.js` in the profiles under `~/.thunderbird`, the
-Flatpak path and the Snap path. It follows symlinks, so profiles managed as
-symlinks are found too. In each profile it:
+Flatpak path and the Snap path and under `'XDG_CONFIG_HOME'/thunderbird`. 
+It follows symlinks, so profiles managed as symlinks are found too. 
+In each profile it:
 
 - prepends `@import "<cache>/noctalia.css";` to `chrome/userChrome.css`
   (creating the file if needed),
