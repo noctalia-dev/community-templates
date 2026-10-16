@@ -11,7 +11,7 @@ find_vaults() {
     # Search common locations for Obsidian vaults (up to 4 levels deep)
     local search_dirs=("$HOME")
     for dir in "${search_dirs[@]}"; do
-        find "$dir" -maxdepth 4 -name ".obsidian" -type d 2>/dev/null
+        find "$dir" -maxdepth 4 -name ".obsidian" -type d 2>/dev/null || true
     done | sort -u
 }
 
