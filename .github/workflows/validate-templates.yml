@@ -23,3 +23,6 @@ jobs:
 
       - name: Validate template manifests
         run: python3 .github/workflows/validate-templates.py
+
+      - name: Test Oh My Posh color mapping
+        run: python3 -B oh-my-posh/test_apply.py
