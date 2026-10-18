@@ -23,12 +23,47 @@ ANSI = (
 ROLES = (*ANSI, "foreground", "background")
 NEUTRALS = {"black", "white", "darkGray", "lightWhite", "foreground", "background"}
 HEX = re.compile(r"#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{3})\Z")
-# A closing delimiter inside a Go string or comment is still executable code.
-GO = re.compile(r'''({{(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`[^`]*`|/\*.*?\*/|(?!}}).)*}})''', re.DOTALL)
 FUNCTION = re.compile(r"(linear-gradient|dark-gradient|light-gradient|darken|lighten)\((.*)\)\Z", re.DOTALL)
 SPECIAL = {"default", "transparent", "parentBackground", "parentForeground", "background", "foreground", "accent"}
 COLOR_FIELDS = {"foreground", "background", "accent_color", "color"}
 MARKUP_FIELDS = {"template", "templates", "filler", "leading_diamond", "trailing_diamond", "powerline_symbol"}
+
+
+def split_go(text):
+    """Yield literal output and Go actions in one forward pass."""
+    index = 0
+    while index < len(text):
+        start = text.find("{{", index)
+        if start < 0:
+            yield text[index:]
+            return
+        yield text[index:start]
+        index = start + 2
+        quote = None
+        while index < len(text):
+            char = text[index]
+            # Closing delimiters inside Go strings and comments are still code.
+            if quote:
+                if char == "\\" and quote != "`":
+                    index += 2
+                    continue
+                if char == quote:
+                    quote = None
+            elif char in "\"'`":
+                quote = char
+            elif text.startswith("/*", index):
+                end = text.find("*/", index + 2)
+                if end < 0:
+                    index = len(text)
+                    break
+                index = end + 2
+                continue
+            elif text.startswith("}}", index):
+                index += 2
+                break
+            index += 1
+        # Preserve unfinished actions through EOF without retrying later openers.
+        yield text[start:index]
 
 
 def rgb(value):
@@ -137,7 +172,7 @@ class Recolor:
             return value
         # Go actions may contain comparisons, printf, or arbitrary string data.
         # Recolor only their literal output; do not rewrite executable expressions.
-        return "".join(part if part.startswith("{{") else self.literal(part) for part in GO.split(value))
+        return "".join(part if part.startswith("{{") else self.literal(part) for part in split_go(value))
 
     def readable(self, original, foreground, background):
         if not original or self.role(original) not in NEUTRALS:
@@ -167,7 +202,7 @@ class Recolor:
                 mapped[0] = self.readable(colors[0], mapped[0], mapped[1])
             return f"<{','.join(mapped)}>"
 
-        return "".join(part if part.startswith("{{") else re.sub(r"<([^<>]*)>", replace, part) for part in GO.split(value))
+        return "".join(part if part.startswith("{{") else re.sub(r"<([^<>]*)>", replace, part) for part in split_go(value))
 
     def walk(self, value):
         if isinstance(value, list):

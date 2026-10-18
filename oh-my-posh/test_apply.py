@@ -6,6 +6,8 @@ from contextlib import redirect_stdout
 import io
 import json
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -51,10 +53,36 @@ class RecolorTests(unittest.TestCase):
         self.assertEqual(result, f'linear-gradient({PALETTE["red"]}, darken({PALETTE["green"]}, 20), p:existing)')
 
     def test_go_delimiters_in_strings_and_comments_are_not_color_output(self):
-        for value in ('{{ printf "}}<#ff0000>" }}', '{{ `}}<#ff0000>` }}', '{{/* }}<#ff0000> */}}'):
-            mapper = theme.Recolor(PALETTE)
-            self.assertEqual(mapper.markup(value), value)
-            self.assertEqual(mapper.color(value), value)
+        values = (
+            '{{ printf "}}<#ff0000>" }}',
+            r'{{ printf "escaped \"}}<#ff0000>" }}',
+            r'{{ printf "backslash \\" }}',
+            r"{{ '\'' }}",
+            r"{{ '\\' }}",
+            '{{ `}}<#ff0000>` }}',
+            r'{{ `\` }}',
+            '{{/* }}<#ff0000> */}}',
+            '{{/* first */ "}}<#ff0000>" /* last */}}',
+            '{{- /* multiline\n}}<#ff0000>\n*/ -}}',
+        )
+        for value in values:
+            with self.subTest(value=value):
+                mapper = theme.Recolor(PALETTE)
+                self.assertEqual(mapper.markup(value), value)
+                self.assertEqual(mapper.color(value), value)
+                self.assertEqual(mapper.markup(f'<#00ff00>{value}<#ff0000>'),
+                                 f'<{PALETTE["green"]}>{value}<{PALETTE["red"]}>')
+                self.assertEqual(mapper.color(f'#00ff00{value}#ff0000'),
+                                 f'{PALETTE["green"]}{value}{PALETTE["red"]}')
+
+    def test_unterminated_go_actions_are_preserved(self):
+        for tail in ('', ' .Value ', '"}}<#ff0000>', "'}}<#ff0000>", '`}}<#ff0000>',
+                     '/* }}<#ff0000>', ' printf "trailing' + '\\'):
+            with self.subTest(tail=tail):
+                value = '{{' + tail
+                mapper = theme.Recolor(PALETTE)
+                self.assertEqual(mapper.markup(f'<#00ff00>{value}'), f'<{PALETTE["green"]}>{value}')
+                self.assertEqual(mapper.color(f'#00ff00{value}'), f'{PALETTE["green"]}{value}')
 
     def test_markup_preserves_text_and_formatting_tags(self):
         source = '<b><#ff0000>error</></b> #00ff00 {{ .Value }} <https://example.org>'
@@ -114,6 +142,17 @@ class StorageTests(unittest.TestCase):
         theme.write_json(directory / "noctalia-source.omp.json", config())
         theme.write_json(directory / "noctalia-palette.json", PALETTE)
         return directory
+
+    def test_pathological_go_actions_do_not_stall_apply(self):
+        directory = self.prompt_directory()
+        # Repeated openers also catch scanners that retry every unmatched '{{'.
+        values = ['{{' + token * 100_000 + '<#ff0000>' for token in ('"', "'", '`', '/*', '{{')]
+        source = config({"type": "text", "style": "plain", "templates": values, "foreground_templates": values})
+        theme.write_json(directory / "noctalia-source.omp.json", source)
+        # Keep a regression from hanging the entire test runner.
+        subprocess.run([sys.executable, "-B", theme.__file__, "--directory", str(directory), "apply"],
+                       check=True, capture_output=True, text=True, timeout=5)
+        self.assertEqual(theme.load_json(directory / "noctalia.omp.json"), source)
 
     def test_apply_is_idempotent_and_keeps_source_and_prior_output_on_failure(self):
         with tempfile.TemporaryDirectory() as temp:
