@@ -1,0 +1,9 @@
+[catalog.vlc]
+name = "VLC"
+category = "audio"
+
+[templates.vlc]
+input_path = "vlc.desktop"
+output_path = "$XDG_DATA_HOME/applications/vlc.desktop"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
+requires_path = "~/.config/vlc"
