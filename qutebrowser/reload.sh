@@ -1,8 +1,8 @@
 #!/bin/sh
 COLORS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/qutebrowser/noctalia/colors.py"
 
-# Skip if colors.py hasn't changed
 [ "$COLORS_FILE" -nt "$0" ] || exit 0
 touch "$0"
 
-pgrep -f qutebrowser >/dev/null && qutebrowser :config-source
+RUNTIME_DIR="${XDG_RUNTIME_DIR:-/tmp}/qutebrowser"
+ls "$RUNTIME_DIR"/ipc-* >/dev/null 2>&1 && qutebrowser :config-source
