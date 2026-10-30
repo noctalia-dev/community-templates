@@ -85,10 +85,18 @@
   --app-watermark-one: "Noctalia";
   --app-watermark-two: "Discord";
 
-  /* Ensure channels-default is different from the active one - works in dark mode / light mode is another story... */
+  /* Ensure channels-default is different from the active one (dark mode; light mode is overridden below) */
   --text-tertiary: hsl(
         var(--accent-hue),
         calc(var(--accent-saturation) * var(--saturation-modifier) * 0.78 * var(--saturation-factor)),
         calc(var(--accent-lightness) * var(--lightness-modifier) * var(--ui-darkness-modifier) * var(--text-lightness-modifier) * 3.0)
     ) !important;
+}
+
+/* In light mode --lightness-modifier is 2.125, so the formula above lands far
+   past 100% lightness and clamps to white: read channels and category headers
+   vanish into the background. Use the palette's outline colour instead, the
+   same token the midnight variant uses for channels. */
+:root.theme-light, .theme-light {
+  --text-tertiary: {{colors.outline.default.hex}} !important;
 }
