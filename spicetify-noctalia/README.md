@@ -24,8 +24,10 @@ On every Noctalia theme change:
      `spicetify apply --no-restart`, so playback is not interrupted. Restart
      Spotify once to load it.
    - **After that:** only `spicetify refresh -e`.
-3. The running extension re-reads its file every 5 seconds and applies new
-   colors without restarting Spotify. If that does not work in your Spotify
+3. The running extension re-reads its own file every 5 seconds (only the
+   `extensions/noctalia.js` Spicetify injected, same origin as Spotify's UI;
+   nothing else is fetched) and applies new colors without restarting
+   Spotify. If that does not work in your Spotify
    build, the colors apply on the next Spotify start.
 
 ## Setup
@@ -95,10 +97,15 @@ To turn Noctalia's colors off without uninstalling, use the in-app
   `spicetify refresh -e`. Writes `noctalia.js` and an empty
   `.noctalia-installed` marker in Spicetify's `Extensions` folder. Downloads
   nothing.
-- Containment: before writing or deleting, the hooks resolve symlinks and
-  refuse to touch anything whose real path is outside Spicetify's folder (a
-  symlinked dotfiles setup still works), and refuse to write through a file
-  that is itself a symlink.
+- Filesystem guarantees, two separate things:
+  - **Files the hooks write or delete themselves** (`noctalia.js`, the marker)
+    are contained: symlinks are resolved first, and anything whose real path
+    is outside Spicetify's folder is refused (a symlinked dotfiles setup still
+    works). A file that is itself a symlink is never written through.
+  - **`spicetify apply` and `spicetify refresh -e`**, which the hooks run,
+    modify Spotify's installed app files (for example `/opt/spotify/Apps/xpui`
+    on Arch). That is Spicetify's normal job, the same as running those
+    commands by hand, and is outside the containment check above.
 - Works with themes that take their colors from Spicetify's `--spice-*`
   variables, which is how Spicetify themes are meant to work. Themes that ship
   **external JavaScript** (theme JS) that sets colors itself, for example

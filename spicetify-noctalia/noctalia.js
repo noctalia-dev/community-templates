@@ -108,10 +108,21 @@
 
   render();
 
-  // Live update: re-read this file (updated by `spicetify refresh -e`).
-  const script = document.querySelector('script[src*="noctalia.js"]');
+  // Live update: re-read this extension's own file, exactly as Spicetify
+  // injected it (<script src="extensions/noctalia.js">, same origin as
+  // Spotify's UI). Nothing else is ever fetched.
+  const script = document.querySelector('script[src="extensions/noctalia.js"]');
   if (!script) return;
-  const url = script.src.split("?")[0];
+  let own;
+  try {
+    own = new URL(script.src, location.href);
+  } catch (_e) {
+    return;
+  }
+  if (own.origin !== location.origin || !own.pathname.endsWith("/extensions/noctalia.js")) return;
+  own.search = "";
+  own.hash = "";
+  const url = own.href;
   let last = JSON.stringify(colors);
   setInterval(async () => {
     try {
