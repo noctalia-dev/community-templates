@@ -1,0 +1,19 @@
+[catalog.stremio-enhanced]
+name = "Stremio Enhanced"
+category = "misc"
+
+# Stremio Enhanced reads themes and plugins from fixed folders under
+# ~/.config/stremio-enhanced (it does not follow XDG_CONFIG_HOME), so the
+# paths are fixed too. Both entries are skipped when the app is not installed.
+# No hooks: picking the theme and enabling the plugin happen in the app.
+
+[templates.stremio_enhanced_theme]
+input_path = "noctalia.theme.css"
+output_path = "~/.config/stremio-enhanced/themes/noctalia.theme.css"
+requires_path = "~/.config/stremio-enhanced"
+
+# Optional live reload: reloads the theme when Noctalia rewrites it.
+[templates.stremio_enhanced_live_sync]
+input_path = "noctalia-live-sync.plugin.js"
+output_path = "~/.config/stremio-enhanced/plugins/noctalia-live-sync.plugin.js"
+requires_path = "~/.config/stremio-enhanced"
