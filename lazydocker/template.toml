@@ -1,0 +1,8 @@
+[catalog.lazydocker]
+name = "lazydocker"
+category = "terminal"
+
+[templates.lazydocker]
+input_path = "lazydocker.yml"
+output_path = "$XDG_CONFIG_HOME/lazydocker/themes/noctalia.yml"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
