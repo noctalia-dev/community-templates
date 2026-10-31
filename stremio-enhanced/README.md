@@ -39,11 +39,15 @@ Without the plugin, new colors apply the next time Stremio Enhanced starts
 ## How it works
 
 Noctalia rewrites `noctalia.theme.css` on every theme change. Stremio Enhanced
-loads the active theme as a stylesheet link (`<link id="activeTheme">`). The
-plugin checks that file every 2 seconds while the Noctalia theme is active and
-reloads the link when the content changed. It does nothing when another theme
-is applied, and makes no network requests (it only reads the local theme file
-Stremio Enhanced already loads).
+loads the active theme as a stylesheet link (`<link id="activeTheme">`), as a
+local `file:` URL when it starts. The plugin checks that file every 2 seconds
+and reloads the link when the content changed.
+
+It only acts when the link is a `file:` URL ending in
+`/stremio-enhanced/themes/noctalia.theme.css`, and only reads that file. Any
+other theme, or any web address, is ignored, so it makes no network requests.
+Right after applying the theme from Settings, Stremio Enhanced may use a
+different link form until it restarts; live reload starts after that restart.
 
 ## Notes
 

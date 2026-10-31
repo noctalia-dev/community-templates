@@ -1,21 +1,41 @@
 /**
  * @name Noctalia Live Sync
- * @description Automatically reloads the Noctalia theme in real-time when wallpaper or palette changes, without restarting Stremio.
- * @version 1.0.0
+ * @description Reloads the Noctalia theme when Noctalia rewrites it, without restarting Stremio.
+ * @version 1.1.0
  * @author augussst
  */
 
 (function () {
+    // Only ever reads the local theme file that Stremio Enhanced loaded itself:
+    // a file: URL ending in /stremio-enhanced/themes/noctalia.theme.css.
+    // Any other URL (including web addresses) is ignored: no network requests.
+    const THEME_SUFFIX = "/stremio-enhanced/themes/noctalia.theme.css";
     let lastCss = null;
-    setInterval(async () => {
+
+    function localThemeUrl() {
         const link = document.getElementById("activeTheme");
-        if (!link || !link.href || !link.href.includes("noctalia.theme.css")) return;
-        const baseHref = link.href.split("?")[0];
+        if (!link || !link.href) return null;
+        let url;
         try {
-            const res = await fetch(baseHref + "?t=" + Date.now(), { cache: "no-store" });
+            url = new URL(link.href);
+        } catch (_e) {
+            return null;
+        }
+        if (url.protocol !== "file:") return null;
+        if (!decodeURIComponent(url.pathname).endsWith(THEME_SUFFIX)) return null;
+        url.search = "";
+        url.hash = "";
+        return url.href;
+    }
+
+    setInterval(async () => {
+        const base = localThemeUrl();
+        if (!base) return;
+        try {
+            const res = await fetch(base + "?t=" + Date.now(), { cache: "no-store" });
             const text = await res.text();
             if (lastCss !== null && text !== lastCss) {
-                link.href = baseHref + "?t=" + Date.now();
+                document.getElementById("activeTheme").href = base + "?t=" + Date.now();
             }
             lastCss = text;
         } catch (_e) {}
