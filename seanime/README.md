@@ -1,10 +1,11 @@
 # Seanime
 
-Applies the active Noctalia palette to [Seanime](https://seanime.app): the app's flat theme
-variables and the two Tailwind colour scales its UI is built from (`--color-brand-*`,
-`--color-gray-*`).
+Applies the active Noctalia palette to [Seanime](https://seanime.app): the flat theme variables
+and the two Tailwind colour scales its UI is built from (`--color-brand-*`, `--color-gray-*`).
 
-<img src="screenshot.png" width="49%"> <img src="light-screenshot.png" width="49%">
+![Seanime home with the Noctalia theme applied](screenshot.png)
+
+![The same screen in light mode](light-screenshot.png)
 
 ## Prerequisites
 
@@ -43,7 +44,7 @@ A flat list of `--nt-*` custom properties holding Noctalia's Material roles:
 
 `--nt-mode` carries the resolved theme mode (`light` or `dark`) so the plugin keeps Seanime's
 colour scheme in step. The file is regenerated on every theme change; it is safe to read, diff or
-delete — the plugin goes inert until it comes back.
+delete; the plugin goes inert until it comes back.
 
 ## How changes take effect
 
