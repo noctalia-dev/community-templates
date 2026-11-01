@@ -19,7 +19,7 @@
 # not need it, because the gateway's watcher repaints on the skin file's
 # mtime. The skin file itself is only rewritten when its content differs.
 
-set -u
+set -euo pipefail
 
 ROOT="${HERMES_ROOT:-$HOME/.hermes}"
 SKIN_NAME="noctalia"
@@ -44,16 +44,26 @@ if [[ "${1:-}" == "--sync-one" ]]; then
     exit 0
   fi
 
-  # Never follow a symlink out of the chosen profile home.
+  # Containment is checked on resolved paths, not on the string: a `skins`
+  # symlink pointing outside the profile home passes a textual prefix test.
+  # `realpath -m` resolves every existing component (that symlink included)
+  # and appends whatever does not exist yet, so the comparison sees the real
+  # destination.
+  if [[ ! "$_skin" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]]; then
+    echo "noctalia-hermes-sync: invalid skin name '$_skin'" >&2
+    exit 1
+  fi
   if [[ -L "$_target" ]]; then
     echo "noctalia-hermes-sync: refusing symlinked target $_target" >&2
-    exit 0
+    exit 1
   fi
-  case "$_target" in
-    "$_home"/*) ;;
+  _home_real="$(realpath -m -- "$_home")" || exit 1
+  _parent_real="$(realpath -m -- "$(dirname -- "$_target")")" || exit 1
+  case "$_parent_real/" in
+    "$_home_real"/*) ;;
     *)
-      echo "noctalia-hermes-sync: refusing escaped target $_target" >&2
-      exit 0
+      echo "noctalia-hermes-sync: refusing target outside the profile home: $_target resolves to $_parent_real" >&2
+      exit 1
       ;;
   esac
 
@@ -78,7 +88,7 @@ if [[ "${1:-}" == "--sync-one" ]]; then
       print
       exit
     }
-  ' "$_home/config.yaml" 2>/dev/null)"
+  ' "$_home/config.yaml" 2>/dev/null || true)"
 
   if [[ "$_active" == "$_skin" ]]; then
     _already=1
@@ -95,21 +105,31 @@ if [[ "${1:-}" == "--sync-one" ]]; then
     # Atomic write: a temp file in the same directory, then a rename. An
     # interrupted run leaves the previous skin intact instead of a truncated
     # YAML.
-    _dir="$(dirname "$_target")"
-    mkdir -p "$_dir" || exit 1
-    _tmp="$(mktemp "$_dir/.noctalia-hermes-sync.XXXXXX")" || exit 1
-    if cat "$_staging" > "$_tmp"; then
-      chmod 644 "$_tmp"
-      mv -f "$_tmp" "$_target"
-    else
-      rm -f "$_tmp"
+    _dir="$(dirname -- "$_target")"
+    mkdir -p -- "$_dir" || exit 1
+    _tmp="$(mktemp -- "$_dir/.noctalia-hermes-sync.XXXXXX")" || exit 1
+    if ! cat -- "$_staging" > "$_tmp"; then
+      rm -f -- "$_tmp"
+      echo "noctalia-hermes-sync: cannot read $_staging" >&2
+      exit 1
+    fi
+    if ! chmod 644 -- "$_tmp"; then
+      rm -f -- "$_tmp"
+      echo "noctalia-hermes-sync: cannot set permissions on $_tmp" >&2
+      exit 1
+    fi
+    if ! mv -f -- "$_tmp" "$_target"; then
+      rm -f -- "$_tmp"
+      echo "noctalia-hermes-sync: cannot install $_target" >&2
       exit 1
     fi
   fi
 
   if [[ "$_already" == "0" ]]; then
-    HERMES_HOME="$_home" "$_hermes" config set display.skin "$_skin" >/dev/null 2>&1
-    exit $?
+    if ! HERMES_HOME="$_home" "$_hermes" config set display.skin "$_skin" >/dev/null 2>&1; then
+      echo "noctalia-hermes-sync: hermes config set failed for $_home" >&2
+      exit 1
+    fi
   fi
 
   exit 0
