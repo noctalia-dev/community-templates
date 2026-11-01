@@ -1,29 +1,69 @@
 # Seanime
 
-Writes the active Noctalia palette to `~/.local/state/noctalia/seanime/palette.css`
-(`$XDG_STATE_HOME/noctalia/seanime/palette.css`).
+Applies the active Noctalia palette to [Seanime](https://seanime.app): the app's flat theme
+variables and the two Tailwind colour scales its UI is built from (`--color-brand-*`,
+`--color-gray-*`).
 
-The file is a flat list of `--nt-*` custom properties holding Noctalia's Material roles. A
-Seanime plugin turns them into Seanime's own variables — the flat ones *and* the
-`--color-brand-*` / `--color-gray-*` scales its UI is built from:
+<img src="screenshot.png" width="49%"> <img src="light-screenshot.png" width="49%">
 
-**[Noctalia Theme plugin](https://github.com/Below-Z3R0/seanime-noctalia-theme)** — requires
-Seanime 3.10+ and the plugin's file-system permission. The template alone does not change
-anything in Seanime.
+## Prerequisites
 
-Roles exported: `mode`, `primary`, `primary_container`, `secondary`, `tertiary`, `error`,
-`surface`, `on_surface`, `surface_container` (plus `_low` / `_high`), `on_surface_variant`,
-`outline` and their `on_*` pairs. A role the plugin does not consume is harmless; renaming one
-drops the matching Seanime variable.
+- Noctalia with the template engine (Settings → Templates)
+- **Seanime 3.10+**
+- The **[Noctalia Theme plugin](https://github.com/Below-Z3R0/seanime-noctalia-theme)** installed
+  in Seanime, with the file-system permission it asks for granted
+
+The template only writes a file. Without the plugin nothing changes in Seanime.
+
+## Setup
+
+1. Install the plugin in Seanime: Settings → Extensions → Marketplace → *Noctalia Theme* →
+   Install, then **Grant** the permission.
+2. Enable **Seanime** in **Noctalia Settings → Templates**.
+
+No hook, no script and no post-processing is involved: the template writes one file and the
+plugin reads it.
+
+## Output
+
+```
+~/.local/state/noctalia/seanime/palette.css
+```
+
+A flat list of `--nt-*` custom properties holding Noctalia's Material roles:
+
+```css
+--nt-mode: light;
+--nt-primary: #d7827e;
+--nt-surface: #fffaf3;
+--nt-on-surface: #575279;
+--nt-surface-container: #f2e9e1;
+--nt-on-surface-variant: #797593;
+```
+
+`--nt-mode` carries the resolved theme mode (`light` or `dark`) so the plugin keeps Seanime's
+colour scheme in step. The file is regenerated on every theme change; it is safe to read, diff or
+delete — the plugin goes inert until it comes back.
+
+## How changes take effect
+
+The plugin polls the file every two seconds. Changing the Noctalia theme rewrites it and Seanime
+repaints within a couple of seconds, without reloading. Nothing is written outside that path and
+no existing configuration is overwritten.
 
 ## Seanime in Docker
 
-The plugin reads the file **inside the Seanime container**, so the Noctalia state directory has
-to be mounted there:
+The plugin reads the file **inside the Seanime container**, so the Noctalia state directory has to
+be mounted there:
 
 ```yaml
 volumes:
   - ${XDG_STATE_HOME:-$HOME/.local/state}/noctalia:/home/seanime/.local/state/noctalia:ro
 ```
 
-Without it the plugin reports `Not found`: the path exists on the host, not in the container.
+Without it the plugin reports `Not found`.
+
+## Tested against
+
+Seanime 3.10.4 (desktop app and browser client), Noctalia Rosepine palette in light and dark,
+including Seanime in Docker with the mount above.
