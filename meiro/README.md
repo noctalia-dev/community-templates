@@ -1,10 +1,18 @@
-# Meiro
+Meiro
+----
 
 Themes [Meiro](https://github.com/elianiva/meiro) — a lightweight desktop YouTube Music client.
 
-### Setup in Meiro
+Requirements
+----
+
+Meiro 0.5.1+
+
+Setup in Meiro
+----
+
 1. Open **Meiro**.
-2. Go to **Settings** → **Appearance**.
+2. Go to **Settings** → **Appearance**.2
 3. Under **Color Source**, select **Matugen**.
 4. Under theme mode, select **System** (or **Dark** / **Light** as preferred).
 
