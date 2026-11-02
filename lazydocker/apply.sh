@@ -5,8 +5,12 @@ lazydocker_config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/lazydocker"
 themes_dir="$lazydocker_config_dir/themes"
 theme_file="$themes_dir/noctalia.yml"
 config_file="$lazydocker_config_dir/config.yml"
+# Marks the theme key written by this hook, and holds the lines it replaced so
+# undo.sh can restore them. Keep both in sync with undo.sh.
+marker="# managed by noctalia - do not touch"
+state_file="${XDG_STATE_HOME:-$HOME/.local/state}/noctalia/lazydocker-original-theme.yml"
 
-mkdir -p "$themes_dir"
+mkdir -p "$themes_dir" "$(dirname "$state_file")"
 touch "$config_file"
 
 # 1. Verify theme file exists
@@ -50,7 +54,7 @@ tmp_file="$(mktemp)"
 # 3. Rebuild config.yml safely using AWK.
 # The config file is passed twice: the first pass only detects whether gui.theme
 # already exists, so a missing theme is never inserted when one appears later.
-awk -v theme_data="$theme_block" '
+awk -v theme_data="$theme_block" -v marker="$marker" -v state_file="$state_file" '
   BEGIN {
     in_gui = 0
     in_theme = 0
@@ -58,10 +62,27 @@ awk -v theme_data="$theme_block" '
     saw_theme = 0
     has_theme = 0
     scan_gui = 0
+    in_old = 0
+    managed = 0
+    old = ""
+  }
+
+  # Lines that belong to (or trail) a theme block and are dropped when it is replaced.
+  function discardable(line) {
+    return line ~ /^    / || line ~ /^[[:space:]]*$/ || line ~ /^[[:space:]]*#/
   }
 
   # Pass 1: look for "theme:" inside the top-level gui block.
+  # Also, keep a copy of exactly the lines pass 2 will discard so undo.sh can put them back.
   FNR == NR {
+    if (in_old) {
+      if (discardable($0)) {
+        old = old $0 "\n"
+        next
+      }
+      in_old = 0
+    }
+
     if ($0 ~ /^gui[[:space:]]*:/) {
       scan_gui = 1
     } else if ($0 ~ /^[^[:space:]#]/) {
@@ -69,13 +90,18 @@ awk -v theme_data="$theme_block" '
       scan_gui = 0
     } else if (scan_gui && $0 ~ /^  theme[[:space:]]*:/) {
       has_theme = 1
+      in_old = 1
+      old = old $0 "\n"
+      if (index($0, marker) > 0) {
+        managed = 1
+      }
     }
     next
   }
 
   # Print the theme block under gui.
   function print_theme() {
-    print "  theme:"
+    print "  theme: " marker
     print theme_data
     saw_theme = 1
   }
@@ -99,7 +125,7 @@ awk -v theme_data="$theme_block" '
 
       # If we are inside theme, discard old theme lines, blank lines, and comments.
       if (in_theme) {
-        if ($0 ~ /^    / || $0 ~ /^[[:space:]]*$/ || $0 ~ /^[[:space:]]*#/) {
+        if (discardable($0)) {
           next
         }
         in_theme = 0
@@ -127,6 +153,14 @@ awk -v theme_data="$theme_block" '
   }
 
   END {
+    # Save what is about to be replaced (an empty file means there was no theme),
+    # unless it is our own earlier output. This happens before config.yml is
+    # rewritten, and only the first apply over a user theme is recorded.
+    if (!managed) {
+      printf "%s", old > state_file
+      close(state_file)
+    }
+
     # If the file ended while we were inside gui and we never saw theme, print it now.
     if (in_gui && !saw_theme && !has_theme) {
       print_theme()
