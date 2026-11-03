@@ -1,0 +1,10 @@
+[catalog.vivaldi]
+name = "Vivaldi"
+category = "browser"
+
+[templates.vivaldi]
+input_path = "settings.json"
+output_path = "$XDG_CACHE_HOME/noctalia/vivaldi/settings.json"
+post_hook = "bash '{{ config_dir }}/apply.sh' {{ mode }}"
+undo_hook = "bash '{{ config_dir }}/apply.sh' undo"
+hook_async = false
