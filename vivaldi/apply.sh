@@ -38,6 +38,12 @@ require_python() {
 }
 
 vivaldi_running() {
+    # Fail closed: if pgrep is unavailable we cannot confirm Vivaldi is not running,
+    # so assume it might be and abort the preference write.
+    if ! command -v pgrep >/dev/null 2>&1; then
+        warn "pgrep is not available; assuming Vivaldi may be running, so Preferences were not changed."
+        return 0
+    fi
     local name
     for name in vivaldi-bin vivaldi vivaldi-stable vivaldi-snapshot; do
         if pgrep -u "$(id -u)" -x "$name" >/dev/null 2>&1; then
