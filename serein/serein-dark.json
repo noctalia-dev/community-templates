@@ -1,0 +1,75 @@
+{
+  "manifest": {
+    "api_version": 1,
+    "id": "noctalia-serein",
+    "name": "noctalia",
+    "version": "1.1.0",
+    "author": "nndp",
+    "license": "MIT",
+    "source": "",
+    "kind": "theme",
+    "capabilities": [],
+    "actions": []
+  },
+  "theme": {
+    "dark": {
+      "colors": {
+        "base": "{{ colors.surface.dark.hex }}",
+        "sidebar": "{{ colors.surface.dark.hex }}",
+        "chat": "{{ colors.surface.dark.hex }}",
+        "raised": "{{ colors.surface_container.dark.hex }}",
+        "hover": "{{ colors.surface_container_highest.dark.hex }}",
+        "selected": "{{ colors.surface_container_highest.dark.hex }}",
+        "border": "{{ colors.surface_container.dark.hex }}",
+        "text_strong": "{{ colors.on_surface.dark.hex }}",
+        "text": "{{ colors.on_surface.dark.hex }}",
+        "muted": "{{ colors.on_surface_variant.dark.hex }}",
+        "link": "{{ colors.primary.dark.hex }}",
+        "accent": "{{ colors.primary.dark.hex }}",
+        "accent_text": "{{ colors.on_primary.dark.hex }}",
+        "positive": "{{ colors.secondary.dark.hex }}",
+        "warning": "{{ colors.tertiary.dark.hex }}",
+        "danger": "{{ colors.error.dark.hex }}",
+        "mention_bg": "{{ colors.primary_container.dark.hex }}",
+        "mention_text": "{{ colors.on_primary_container.dark.hex }}"
+      }
+    },
+    "light": {
+      "colors": {
+        "base": "{{ colors.surface.dark.hex }}",
+        "sidebar": "{{ colors.surface.dark.hex }}",
+        "chat": "{{ colors.surface.dark.hex }}",
+        "raised": "{{ colors.surface_container.dark.hex }}",
+        "hover": "{{ colors.surface_container_highest.dark.hex }}",
+        "selected": "{{ colors.surface_container_highest.dark.hex }}",
+        "border": "{{ colors.surface_container.dark.hex }}",
+        "text_strong": "{{ colors.on_surface.dark.hex }}",
+        "text": "{{ colors.on_surface.dark.hex }}",
+        "muted": "{{ colors.on_surface_variant.dark.hex }}",
+        "link": "{{ colors.primary.dark.hex }}",
+        "accent": "{{ colors.primary.dark.hex }}",
+        "accent_text": "{{ colors.on_primary.dark.hex }}",
+        "positive": "{{ colors.secondary.dark.hex }}",
+        "warning": "{{ colors.tertiary.dark.hex }}",
+        "danger": "{{ colors.error.dark.hex }}",
+        "mention_bg": "{{ colors.primary_container.dark.hex }}",
+        "mention_text": "{{ colors.on_primary_container.dark.hex }}"
+      }
+    }
+  },
+  "style": {
+    "transparency_blur": false,
+    "transparency": 0,
+    "blur": 0,
+    "widget_radius": 8,
+    "window_radius": 12,
+    "menu_radius": 12,
+    "body_size": 15,
+    "heading_size": 20,
+    "button_size": 14,
+    "small_size": 12,
+    "item_spacing": [8, 8],
+    "button_padding": [12, 6],
+    "control_height": 32
+  }
+}
