@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-output="${XDG_DATA_HOME:-$HOME/.local/share}/serein-theme/noctalia.serein-extension"
+output="${XDG_DATA_HOME:-$HOME/.local/share}/serein/noctalia.serein-extension"
 installed_dir="${XDG_DATA_HOME:-$HOME/.local/share}/serein/extensions/themes/noctalia"
 installed="$installed_dir/package.json"
 
