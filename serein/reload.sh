@@ -6,12 +6,12 @@ installed_dir="${XDG_DATA_HOME:-$HOME/.local/share}/serein/extensions/themes/noc
 installed="$installed_dir/package.json"
 
 command -v jq >/dev/null || {
-    printf 'serein-theme-sync: jq is required\n' >&2
+    printf 'reload.sh: jq is required\n' >&2
     exit 1
 }
 
 [[ -s "$output" ]] || {
-    printf 'serein-theme-sync: generated theme is missing: %s\n' "$output" >&2
+    printf 'reload.sh: generated theme is missing: %s\n' "$output" >&2
     exit 1
 }
 
@@ -42,5 +42,5 @@ if pgrep -x serein >/dev/null; then
         pgrep -x serein >/dev/null || break
         sleep 0.1
     done
-    nohup serein >/tmp/serein-theme-sync.log 2>&1 &
+    nohup serein >/tmp/serein-reload.log 2>&1 &
 fi
