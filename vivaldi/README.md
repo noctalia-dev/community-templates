@@ -83,8 +83,10 @@ If you do not want to quit Vivaldi, import the generated ZIP:
 2. Choose `~/.local/share/noctalia/vivaldi/Noctalia.zip`
    (`$XDG_DATA_HOME/noctalia/vivaldi/Noctalia.zip`).
 
-This is a snapshot, not a live sync. Re-import after each palette change, or
-quit Vivaldi and let the hook write the profiles for the next start.
+The import is applied immediately, without restarting the browser. It is the
+only supported way to change the theme while Vivaldi is running. This is a
+snapshot, not a live sync: re-import after each palette change, or quit Vivaldi
+and let the hook write the profiles for the next start.
 
 ## Switching palettes and restoring
 
@@ -99,8 +101,11 @@ the backup path above if you need to recover it manually.
 
 ## Limits
 
-- The theme is applied only at Vivaldi startup; it cannot be changed live from
-  outside the browser.
+- The theme is read from `Preferences` only at Vivaldi startup; it cannot be
+  changed live from outside the browser. Editing `Preferences` while Vivaldi is
+  running has no visible effect and the change is overwritten from memory when
+  Vivaldi exits (verified on Vivaldi 8.2.4133.96). Use the ZIP import above for
+  live changes.
 - Web content, `vivaldi://` pages and extension pages are not themed.
 - Vivaldi does not support Chromium's `BrowserThemeColor` policy, which is why
   this template does not reuse the generic Chromium theme.
