@@ -1,0 +1,9 @@
+[catalog.serein]
+name = "serein"
+category = "chat"
+
+[templates.serein]
+input_path_modes = { dark = "serein-dark.json", light = "serein-light.json" }
+output_path = '$XDG_DATA_HOME/serein/noctalia.serein-extension'
+post_hook = "bash '{{ config_dir }}/reload.sh'"
+hook_async = false
