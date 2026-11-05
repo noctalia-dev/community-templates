@@ -12,16 +12,28 @@ tmp=$(mktemp "${CONFIG}.XXXXXX")
 trap 'rm -f "$tmp"' EXIT
 
 awk '
-BEGIN { in_settings = 0; found = 0 }
+BEGIN {
+    in_settings = 0
+    settings_found = 0
+    theme_found = 0
+}
 
 /^[[:space:]]*\[/ {
+    if (in_settings && !theme_found) {
+        print "theme = \"noctalia\""
+        theme_found = 1
+    }
+
     in_settings = ($0 ~ /^[[:space:]]*\[settings\][[:space:]]*$/)
+
+    if (in_settings)
+        settings_found = 1
 }
 
 in_settings && /^[[:space:]]*theme[[:space:]]*=/ {
-    if (!found) {
+    if (!theme_found) {
         print "theme = \"noctalia\""
-        found = 1
+        theme_found = 1
     }
     next
 }
@@ -29,7 +41,10 @@ in_settings && /^[[:space:]]*theme[[:space:]]*=/ {
 { print }
 
 END {
-    if (!found) {
+    if (in_settings && !theme_found)
+        print "theme = \"noctalia\""
+
+    if (!settings_found) {
         print ""
         print "[settings]"
         print "theme = \"noctalia\""

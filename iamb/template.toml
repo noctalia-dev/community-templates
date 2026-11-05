@@ -1,8 +1,8 @@
-[catalog.fuzzel]            # the id users enable; must match the directory name
-name     = "iamp"         # display name in Settings
+[catalog.iamb]            # the id users enable; must match the directory name
+name     = "iamb"         # display name in Settings
 category = "chat"
 
-[templates.fuzzel]          # one or more render entries
+[templates.iamb]          # one or more render entries
 input_path  = "iamb.toml"                              # a file in this directory
 output_path = "$XDG_CONFIG_HOME/iamb/themes/noctalia.toml"  # where the rendered file lands
 post_hook = "bash '{{ config_dir }}/apply.sh'"
