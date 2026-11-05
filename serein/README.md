@@ -13,11 +13,11 @@ A lightweight, native Discord desktop client written in Rust, powered by egui an
 3. Noctalia writes the generated package to:
 
    ```text
-   $XDG_DATA_HOME/serein-theme/noctalia.serein-extension
+   $XDG_DATA_HOME/serein/noctalia.serein-extension
    ```
 
    When `XDG_DATA_HOME` is unset, this resolves to
-   `~/.local/share/serein-theme/noctalia.serein-extension`.
+   `~/.local/share/serein/noctalia.serein-extension`.
 
 4. In Serein, open **Settings → Themes → Import** and select the generated
    `.serein-extension` file.
