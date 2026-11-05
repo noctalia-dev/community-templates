@@ -4,4 +4,4 @@ category = "ai"
 
 [templates.claude-code]
 input_path = "claude-code.json"
-output_path = "~/.claude/themes/noctalia.json"
+output_path_dynamic = 'printf "%s\n" "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/themes/noctalia.json"'
