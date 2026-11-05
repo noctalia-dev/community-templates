@@ -34,13 +34,3 @@ if cmp -s "$tmp" "$installed"; then
 fi
 
 install -m 0644 "$tmp" "$installed"
-
-# Serein has no theme reload IPC. Restart it only when it is already running.
-if pgrep -x serein >/dev/null; then
-    pkill -TERM -x serein || true
-    for _ in {1..50}; do
-        pgrep -x serein >/dev/null || break
-        sleep 0.1
-    done
-    nohup serein >/tmp/serein-reload.log 2>&1 &
-fi
