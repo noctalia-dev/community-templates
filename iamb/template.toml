@@ -5,3 +5,4 @@ category = "chat"
 [templates.fuzzel]          # one or more render entries
 input_path  = "iamb.toml"                              # a file in this directory
 output_path = "$XDG_CONFIG_HOME/iamb/themes/noctalia.toml"  # where the rendered file lands
+post_hook = "bash apply.sh"
