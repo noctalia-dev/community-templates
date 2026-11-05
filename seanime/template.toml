@@ -1,0 +1,7 @@
+[catalog.seanime]
+name     = "Seanime"
+category = "misc"
+
+[templates.seanime]
+input_path  = "palette.css"
+output_path = "$XDG_STATE_HOME/noctalia/seanime/palette.css"
