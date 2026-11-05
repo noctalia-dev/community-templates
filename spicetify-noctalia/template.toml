@@ -1,0 +1,15 @@
+[catalog.spicetify-noctalia]
+name = "Spicetify (Noctalia colors, any theme)"
+category = "audio"
+
+# Renders a Spicetify extension that applies Noctalia's colors over any theme.
+# The hook pushes it into Spotify with `spicetify refresh -e`, which patches the
+# Spotify install, so it must not overlap with another Spicetify hook.
+[templates.spicetify_noctalia]
+input_path = "noctalia.js"
+# Spicetify's folder differs between installs, so the destination is asked
+# from Spicetify itself (`spicetify path userdata`) at apply time.
+output_path_dynamic = "bash '{{ config_dir }}/apply.sh' output"
+post_hook = "bash '{{ config_dir }}/apply.sh' apply"
+undo_hook = "bash '{{ config_dir }}/undo.sh'"
+hook_async = false
