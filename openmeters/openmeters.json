@@ -1,0 +1,63 @@
+{
+  "name": "noctalia",
+  "author": "Noctalia",
+  "background": "{{ colors.background.default.hex }}",
+  "palettes": {
+    "loudness": {
+      "stops": [
+        "{{ colors.background.default.hex }}",
+        "{{ colors.surface_dim.default.hex }}",
+        "{{ colors.surface_container_low.default.hex }}",
+        "{{ colors.primary.default.hex }}",
+        "{{ colors.error.default.hex }}",
+        "{{ colors.primary_container.default.hex }}",
+        "{{ colors.outline_variant.default.hex }}"
+      ]
+    },
+    "oscilloscope": {
+      "stops": [
+        "{{ colors.primary.default.hex }}",
+        "{{ colors.secondary.default.hex }}"
+      ]
+    },
+    "waveform": {
+      "stops": [
+        "{{ colors.surface_dim.default.hex }}",
+        "{{ colors.surface_container_low.default.hex }}",
+        "{{ colors.primary.default.hex }}"
+      ]
+    },
+    "spectrogram": {
+      "stops": [
+        "{{ colors.surface.default.hex }}",
+        "{{ colors.tertiary.default.hex }}",
+        "{{ colors.secondary.default.hex }}",
+        "{{ colors.primary.default.hex }}",
+        "{{ colors.on_primary.default.hex }}"
+      ]
+    },
+    "spectrum": {
+      "stops": [
+        "{{ colors.surface.default.hex }}",
+        "{{ colors.tertiary.default.hex }}",
+        "{{ colors.secondary.default.hex }}",
+        "{{ colors.primary.default.hex }}",
+        "{{ colors.on_primary.default.hex }}",
+        "{{ colors.primary.default.hex }}"
+      ]
+    },
+    "stereometer": {
+      "stops": [
+        "{{ colors.primary.default.hex }}",
+        "{{ colors.surface.default.hex }}",
+        "{{ colors.outline_variant.default.hex }}",
+        "{{ colors.secondary.default.hex }}",
+        "{{ colors.error.default.hex }}",
+        "{{ colors.surface_dim.default.hex }}",
+        "{{ colors.surface_container_low.default.hex }}",
+        "{{ colors.primary.default.hex }}",
+        "{{ colors.outline_variant.default.hex }}"
+      ]
+    }
+  }
+}
