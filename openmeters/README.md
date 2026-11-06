@@ -27,9 +27,13 @@ differ.
 
 ## Screenshots
 
-![OpenMeters full analysis dashboard with the Noctalia theme applied](screenshot1.png)
+![OpenMeters with the Dark Noctalia theme applied](screenshot2.png)
 
-![OpenMeters integrated loudness (LUFS) analysis with the Noctalia theme applied](screenshot2.png)
+![OpenMeters with the Light Noctalia theme applied](screenshot4.png)
+
+![OpenMeters with the Dark Everforest theme applied](screenshot1.png)
+
+![OpenMeters with the Light Horizon theme applied](screenshot3.png)
 
 ## Undo
 
