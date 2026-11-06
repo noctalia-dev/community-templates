@@ -1,0 +1,10 @@
+[catalog.slick]
+name = "slick"
+category = "chat"
+
+[templates.slick]
+input_path = "theme.json"
+output_path = "$XDG_CONFIG_HOME/slick/slick/noctalia-theme.json"
+post_hook = "python3 '{{ config_dir }}/apply.py'"
+undo_hook = "python3 '{{ config_dir }}/apply.py' undo"
+requires_path = "~/.config/slick/slick"
