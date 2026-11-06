@@ -4,7 +4,6 @@ set -euo pipefail
 installed_dir="${XDG_DATA_HOME:-$HOME/.local/share}/serein/extensions/themes/noctalia"
 installed="$installed_dir/package.json"
 themes_dir="${XDG_DATA_HOME:-$HOME/.local/share}/serein/extensions/themes"
-active_theme="$themes_dir/active.json"
 
 if [[ "${1:-}" == "prepare" ]]; then
     mkdir -p -- "$installed_dir" "$themes_dir"
@@ -23,7 +22,7 @@ command -v jq >/dev/null || {
 
 package_tmp="$(mktemp "${installed}.payload.XXXXXX")"
 wrapper_tmp="$(mktemp "${installed}.tmp.XXXXXX")"
-trap 'rm -f "$package_tmp" "$wrapper_tmp" "${active_tmp:-}"' EXIT
+trap 'rm -f "$package_tmp" "$wrapper_tmp"' EXIT
 
 if jq -e '.package | objects' "$installed" >/dev/null 2>&1; then
     jq -cS '.package' "$installed" > "$package_tmp"
@@ -50,12 +49,5 @@ jq -cn \
 if ! cmp -s "$wrapper_tmp" "$installed"; then
     chmod 0644 "$wrapper_tmp"
     mv -f -- "$wrapper_tmp" "$installed"
-fi
-
-if [[ "$(cat "$active_theme" 2>/dev/null || true)" != "noctalia" ]]; then
-    active_tmp="$(mktemp "$themes_dir/active.json.tmp.XXXXXX")"
-    printf 'noctalia' > "$active_tmp"
-    chmod 0644 "$active_tmp"
-    mv -f -- "$active_tmp" "$active_theme"
 fi
 
