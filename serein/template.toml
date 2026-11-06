@@ -3,7 +3,8 @@ name = "serein"
 category = "chat"
 
 [templates.serein]
-input_path_modes = { dark = "serein-dark.json", light = "serein-light.json" }
-output_path = '$XDG_DATA_HOME/serein/noctalia.serein-extension'
+input_path = "colors.json"
+output_path = '$XDG_DATA_HOME/serein/extensions/themes/noctalia/package.json'
+pre_hook = "bash '{{ config_dir }}/reload.sh' prepare"
 post_hook = "bash '{{ config_dir }}/reload.sh'"
 hook_async = false
