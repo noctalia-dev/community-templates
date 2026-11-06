@@ -3,23 +3,31 @@
 Serein is a lightweight, 100% native Discord client written in Rust, designed
 for fast startup and low overhead without Electron.
 
-## Requirements
+## Requirements and installation
 
-- [Serein](https://github.com/ViceVerse-cz/Serein)
-- `jq`
-
-Install `jq` with your distribution's package manager:
+Install Serein from its official package repository, then install `jq` with
+your distribution's package manager:
 
 ```sh
 # Debian / Ubuntu
-sudo apt install jq
+sudo apt install serein jq
 
 # Fedora
-sudo dnf install jq
+sudo dnf install serein jq
 
 # Arch Linux
-sudo pacman -S jq
+sudo pacman -S serein jq
 ```
+
+If you have not configured the Serein package repository yet, run its official
+setup script first:
+
+```sh
+curl -fsSL https://viceverse-cz.github.io/Serein/setup.sh | sh
+```
+
+See the [Serein installation guide](https://github.com/ViceVerse-cz/Serein#linux-installation)
+for other installation methods.
 
 ## Setup
 
@@ -27,17 +35,11 @@ sudo pacman -S jq
 2. Enable **serein**.
 3. In Noctalia Settings → Theme, enable **Sync color scheme** so Serein's
    **System** appearance follows Noctalia's Light/Dark mode.
-4. Noctalia writes the generated package to:
+4. In Serein, choose **System** appearance.
+5. Restart Serein after Noctalia renders new palette colors to load the updated
+   theme.
 
-   ```text
-   $XDG_DATA_HOME/serein/noctalia.serein-extension
-   ```
-
-   When `XDG_DATA_HOME` is unset, this resolves to
-   `~/.local/share/serein/noctalia.serein-extension`.
-
-5. Import the generated `.serein-extension` file once from **Settings → Themes → Import**.
-
-6. The `reload.sh` hook installs or updates the theme package at
-   `$XDG_DATA_HOME/serein/extensions/themes/noctalia/package.json` whenever
-   Noctalia renders the template. Restart Serein to load an updated theme.
+The theme package is stored at
+`$XDG_DATA_HOME/serein/extensions/themes/noctalia/package.json`. When
+`XDG_DATA_HOME` is unset, it is stored at
+`~/.local/share/serein/extensions/themes/noctalia/package.json`.
