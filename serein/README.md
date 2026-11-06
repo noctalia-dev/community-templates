@@ -25,7 +25,9 @@ sudo pacman -S jq
 
 1. Open Noctalia Settings → Templates.
 2. Enable **serein**.
-3. Noctalia writes the generated package to:
+3. In Noctalia Settings → Theme, enable **Sync color scheme** so Serein's
+   **System** appearance follows Noctalia's Light/Dark mode.
+4. Noctalia writes the generated package to:
 
    ```text
    $XDG_DATA_HOME/serein/noctalia.serein-extension
@@ -34,8 +36,8 @@ sudo pacman -S jq
    When `XDG_DATA_HOME` is unset, this resolves to
    `~/.local/share/serein/noctalia.serein-extension`.
 
-4. Import the generated `.serein-extension` file once from **Settings → Themes → Import**.
+5. Import the generated `.serein-extension` file once from **Settings → Themes → Import**.
 
-5. The `reload.sh` hook installs or updates the theme package at
+6. The `reload.sh` hook installs or updates the theme package at
    `$XDG_DATA_HOME/serein/extensions/themes/noctalia/package.json` whenever
    Noctalia renders the template. Restart Serein to load an updated theme.
