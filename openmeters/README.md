@@ -24,3 +24,15 @@ The per-visual stop-to-token mapping is authored from Noctalia's Material
 token set (background, surface, primary, error, outline, and the fixed/accent
 roles). Adjust `openmeters.json` if a specific visual's mapping needs to
 differ.
+
+## Screenshots
+
+![OpenMeters full analysis dashboard with the Noctalia theme applied](screenshot1.png)
+
+![OpenMeters integrated loudness (LUFS) analysis with the Noctalia theme applied](screenshot2.png)
+
+## Undo
+
+The post hook edits the theme selection in `settings.json`, so the template
+ships an `undo_hook` that restores the previous selection from a state file and
+removes it. Undo is a no-op when there is nothing to revert.

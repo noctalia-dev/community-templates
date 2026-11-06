@@ -1,16 +1,24 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+operation="apply"
 case "${1:-}" in
-    native)
+    native|flatpak)
+        operation="apply"
+        if [ "${1:-}" = "flatpak" ]; then
+            config_dir="$HOME/.var/app/io.github.nolight132.openmeters/config/openmeters"
+        else
+            config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+            config_dir="$config_home/openmeters"
+        fi
+        ;;
+    undo)
+        operation="undo"
         config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
         config_dir="$config_home/openmeters"
         ;;
-    flatpak)
-        config_dir="$HOME/.var/app/io.github.nolight132.openmeters/config/openmeters"
-        ;;
     *)
-        echo "Usage: $0 {native|flatpak}" >&2
+        echo "Usage: $0 {native|flatpak|undo}" >&2
         exit 2
         ;;
 esac
@@ -33,15 +41,41 @@ if [ ! -f "$settings_file" ]; then
     exit 1
 fi
 
-temporary="$(mktemp "${settings_file}.tmp.XXXXXX")"
-trap 'rm -f -- "$temporary"' EXIT
+state_file="$config_dir/.openmeters-theme-previous"
 
-jq --indent 2 '.theme = "noctalia"' "$settings_file" >"$temporary"
-chmod --reference="$settings_file" "$temporary"
+if [ "$operation" = "apply" ]; then
+    previous_theme="$(jq -r '.theme // empty' "$settings_file")"
+    printf '%s\n' "$previous_theme" >"$state_file"
 
-if cmp -s "$settings_file" "$temporary"; then
-    rm -f "$temporary"
+    temporary="$(mktemp "${settings_file}.tmp.XXXXXX")"
+    trap 'rm -f -- "$temporary"' EXIT
+
+    jq --indent 2 '.theme = "noctalia"' "$settings_file" >"$temporary"
+    chmod --reference="$settings_file" "$temporary"
+
+    if cmp -s "$settings_file" "$temporary"; then
+        rm -f -- "$temporary"
+    else
+        mv "$temporary" "$settings_file"
+    fi
+    trap - EXIT
 else
-    mv "$temporary" "$settings_file"
+    if [ ! -f "$state_file" ]; then
+        exit 0
+    fi
+    previous_theme="$(cat "$state_file")"
+    rm -f -- "$state_file"
+    if [ -z "$previous_theme" ]; then
+        exit 0
+    fi
+    temporary="$(mktemp "${settings_file}.tmp.XXXXXX")"
+    trap 'rm -f -- "$temporary"' EXIT
+    jq --arg theme "$previous_theme" '.theme = $theme' "$settings_file" >"$temporary"
+    chmod --reference="$settings_file" "$temporary"
+    if cmp -s "$settings_file" "$temporary"; then
+        rm -f -- "$temporary"
+    else
+        mv "$temporary" "$settings_file"
+    fi
+    trap - EXIT
 fi
-trap - EXIT
