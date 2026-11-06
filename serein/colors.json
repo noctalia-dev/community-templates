@@ -3,7 +3,7 @@
     "api_version": 1,
     "id": "noctalia",
     "name": "noctalia",
-    "version": "1.1.0",
+    "version": "1.0",
     "author": "nndp",
     "license": "MIT",
     "source": "https://github.com/noctalia-dev/community-templates",
@@ -55,27 +55,6 @@
         "mention_bg": "{{ colors.primary_container.light.hex }}",
         "mention_text": "{{ colors.on_primary_container.light.hex }}"
       }
-    },
-    "style": {
-      "transparency_blur": false,
-      "transparency": 0,
-      "blur": 0,
-      "widget_radius": 8,
-      "window_radius": 12,
-      "menu_radius": 12,
-      "body_size": 15,
-      "heading_size": 20,
-      "button_size": 14,
-      "small_size": 12,
-      "item_spacing": [
-        8,
-        8
-      ],
-      "button_padding": [
-        12,
-        6
-      ],
-      "control_height": 32
     }
   }
 }
