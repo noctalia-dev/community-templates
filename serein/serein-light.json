@@ -14,24 +14,24 @@
   "theme": {
     "dark": {
       "colors": {
-        "base": "{{ colors.surface.light.hex }}",
-        "sidebar": "{{ colors.surface_container.light.hex }}",
-        "chat": "{{ colors.surface.light.hex }}",
-        "raised": "{{ colors.surface_container_high.light.hex }}",
-        "hover": "{{ colors.surface_container_highest.light.hex }}",
-        "selected": "{{ colors.surface_container_highest.light.hex }}",
-        "border": "{{ colors.surface_container_high.light.hex }}",
-        "text_strong": "{{ colors.on_surface.light.hex }}",
-        "text": "{{ colors.on_surface_variant.light.hex }}",
-        "muted": "{{ colors.on_surface_variant.light.hex }}",
-        "link": "{{ colors.primary.light.hex }}",
-        "accent": "{{ colors.primary.light.hex }}",
-        "accent_text": "{{ colors.on_primary.light.hex }}",
-        "positive": "{{ colors.secondary.light.hex }}",
-        "warning": "{{ colors.tertiary.light.hex }}",
-        "danger": "{{ colors.error.light.hex }}",
-        "mention_bg": "{{ colors.primary_container.light.hex }}",
-        "mention_text": "{{ colors.on_primary_container.light.hex }}"
+        "base": "{{ colors.surface.dark.hex }}",
+        "sidebar": "{{ colors.surface_container.dark.hex }}",
+        "chat": "{{ colors.surface.dark.hex }}",
+        "raised": "{{ colors.surface_container_high.dark.hex }}",
+        "hover": "{{ colors.surface_container_highest.dark.hex }}",
+        "selected": "{{ colors.surface_container_highest.dark.hex }}",
+        "border": "{{ colors.surface_container_high.dark.hex }}",
+        "text_strong": "{{ colors.on_surface.dark.hex }}",
+        "text": "{{ colors.on_surface_variant.dark.hex }}",
+        "muted": "{{ colors.on_surface_variant.dark.hex }}",
+        "link": "{{ colors.primary.dark.hex }}",
+        "accent": "{{ colors.primary.dark.hex }}",
+        "accent_text": "{{ colors.on_primary.dark.hex }}",
+        "positive": "{{ colors.secondary.dark.hex }}",
+        "warning": "{{ colors.tertiary.dark.hex }}",
+        "danger": "{{ colors.error.dark.hex }}",
+        "mention_bg": "{{ colors.primary_container.dark.hex }}",
+        "mention_text": "{{ colors.on_primary_container.dark.hex }}"
       }
     },
     "light": {
