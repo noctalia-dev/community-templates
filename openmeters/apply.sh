@@ -31,11 +31,6 @@ if ! command -v jq >/dev/null 2>&1; then
     exit 1
 fi
 
-if [ ! -f "$theme_file" ]; then
-    echo "OpenMeters theme file not found: $theme_file" >&2
-    exit 1
-fi
-
 if [ ! -f "$settings_file" ]; then
     echo "OpenMeters settings not found: $settings_file (launch OpenMeters once first)" >&2
     exit 1
@@ -44,8 +39,19 @@ fi
 state_file="$config_dir/.openmeters-theme-previous"
 
 if [ "$operation" = "apply" ]; then
-    previous_theme="$(jq -r '.theme // empty' "$settings_file")"
-    printf '%s\n' "$previous_theme" >"$state_file"
+    if [ ! -f "$theme_file" ]; then
+        echo "OpenMeters theme file not found: $theme_file" >&2
+        exit 1
+    fi
+    if [ ! -f "$state_file" ]; then
+        had_theme="$(jq -r 'has("theme")' "$settings_file")"
+        if [ "$had_theme" = "true" ]; then
+            initial_theme="$(jq -r '.theme' "$settings_file")"
+            printf '%s\n' "$(jq -cn --arg t "$initial_theme" '{had: true, theme: $t}')" >"$state_file"
+        else
+            printf '%s\n' '{"had":false,"theme":null}' >"$state_file"
+        fi
+    fi
 
     temporary="$(mktemp "${settings_file}.tmp.XXXXXX")"
     trap 'rm -f -- "$temporary"' EXIT
@@ -63,19 +69,23 @@ else
     if [ ! -f "$state_file" ]; then
         exit 0
     fi
-    previous_theme="$(cat "$state_file")"
-    rm -f -- "$state_file"
-    if [ -z "$previous_theme" ]; then
-        exit 0
-    fi
+    state_theme="$(jq -r '.theme // empty' "$state_file")"
+    state_had="$(jq -r '.had // false' "$state_file")"
     temporary="$(mktemp "${settings_file}.tmp.XXXXXX")"
     trap 'rm -f -- "$temporary"' EXIT
-    jq --arg theme "$previous_theme" '.theme = $theme' "$settings_file" >"$temporary"
+    if [ "$state_had" = "true" ]; then
+        jq --arg theme "$state_theme" '.theme = $theme' "$settings_file" >"$temporary"
+    else
+        jq 'del(.theme)' "$settings_file" >"$temporary"
+    fi
     chmod --reference="$settings_file" "$temporary"
     if cmp -s "$settings_file" "$temporary"; then
         rm -f -- "$temporary"
-    else
-        mv "$temporary" "$settings_file"
+        rm -f -- "$state_file"
+        trap - EXIT
+        exit 0
     fi
+    mv "$temporary" "$settings_file"
+    rm -f -- "$state_file"
     trap - EXIT
 fi
