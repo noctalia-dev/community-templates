@@ -6,19 +6,11 @@ Generate a Noctalia color theme for iamb's Matrix TUI interface.
 
 1. Enable **iamb** in **Noctalia Settings → Templates**.
 2. Open `~/.config/iamb/config.toml`, and add or edit `theme = "noctalia"` under `[settings]`
-  Example :
-  ```toml
-  [settings]
-  theme = "noctalia"
-  ```
 
-The template writes `$XDG_CONFIG_HOME/iamb/themes/noctalia.toml`. The Bash post-hook updates the `theme` setting in iamb's `[settings]` section to `"noctalia"`, or adds it if absent.
+Example :
+```toml
+[settings]
+theme = "noctalia"
+```
 
-Other configuration settings are retained. The hook is idempotent and can safely be executed multiple times.
-
-The hook requires `bash`, `awk`, and standard command-line tools (`mktemp`, `cat`, `rm`). It does not download or execute external scripts.
-
-The hook does not restart iamb or send a reload command. Restart iamb if necessary to load the generated theme.
-
-The hook uses `~/.config` when `XDG_CONFIG_HOME` is unset.
-
+The template writes `$XDG_CONFIG_HOME/iamb/themes/noctalia.toml`.
