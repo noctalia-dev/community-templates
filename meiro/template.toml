@@ -1,0 +1,7 @@
+[catalog.meiro]
+name = "Meiro"
+category = "audio"
+
+[templates.meiro]
+input_path = "colors.json"
+output_path = "$XDG_CONFIG_HOME/Meiro/colors.json"
