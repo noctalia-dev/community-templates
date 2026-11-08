@@ -6,7 +6,7 @@ category = "chat"
 input_path = "colors.json"
 output_path = '$XDG_DATA_HOME/serein/extensions/themes/noctalia/package.json'
 post_hook = "bash '{{ config_dir }}/reload.sh'"
-requires_path = '~/.local/share/serein'
+requires_path = "$XDG_DATA_HOME/serein"
 hook_async = false
 
 [templates.serein-flatpak]
