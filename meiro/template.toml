@@ -5,3 +5,9 @@ category = "audio"
 [templates.meiro]
 input_path = "colors.json"
 output_path = "$XDG_CONFIG_HOME/Meiro/colors.json"
+requires_path = "$XDG_CONFIG_HOME/Meiro"
+
+[templates.meiro-flatpak]
+input_path = "colors.json"
+output_path = "~/.var/app/com.elianiva.meiro/config/Meiro/colors.json"
+requires_path = "~/.var/app/com.elianiva.meiro"
