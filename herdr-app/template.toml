@@ -1,0 +1,7 @@
+[catalog.herdr-app]
+name = "Herdr App"
+category = "terminal"
+
+[templates.herdr-app]
+input_path = "noctalia.json"
+output_path = "$XDG_CONFIG_HOME/herdr-app/themes/noctalia.json"
