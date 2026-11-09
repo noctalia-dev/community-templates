@@ -12,6 +12,8 @@ Noctalia-colored variants of Midnight, Material Discord (with its Material You a
 
 The template does not install a loader or select a theme for you; choose one style rather than enabling competing styles together.
 
+Midnight and System24 use Noctalia's font (`shell.font_family`). With the default `sans-serif`, Discord's own font stays. Material keeps its own font.
+
 Each destination directory below receives these files:
 
 | Style | Filename |

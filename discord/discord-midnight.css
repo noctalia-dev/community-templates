@@ -15,7 +15,7 @@
 
 body {
   /* font options */
-  --font: ''; /* change to '' for default discord font */
+  --font: '{{config.shell.font_family}}'; /* Noctalia's shell.font_family; the default 'sans-serif' keeps Discord's font */
   --code-font: ''; /* change to '' for default discord font */
   font-weight: 400; /* normal text font weight. DOES NOT AFFECT BOLD TEXT */
 
