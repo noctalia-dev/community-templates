@@ -5,3 +5,8 @@ category = "audio"
 [templates.feishin]
 input_path = "custom.css"
 output_path = "$XDG_CONFIG_HOME/feishin/custom.css"
+
+[templates.feishin-flatpak]
+input_path = "custom.css"
+output_path = "~/.var/app/org.jeffvli.feishin/config/feishin/custom.css"
+requires_path = "~/.var/app/org.jeffvli.feishin"
