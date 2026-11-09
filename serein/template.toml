@@ -5,6 +5,13 @@ category = "chat"
 [templates.serein]
 input_path = "colors.json"
 output_path = '$XDG_DATA_HOME/serein/extensions/themes/noctalia/package.json'
-pre_hook = "bash '{{ config_dir }}/reload.sh' prepare"
 post_hook = "bash '{{ config_dir }}/reload.sh'"
+requires_path = "$XDG_DATA_HOME/serein"
+hook_async = false
+
+[templates.serein-flatpak]
+input_path = "colors.json"
+output_path = '~/.var/app/cz.viceverse.serein/data/serein/extensions/themes/noctalia/package.json'
+post_hook = 'XDG_DATA_HOME="$HOME/.var/app/cz.viceverse.serein/data" bash "{{ config_dir }}/reload.sh"'
+requires_path = '~/.var/app/cz.viceverse.serein'
 hook_async = false

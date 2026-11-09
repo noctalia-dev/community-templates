@@ -34,4 +34,7 @@ The theme package is stored at
 `XDG_DATA_HOME` is unset, it is stored at
 `~/.local/share/serein/extensions/themes/noctalia/package.json`.
 
+For the Flatpak version, the theme package is stored at
+`~/.var/app/cz.viceverse.serein/data/serein/extensions/themes/noctalia/package.json`.
+
 The `reload.sh` hook writes the rendered theme package to this `package.json` file.

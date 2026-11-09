@@ -3,12 +3,6 @@ set -euo pipefail
 
 installed_dir="${XDG_DATA_HOME:-$HOME/.local/share}/serein/extensions/themes/noctalia"
 installed="$installed_dir/package.json"
-themes_dir="${XDG_DATA_HOME:-$HOME/.local/share}/serein/extensions/themes"
-
-if [[ "${1:-}" == "prepare" ]]; then
-    mkdir -p -- "$installed_dir" "$themes_dir"
-    exit 0
-fi
 
 command -v jq >/dev/null || {
     printf 'reload.sh: jq is required\n' >&2
