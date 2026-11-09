@@ -152,7 +152,10 @@ has a non-empty `README.md` (exact filename).
 - **One app per PR.**
 - Include a `README.md` explaining what is themed, prerequisites, setup, generated config paths, and how changes take
   effect. Document hook side effects and overwrite caveats where applicable; say explicitly when no manual setup is needed.
-- Include a screenshot of the app with the theme applied.
+- For new templates and updates that change the app's appearance, include screenshots of the app with the theme applied
+  in both dark and light modes. If the app supports only one mode, include that mode and explain the limitation.
+  Nonvisual updates (for example, output paths, installation detection, hooks that do not change appearance, or
+  documentation) do not require screenshots; explain why the update is nonvisual in the PR.
 - Say which version of the app you tested against.
 - Do not commit rendered output or your own personal app config.
 

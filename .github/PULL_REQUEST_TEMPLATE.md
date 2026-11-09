@@ -22,7 +22,15 @@
 
 ## Screenshots
 
-<!-- The app running with the theme applied. Required. -->
+For new templates and updates that change the app's appearance, attach screenshots of the app with the theme applied in both dark and light modes. If the app supports only one mode, include that mode and explain the limitation.
+
+Screenshots are not required for nonvisual updates (for example, output paths, installation detection, hooks that do not change appearance, or documentation). State why the update is nonvisual below.
+
+### Dark mode
+<!-- Paste screenshot(s) here, or explain why not applicable. -->
+
+### Light mode
+<!-- Paste screenshot(s) here, or explain why not applicable. -->
 
 ## Hooks
 
@@ -41,3 +49,4 @@
 - [ ] Every `input_path` names a file that exists in this directory.
 - [ ] A non-empty `README.md` documents what is themed, prerequisites, setup, output paths, and any hook side effects.
 - [ ] No generated output or app-specific personal config is committed.
+- [ ] Dark/light screenshots are included, or I explained why screenshots or a mode are not applicable.
