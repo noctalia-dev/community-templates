@@ -26,3 +26,6 @@ jobs:
 
       - name: Test Oh My Posh color mapping
         run: python3 -B oh-my-posh/test_apply.py
+
+      - name: Test Chromium based setup
+        run: bash chromium-based/test.sh

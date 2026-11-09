@@ -19,15 +19,19 @@ pick up the new colors.
 
 Target file: `$XDG_CONFIG_HOME/fcitx5/conf/classicui.conf` (created if the directory is missing).
 
+The hook sets both `Theme=noctalia` and `DarkTheme=noctalia`. Both point to the same `theme.conf`,
+which Noctalia renders with the current palette. This keeps Classic UI on the Noctalia theme
+when following the system light/dark color scheme.
+
 | Situation | Behaviour |
 | --- | --- |
-| File does not exist | Write `Theme=noctalia` as the only line |
-| `Theme=` line already set to `noctalia` | No change |
-| `Theme=` line set to something else | Replace that line with `Theme=noctalia` |
-| File exists but has no `Theme=` line | Append `Theme=noctalia` on a new line |
+| File does not exist | Write `Theme=noctalia` and `DarkTheme=noctalia`, each on its own line |
+| Either theme key is already set to `noctalia` | Leave that key unchanged |
+| Either theme key is set to something else | Replace that key's value with `noctalia` |
+| File exists but is missing either theme key | Append the missing key with value `noctalia` on a new line |
 
-Other keys in `classicui.conf` (fonts, tray colors, vertical candidate list, etc.) are left
-untouched.
+Each theme key is handled independently. Other keys in `classicui.conf` (including `UseDarkTheme`,
+fonts, tray colors, and vertical candidate list) are left untouched.
 
 ### 2. Hot-reload the UI
 
@@ -46,5 +50,6 @@ If Fcitx5 is not running, or D-Bus is unavailable, the call fails silently. The 
 
 ### Idempotency
 
-Running the hook twice with the same theme does not append duplicate `Theme=` lines or rewrite
-`classicui.conf` when it already points at `noctalia`. The D-Bus reload is safe to repeat.
+Running the hook twice with the same theme does not append duplicate `Theme=` or `DarkTheme=`
+lines or rewrite `classicui.conf` when both already point at `noctalia`. The D-Bus reload is safe
+to repeat.

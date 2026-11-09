@@ -1,0 +1,124 @@
+name = Noctalia
+kind = dark
+
+; ── Core surfaces ─────────────────────────────────────────────────────────────
+bg             = {{colors.surface.default.hex}}
+fg             = {{colors.on_surface.default.hex}}
+accent         = {{colors.primary.default.hex}}
+accent_fg      = {{colors.on_primary.default.hex}}
+
+; ── Panels & chrome ───────────────────────────────────────────────────────────
+panel          = {{colors.surface_container_low.default.hex}}
+panel_fg       = {{colors.on_surface_variant.default.hex}}
+border         = {{colors.surface_container_high.default.hex}}
+titlebar       = {{colors.surface_container.default.hex}}
+
+; ── Editor chrome ─────────────────────────────────────────────────────────────
+selection      = {{colors.surface_container_highest.default.hex}}
+line_highlight = {{colors.surface_container.default.hex}}
+line_number    = {{colors.outline.default.hex}}
+line_number_active = {{colors.on_surface_variant.default.hex}}
+cursor         = {{colors.primary.default.hex}}
+muted          = {{colors.on_surface_variant.default.hex}}
+
+; ── Interactive states ────────────────────────────────────────────────────────
+hover          = {{colors.surface_container_high.default.hex}}
+active         = {{colors.surface_container_highest.default.hex}}
+popup          = {{colors.surface_container_high.default.hex}}
+input          = {{colors.surface_container.default.hex}}
+scrollbar      = {{colors.outline_variant.default.hex}}
+match          = {{colors.primary_container.default.hex}}
+guide          = {{colors.surface_container_high.default.hex}}
+
+; ── Semantic status ───────────────────────────────────────────────────────────
+error          = {{colors.terminal_normal_red.default.hex}}
+warning        = {{colors.terminal_normal_yellow.default.hex}}
+success        = {{colors.terminal_normal_green.default.hex}}
+
+; ── Git gutter ────────────────────────────────────────────────────────────────
+git_added      = {{colors.terminal_normal_green.default.hex}}
+git_modified   = {{colors.terminal_normal_yellow.default.hex}}
+git_deleted    = {{colors.terminal_normal_red.default.hex}}
+
+; ── Extension: inlay hints, ghost text, occurrences, diagnostics ──────────────
+inlay             = {{colors.on_surface_variant.default.hex}}
+inlay_bg          = {{colors.surface_container.default.hex}}
+ghost             = {{colors.outline.default.hex}}
+codelens          = {{colors.on_surface_variant.default.hex}}
+highlight         = {{colors.surface_container_high.default.hex}}
+highlight_write   = {{colors.primary_container.default.hex}}
+info              = {{colors.terminal_normal_blue.default.hex}}
+hint              = {{colors.outline.default.hex}}
+
+; ── File icon palette (10 roles) ──────────────────────────────────────────────
+icon_red     = {{colors.terminal_normal_red.default.hex}}
+icon_orange  = {{colors.terminal_bright_red.default.hex}}
+icon_yellow  = {{colors.terminal_normal_yellow.default.hex}}
+icon_green   = {{colors.terminal_normal_green.default.hex}}
+icon_blue    = {{colors.terminal_normal_blue.default.hex}}
+icon_purple  = {{colors.terminal_normal_magenta.default.hex}}
+icon_pink    = {{colors.terminal_bright_magenta.default.hex}}
+icon_cyan    = {{colors.terminal_normal_cyan.default.hex}}
+icon_grey    = {{colors.terminal_bright_black.default.hex}}
+icon_white   = {{colors.on_surface.default.hex}}
+
+; ── Syntax ────────────────────────────────────────────────────────────────────
+[syntax]
+; keyword  → magenta (mPrimary maps to green, so reserved words get purple contrast)
+keyword     = {{colors.terminal_normal_magenta.default.hex}}
+; type     → bright blue (clear type distinction)
+type        = {{colors.terminal_bright_blue.default.hex}}
+; function → primary accent (electric green — most prominent call site)
+function    = {{colors.primary.default.hex}}
+; string   → normal green (readable, on-palette)
+string      = {{colors.terminal_normal_green.default.hex}}
+; number   → yellow (warm contrast)
+number      = {{colors.terminal_normal_yellow.default.hex}}
+; comment  → bright-black (dim, unobtrusive)
+comment     = {{colors.terminal_bright_black.default.hex}}
+; constant → bright magenta (distinct from keyword)
+constant    = {{colors.terminal_bright_magenta.default.hex}}
+; operator → cyan (clear without shouting)
+operator    = {{colors.terminal_normal_cyan.default.hex}}
+; punctuation → muted on_surface_variant
+punctuation = {{colors.on_surface_variant.default.hex}}
+; preproc  → bright red (preprocessor / macro directives)
+preproc     = {{colors.terminal_bright_red.default.hex}}
+; builtin  → bright cyan (stdlib / built-in functions)
+builtin     = {{colors.terminal_bright_cyan.default.hex}}
+; variable → foreground text (no extra color noise)
+variable    = {{colors.on_surface.default.hex}}
+; attribute → secondary (muted yellow-green)
+attribute   = {{colors.secondary.default.hex}}
+; tag      → tertiary (teal)
+tag         = {{colors.tertiary.default.hex}}
+; heading  → primary (electric green — markdown/asciidoc headings pop)
+heading     = {{colors.primary.default.hex}}
+; escape   → bright yellow (escape sequences stand out)
+escape      = {{colors.terminal_bright_yellow.default.hex}}
+; link     → bright blue
+link        = {{colors.terminal_bright_blue.default.hex}}
+; diff markers
+inserted    = {{colors.terminal_normal_green.default.hex}}
+deleted     = {{colors.terminal_normal_red.default.hex}}
+; plain document text
+text        = {{colors.on_surface.default.hex}}
+
+; ── Terminal 16-color palette ─────────────────────────────────────────────────
+[terminal]
+black          = {{colors.terminal_normal_black.default.hex}}
+red            = {{colors.terminal_normal_red.default.hex}}
+green          = {{colors.terminal_normal_green.default.hex}}
+yellow         = {{colors.terminal_normal_yellow.default.hex}}
+blue           = {{colors.terminal_normal_blue.default.hex}}
+magenta        = {{colors.terminal_normal_magenta.default.hex}}
+cyan           = {{colors.terminal_normal_cyan.default.hex}}
+white          = {{colors.terminal_normal_white.default.hex}}
+bright_black   = {{colors.terminal_bright_black.default.hex}}
+bright_red     = {{colors.terminal_bright_red.default.hex}}
+bright_green   = {{colors.terminal_bright_green.default.hex}}
+bright_yellow  = {{colors.terminal_bright_yellow.default.hex}}
+bright_blue    = {{colors.terminal_bright_blue.default.hex}}
+bright_magenta = {{colors.terminal_bright_magenta.default.hex}}
+bright_cyan    = {{colors.terminal_bright_cyan.default.hex}}
+bright_white   = {{colors.terminal_bright_white.default.hex}}

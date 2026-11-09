@@ -1,0 +1,7 @@
+[catalog.cressida]
+name = "Cressida"
+category = "chat"
+
+[templates.cressida]
+input_path = "cressida.toml"
+output_path = "$XDG_CONFIG_HOME/cressida/themes/noctalia.toml"

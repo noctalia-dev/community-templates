@@ -1,18 +1,21 @@
+/* Vollstaendiges Heroic-Theme aus Noctalia-Palette. Community-Template
+   heroiclauncher definiert nur ~35 der ~66 Variablen, die Heroic 2.22 nutzt
+   -> fehlende fielen auf die dunklen :root-Defaults zurueck. */
 body.matugen {
-  --accent: {{colors.tertiary.default.hex}};
-  --accent-overlay: {{colors.inverse_primary.default.hex}};
-  
-  --primary: {{colors.primary.default.hex}};
-  --primary-hover: {{colors.primary_container.default.hex}};
+  --accent: {{ colors.tertiary.default.hex }};
+  --accent-overlay: {{ colors.inverse_primary.default.hex }};
+
+  --primary: {{ colors.primary.default.hex }};
+  --primary-hover: {{ colors.primary_container.default.hex }};
   --navbar-accent: var(--primary);
-  
-  --background: {{colors.background.default.hex}};
-  --body-background: {{colors.surface.default.hex}};
-  --navbar-background: {{colors.surface_container.default.hex}};
-  
+
+  --background: {{ colors.background.default.hex }};
+  --body-background: {{ colors.surface.default.hex }};
+  --navbar-background: {{ colors.surface_container.default.hex }};
+
   --background-darker: var(--background);
   --current-background: var(--body-background);
-  --navbar-active-background: {{colors.surface_container_high.default.hex}};
+  --navbar-active-background: {{ colors.surface_container_high.default.hex }};
 
   --gradient-body-background: linear-gradient(
     90deg,
@@ -20,33 +23,90 @@ body.matugen {
     var(--body-background) 64px,
     var(--body-background) 100%
   );
-  
-  --input-background: var(--navbar-background);
-  --modal-background: var(--body-background);
-  --modal-border: var(--body-background);
 
-  --success: {{colors.tertiary.default.hex}};
-  --success-hover: {{colors.tertiary_container.default.hex}};
-  --danger: {{colors.error.default.hex}};
-  --danger-hover: {{colors.error_container.default.hex}};
+  --input-background: {{ colors.surface_container.default.hex }};
+  --modal-background: {{ colors.surface.default.hex }};
+  --modal-border: {{ colors.surface_container_high.default.hex }};
 
-  --text-default: {{colors.on_surface.default.hex}};
-  --text-title: {{colors.on_surface.default.hex}};
-  --text-secondary: {{colors.on_surface_variant.default.hex}};
-  --text-tertiary: {{colors.outline.default.hex}};
-  --text-hover: {{colors.primary.default.hex}};
+  --success: {{ colors.tertiary.default.hex }};
+  --success-hover: {{ colors.tertiary_container.default.hex }};
+  --danger: {{ colors.error.default.hex }};
+  --danger-hover: {{ colors.error_container.default.hex }};
 
-  --text-title: {{colors.on_surface.default.hex}};
-  --action-icon: {{colors.on_surface.default.hex}};
-  --action-icon-hover: {{colors.primary.default.hex}};
-  --action-icon-active: {{colors.primary_container.default.hex}};
-  --icons-background: {{colors.surface_variant.default.hex}};
-  --icon-disabled: {{colors.on_surface_variant.default.hex}};
+  --text-default: {{ colors.on_surface.default.hex }};
+  --text-title: {{ colors.on_surface.default.hex }};
+  --text-secondary: {{ colors.on_surface_variant.default.hex }};
+  --text-tertiary: {{ colors.outline.default.hex }};
+  --text-hover: {{ colors.primary.default.hex }};
+
+  --action-icon: {{ colors.on_surface.default.hex }};
+  --action-icon-hover: {{ colors.primary.default.hex }};
+  --action-icon-active: {{ colors.primary_container.default.hex }};
+  --icons-background: {{ colors.surface_container_high.default.hex }};
+  --icon-disabled: {{ colors.on_surface_variant.default.hex }};
 
   --anticheat-denied: var(--danger);
   --anticheat-broken: var(--accent);
   --anticheat-running: var(--primary);
   --anticheat-supported: var(--success);
-  --anticheat-planned: {{colors.secondary.default.hex}};
-}
+  --anticheat-planned: {{ colors.outline.default.hex }};
 
+  /* Von Heroic 2.22 genutzt, fehlte im Community-Template */
+  --status-success: {{ colors.tertiary.default.hex }};
+  --status-success-hover: {{ colors.tertiary_container.default.hex }};
+  --status-warning: {{ colors.secondary.default.hex }};
+  --status-warning-hover: {{ colors.secondary_container.default.hex }};
+  --status-danger: {{ colors.error.default.hex }};
+  --status-danger-hover: {{ colors.error_container.default.hex }};
+  --status-default: {{ colors.on_surface_variant.default.hex }};
+  --status-info: {{ colors.primary.default.hex }};
+  --status-denied: {{ colors.error.default.hex }};
+
+  --brand-primary: {{ colors.primary.default.hex }};
+  --brand-primary-hover: {{ colors.primary_container.default.hex }};
+  --brand-secondary: {{ colors.secondary.default.hex }};
+  --brand-text-01: {{ colors.on_primary.default.hex }};
+  --brand-text-02: {{ colors.on_secondary_container.default.hex }};
+
+  --neutral-01: {{ colors.outline.default.hex }};
+  --neutral-02: {{ colors.surface_dim.default.hex }};
+  --neutral-03: {{ colors.surface_container_low.default.hex }};
+  --neutral-04: {{ colors.on_surface_variant.default.hex }};
+  --neutral-05: {{ colors.outline.default.hex }};
+  --neutral-06: {{ colors.on_surface.default.hex }};
+  --neutral-07: {{ colors.surface_container_high.default.hex }};
+  --neutral-08: {{ colors.surface_container_highest.default.hex }};
+
+  --background-light: {{ colors.surface_container_low.default.hex }};
+  --background-lighter: {{ colors.surface_container_high.default.hex }};
+  --background-darker-80: {{ colors.scrim.default.hex | set_alpha 0.8 }};
+  --eighty-percent-black: {{ colors.scrim.default.hex | set_alpha 0.8 }};
+
+  --primary-button: {{ colors.primary.default.hex }};
+  --primary-active: {{ colors.primary_container.default.hex }};
+  --secondary-button: {{ colors.secondary.default.hex }};
+  --success-button: {{ colors.tertiary.default.hex }};
+  --tertiary-button: {{ colors.secondary.default.hex }};
+  --install-button: {{ colors.primary.default.hex }};
+  --disabled-button: {{ colors.outline_variant.default.hex }};
+  --disabled-button-overlay: {{ colors.surface_container_high.default.hex }};
+
+  --navbar-active: {{ colors.primary_container.default.hex }};
+  --navbar-inactive: {{ colors.on_surface_variant.default.hex }};
+
+  --gamecard-title-color: {{ colors.on_surface_variant.default.hex | set_alpha 0.8 }};
+
+  /* On-Screen-Keyboard + gefuehrter Tour, fehlten im Community-Template */
+  --osk-background: {{ colors.surface.default.hex }};
+  --osk-button-background: {{ colors.surface_container.default.hex }};
+  --osk-button-border: {{ colors.outline_variant.default.hex }};
+
+  --text-log: {{ colors.on_surface_variant.default.hex }};
+
+  --tour-popup-background: {{ colors.surface_container.default.hex }};
+  --tour-popup-title: {{ colors.on_surface.default.hex }};
+  --tour-popup-skip-color: {{ colors.on_surface_variant.default.hex }};
+  --tour-popup-skip-color-hover: {{ colors.primary.default.hex }};
+  --tour-bullet-active: {{ colors.primary.default.hex }};
+  --tour-bullet-inactive: {{ colors.outline_variant.default.hex }};
+}

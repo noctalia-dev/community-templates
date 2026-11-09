@@ -1,0 +1,7 @@
+[catalog.rawmakase]
+name = "RAWmakase"
+category = "editor"
+
+[templates.rawmakase]
+input_path = "Noctalia.json"
+output_path = "$XDG_DATA_HOME/rawmakase/themes/Noctalia.json"

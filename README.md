@@ -99,9 +99,9 @@ window {
 }
 ```
 
-The full reference is in the docs: [Templates](https://docs.noctalia.dev/v5/theming/templates/) covers the syntax, every
+The full reference is in the docs: [Templates](https://docs.noctalia.dev/noctalia/theming/templates/) covers the syntax, every
 color token, filters (`| darken(0.2)`, `| hex_stripped`), loops and conditionals.
-[App theming](https://docs.noctalia.dev/v5/theming/app-theming/) covers how templates get applied.
+[App theming](https://docs.noctalia.dev/noctalia/theming/app-theming/) covers how templates get applied.
 
 ## Hooks run as the user
 

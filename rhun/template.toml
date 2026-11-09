@@ -1,0 +1,7 @@
+[catalog.rhun]
+name = "rhun"
+category = "editor"
+
+[templates.rhun]
+input_path = "rhun.theme"
+output_path = "$XDG_CONFIG_HOME/rhun/themes/noctalia.theme"

@@ -1,0 +1,11 @@
+[catalog.cosmic]
+name = "COSMIC"
+category = "system"
+
+[templates.cosmic]
+input_path = "cosmic-colors"
+output_path = "$XDG_CACHE_HOME/noctalia/cosmic-palette"
+post_hook = "python3 '{{ config_dir }}/apply.py'"
+undo_hook = "bash '{{ config_dir }}/undo.sh'"
+hook_async = false
+requires_path = "~/.config/cosmic"

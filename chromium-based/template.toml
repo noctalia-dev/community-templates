@@ -1,0 +1,9 @@
+[catalog.chromium-based]
+name = "Chromium based"
+category = "browser"
+
+[templates.chromium-based]
+input_path = "color.json"
+output_path_dynamic = "bash '{{ config_dir }}/apply.sh' output"
+post_hook = "bash '{{ config_dir }}/apply.sh' refresh"
+undo_hook = "bash '{{ config_dir }}/apply.sh' undo"

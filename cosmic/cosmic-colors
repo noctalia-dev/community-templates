@@ -1,0 +1,65 @@
+# Noctalia -> COSMIC palette bridge.
+#
+# Rendered by Noctalia's template engine whenever the palette changes. One
+# KEY=VALUE line per color, prefixed by the mode it belongs to. `apply.sh`
+# consumes this and writes the COSMIC theme configs that libcosmic apps
+# (cosmic-files, cosmic-edit, ...) read.
+#
+# `palettes.neutral` is the mode-independent tonal neutral ramp (0 = black,
+# 100 = white); apply.sh turns it into COSMIC's neutral_0..neutral_10 controls.
+
+mode={{ mode }}
+
+dark_surface={{ colors.surface.dark.hex }}
+dark_on_surface={{ colors.on_surface.dark.hex }}
+dark_surface_container_low={{ colors.surface_container_low.dark.hex }}
+dark_surface_container={{ colors.surface_container.dark.hex }}
+dark_surface_container_high={{ colors.surface_container_high.dark.hex }}
+dark_surface_container_highest={{ colors.surface_container_highest.dark.hex }}
+dark_surface_variant={{ colors.surface_variant.dark.hex }}
+dark_outline={{ colors.outline.dark.hex }}
+dark_outline_variant={{ colors.outline_variant.dark.hex }}
+dark_primary={{ colors.primary.dark.hex }}
+dark_on_primary={{ colors.on_primary.dark.hex }}
+dark_primary_container={{ colors.primary_container.dark.hex }}
+dark_on_primary_container={{ colors.on_primary_container.dark.hex }}
+dark_secondary={{ colors.secondary.dark.hex }}
+dark_secondary_container={{ colors.secondary_container.dark.hex }}
+dark_on_secondary_container={{ colors.on_secondary_container.dark.hex }}
+dark_tertiary={{ colors.tertiary.dark.hex }}
+dark_on_tertiary={{ colors.on_tertiary.dark.hex }}
+dark_error={{ colors.error.dark.hex }}
+dark_on_error={{ colors.on_error.dark.hex }}
+
+light_surface={{ colors.surface.light.hex }}
+light_on_surface={{ colors.on_surface.light.hex }}
+light_surface_container_low={{ colors.surface_container_low.light.hex }}
+light_surface_container={{ colors.surface_container.light.hex }}
+light_surface_container_high={{ colors.surface_container_high.light.hex }}
+light_surface_container_highest={{ colors.surface_container_highest.light.hex }}
+light_surface_variant={{ colors.surface_variant.light.hex }}
+light_outline={{ colors.outline.light.hex }}
+light_outline_variant={{ colors.outline_variant.light.hex }}
+light_primary={{ colors.primary.light.hex }}
+light_on_primary={{ colors.on_primary.light.hex }}
+light_primary_container={{ colors.primary_container.light.hex }}
+light_on_primary_container={{ colors.on_primary_container.light.hex }}
+light_secondary={{ colors.secondary.light.hex }}
+light_secondary_container={{ colors.secondary_container.light.hex }}
+light_on_secondary_container={{ colors.on_secondary_container.light.hex }}
+light_tertiary={{ colors.tertiary.light.hex }}
+light_on_tertiary={{ colors.on_tertiary.light.hex }}
+light_error={{ colors.error.light.hex }}
+light_on_error={{ colors.on_error.light.hex }}
+
+neutral_0={{ palettes.neutral.0.hex }}
+neutral_1={{ palettes.neutral.10.hex }}
+neutral_2={{ palettes.neutral.20.hex }}
+neutral_3={{ palettes.neutral.30.hex }}
+neutral_4={{ palettes.neutral.40.hex }}
+neutral_5={{ palettes.neutral.50.hex }}
+neutral_6={{ palettes.neutral.60.hex }}
+neutral_7={{ palettes.neutral.70.hex }}
+neutral_8={{ palettes.neutral.80.hex }}
+neutral_9={{ palettes.neutral.90.hex }}
+neutral_10={{ palettes.neutral.100.hex }}

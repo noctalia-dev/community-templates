@@ -1,0 +1,7 @@
+[catalog.thunar]
+name = "Thunar"
+category = "system"
+
+[templates.thunar]
+input_path = "thunar.css"
+gtk_extension = "gtk3"

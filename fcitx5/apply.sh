@@ -19,20 +19,23 @@ write_if_changed() {
     rm -f "$tmp"
 }
 
-if [ ! -f "$config_file" ]; then
-    echo "Theme=$theme_name" >"$config_file"
-elif grep -qE '^Theme=' "$config_file"; then
-    if grep -qE "^Theme=$theme_name\$" "$config_file"; then
-        :
+# Both modes use the same theme file, rendered with the current Noctalia palette.
+for theme_key in Theme DarkTheme; do
+    if [ ! -f "$config_file" ]; then
+        echo "$theme_key=$theme_name" >"$config_file"
+    elif grep -qE "^$theme_key=" "$config_file"; then
+        if grep -qE "^$theme_key=$theme_name\$" "$config_file"; then
+            :
+        else
+            tmp_file="$(mktemp "${config_file}.tmp.XXXXXX")"
+            sed -E "s/^$theme_key=.*/$theme_key=$theme_name/" "$config_file" >"$tmp_file"
+            write_if_changed "$config_file" "$tmp_file"
+        fi
     else
-        tmp_file="$(mktemp "${config_file}.tmp.XXXXXX")"
-        sed -E "s/^Theme=.*/Theme=$theme_name/" "$config_file" >"$tmp_file"
-        write_if_changed "$config_file" "$tmp_file"
+        [ -s "$config_file" ] && [ -n "$(tail -c1 "$config_file")" ] && echo >>"$config_file"
+        echo "$theme_key=$theme_name" >>"$config_file"
     fi
-else
-    [ -s "$config_file" ] && [ -n "$(tail -c1 "$config_file")" ] && echo >>"$config_file"
-    echo "Theme=$theme_name" >>"$config_file"
-fi
+done
 
 busctl --user call org.fcitx.Fcitx5 /controller org.fcitx.Fcitx.Controller1 ReloadAddonConfig s classicui \
     >/dev/null 2>&1 || true
