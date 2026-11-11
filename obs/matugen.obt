@@ -13,7 +13,7 @@
     --blue2: {{colors.primary_container.default.hex}};
     --blue3: {{colors.primary.default.hex}};
     --blue4: {{colors.on_primary_container.default.hex}};
-    --blue5: {{colors.inverse_primary.default.hex}};
+    --blue5: {{colors.on_primary.default.hex}};
 
     /* Error / Danger (Red mapping) */
     --red1: #E85E75;
@@ -101,6 +101,7 @@
 
     --text_disabled: var(--text_muted);
     --text_inactive: var(--white2);
+    --text_on_primary: {{colors.on_primary.default.hex}};
 
     /* Layout */
     --font_base_value: var(--obsFontScale);
@@ -234,7 +235,8 @@
     --palette_mid: var(--grey7);
     --palette_dark: var(--grey6);
     --palette_highlight: var(--primary);
-    --palette_highlightedText: var(--text);
+    --palette_highlightText: var(--text_on_primary);
+    --palette_highlightedText: var(--text_on_primary);
     --palette_text: var(--text);
     --palette_link: var(--blue2);
     --palette_linkVisited: var(--blue2);
@@ -242,7 +244,11 @@
     --palette_buttonText: var(--text);
     --palette_text_active: var(--text);
     --palette_text_disabled: var(--text_disabled);
-    --palette_text_inactive: var(--text_inactive);
+    --palette_text_inactive: var(--text);
+
+    --palette_highlight_inactive: var(--grey4);
+    --palette_highlightText_inactive: var(--text);
+    --palette_highlightedText_inactive: var(--text);
 }
 
 .bg_window {
@@ -457,7 +463,7 @@ QWidget {
     alternate-background-color: var(--bg_base);
     color: var(--text);
     selection-background-color: var(--primary);
-    selection-color: var(--text);
+    selection-color: var(--text_on_primary);
     font-size: var(--font_base);
     font-family: 'Open Sans', '.AppleSystemUIFont', Helvetica, Arial, 'MS Shell Dlg', sans-serif;
 }
@@ -587,6 +593,7 @@ QMenuBar::item {
 
 QMenuBar::item:selected {
     background: var(--primary);
+    color: var(--text_on_primary);
 }
 
 /* Item Lists */
@@ -621,7 +628,9 @@ QMenu::item {
 
 QListView::item,
 QListWidget::item,
-QMenu::item {
+QMenu::item,
+SceneTree::item,
+SourceTree::item {
     border-radius: var(--border_radius);
     color: var(--text);
     border: 1px solid transparent;
@@ -651,33 +660,55 @@ SourceTree .indicator-expand {
 
 QMenu::item:selected,
 QListView::item:selected,
-QListWidget::item:selected {
+QListWidget::item:selected,
+SceneTree::item:selected,
+SourceTree::item:selected {
     background-color: var(--primary);
     border-color: var(--primary_light);
+    color: var(--text_on_primary);
+}
+
+QMenu::item:selected:!active,
+QListView::item:selected:!active,
+QListWidget::item:selected:!active,
+SceneTree::item:selected:!active,
+SourceTree::item:selected:!active {
+    background-color: var(--grey4);
+    border-color: var(--grey3);
+    color: var(--text);
 }
 
 QMenu::item:hover,
 QListView::item:hover,
-QListWidget::item:hover {
+QListWidget::item:hover,
+SceneTree::item:hover,
+SourceTree::item:hover {
     background: var(--grey4);
     border: 1px solid var(--grey3);
+    color: var(--text);
 }
 
 QMenu::item:focus,
 QListView::item:focus,
 QListWidget::item:focus,
+SceneTree::item:focus,
+SourceTree::item:focus,
 QMenu::item:selected:focus,
 QListView::item:selected:focus,
-QListWidget::item:selected:focus {
+QListWidget::item:selected:focus,
+SceneTree::item:selected:focus,
+SourceTree::item:selected:focus {
     border: 1px solid var(--white3);
 }
 
 QMenu::item:selected:hover,
 QListView::item:selected:hover,
-QListWidget::item:selected:hover {
+QListWidget::item:selected:hover,
+SceneTree::item:selected:hover,
+SourceTree::item:selected:hover {
     background: var(--primary_light);
     border: 1px solid var(--primary_lighter);
-    color: var(--text);
+    color: var(--text_on_primary);
 }
 
 QListView::item:disabled,
@@ -1092,6 +1123,7 @@ QComboBox QAbstractItemView::item {
 QComboBox QAbstractItemView::item:selected,
 QComboBox QAbstractItemView::item:hover {
     background-color: var(--list_item_bg_selected);
+    color: var(--text_on_primary);
 }
 
 QComboBox:hover,
@@ -1312,6 +1344,7 @@ QDoubleSpinBox::down-arrow {
 #modeSwitch:!hover:!pressed.state-active,
 #broadcastButton:!hover:!pressed.state-active {
     background: var(--primary);
+    color: var(--text_on_primary);
 }
 
 /* Primary Control Button Hover Coloring */
@@ -1323,7 +1356,7 @@ QDoubleSpinBox::down-arrow {
 #modeSwitch:hover:!pressed.state-active,
 #broadcastButton:hover:!pressed.state-active {
     background: var(--primary_light);
-    color: var(--text);
+    color: var(--text_on_primary);
 }
 
 
@@ -1359,11 +1392,13 @@ QPushButton::flat {
 QPushButton:checked {
     background-color: var(--primary);
     border-color: var(--primary_light);
+    color: var(--text_on_primary);
 }
 
 QPushButton:checked:hover,
 QPushButton:checked:focus {
     border-color: var(--primary_lighter);
+    color: var(--text_on_primary);
 }
 
 QPushButton:pressed,
@@ -1936,10 +1971,12 @@ SceneTree {
 
 .list-grid SceneTree::item:selected {
     background-color: var(--list_item_bg_selected);
+    color: var(--text_on_primary);
 }
 
 .list-grid SceneTree::item:checked {
     background-color: var(--primary);
+    color: var(--text_on_primary);
 }
 
 .list-grid SceneTree::item:hover {
@@ -1948,6 +1985,7 @@ SceneTree {
 
 .list-grid SceneTree::item:selected:hover {
     background-color: var(--list_item_bg_hover);
+    color: var(--text_on_primary);
 }
 
 /* Studio Mode T-Bar */
@@ -1990,11 +2028,12 @@ OBSYoutubeActions {
 #ytEventList .row-selected {
     background-color: var(--primary);
     border: none;
+    color: var(--text_on_primary);
 }
 
 #ytEventList .row-selected:hover {
     background-color: var(--primary_light);
-    color: var(--text);
+    color: var(--text_on_primary);
 }
 
 /* Calendar Widget */
@@ -2345,6 +2384,7 @@ idian--Row QComboBox QAbstractItemView::item {
 idian--Row QComboBox QAbstractItemView::item:hover,
 idian--Row QComboBox QAbstractItemView::item:selected {
     background-color: var(--list_item_bg_selected);
+    color: var(--text_on_primary);
     padding: var(--padding_base) var(--padding_large);
 }
 
