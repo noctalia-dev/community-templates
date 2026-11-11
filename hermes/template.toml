@@ -1,0 +1,9 @@
+[catalog.hermes]
+name     = "Hermes Agent"
+category = "ai"
+
+[templates.hermes]
+input_path  = "hermes-skin.yaml"
+output_path = "$XDG_STATE_HOME/noctalia/hermes/hermes-skin.yaml"
+post_hook   = "bash '{{ config_dir }}/apply.sh'"
+hook_async  = false

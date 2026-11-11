@@ -1,0 +1,83 @@
+# Hermes skin — rendered by Noctalia.
+#
+# The skin engine reads `colors:` for the CLI/TUI palette and `customCSS` for
+# the desktop app. Noctalia fills every placeholder below with the live
+# palette on each theme change.
+#
+# The desktop app derives its own palette from `colors:` (see
+# `skinToDesktopTheme` in apps/desktop/src/themes/skin.ts) — it reads
+# `background`, `ui_text`/`banner_text`, `ui_accent` and `ui_border`. The
+# `customCSS` block then overrides the exact CSS custom properties the
+# desktop paints, so both layers follow Noctalia.
+name: noctalia
+
+description: Noctalia palette (auto-generated)
+
+colors:
+  background: "{{ colors.surface.default.hex }}"
+  foreground: "{{ colors.on_surface.default.hex }}"
+
+  ui_accent: "{{ colors.primary.default.hex }}"
+  ui_tool: "{{ colors.secondary.default.hex }}"
+  ui_text: "{{ colors.on_surface.default.hex }}"
+  ui_border: "{{ colors.outline_variant.default.hex }}"
+
+  banner_border: "{{ colors.outline_variant.default.hex }}"
+  banner_title: "{{ colors.on_surface.default.hex }}"
+  banner_accent: "{{ colors.primary.default.hex }}"
+  banner_dim: "{{ colors.on_surface_variant.default.hex }}"
+  banner_text: "{{ colors.on_surface.default.hex }}"
+
+  ui_label: "{{ colors.on_surface_variant.default.hex }}"
+  ui_ok: "{{ colors.terminal_normal_green.default.hex }}"
+  ui_error: "{{ colors.error.default.hex }}"
+  ui_warn: "{{ colors.terminal_normal_yellow.default.hex }}"
+
+  prompt: "{{ colors.on_surface.default.hex }}"
+  input_rule: "{{ colors.outline_variant.default.hex }}"
+  response_border: "{{ colors.primary.default.hex }}"
+  session_label: "{{ colors.on_surface_variant.default.hex }}"
+  session_border: "{{ colors.outline_variant.default.hex }}"
+
+  status_bar_bg: "{{ colors.surface_container.default.hex }}"
+  status_bar_text: "{{ colors.on_surface.default.hex }}"
+  voice_status_bg: "{{ colors.surface_container.default.hex }}"
+
+  selection_bg: "{{ colors.primary_container.default.hex }}"
+  completion_menu_bg: "{{ colors.surface_container.default.hex }}"
+  completion_menu_current_bg: "{{ colors.surface_container_high.default.hex }}"
+  completion_menu_meta_bg: "{{ colors.surface_container.default.hex }}"
+  completion_menu_meta_current_bg: "{{ colors.surface_container_high.default.hex }}"
+
+customCSS: |
+  /* Hermes Desktop — Noctalia palette.
+     Applied by the desktop app as <style id="hermes-desktop-custom-css">
+     while this skin is active. These are the exact custom properties the
+     desktop paints, so they win over the palette it derives from `colors:`. */
+  :root {
+    --dt-primary: {{ colors.primary.default.hex }};
+    --dt-accent: {{ colors.primary_container.default.hex }};
+    --dt-background: {{ colors.surface.default.hex }};
+    --dt-foreground: {{ colors.on_surface.default.hex }};
+    --dt-card: {{ colors.surface_container.default.hex }};
+    --dt-card-foreground: {{ colors.on_surface.default.hex }};
+    --dt-muted: {{ colors.surface_container_high.default.hex }};
+    --dt-muted-foreground: {{ colors.on_surface_variant.default.hex }};
+    --dt-popover: {{ colors.surface_container_high.default.hex }};
+    --dt-popover-foreground: {{ colors.on_surface.default.hex }};
+    --dt-sidebar-bg: {{ colors.surface_container.default.hex }};
+    --dt-sidebar-foreground: {{ colors.on_surface.default.hex }};
+    --dt-sidebar-border: {{ colors.outline_variant.default.hex }};
+    --dt-sidebar-accent: {{ colors.primary.default.hex }};
+    --dt-sidebar-primary: {{ colors.primary.default.hex }};
+    --dt-sidebar-ring: {{ colors.primary.default.hex }};
+    --dt-border: {{ colors.outline_variant.default.hex }};
+    --dt-ring: {{ colors.primary.default.hex }};
+    --dt-midground: {{ colors.on_surface_variant.default.hex }};
+    --dt-input-border: {{ colors.outline_variant.default.hex }};
+    --dt-danger: {{ colors.error.default.hex }};
+    --dt-danger-foreground: {{ colors.on_error.default.hex }};
+    --dt-success: {{ colors.terminal_normal_green.default.hex }};
+    --dt-warning: {{ colors.terminal_normal_yellow.default.hex }};
+    --dt-info: {{ colors.terminal_normal_cyan.default.hex }};
+  }
