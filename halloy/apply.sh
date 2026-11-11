@@ -41,4 +41,5 @@ else
   write_if_changed "$config_file" "$tmp_file"
 fi
 
-pkill -SIGUSR1 halloy >/dev/null 2>&1 || true
+# Halloy installs its reload handler during startup; SIGUSR1 terminates it before then.
+pkill --require-handler --signal USR1 --euid "$(id -u)" --exact halloy >/dev/null 2>&1 || true
