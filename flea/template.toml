@@ -1,0 +1,7 @@
+[catalog.flea]
+name = "Flea"
+category = "misc"
+
+[templates.flea]
+input_path = "flea.toml"
+output_path = "$XDG_STATE_HOME/omarchy/current/theme/colors.toml"
