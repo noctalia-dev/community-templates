@@ -1,0 +1,13 @@
+[catalog.betterbird]
+name = "Betterbird"
+category = "misc"
+
+# Noctalia renders the palette into Betterbird's chrome via userChrome.css and userContent.css.
+# apply.sh wires the rendered file into every Betterbird profile and enables userChrome;
+# undo.sh cleanly reverses imports and preference changes when disabled;
+# see README.md for the read-only profile handling.
+[templates.betterbird]
+input_path = "noctalia.css"
+output_path = "$XDG_CACHE_HOME/noctalia/betterbird/noctalia.css"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
+undo_hook = "bash '{{ config_dir }}/undo.sh'"

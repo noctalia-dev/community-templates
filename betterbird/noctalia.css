@@ -1,0 +1,939 @@
+/* Noctalia palette for Betterbird.
+ *
+ * Rendered by the Noctalia template engine into
+ *   $XDG_CACHE_HOME/noctalia/betterbird/noctalia.css
+ * and imported from the profile's userChrome.css and userContent.css by apply.sh.
+ *
+ * Betterbird's chrome is themed through its layout variables (see
+ * chrome://messenger/skin/layout.css): background 0..4 build the pane
+ * hierarchy, color 0..3 the text, border 0..2 the separators. Overriding
+ * those reaches toolbars, folder pane, message list, message header and
+ * cards at once.
+ */
+
+:root {
+  --layout-background-0: {{ colors.surface.default.hex }} !important;
+  --layout-background-1: {{ colors.surface.default.hex }} !important;
+  --layout-background-2: {{ colors.surface.default.hex }} !important;
+  --layout-background-3: {{ colors.surface.default.hex }} !important;
+  --layout-background-4: {{ colors.surface.default.hex }} !important;
+
+  /* Calendar background variables */
+  --viewBackground: {{ colors.surface.default.hex }} !important;
+  --viewCalendarHeaderBackground: {{ colors.surface.default.hex }} !important;
+  --viewTodayBackground: {{ colors.surface.default.hex }} !important;
+  --viewTodayOffBackground: {{ colors.surface.default.hex }} !important;
+  --viewTodayWeekendBackground: {{ colors.surface.default.hex }} !important;
+  --viewWeekendBackground: {{ colors.surface.default.hex }} !important;
+  --viewMonthOtherBackground: {{ colors.surface.default.hex }} !important;
+  --viewMonthWeekLabelBackground: {{ colors.surface.default.hex }} !important;
+  --viewMonthDayOtherBackground: {{ colors.surface.default.hex }} !important;
+  --viewMonthDayOffLabelBackground: {{ colors.surface.default.hex }} !important;
+  --viewOffTimeBackground: {{ colors.surface.default.hex }} !important;
+  --calendar-view-toggle-background: {{ colors.surface.default.hex }} !important;
+  --mmMainBackground: {{ colors.surface.default.hex }} !important;
+  --mmBoxBackground: {{ colors.surface.default.hex }} !important;
+  --mmBoxBorderColor: transparent !important;
+  --mmMainBorderColor: transparent !important;
+
+  /* Sidebar, panel, and gray overrides */
+  --sidebar-background: {{ colors.surface.default.hex }} !important;
+  --sidebar-background-color: {{ colors.surface.default.hex }} !important;
+  --panel-background-color: {{ colors.surface.default.hex }} !important;
+  --panel-background: {{ colors.surface.default.hex }} !important;
+  --color-gray-70: {{ colors.surface.default.hex }} !important;
+  --color-gray-80: {{ colors.surface.default.hex }} !important;
+  --color-gray-90: {{ colors.surface.default.hex }} !important;
+
+  /* Conversations Add-on custom properties */
+  --application-background-color: {{ colors.surface.default.hex }} !important;
+  --application-foreground-color: {{ colors.on_surface.default.hex }} !important;
+  --dull-foreground-color: {{ colors.on_surface_variant.default.hex }} !important;
+  --email-address-dull-color: {{ colors.on_surface_variant.default.hex }} !important;
+  --border-color: {{ colors.outline_variant.default.hex }} !important;
+  --icon-color: {{ colors.on_surface_variant.default.hex }} !important;
+  --notification-bar-background-color: {{ colors.surface_container.default.hex }} !important;
+  --notification-bar-foreground-color: {{ colors.on_surface.default.hex }} !important;
+
+  /* Bolt surface tokens: every grey comes from these via light-dark() */
+  --color-surface-base-dark: {{ colors.surface.default.hex }} !important;
+  --color-surface-base-light: {{ colors.surface.default.hex }} !important;
+  --color-surface-lower-dark: {{ colors.surface.default.hex }} !important;
+  --color-surface-lower-light: {{ colors.surface.default.hex }} !important;
+  --color-surface-subtle-dark: {{ colors.surface_container.default.hex }} !important;
+  --color-surface-subtle-light: {{ colors.surface_container.default.hex }} !important;
+  --color-surface-raised-dark: {{ colors.surface_container.default.hex }} !important;
+  --color-surface-raised-light: {{ colors.surface_container.default.hex }} !important;
+  --color-surface-deep-dark: {{ colors.surface_container_high.default.hex }} !important;
+  --color-surface-deep-light: {{ colors.surface_container_high.default.hex }} !important;
+  --color-surface-border-dark: {{ colors.outline_variant.default.hex }} !important;
+  --color-surface-border-light: {{ colors.outline_variant.default.hex }} !important;
+  --color-gray-50: {{ colors.outline_variant.default.hex }} !important;
+  --color-gray-60: {{ colors.surface_container_high.default.hex }} !important;
+
+  /* Trees, lists, fields */
+  --tree-view-bg: {{ colors.surface.default.hex }} !important;
+  --tree-pane-background: {{ colors.surface.default.hex }} !important;
+  --foldertree-background: {{ colors.surface.default.hex }} !important;
+  --listbox-selected-bg: {{ colors.surface_container_high.default.hex }} !important;
+  --listbox-hover: color-mix(in srgb, {{ colors.primary_container.default.hex }} 25%, transparent) !important;
+  --field-background-color: {{ colors.surface_container.default.hex }} !important;
+  --background-color-box: {{ colors.surface.default.hex }} !important;
+  --background-color-canvas: {{ colors.surface.default.hex }} !important;
+
+  /* Toolbar & LWT variables (fixes grey bars in Chat, Calendar unifinder, Tasks, Today Pane) */
+  --toolbar-background-color: {{ colors.surface.default.hex }} !important;
+  --toolbar-text-color: {{ colors.on_surface.default.hex }} !important;
+  --lwt-accent-color: {{ colors.surface.default.hex }} !important;
+  --lwt-accent-color-inactive: {{ colors.surface.default.hex }} !important;
+  --lwt-text-color: {{ colors.on_surface.default.hex }} !important;
+  --lwt-selected-tab-background-color: transparent !important;
+  --lwt-header-image: none !important;
+  --toolbox-background-color: {{ colors.surface.default.hex }} !important;
+  --toolbox-background-color-inactive: {{ colors.surface.default.hex }} !important;
+
+  /* Toolbar search fields (.themeableSearchBox in Calendar, Tasks, Chat, Address Book) */
+  --toolbar-field-background-color: {{ colors.surface_container_high.default.hex }} !important;
+  --toolbar-field-color: {{ colors.on_surface.default.hex }} !important;
+  --toolbar-field-border-color: transparent !important;
+  --toolbar-field-background-color-focus: {{ colors.surface_container_highest.default.hex }} !important;
+  --toolbar-field-text-color-focus: {{ colors.on_surface.default.hex }} !important;
+  --toolbar-field-focus-border-color: {{ colors.primary.default.hex }} !important;
+
+  /* Ink palette (blue-grey) used by calendar & thread lines */
+  --color-ink-10: {{ colors.on_surface.default.hex }} !important;
+  --color-ink-20: {{ colors.on_surface_variant.default.hex }} !important;
+  --color-ink-30: {{ colors.outline.default.hex }} !important;
+  --color-ink-40: {{ colors.outline.default.hex }} !important;
+  --color-ink-50: {{ colors.outline_variant.default.hex }} !important;
+  --color-ink-60: {{ colors.surface_container_high.default.hex }} !important;
+  --color-ink-70: {{ colors.surface_container.default.hex }} !important;
+  --color-ink-80: {{ colors.surface_container_low.default.hex }} !important;
+  --color-ink-90: {{ colors.surface.default.hex }} !important;
+
+  --input-border-color: {{ colors.outline_variant.default.hex }} !important;
+  --viewDayLabelSelectedBackground: {{ colors.primary_container.default.hex }} !important;
+  --viewDragboxBackground: {{ colors.primary_container.default.hex }} !important;
+  --viewDropshadowBackground: {{ colors.primary_container.default.hex }} !important;
+  --viewMonthWeekLabelBackground: {{ colors.surface_container.default.hex }} !important;
+
+  /* Minimonth */
+  --mmDayTodayBackground: {{ colors.primary_container.default.hex }} !important;
+  --mmDaySelectedBackground: {{ colors.secondary_container.default.hex }} !important;
+
+  --layout-color-0: {{ colors.on_surface.default.hex }} !important;
+  --layout-color-1: {{ colors.on_surface.default.hex }} !important;
+  --layout-color-2: {{ colors.on_surface_variant.default.hex }} !important;
+  --layout-color-3: {{ colors.outline.default.hex }} !important;
+
+  /* M3 separates regions by tonal surface, not by hairlines, so the
+   * structural borders go transparent. Interactive borders and card
+   * outlines stay on --layout-border-2 / --tree-card-border. */
+  --layout-border-0: transparent !important;
+  --layout-border-1: transparent !important;
+  --layout-border-2: {{ colors.outline_variant.default.hex }} !important;
+  --chrome-content-separator-color: transparent !important;
+  --tabs-tabbar-border-size: 0 !important;
+  --toolbarseparator-color: transparent !important;
+
+  --color-accent-primary: {{ colors.primary.default.hex }} !important;
+  --toolbarbutton-icon-fill-attention: {{ colors.primary.default.hex }} !important;
+
+  /* Selected folder / message rows. */
+  --selected-item-color: {{ colors.primary_container.default.hex }} !important;
+  --selected-item-text-color: {{ colors.on_primary_container.default.hex }} !important;
+  --sidebar-highlight-background-color: {{ colors.primary_container.default.hex }} !important;
+  --sidebar-highlight-text-color: {{ colors.on_primary_container.default.hex }} !important;
+
+  /* Message cards background matching the page. */
+  --tree-card-background: {{ colors.surface.default.hex }} !important;
+  --tree-card-border: {{ colors.outline_variant.default.hex }} !important;
+}
+
+/* --- Material 3 shape -------------------------------------------------- */
+
+/* Betterbird defaults to a 3px radius on buttons, inputs, list rows and
+ * cards. M3 uses pills for buttons and inputs and 12dp for cards/panels, so
+ * overriding the radius variables lifts the whole chrome to the M3 shape
+ * scale. Buttons also become filled tonal (secondary container). */
+:root {
+  --button-border-radius: 20px !important;
+  --border-radius-medium: 12px !important;
+  --border-radius-large: 16px !important;
+  --input-search-border-radius: 9999px !important;
+  --listbox-border-radius: 12px !important;
+  --panel-border-radius: 12px !important;
+
+  --button-background-color: {{ colors.secondary_container.default.hex }} !important;
+  --button-text-color: {{ colors.on_secondary_container.default.hex }} !important;
+  --button-border-color: transparent !important;
+
+  --focus-outline-color: {{ colors.primary.default.hex }} !important;
+
+  /* Filled search field and navigation rail surface. */
+  --search-bar-background: {{ colors.surface_container_high.default.hex }} !important;
+  --search-bar-focus-background: {{ colors.surface_container_highest.default.hex }} !important;
+  --search-bar-border-color: transparent !important;
+  --spaces-bg-color: {{ colors.surface.default.hex }} !important;
+}
+
+/* Navigation rail: circular active indicator behind the icon (M3). */
+.spaces-toolbar-button {
+  border-radius: 9999px !important;
+}
+
+.spaces-toolbar-button:not(.current):not(:hover) {
+  background-color: transparent !important;
+}
+
+/* --- Firefox Nova inspired chrome ------------------------------------- */
+
+/* Window, top bar and toolbar backgrounds all match the unified surface color */
+:root:not(svg),
+#messengerWindow,
+#navigation-toolbox,
+#titlebar,
+#unifiedToolbarContainer,
+#unifiedToolbar,
+#unifiedToolbarContent,
+#spacesToolbar,
+#status-bar {
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+/* Floating tab pills: uniform radius, a gap between tabs, a soft gradient on
+ * the active tab, no accent line underneath. */
+#tabs-toolbar {
+  --tabs-toolbar-background-color: {{ colors.surface.default.hex }} !important;
+  background-color: {{ colors.surface.default.hex }} !important;
+  --tabs-toolbar-box-shadow: none !important;
+  padding-inline: 6px !important;
+}
+
+.tabmail-tab {
+  border-radius: 8px !important;
+  margin-inline-end: 4px !important;
+  margin-block: 4px !important;
+}
+
+.tabmail-tab .tab-background {
+  border-radius: 8px !important;
+}
+
+.tabmail-tab .tab-background[selected] {
+  background-color: {{ colors.surface_container_highest.default.hex }} !important;
+  background-image: linear-gradient(
+    135deg,
+    color-mix(in srgb, {{ colors.primary_container.default.hex }} 40%, {{ colors.surface_container_highest.default.hex }}),
+    {{ colors.surface_container_high.default.hex }}
+  ) !important;
+  box-shadow: 0 1px 4px -2px rgba(0, 0, 0, 0.45) !important;
+}
+
+.tabmail-tab:hover .tab-background:not([selected]) {
+  background-color: {{ colors.surface_container_high.default.hex }} !important;
+}
+
+.tab-line {
+  display: none !important;
+}
+
+/* Framed content: all panes and the layout frame share the same background color. */
+body#paneLayout {
+  gap: 8px !important;
+  padding: 8px !important;
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+#paneLayout #folderPane {
+  background-color: {{ colors.surface.default.hex }} !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 0 0 1px {{ colors.outline_variant.default.hex }} !important;
+}
+
+#paneLayout :is(#threadPane, #messagePane) {
+  background-color: {{ colors.surface.default.hex }} !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 0 0 1px {{ colors.outline_variant.default.hex }} !important;
+}
+
+/* Message list cards: eliminate opaque backgrounds in twisty, columns & status dots */
+#threadTree[rows="thread-card"] button.twisty,
+#threadTree[rows="thread-card"] .thread-card-column,
+#threadTree[rows="thread-card"] .read-status,
+.card-layout button.twisty,
+.card-container .thread-card-column {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+#threadTree[rows="thread-card"] button.twisty:hover,
+.card-layout button.twisty:hover {
+  background-color: color-mix(in srgb, currentColor 15%, transparent) !important;
+}
+
+/* Popups, hamburger menu, and panels: unified surface background */
+:is(menupopup, panel):not(.autoscroller),
+panelview,
+.panel-subview-body,
+.panel-arrowcontent,
+#appMenu-popup,
+#appMenu-mainView,
+menupopup,
+panel {
+  --panel-background-color: {{ colors.surface.default.hex }} !important;
+  --panel-background: {{ colors.surface.default.hex }} !important;
+  --color-surface-subtle: {{ colors.surface.default.hex }} !important;
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+.toolbaritem-combined-buttons > .subviewbutton[type="radio"]:not([checked]) {
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+/* --- Slim chrome ------------------------------------------------------- */
+
+/* The classic menu bar is pure chrome on a tiling setup; it stays reachable
+ * through the Alt key and the app menu. */
+#toolbar-menubar {
+  display: none !important;
+}
+
+:root {
+  --tab-min-height: 28px !important;
+  --unified-toolbar-minimal-height: 26px !important;
+  --list-item-min-height: 22px !important;
+  --tree-row-padding: 2px !important;
+}
+
+#unifiedToolbar {
+  padding-block: 2px !important;
+}
+
+/* --- Calendar, Address Book, Chat, Message Content & Other Backgrounds --- */
+
+/* Calendar views, sidebar, task list, unifinder, minimonth, and today pane */
+tree,
+treecols,
+treecol,
+.tree-columnpicker-button,
+#unifinder-search-box,
+#unifinder-tree,
+#unifinderHeader,
+#calendar-task-tree,
+#calendar-task-tree treecols,
+#calendar-task-tree treecol,
+#task-tree-filter-header,
+#task-filter-pane,
+#minimonth-pane,
+#minimonth-header,
+.minimonth-header,
+.minimonth-month-box,
+#calendar-nav-bar,
+#calendar-panel,
+#task-view-body,
+#today-splitter,
+#calsidebar_splitter,
+#imip-view-toolbar,
+calendar-minimonth,
+#bottom-events-box,
+#calSidebar,
+#calendarContent,
+#view-box,
+#calendarDisplayDeck,
+calendar-month-view,
+calendar-day-view,
+calendar-week-view,
+calendar-multiday-view,
+.multiday-hour-box,
+calendar-header-container,
+.day-column-weekend :is(calendar-header-container, .multiday-hour-box),
+.day-column-today :is(calendar-header-container, .multiday-hour-box),
+.calendar-month-day-box-current-month,
+.calendar-month-day-box-day-off,
+.calendar-month-day-box-other-month,
+.calendar-month-day-box-week-label,
+calendar-month-day-box-item,
+#today-pane-panel,
+#today-pane-panel > vbox,
+#today-minimonth-box,
+#agenda,
+#calendar-task-details,
+#calendar-task-details-container,
+.calview-toggle {
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+/* Address Book (Chrome & In-Content about:addressbook) */
+#aboutAddressBook,
+#booksPane,
+#cardsPane,
+#detailsPane,
+#dialogStack,
+#cards,
+#books,
+.books-pane-bottom,
+.contact-details-scroll,
+tr[is="ab-card-row"] td > .card-container {
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+/* Chat panels, conversation list, and conversation content */
+#chatTabPanel,
+#listPaneBox,
+#contextPane,
+.im-placeholder-screen,
+#conversations-deck,
+#logDisplayBrowserBox,
+#chat-conversation-browser,
+.conv-nicklist-header,
+.conv-logs-header-label,
+#Chat {
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+/* Message body & reader content documents (userContent) */
+html,
+body,
+body:has(> .moz-text-html),
+.moz-text-plain,
+.moz-text-flowed,
+.moz-text-html {
+  background-color: {{ colors.surface.default.hex }} !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+}
+
+/* Neutralize Conversations darkReader double-inversion */
+html.darkReaderEnabled,
+html.darkReaderEnabled > body {
+  filter: none !important;
+  background-color: {{ colors.surface.default.hex }} !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+}
+
+html.darkReaderEnabled > body :is(img, [style*="background-image:"]:not([style*="background-image: none"]), [background*="."], g-emoji) {
+  filter: none !important;
+}
+
+/* Ensure text inside message content is legible against the dark background */
+:is(.moz-text-html, .moz-text-plain, .moz-text-flowed, html.darkReaderEnabled > body)
+  :is(div, table, tbody, thead, tfoot, tr, td, th, section, article, main, aside, header, footer, p, span, li, ul, ol, dl, dt, dd, font, b, strong, em, i, u, small, sub, sup, h1, h2, h3, h4, h5, h6, blockquote, pre, code) {
+  color: {{ colors.on_surface.default.hex }} !important;
+  border-color: {{ colors.outline_variant.default.hex }} !important;
+}
+
+/* Clear hardcoded light backgrounds from email templates and wrappers */
+:is(.moz-text-html, .moz-text-plain, .moz-text-flowed, html.darkReaderEnabled > body) :is([bgcolor], [style*="background"]) {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Links inside message content */
+:is(.moz-text-html, .moz-text-plain, .moz-text-flowed, html.darkReaderEnabled > body)
+  :is(a, a:link, a:visited, a *) {
+  color: {{ colors.primary.default.hex }} !important;
+}
+
+/* Message pane header & attachment area */
+#messagepanebox,
+#messagepaneboxwrapper,
+#messageHeader,
+#singleMessage,
+#attachmentView,
+#attachmentBar {
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+/* Compose window */
+#msgcomposeWindow,
+#compose-toolbox,
+#composeToolbar2,
+#headers-box,
+#addressingWidget,
+#MsgHeadersToolbar,
+#FormatToolbox,
+#attachmentBucket {
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+/* In-content pages (Preferences / Settings, Addons, Account Settings, etc.) */
+@-moz-document url-prefix("about:"),
+               url-prefix("chrome://messenger/content/preferences/"),
+               url-prefix("chrome://messenger/content/messenger/preferences/") {
+  :root:not(svg),
+  body,
+  #categories,
+  .paneDeck,
+  .main-content,
+  #pref-category-box,
+  .sticky-container {
+    background-color: {{ colors.surface.default.hex }} !important;
+  }
+
+}
+
+/* Chat conv.html */
+@-moz-document url-prefix("chrome://chat/content/chat/conv.html") {
+  html,
+  body,
+  #Chat {
+    background-color: {{ colors.surface.default.hex }} !important;
+    color: {{ colors.on_surface.default.hex }} !important;
+  }
+}
+
+/* GTK-colored widgets that ignore the tokens above */
+treechildren,
+richlistbox,
+#unifinder-search-results-tree,
+.minimonth-nav-btns {
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+/* --- Conversations Add-on (chrome://conversations/ & in-content) -------- */
+
+@-moz-document url-prefix("chrome://conversations/"),
+               url-prefix("moz-extension://") {
+  :root {
+    --application-background-color: {{ colors.surface.default.hex }} !important;
+    --application-foreground-color: {{ colors.on_surface.default.hex }} !important;
+    --dull-foreground-color: {{ colors.on_surface_variant.default.hex }} !important;
+    --email-address-dull-color: {{ colors.on_surface_variant.default.hex }} !important;
+    --border-color: {{ colors.outline_variant.default.hex }} !important;
+    --icon-color: {{ colors.on_surface_variant.default.hex }} !important;
+  }
+
+  body {
+    background-color: {{ colors.surface.default.hex }} !important;
+    color: {{ colors.on_surface.default.hex }} !important;
+  }
+}
+
+/* Outer wrapper & message container */
+#conversationWrapper,
+#messageList,
+#popup-container {
+  background-color: {{ colors.surface.default.hex }} !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+}
+
+/* Sticky conversation header */
+conversation-header,
+.conversationHeaderWrapper,
+.conversationHeader,
+linkified-subject,
+.subject,
+conv-actions-buttons,
+.actions {
+  background-color: {{ colors.surface_container.default.hex }} !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+  border-color: {{ colors.outline_variant.default.hex }} !important;
+}
+
+/* Actions button styling in conversation header */
+.actions-button {
+  color: {{ colors.on_surface_variant.default.hex }} !important;
+}
+
+.actions-button:hover,
+.actions-button:focus {
+  color: {{ colors.primary.default.hex }} !important;
+  border-color: {{ colors.outline_variant.default.hex }} !important;
+}
+
+.actions-button.unread {
+  color: {{ colors.primary.default.hex }} !important;
+}
+
+/* Message cards */
+.message,
+.messageHeader,
+.messageBody,
+.messageFooter,
+message-footer {
+  background-color: {{ colors.surface_container_low.default.hex }} !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+  border-color: {{ colors.outline_variant.default.hex }} !important;
+}
+
+.message .iframe-container,
+.message iframe {
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+.detailsLine,
+.extraDetails,
+.notificationBar {
+  background-color: {{ colors.surface_container.default.hex }} !important;
+  color: {{ colors.on_surface_variant.default.hex }} !important;
+  border-color: {{ colors.outline_variant.default.hex }} !important;
+}
+
+.author {
+  color: {{ colors.on_surface.default.hex }} !important;
+}
+
+.to,
+.bzTo,
+.snippet {
+  color: {{ colors.on_surface_variant.default.hex }} !important;
+}
+
+/* Quick reply & inline compose area */
+.quickReply,
+.quickReplyHeader,
+.replyHeader {
+  background-color: {{ colors.surface_container_low.default.hex }} !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+  border-color: {{ colors.outline_variant.default.hex }} !important;
+}
+
+.quickReply .replyBoxWrapper li,
+.quickReply .replyBox {
+  background-color: {{ colors.surface_container.default.hex }} !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+  border-color: {{ colors.outline_variant.default.hex }} !important;
+  border-radius: 8px !important;
+}
+
+.quickReply .replyBox:hover,
+.quickReply .replyBox.selected {
+  background-color: {{ colors.surface_container_high.default.hex }} !important;
+  color: {{ colors.primary.default.hex }} !important;
+  border-color: {{ colors.primary.default.hex }} !important;
+}
+
+.quickReply a,
+.bottom-links a,
+.link,
+a.link {
+  color: {{ colors.primary.default.hex }} !important;
+}
+
+.bottom-links {
+  background-color: {{ colors.surface.default.hex }} !important;
+  color: {{ colors.on_surface_variant.default.hex }} !important;
+}
+
+/* Compose form widgets inside conversations */
+compose-widget,
+.headerField label,
+.buttons > button {
+  background-color: {{ colors.surface_container_high.default.hex }} !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+  border-color: {{ colors.outline_variant.default.hex }} !important;
+}
+
+.headerEntry,
+.headerEntry > input,
+.textAreaWrapper > textarea {
+  background-color: {{ colors.surface_container_lowest.default.hex }} !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+  border-color: {{ colors.outline_variant.default.hex }} !important;
+}
+
+/* Tooltips, contact details, popups, and attachment cards */
+.tooltip,
+.tipFooter,
+.attachmentThumb {
+  background-color: {{ colors.surface_container_high.default.hex }} !important;
+  background-image: none !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+  border-color: {{ colors.outline_variant.default.hex }} !important;
+}
+
+.arrow.inside {
+  border-color: transparent transparent {{ colors.surface_container_high.default.hex }} transparent !important;
+}
+
+.arrow {
+  border-color: transparent transparent {{ colors.outline_variant.default.hex }} transparent !important;
+}
+
+.icon-link,
+button.header,
+button.footerActions {
+  color: {{ colors.on_surface_variant.default.hex }} !important;
+}
+
+.icon-link:hover,
+.icon-link:focus,
+button.header:hover,
+button.footerActions:hover {
+  color: {{ colors.primary.default.hex }} !important;
+}
+
+/* --- Calendar Minimonth & Widgets -------------------------------------- */
+
+/* Element-level minimonth tokens (must sit on calendar-minimonth, not :root) */
+calendar-minimonth {
+  --mmMainBackground: {{ colors.surface.default.hex }} !important;
+  --mmBoxBackground: {{ colors.surface_container_high.default.hex }} !important;
+  --mmBoxBorderColor: transparent !important;
+  --mmBoxItemColor: transparent !important;
+  --mmDayColor: {{ colors.on_surface.default.hex }} !important;
+  --mmDayOtherColor: {{ colors.outline.default.hex }} !important;
+  --mmDayWeekColor: {{ colors.primary.default.hex }} !important;
+  --mmDayTodayColor: {{ colors.on_primary_container.default.hex }} !important;
+  --mmDayTodayBackground: {{ colors.primary_container.default.hex }} !important;
+  --mmDayTodayBorderColor: transparent !important;
+  --mmDaySelectedColor: {{ colors.on_secondary_container.default.hex }} !important;
+  --mmDaySelectedBackground: {{ colors.secondary_container.default.hex }} !important;
+  --mmDaySelectedBorderColor: transparent !important;
+  --mmDaySelectedTodayBackground: {{ colors.primary_container.default.hex }} !important;
+  --mmDaySelectedTodayBorderColor: {{ colors.primary.default.hex }} !important;
+  --mmDayBusyColor: {{ colors.primary.default.hex }} !important;
+  --mmDayBorderRadius: 8px !important;
+}
+
+/* One clean M3 pill per nav section, no inner pill, no separators */
+.minimonth-nav-section {
+  background-color: {{ colors.surface_container_high.default.hex }} !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  padding: 2px !important;
+  gap: 2px !important;
+}
+.minimonth-nav-item {
+  border-inline: none !important;
+}
+.minimonth-nav-item input,
+.minimonth-month-name,
+.minimonth-year-name {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+  opacity: 1 !important;
+}
+
+/* Circular icon buttons (prev / next / today) */
+.minimonth-header .minimonth-nav-btn {
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  inline-size: 24px !important;
+  block-size: 24px !important;
+  min-inline-size: 24px !important;
+  stroke: {{ colors.on_surface_variant.default.hex }} !important;
+  fill: {{ colors.on_surface_variant.default.hex }} !important;
+}
+.minimonth-header .minimonth-nav-btn:is(:hover, :active, :focus-visible) {
+  background-color: {{ colors.secondary_container.default.hex }} !important;
+  stroke: {{ colors.on_secondary_container.default.hex }} !important;
+  fill: {{ colors.on_secondary_container.default.hex }} !important;
+}
+
+/* ENABLE badge on disabled calendars */
+#calendar-list > li > button.calendar-enable-button {
+  background: {{ colors.primary_container.default.hex }} !important;
+  color: {{ colors.on_primary_container.default.hex }} !important;
+}
+#calendar-list > li > button.calendar-enable-button:is(:hover, :focus, :active) {
+  background: {{ colors.primary.default.hex }} !important;
+  color: {{ colors.on_primary.default.hex }} !important;
+}
+
+/* Tasks quick-add field ("Please select a calendar that supports tasks") */
+#view-task-edit-field,
+#unifinder-task-edit-field {
+  background-color: {{ colors.surface_container_high.default.hex }} !important;
+  border-color: transparent !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+}
+.task-edit-field[readonly="true"] {
+  color: {{ colors.on_surface_variant.default.hex }} !important;
+}
+
+/* --- Search Bars (Calendar, Tasks, Chat, Address Book) ----------------- */
+
+.searchBox,
+.themeableSearchBox,
+.gloda-search,
+.remote-gloda-search,
+#unifinder-search-field,
+#task-text-filter-field,
+#peopleSearchInput {
+  background-color: {{ colors.surface_container_high.default.hex }} !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+  border: 1px solid transparent !important;
+  border-radius: 9999px !important;
+  box-shadow: none !important;
+  padding-block: 3px !important;
+  padding-inline-end: 10px !important;
+}
+
+:is(
+  .searchBox,
+  .themeableSearchBox,
+  .gloda-search,
+  .remote-gloda-search,
+  #unifinder-search-field,
+  #task-text-filter-field,
+  #peopleSearchInput
+):is(:focus, [focused="true"]) {
+  background-color: {{ colors.surface_container_highest.default.hex }} !important;
+  color: {{ colors.on_surface.default.hex }} !important;
+  border-color: {{ colors.primary.default.hex }} !important;
+  outline: none !important;
+}
+
+.mail-toolbox,
+.contentTabToolbox,
+#chat-view-toolbox,
+#chat-toolbar,
+#unifinder-searchBox,
+#task-addition-box,
+#today-pane-panel,
+#today-pane-panel > vbox,
+#today-pane-panel > .sidebar-header,
+#mini-day-image {
+  background-color: {{ colors.surface.default.hex }} !important;
+  background-image: none !important;
+}
+
+/* --- Rounded Panel Framing & Inner Padding (Calendar, Tasks, Chat, Today Pane) --- */
+
+/* Hide straight splitter lines while keeping drag handles functional */
+#calsidebar_splitter,
+#today-splitter,
+#calendar-view-splitter,
+#calendar-task-view-splitter,
+#listSplitter,
+#contextSplitter,
+#today-pane-splitter {
+  border: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Outer containers: 8px padding & spacing to match Email body#paneLayout */
+#calendarContent {
+  padding: 8px !important;
+  gap: 6px !important;
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+#chatTabPanel {
+  padding: 8px !important;
+  gap: 8px !important;
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+#chatPanel {
+  gap: 6px !important;
+  background-color: {{ colors.surface.default.hex }} !important;
+}
+
+/* Framed rounded panels matching Email tab (#folderPane, #threadPane, #messagePane) */
+#calSidebar,
+#bottom-events-box,
+#calendar-task-box,
+#chat-view-toolbox,
+#listPaneBox,
+#chat-notification-top,
+#contextPane {
+  background-color: {{ colors.surface.default.hex }} !important;
+  border-radius: 12px !important;
+  box-shadow: 0 0 0 1px {{ colors.outline_variant.default.hex }} !important;
+}
+
+/* Calendar view: frame the calendar grid + header cleanly */
+#calendarDisplayBox {
+  gap: 8px !important;
+  padding: 1px !important;
+}
+
+#calendar-view-box {
+  gap: 8px !important;
+  padding: 1px !important;
+}
+
+#bottom-events-box {
+  padding: 6px 8px !important;
+  overflow: hidden !important;
+}
+
+#calendar-view-box > #calendarViewHeader {
+  background-color: {{ colors.surface.default.hex }} !important;
+  border-radius: 12px 12px 0 0 !important;
+  box-shadow: 0 0 0 1px {{ colors.outline_variant.default.hex }} !important;
+  padding: 6px 10px !important;
+  margin-bottom: -8px !important;
+}
+
+#calendar-view-box > #view-box {
+  background-color: {{ colors.surface.default.hex }} !important;
+  border-radius: 0 0 12px 12px !important;
+  box-shadow: 0 0 0 1px {{ colors.outline_variant.default.hex }} !important;
+  padding: 4px !important;
+  overflow: hidden !important;
+}
+
+/* Right-side Today Pane (visible across Email, Calendar, Tasks, and Chat) */
+#today-pane-panel {
+  margin: 8px 8px 8px 2px !important;
+  padding: 6px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 0 0 1px {{ colors.outline_variant.default.hex }} !important;
+  overflow: hidden !important;
+}
+
+/* Inner padding so buttons and inputs at panel edges never get cut off */
+#calSidebar {
+  padding: 6px !important;
+}
+
+#primaryButtonSidePanel {
+  padding: 6px 8px !important;
+}
+
+#sideButtonsBottom {
+  padding: 4px 6px !important;
+}
+
+#unifinder-searchBox,
+#task-addition-box {
+  padding: 4px 6px !important;
+  gap: 6px !important;
+  border: none !important;
+}
+
+#calendar-task-box {
+  padding: 6px !important;
+  overflow: hidden !important;
+}
+
+#chat-view-toolbox {
+  padding: 4px 8px !important;
+  overflow: hidden !important;
+}
+
+#listPaneBox,
+#chat-notification-top,
+#contextPane {
+  padding: 6px !important;
+  overflow: hidden !important;
+}
+
+#today-pane-panel > .sidebar-header {
+  padding: 4px 6px !important;
+  border-block-end: 1px solid {{ colors.outline_variant.default.hex }} !important;
+}
+
+#unifinder-todo-tree {
+  padding: 4px !important;
+}
+
+#view-task-edit-field,
+#unifinder-task-edit-field {
+  margin: 4px 6px !important;
+}
+
+/* Email tab header bars: prevent Quick Filter & New Message buttons from clipping at rounded corners */
+#folderPaneHeaderBar,
+#threadPaneHeaderBar {
+  padding-inline: 8px !important;
+}
