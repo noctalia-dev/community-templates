@@ -35,28 +35,20 @@ if [ "${#roots[@]}" -eq 0 ]; then
     exit 0
 fi
 
-# -L so profiles managed as symlinks are found too.
-all_profiles=()
-betterbird_profiles=()
+# Collect only profiles explicitly identified as Betterbird.
+# Unidentified profiles (e.g. ordinary Thunderbird profiles) are strictly skipped.
+profiles=()
 
 while IFS= read -r -d '' prefs; do
     p="$(dirname "$prefs")"
-    all_profiles+=("$p")
-    # If the path itself is in a betterbird-named root, or compatibility.ini specifies betterbird
     if [[ "$p" =~ [Bb]etterbird ]] || ( [ -f "$p/compatibility.ini" ] && grep -qi "betterbird" "$p/compatibility.ini" ); then
-        betterbird_profiles+=("$p")
+        profiles+=("$p")
     fi
 done < <(find -L "${roots[@]}" -mindepth 2 -maxdepth 2 -type f -name prefs.js -print0)
 
-if [ "${#all_profiles[@]}" -eq 0 ]; then
-    warn "no profile with prefs.js found under ${roots[*]}"
-    exit 1
-fi
-
-if [ "${#betterbird_profiles[@]}" -gt 0 ]; then
-    profiles=("${betterbird_profiles[@]}")
-else
-    profiles=("${all_profiles[@]}")
+if [ "${#profiles[@]}" -eq 0 ]; then
+    # No profile identified as Betterbird; skip without modifying ordinary Thunderbird profiles.
+    exit 0
 fi
 
 for profile in "${profiles[@]}"; do

@@ -44,15 +44,20 @@ field a filled container.
 
 ## How the wiring works
 
-`apply.sh` looks for `prefs.js` in Betterbird and Thunderbird profiles (under `~/.betterbird`, `~/.thunderbird`,
-Flatpak and Snap paths). It automatically identifies Betterbird-specific profiles via `compatibility.ini` and:
+`apply.sh` searches for profiles under Betterbird and Thunderbird roots (such as `~/.betterbird`,
+`~/.thunderbird`, Flatpak and Snap directories). To avoid modifying ordinary Thunderbird profiles,
+it strictly targets profiles located in Betterbird paths or marked as Betterbird via `compatibility.ini`:
 
 - prepends `@import "<cache>/betterbird/noctalia.css";` to `chrome/userChrome.css` and `chrome/userContent.css`
   (creating the directory and files if needed),
 - ensures `user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);` in `user.js`.
 
-Both steps are idempotent: re-applying never duplicates a line.
+Any profile not identified as Betterbird is skipped. Both steps are idempotent: re-applying never duplicates a line.
 
 ## Uninstall
 
-Remove the import lines from `chrome/userChrome.css` and `chrome/userContent.css`, and disable the template in Noctalia.
+Disable the template in Noctalia (or remove it from `community_ids`). Noctalia automatically triggers `undo.sh`, which:
+- removes the `@import` lines from `chrome/userChrome.css` and `chrome/userContent.css` (deleting the files if empty),
+- removes the `toolkit.legacyUserProfileCustomizations.stylesheets` preference from `user.js` (reverting to default),
+- clears the Gecko startup cache,
+- deletes the cached rendered palette file.
