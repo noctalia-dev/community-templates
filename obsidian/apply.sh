@@ -8,11 +8,31 @@ set -euo pipefail
 snippet_name="noctalia"
 
 find_vaults() {
-    # Search common locations for Obsidian vaults (up to 4 levels deep)
-    local search_dirs=("$HOME")
-    for dir in "${search_dirs[@]}"; do
-        find "$dir" -maxdepth 4 -name ".obsidian" -type d 2>/dev/null || true
-    done | sort -u
+	python3 -c "
+import json
+import sys
+import os
+
+if 'XDG_CONFIG_HOME' in os.environ:
+    config_dir = os.environ['XDG_CONFIG_HOME']
+else:
+    config_dir = os.path.join(os.environ['HOME'], '.config/')
+
+path = os.path.join(
+    config_dir,
+    'obsidian/obsidian.json'
+)
+
+try:
+    with open(path) as f:
+        for name, vault in json.load(f)['vaults'].items():
+            print(vault['path'] + '/.obsidian')
+except FileNotFoundError:
+	sys.exit(1)
+"	|| {
+		printf 'Warning: Obsidian configuration not found\n' >&2
+		exit 1
+	}
 }
 
 case "${1:-}" in
@@ -39,17 +59,17 @@ case "${1:-}" in
             python3 -c "
 import json, sys
 
-with open('$appearance_file') as f:
+with open(sys.argv[1]) as f:
     data = json.load(f)
 
 snippets = data.get('enabledCssSnippets', [])
 if '$snippet_name' not in snippets:
     snippets.append('$snippet_name')
     data['enabledCssSnippets'] = snippets
-    with open('$appearance_file', 'w') as f:
+    with open(sys.argv[1], 'w') as f:
         json.dump(data, f, indent=2)
         f.write('\n')
-" 2>/dev/null || true
+" "$appearance_file" 2>/dev/null || true
         done
         ;;
     *)
