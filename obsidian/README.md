@@ -15,8 +15,9 @@ The apply script automatically enables the snippet in each vault's `appearance.j
 
 ## Vault discovery
 
-The apply script searches `$HOME` (up to 4 directories deep) for `.obsidian/` folders.
-If your vault lives deeper or on an external drive, you can add a user template override
+The apply script checks the vaults listed in `~/.config/obsidian/obsidian.json`.
+This list is maintainted automatically by Obsidian and should include all the vaults you use.
+If you would like to specify a vault directory manually, you can add a user template override
 in your noctalia config with an explicit `output_path`:
 
 ```toml
