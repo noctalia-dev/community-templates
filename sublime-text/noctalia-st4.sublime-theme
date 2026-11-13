@@ -1,0 +1,124 @@
+{
+    "extends": "Adaptive.sublime-theme",
+    "rules":
+    [
+        {
+            "class": "title_bar",
+            "settings": ["themed_title_bar"],
+            "bg": "{{colors.surface.default.hex}}",
+            "fg": "{{colors.on_surface.default.hex}}"
+        },
+        {
+            "class": "sidebar_container",
+            "layer0.tint": "{{colors.surface_container_low.default.hex}}",
+            "layer0.opacity": 1.0
+        },
+        {
+            "class": "tree_row",
+            "attributes": ["selected"],
+            "layer0.tint": "{{colors.surface_container_highest.default.hex}}",
+            "layer0.opacity": 1.0
+        },
+        {
+            "class": "sidebar_label",
+            "parents": [{"class": "tree_row", "attributes": ["selected"]}],
+            "fg": "{{colors.on_surface.default.hex}}"
+        },
+        {
+            "class": "tabset_control",
+            "layer0.tint": "{{colors.surface_container.default.hex}}",
+            "layer0.opacity": 1.0
+        },
+        {
+            "class": "tab_control",
+            "layer0.tint": "{{colors.surface_container.default.hex}}",
+            "layer0.opacity": 1.0
+        },
+        {
+            "class": "tab_label",
+            "fg": "{{colors.on_surface.default.hex}}"
+        },
+        {
+            "class": "status_bar",
+            "layer0.tint": "{{colors.surface.default.hex}}",
+            "layer0.opacity": 1.0
+        },
+        {
+            "class": "label_control",
+            "parents": [{"class": "status_bar"}],
+            "fg": "{{colors.on_surface_variant.default.hex}}"
+        },
+        {
+            "class": "panel_control",
+            "layer0.tint": "{{colors.surface_container_low.default.hex}}",
+            "layer0.opacity": 1.0
+        },
+        {
+            "class": "quick_panel",
+            "layer0.tint": "{{colors.surface_container_high.default.hex}}",
+            "layer0.opacity": 1.0
+        },
+        {
+            "class": "quick_panel_row",
+            "attributes": ["selected"],
+            "layer0.tint": "{{colors.surface_container_highest.default.hex}}",
+            "layer0.opacity": 1.0
+        },
+        {
+            "class": "mini_quick_panel_row",
+            "attributes": ["selected"],
+            "layer0.tint": "{{colors.surface_container_highest.default.hex}}",
+            "layer0.opacity": 1.0
+        },
+        {
+            "class": "quick_panel_label",
+            "fg": "{{colors.on_surface.default.hex}}",
+            "match_fg": "{{colors.primary.default.hex}}",
+            "selected_fg": "{{colors.on_surface.default.hex}}",
+            "selected_match_fg": "{{colors.primary.default.hex}}"
+        },
+        {
+            "class": "quick_panel_path_label",
+            "fg": "{{colors.on_surface_variant.default.hex}}",
+            "match_fg": "{{colors.primary.default.hex}}",
+            "selected_fg": "{{colors.on_surface_variant.default.hex}}",
+            "selected_match_fg": "{{colors.primary.default.hex}}"
+        },
+        {
+            "class": "table_row",
+            "attributes": ["selected"],
+            "layer0.tint": "{{colors.surface_container_highest.default.hex}}",
+            "layer0.opacity": 1.0
+        },
+        {
+            "class": "auto_complete_label",
+            "fg": "{{colors.on_surface.default.hex}}",
+            "match_fg": "{{colors.primary.default.hex}}",
+            "selected_fg": "{{colors.on_surface.default.hex}}",
+            "selected_match_fg": "{{colors.primary.default.hex}}"
+        },
+        {
+            "class": "tool_tip_control",
+            "layer0.tint": "{{colors.surface_container_high.default.hex}}",
+            "layer0.opacity": 1.0
+        },
+        {
+            "class": "tool_tip_label_control",
+            "fg": "{{colors.on_surface.default.hex}}"
+        },
+        {
+            "class": "scroll_bar_control",
+            "layer0.tint": "{{colors.background.default.hex}}",
+            "layer0.opacity": 1.0
+        },
+        {
+            "class": "puck_control",
+            "layer0.tint": "{{colors.outline.default.hex}}",
+            "layer0.opacity": 1.0
+        },
+        {
+            "class": "grid_layout_control",
+            "border_color": "{{colors.outline_variant.default.hex}}"
+        }
+    ]
+}

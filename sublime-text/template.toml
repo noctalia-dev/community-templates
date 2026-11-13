@@ -1,0 +1,26 @@
+[catalog.sublime-text]
+name = "Sublime Text"
+category = "editor"
+
+# Sublime Text 4 (~/.config/sublime-text)
+[templates.sublime_text_4_color_scheme]
+input_path = "noctalia.sublime-color-scheme"
+output_path = "~/.config/sublime-text/Packages/User/Noctalia.sublime-color-scheme"
+requires_path = "~/.config/sublime-text"
+
+# The theme is written next to the stock themes, not into Packages/User: Sublime
+# resolves sidebar file-type icons relative to the active .sublime-theme file, so
+# from Packages/User every file icon would be missing. A loose "Theme - Default"
+# folder overlays the bundled package; this adds one file and overrides none.
+[templates.sublime_text_4_theme]
+input_path = "noctalia-st4.sublime-theme"
+output_path = "~/.config/sublime-text/Packages/Theme - Default/Noctalia.sublime-theme"
+requires_path = "~/.config/sublime-text"
+
+# Sublime Text 3 (~/.config/sublime-text-3)
+# Color scheme only: ST3 themes have no `extends`, so a UI theme would mean
+# overriding the bundled Adaptive theme, which we don't want to touch.
+[templates.sublime_text_3_color_scheme]
+input_path = "noctalia.sublime-color-scheme"
+output_path = "~/.config/sublime-text-3/Packages/User/Noctalia.sublime-color-scheme"
+requires_path = "~/.config/sublime-text-3"
