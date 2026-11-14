@@ -13,9 +13,10 @@ Noctalia generates the stylesheet at:
 - Native: `$XDG_CONFIG_HOME/io.github.tobagin.karere/user.css`
   (normally `~/.config/io.github.tobagin.karere/user.css`).
 
-The path matches Karere's upstream `user_css_path()` implementation. The
-manifest checks for `/usr/bin/karere` so that the stylesheet can be generated
-even before Karere has created its configuration directory.
+The path matches Karere's upstream `user_css_path()` implementation. Enable
+Karere in Noctalia's community templates; no additional manual setup or hooks
+are needed. The manifest checks for `/usr/bin/karere` so that the stylesheet
+can be generated even before Karere has created its configuration directory.
 
 Karere 4.4.1 loads `user.css` when WhatsApp Web loads, but **does not
 automatically reload it after Noctalia changes the theme**. Press **Ctrl+R**
