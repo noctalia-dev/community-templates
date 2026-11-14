@@ -1,0 +1,8 @@
+[catalog.lxqt]
+name = "lxqt-config-appearance"
+category = "system"
+
+[templates.lxqt]
+input_path = "lxqt-palette.conf"
+output_path = "~/.cache/noctalia/lxqt/palettes/noctalia.conf"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
