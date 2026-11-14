@@ -1,0 +1,7 @@
+[catalog.sable]
+name  = "sable"
+category  = "chat"
+
+[templates.sable]
+input_path  = "sable.css"
+output_path = "$XDG_CACHE_HOME/sable/noctalia.sable.css"
