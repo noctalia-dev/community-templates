@@ -1,0 +1,30 @@
+[catalog.sublime-merge]
+name = "Sublime Merge"
+category = "editor"
+
+[templates.sublime_merge_theme]
+input_path = "noctalia.sublime-theme"
+output_path = "~/.config/sublime-merge/Packages/User/Noctalia.sublime-theme"
+requires_path = "~/.config/sublime-merge"
+
+[templates.sublime_merge_color_scheme]
+input_path = "noctalia.sublime-color-scheme"
+output_path = "~/.config/sublime-merge/Packages/User/Noctalia.sublime-color-scheme"
+requires_path = "~/.config/sublime-merge"
+
+# Merge picks the color scheme of each text view from "<View> - <Theme>.sublime-settings",
+# so these route every view to the Noctalia scheme while the Noctalia theme is selected.
+[templates.sublime_merge_views]
+input_path = "view.sublime-settings"
+output_path = [
+	"~/.config/sublime-merge/Packages/User/Diff - Noctalia.sublime-settings",
+	"~/.config/sublime-merge/Packages/User/Commit Message - Noctalia.sublime-settings",
+	"~/.config/sublime-merge/Packages/User/File Mode - Noctalia.sublime-settings",
+	"~/.config/sublime-merge/Packages/User/Git Output - Noctalia.sublime-settings",
+]
+requires_path = "~/.config/sublime-merge"
+
+[templates.sublime_merge_widgets]
+input_path = "widget.sublime-settings"
+output_path = "~/.config/sublime-merge/Packages/User/Widget - Noctalia.sublime-settings"
+requires_path = "~/.config/sublime-merge"
