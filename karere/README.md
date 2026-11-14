@@ -1,11 +1,25 @@
-# Karere Custom CSS
+# Karere
 
-Themes the WhatsApp Web interface inside Karere using the current Noctalia palette.
+Themes the WhatsApp Web interface inside [Karere](https://github.com/tobagin/karere)
+using the current Noctalia palette.
 
-Requires the `karere-custom-css` AUR package, which provides live custom CSS support for Karere. See the [Karere custom CSS documentation](https://github.com/riccardomarotti/karere/blob/main/CUSTOM-CSS.md) for details.
+Requires Karere **4.4.0 or later**, which supports loading a custom `user.css`
+stylesheet natively. This works with the regular native `karere` or
+[`karere-bin`](https://aur.archlinux.org/packages/karere-bin) AUR packages;
+the old `karere-custom-css` fork is no longer required.
 
-Generated stylesheet path:
+Noctalia generates the stylesheet at:
 
-- Native: `$XDG_CONFIG_HOME/karere/custom.css`
+- Native: `$XDG_CONFIG_HOME/io.github.tobagin.karere/user.css`
+  (normally `~/.config/io.github.tobagin.karere/user.css`).
 
-Karere reloads the stylesheet automatically when Noctalia updates it. The template is compatible with both dark and light Noctalia palettes.
+The path matches Karere's upstream `user_css_path()` implementation. The
+manifest checks for `/usr/bin/karere` so that the stylesheet can be generated
+even before Karere has created its configuration directory.
+
+Karere 4.4.1 loads `user.css` when WhatsApp Web loads, but **does not
+automatically reload it after Noctalia changes the theme**. Press **Ctrl+R**
+in Karere to refresh the page and apply the newly rendered colors.
+
+The template affects WhatsApp Web content, not Karere's native GTK interface,
+and supports both light and dark Noctalia palettes.
