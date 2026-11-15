@@ -1,0 +1,8 @@
+[catalog.tele]
+name = "tele"
+category = "chat"
+
+[templates.tele]
+input_path = "tele-colors.yml"
+output_path = "~/.config/tele/themes/noctalia.yml"
+requires_path = "~/.config/tele"
