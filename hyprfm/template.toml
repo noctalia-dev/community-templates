@@ -1,0 +1,11 @@
+[catalog.hyprfm]
+name = "HyprFM"
+category = "misc"
+
+# Renders a HyprFM theme file; apply.sh selects it in HyprFM's config.toml
+# and undo.sh reverts that selection. HyprFM reloads both files live.
+[templates.hyprfm]
+input_path = "hyprfm.toml"
+output_path = "$XDG_CONFIG_HOME/hyprfm/themes/noctalia.toml"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
+undo_hook = "bash '{{ config_dir }}/undo.sh'"
