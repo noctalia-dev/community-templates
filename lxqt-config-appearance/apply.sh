@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-lxqt_cache_dir="${XDG_CACHE_DIR:-$HOME/.cache}/noctalia/lxqt"
+lxqt_cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/noctalia/lxqt"
 palettes_dir="$lxqt_cache_dir/palettes"
 config_file="${XDG_CONFIG_HOME:-$HOME/.config}/lxqt/lxqt.conf"
 
