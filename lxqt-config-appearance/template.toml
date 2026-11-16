@@ -4,5 +4,5 @@ category = "system"
 
 [templates.lxqt-config-appearance]
 input_path = "lxqt-palette.conf"
-output_path = "~/.cache/noctalia/lxqt/palettes/noctalia.conf"
+output_path = "${XDG_CACHE_HOME:-$HOME/.cache}/noctalia/lxqt/palettes/noctalia.conf"
 post_hook = "bash '{{ config_dir }}/apply.sh'"
