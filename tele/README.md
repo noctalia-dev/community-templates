@@ -48,3 +48,9 @@ Gruvbox dark palette:
 
 Gruvbox light palette:
 ![tele with the Gruvbox light palette](tele-gruvbox-light.png)
+
+Palette generated from the Noctalia wallpaper, dark:
+![tele with a palette generated from the Noctalia wallpaper, dark](tele-wallpaper-dark.png)
+
+Palette generated from the Noctalia wallpaper, light:
+![tele with a palette generated from the Noctalia wallpaper, light](tele-wallpaper-light.png)
