@@ -1,0 +1,9 @@
+[catalog.openmeters]
+name = "OpenMeters"
+category = "audio"
+
+[templates.openmeters]
+input_path = "openmeters.json"
+output_path = "$XDG_CONFIG_HOME/openmeters/themes/noctalia.json"
+post_hook = "bash '{{ config_dir }}/apply.sh' native"
+undo_hook = "bash '{{ config_dir }}/apply.sh' undo native"
