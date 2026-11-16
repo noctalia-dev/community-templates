@@ -1,0 +1,99 @@
+/*
+@sable-theme
+id: Noctalia-Theme-Template
+name: Noctalia-Matugen
+author: Yoake2000
+kind: light
+tags: Noctalia, Matugen
+description: Made as a template for Noctalia Colors. Also usable by Matugen.
+*/
+
+body.sable-remote-theme {
+  /* Background */
+  --sable-bg-container: {{colors.surface.default.hex}};
+  --sable-bg-container-hover: {{colors.surface_container_highest.default.hex}};
+  --sable-bg-container-active: {{colors.surface_container_highest.default.hex}};
+  --sable-bg-container-line: {{colors.outline_variant.default.hex}};
+  --sable-bg-on-container: {{colors.on_surface.default.hex}};
+
+  /* Surface */
+  --sable-surface-container: {{colors.surface_container.default.hex}};
+  --sable-surface-container-hover: {{colors.surface_container_high.default.hex}};
+  --sable-surface-container-active: {{colors.surface_container_highest.default.hex}};
+  --sable-surface-container-line: {{colors.outline_variant.default.hex}};
+  --sable-surface-on-container: {{colors.on_surface.default.hex}};
+
+  /* Surface Variant */
+  --sable-surface-var-container: {{colors.surface_variant.default.hex}};
+  --sable-surface-var-container-hover: {{colors.surface_container_high.default.hex}};
+  --sable-surface-var-container-active: {{colors.surface_container_highest.default.hex}};
+  --sable-surface-var-container-line: {{colors.outline_variant.default.hex}};
+  --sable-surface-var-on-container: {{colors.on_surface_variant.default.hex}};
+
+  /* Primary */
+  --sable-primary-main: {{colors.primary.default.hex}};
+  --sable-primary-main-hover: {{colors.primary_fixed.default.hex}};
+  --sable-primary-main-active: {{colors.primary_fixed_dim.default.hex}};
+  --sable-primary-main-line: {{colors.primary.default.hex}};
+  --sable-primary-on-main: {{colors.on_primary.default.hex}};
+  --sable-primary-container: {{colors.primary_container.default.hex}};
+  --sable-primary-container-hover: {{colors.primary_fixed_dim.default.hex}};
+  --sable-primary-container-active: {{colors.primary_fixed.default.hex}};
+  --sable-primary-container-line: {{colors.outline.default.hex}};
+  --sable-primary-on-container: {{colors.on_primary_container.default.hex}};
+
+  /* Secondary */
+  --sable-sec-main: {{colors.secondary.default.hex}};
+  --sable-sec-main-hover: {{colors.secondary_fixed.default.hex}};
+  --sable-sec-main-active: {{colors.secondary_fixed_dim.default.hex}};
+  --sable-sec-main-line: {{colors.outline.default.hex}};
+  --sable-sec-on-main: {{colors.on_secondary.default.hex}};
+  --sable-sec-container: {{colors.secondary_container.default.hex}};
+  --sable-sec-container-hover: {{colors.secondary_fixed_dim.default.hex}};
+  --sable-sec-container-active: {{colors.secondary_fixed.default.hex}};
+  --sable-sec-container-line: {{colors.outline_variant.default.hex}};
+  --sable-sec-on-container: {{colors.on_secondary_container.default.hex}};
+
+  /* Success */
+  --sable-success-main: {{colors.tertiary.default.hex}};
+  --sable-success-main-hover: {{colors.tertiary_fixed.default.hex}};
+  --sable-success-main-active: {{colors.tertiary_fixed_dim.default.hex}};
+  --sable-success-main-line: {{colors.tertiary.default.hex}};
+  --sable-success-on-main: {{colors.on_tertiary.default.hex}};
+  --sable-success-container: {{colors.tertiary_container.default.hex}};
+  --sable-success-container-hover: {{colors.tertiary_fixed_dim.default.hex}};
+  --sable-success-container-active: {{colors.tertiary_fixed.default.hex}};
+  --sable-success-container-line: {{colors.outline_variant.default.hex}};
+  --sable-success-on-container: {{colors.on_tertiary_container.default.hex}};
+
+  /* Warning*/
+  --sable-warn-main: {{colors.secondary.default.hex}};
+  --sable-warn-main-hover: {{colors.secondary_fixed.default.hex}};
+  --sable-warn-main-active: {{colors.secondary_fixed_dim.default.hex}};
+  --sable-warn-main-line: {{colors.secondary.default.hex}};
+  --sable-warn-on-main: {{colors.on_secondary.default.hex}};
+  --sable-warn-container: {{colors.secondary_container.default.hex}};
+  --sable-warn-container-hover: {{colors.secondary_fixed_dim.default.hex}};
+  --sable-warn-container-active: {{colors.secondary_fixed.default.hex}};
+  --sable-warn-container-line: {{colors.outline_variant.default.hex}};
+  --sable-warn-on-container: {{colors.on_secondary_container.default.hex}};
+
+  /* Critical */
+  --sable-crit-main: {{colors.error.default.hex}};
+  --sable-crit-main-hover: {{colors.error_container.default.hex}};
+  --sable-crit-main-active: {{colors.error_container.default.hex}};
+  --sable-crit-main-line: {{colors.error.default.hex}};
+  --sable-crit-on-main: {{colors.on_error.default.hex}};
+  --sable-crit-container: {{colors.error_container.default.hex}};
+  --sable-crit-container-hover: {{colors.error_container.default.hex}};
+  --sable-crit-container-active: {{colors.error_container.default.hex}};
+  --sable-crit-container-line: {{colors.outline.default.hex}};
+  --sable-crit-on-container: {{colors.on_error_container.default.hex}};
+
+  /* Other */
+  --sable-focus-ring: {{colors.primary.default.rgba}};
+  --sable-shadow: rgba(0, 0, 0, 1);
+  --sable-overlay: rgba(0, 0, 0, 0.8);
+
+  --tc-link: {{colors.primary.default.hex}};
+}
