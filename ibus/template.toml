@@ -1,0 +1,9 @@
+[catalog.ibus]
+name = "ibus"
+category = "system"
+
+[templates.ibus]
+input_path = "gtk.css"
+output_path = "$XDG_DATA_HOME/themes/noctalia-ibus/gtk-3.0/gtk.css"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
+undo_hook = "bash '{{ config_dir }}/undo.sh'"
