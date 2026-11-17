@@ -1,0 +1,284 @@
+/*
+ * Noctalia colors for the IBus panel: the candidate window, the engine
+ * switcher and the emoji picker.
+ */
+
+/* Adwaita's built-in stylesheet gives the widgets their shape and the rules below
+ * recolor them. Renders as gtk-contained-dark.css in dark mode and as
+ * gtk-contained.css in light mode. */
+@import url("resource:///org/gtk/libgtk/theme/Adwaita/gtk-contained{{ mode | replace: "light", "" | replace: "dark", "-dark" }}.css");
+
+/* Popups: the candidate window and the engine switcher. On Wayland every GTK
+ * window has an alpha channel, so clearing their background lets the rounded
+ * panel inside show what is behind its corners. */
+window.background:not(.csd),
+window.background:not(.csd):backdrop {
+  background-color: transparent;
+}
+
+/* The panel: the candidate window's #IBusCandidate box and the switcher's box. */
+#IBusCandidate,
+window.background:not(.csd) > box {
+  background-color: {{ colors.surface_container.default.hex }};
+  border-radius: calc(12px * {{ config.shell.corner_radius_scale }});
+<* if {{ config.shell.popup_borders }} *>
+  border: 1px solid {{ colors.outline_variant.default.hex }};
+<* else *>
+  border: none;
+<* endif *>
+}
+
+/* Candidate window. GtkEventBox has no CSS name in GTK 3, so its node is "widget",
+ * not "eventbox". The window is a popup that never takes focus, so it is always
+ * :backdrop.
+ *
+ * Inset the content so nothing reaches into the rounded corners. The drag
+ * handle takes 6px on the left, so the right side gets 6px more. */
+#IBusCandidate {
+  padding: calc(4px * {{ config.shell.corner_radius_scale }})
+           calc(4px * {{ config.shell.corner_radius_scale }} + 6px)
+           calc(4px * {{ config.shell.corner_radius_scale }})
+           calc(4px * {{ config.shell.corner_radius_scale }});
+}
+
+/* The drag handle at the left edge, drawn as a rounded accent bar. ibus colors
+ * it gray from its own stylesheet, at a priority a theme cannot outrank for
+ * background-color, but a background-image is painted over it. */
+#IBusHandle {
+  background-image: image({{ colors.primary.default.hex }});
+  border-radius: 3px;
+}
+
+#IBusCandidate label {
+  color: {{ colors.on_surface.default.hex }};
+}
+
+/* Aux text above the list (engine hints, reading, page counter). */
+#IBusCandidate > box > label {
+  color: {{ colors.on_surface_variant.default.hex }};
+}
+
+/* Candidate numbers. The label column of the vertical list, and the first
+ * label of each pair in the horizontal list. */
+#IBusCandidate box > box:first-child > widget > label,
+#IBusCandidate widget > box > label:first-child {
+  color: {{ colors.primary.default.hex }};
+}
+
+/* Let spacing do the separating. */
+#IBusCandidate separator {
+  background-color: transparent;
+}
+
+/* Page up / page down. */
+#IBusCandidate button,
+#IBusCandidate button:backdrop {
+  border-radius: calc(8px * {{ config.shell.corner_radius_scale }});
+  color: {{ colors.on_surface_variant.default.hex }};
+  background-color: transparent;
+  background-image: none;
+  border-color: transparent;
+  box-shadow: none;
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+}
+
+#IBusCandidate button:hover {
+  color: {{ colors.on_surface.default.hex }};
+  background-image: image({{ colors.surface_container_highest.default.hex }});
+}
+
+#IBusCandidate button:active {
+  color: {{ colors.on_primary_container.default.hex }};
+  background-image: image({{ colors.primary_container.default.hex }});
+}
+
+/* Highlighted candidate. ibus paints it as a text background from these
+ * colors, so it stays as a square box around the text. */
+GtkTextView.view {
+  color: {{ colors.on_surface.default.hex }};
+  background-color: {{ colors.surface_container.default.hex }};
+}
+
+GtkTextView.view:selected {
+  color: {{ colors.on_primary.default.hex }};
+  background-color: {{ colors.primary.default.hex }};
+}
+
+/* Preedit text, shown in the window when the app cannot draw it inline. */
+@define-color placeholder_text_color {{ colors.on_surface_variant.default.hex }};
+
+/* Engine switcher: room around the engine buttons. ibus marks the engine about
+ * to be picked with a blue tint it paints over the button itself, not through
+ * a CSS state, so a theme cannot recolor it. */
+window.background:not(.csd) > box:not(#IBusCandidate) {
+  padding: calc(6px * {{ config.shell.corner_radius_scale }});
+}
+
+/* Engine switcher, emoji picker, menus */
+.background,
+.background:backdrop {
+  color: {{ colors.on_surface.default.hex }};
+  background-color: {{ colors.surface_container.default.hex }};
+}
+
+label:disabled,
+label:disabled:backdrop {
+  color: {{ colors.on_surface_variant.default.hex }};
+}
+
+label selection,
+entry selection,
+entry selection:focus {
+  color: {{ colors.on_primary.default.hex }};
+  background-color: {{ colors.primary.default.hex }};
+}
+
+headerbar,
+headerbar:backdrop,
+.titlebar:not(headerbar),
+.titlebar:not(headerbar):backdrop {
+  color: {{ colors.on_surface.default.hex }};
+  background-color: {{ colors.surface_container.default.hex }};
+  background-image: none;
+  border-color: {{ colors.outline_variant.default.hex }};
+  box-shadow: none;
+}
+
+.view,
+.view:backdrop,
+list,
+list:backdrop,
+viewport,
+scrolledwindow {
+  color: {{ colors.on_surface.default.hex }};
+  background-color: {{ colors.surface_container.default.hex }};
+}
+
+row:hover,
+row.activatable:hover {
+  background-color: {{ colors.surface_container_highest.default.hex }};
+}
+
+row:selected,
+row:selected:backdrop,
+row:selected:focus {
+  color: {{ colors.on_primary.default.hex }};
+  background-color: {{ colors.primary.default.hex }};
+}
+
+entry,
+entry:backdrop {
+  color: {{ colors.on_surface.default.hex }};
+  caret-color: {{ colors.primary.default.hex }};
+  background-color: {{ colors.surface_container_high.default.hex }};
+  background-image: none;
+  border-color: {{ colors.outline_variant.default.hex }};
+  box-shadow: none;
+}
+
+entry:focus {
+  border-color: {{ colors.primary.default.hex }};
+  box-shadow: inset 0 0 0 1px {{ colors.primary.default.hex }};
+}
+
+button,
+button:backdrop {
+  color: {{ colors.on_surface.default.hex }};
+  background-color: transparent;
+  background-image: image({{ colors.surface_container_high.default.hex }});
+  border-color: {{ colors.outline_variant.default.hex }};
+  box-shadow: none;
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+}
+
+button.flat,
+button.flat:backdrop {
+  background-image: none;
+  border-color: transparent;
+}
+
+button:hover,
+button.flat:hover {
+  color: {{ colors.on_surface.default.hex }};
+  background-image: image({{ colors.surface_container_highest.default.hex }});
+  border-color: {{ colors.outline_variant.default.hex }};
+}
+
+button:active,
+button:checked,
+button:backdrop:active,
+button:backdrop:checked,
+button.flat:hover:active,
+button.flat:checked {
+  color: {{ colors.on_primary_container.default.hex }};
+  background-image: image({{ colors.primary_container.default.hex }});
+  border-color: {{ colors.primary_container.default.hex }};
+}
+
+button:disabled,
+button:backdrop:disabled {
+  color: {{ colors.outline.default.hex }};
+  background-image: none;
+}
+
+popover.background,
+popover.background:backdrop,
+menu,
+.menu,
+.context-menu {
+  color: {{ colors.on_surface.default.hex }};
+  background-color: {{ colors.surface_container_high.default.hex }};
+  border-color: {{ colors.outline_variant.default.hex }};
+  box-shadow: none;
+}
+
+menuitem:hover,
+menu menuitem:hover,
+.menu menuitem:hover {
+  color: {{ colors.on_primary.default.hex }};
+  background-color: {{ colors.primary.default.hex }};
+}
+
+tooltip.background {
+  color: {{ colors.inverse_on_surface.default.hex }};
+  background-color: {{ colors.inverse_surface.default.hex }};
+}
+
+tooltip * {
+  color: {{ colors.inverse_on_surface.default.hex }};
+}
+
+separator,
+separator:backdrop {
+  background-color: {{ colors.outline_variant.default.hex }};
+}
+
+scrollbar,
+scrollbar:backdrop {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+scrollbar slider,
+scrollbar slider:backdrop {
+  background-color: {{ colors.outline.default.hex }};
+}
+
+scrollbar slider:hover {
+  background-color: {{ colors.on_surface_variant.default.hex }};
+}
+
+progressbar trough,
+progressbar trough:backdrop {
+  background-color: {{ colors.surface_container_highest.default.hex }};
+  border-color: transparent;
+}
+
+progressbar progress,
+progressbar progress:backdrop {
+  background-color: {{ colors.primary.default.hex }};
+  background-image: none;
+  border-color: {{ colors.primary.default.hex }};
+}
