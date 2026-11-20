@@ -1,0 +1,8 @@
+[catalog.rummage]
+name = "rummage"
+category = "system"
+
+# rummage reads ~/.config/rummage/colors.toml and reloads it live; no hook needed.
+[templates.rummage]
+input_path = "colors.toml"
+output_path = "$XDG_CONFIG_HOME/rummage/colors.toml"
