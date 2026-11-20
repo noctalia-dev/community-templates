@@ -9,6 +9,15 @@ hierarchy, borders, status bar, diffs, syntax highlighting and completion menu a
 follow the palette you pick in Noctalia — including the accent color the desktop
 app uses for buttons, focus rings and the tool marker.
 
+## Screenshots
+
+The desktop app under a Noctalia palette, in both polarities — same skin, one
+palette:
+
+![Hermes Agent with a dark Noctalia palette](screenshot-dark.png)
+
+![Hermes Agent with a light Noctalia palette](screenshot-light.png)
+
 ## Prerequisites
 
 - Hermes Agent installed, with `hermes` on `PATH`.
