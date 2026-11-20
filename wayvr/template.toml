@@ -1,0 +1,7 @@
+[catalog.wayvr]
+name = "WayVR"
+category = "gaming"
+
+[templates.wayvr]
+input_path = "wayvr.json"
+output_path = "$XDG_CONFIG_HOME/wayvr/palettes/noctalia.json"
