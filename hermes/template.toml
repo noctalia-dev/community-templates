@@ -1,0 +1,7 @@
+[catalog.hermes]
+name = "Hermes Agent"
+category = "ai"
+
+[templates.hermes]
+input_path = "hermes-skin.yaml"
+output_path_dynamic = 'printf "%s\n" "${HERMES_HOME:-$HOME/.hermes}/skins/noctalia.yaml"'
