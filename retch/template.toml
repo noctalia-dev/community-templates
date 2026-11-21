@@ -1,0 +1,9 @@
+[catalog.retch]
+name = "retch"
+category = "terminal"
+
+[templates.retch]
+input_path = "retch.toml"
+output_path = "$XDG_CONFIG_HOME/retch/themes/noctalia.toml"
+post_hook = "bash '{{ config_dir }}/apply.sh'"
+undo_hook = "bash '{{ config_dir }}/undo.sh'"
