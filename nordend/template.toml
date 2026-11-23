@@ -1,0 +1,8 @@
+[catalog.nordend]
+name = "Nordend"
+category = "system"
+
+# Nordend watches ~/.config/nordend/colors.toml and reloads it live, so there is no hook.
+[templates.nordend]
+input_path = "colors.toml"
+output_path = "$XDG_CONFIG_HOME/nordend/colors.toml"
