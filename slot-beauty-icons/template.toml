@@ -8,4 +8,3 @@ output_path = "colors-final"
 post_hook = "bash '{{ config_dir }}/apply.sh'"
 undo_hook = "bash '{{ config_dir }}/undo.sh'"
 hook_async = false
-requires_path = "~/.local/share/icons/Slot-Beauty-Dark-Icons-V-2"

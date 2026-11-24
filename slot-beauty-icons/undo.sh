@@ -14,10 +14,11 @@ DEST="$DATA_HOME/icons/Slot-Beauty-Dark-Icons-V-2-Noctalia"
 ini_set() { # file group key value
   local file="$1" group="$2" key="$3" value="$4"
   [[ -f "$file" ]] || return 0
+  file="$(readlink -f "$file" 2>/dev/null || echo "$file")"
   if grep -qE "^[[:space:]]*${key}[[:space:]]*=" "$file"; then
     sed -i -E "s|^[[:space:]]*${key}[[:space:]]*=.*|${key}=${value}|" "$file"
-  elif grep -qxF "[${group}]" "$file"; then
-    sed -i -E "0,/^\[${group}\]\$/s//[${group}]\n${key}=${value}/" "$file"
+  elif grep -qE "^\[${group}\][[:space:]]*$" "$file"; then
+    sed -i -E "0,/^\[${group}\][[:space:]]*$/s//[${group}]\n${key}=${value}/" "$file"
   else
     printf '\n[%s]\n%s=%s\n' "$group" "$key" "$value" >> "$file"
   fi
@@ -26,6 +27,7 @@ ini_set() { # file group key value
 ini_unset() { # file key
   local file="$1" key="$2"
   [[ -f "$file" ]] || return 0
+  file="$(readlink -f "$file" 2>/dev/null || echo "$file")"
   sed -i -E "/^[[:space:]]*${key}[[:space:]]*=/d" "$file"
 }
 
@@ -39,7 +41,7 @@ done < "$STATE"
 if [[ -v remembered[gsettings] ]]; then
   value="${remembered[gsettings]}"
   if command -v gsettings >/dev/null 2>&1; then
-    if [[ "$value" == "__UNSET__" ]]; then
+    if [[ "$value" == "__UNSET__" || "$value" == "__RESET__" ]]; then
       gsettings reset org.gnome.desktop.interface icon-theme 2>/dev/null || true
     elif [[ -n "$value" ]]; then
       val_clean="${value//\'/}"

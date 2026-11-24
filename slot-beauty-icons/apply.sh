@@ -11,12 +11,23 @@ CONFIG_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 SRC="${SLOT_BEAUTY_SRC:-}"
+
 if [[ -z "$SRC" ]]; then
-  for cand in \
-    "$DATA_HOME/icons/Slot-Beauty-Dark-Icons-V-2" \
-    "$HOME/.icons/Slot-Beauty-Dark-Icons-V-2" \
-    "/usr/share/icons/Slot-Beauty-Dark-Icons-V-2" \
-    "/usr/local/share/icons/Slot-Beauty-Dark-Icons-V-2"; do
+  search_dirs=("$DATA_HOME" "$HOME/.icons")
+  if [[ -n "${XDG_DATA_DIRS:-}" ]]; then
+    IFS=: read -ra xdg_dirs <<< "$XDG_DATA_DIRS"
+    search_dirs+=("${xdg_dirs[@]}")
+  fi
+  search_dirs+=(/usr/local/share /usr/share)
+
+  for dir in "${search_dirs[@]}"; do
+    [[ -n "$dir" ]] || continue
+    cand="$dir/icons/Slot-Beauty-Dark-Icons-V-2"
+    if [[ -d "$cand/places" ]]; then
+      SRC="$cand"
+      break
+    fi
+    cand="$dir/Slot-Beauty-Dark-Icons-V-2"
     if [[ -d "$cand/places" ]]; then
       SRC="$cand"
       break
@@ -24,6 +35,7 @@ if [[ -z "$SRC" ]]; then
   done
   SRC="${SRC:-$DATA_HOME/icons/Slot-Beauty-Dark-Icons-V-2}"
 fi
+
 DEST="$DATA_HOME/icons/Slot-Beauty-Dark-Icons-V-2-Noctalia"
 STATE="$CONFIG_HOME/noctalia/slot-beauty-icons.state"
 COLOR_FILE="$CONFIG_DIR/colors-final"
@@ -31,20 +43,22 @@ THEME_NAME="Slot-Beauty-Dark-Icons-V-2-Noctalia"
 
 # ---------------------------------------------------------------- target ----
 
-TARGET=""
-if [[ -f "$COLOR_FILE" ]]; then
-  TARGET="$(head -n1 "$COLOR_FILE" | tr -d '[:space:]#')"
-  TARGET="${TARGET:0:6}"
+if [[ ! -f "$COLOR_FILE" ]]; then
+  echo "Error: colors-final not found at $COLOR_FILE" >&2
+  exit 1
 fi
+
+TARGET="$(head -n1 "$COLOR_FILE" | tr -d '[:space:]#')"
+TARGET="${TARGET:0:6}"
 if [[ ! "$TARGET" =~ ^[0-9a-fA-F]{6}$ ]]; then
-  echo "Warning: colors-final holds no valid colour; leaving the icon theme as is" >&2
-  exit 0
+  echo "Error: colors-final holds no valid hex colour: '$TARGET'" >&2
+  exit 1
 fi
 TARGET="$(printf '%s' "$TARGET" | tr 'A-F' 'a-f')"
 
 if [[ ! -d "$SRC/places" ]]; then
-  echo "Warning: Slot Beauty Dark Icons not found at $SRC" >&2
-  exit 0
+  echo "Error: Slot Beauty Dark Icons not found at $SRC" >&2
+  exit 1
 fi
 SRC="$(readlink -f "$SRC")"
 
@@ -53,7 +67,7 @@ SRC="$(readlink -f "$SRC")"
 # Fast atomic theme synchronization:
 # Never deletes active directories in-place to avoid falling back to Adwaita/Breeze.
 STAMP="$DEST/.noctalia-color"
-if [[ -f "$STAMP" && -d "$DEST/places" && "$(cat "$STAMP" 2>/dev/null)" == "$TARGET" ]]; then
+if [[ -f "$STAMP" && -f "$DEST/index.theme" && -d "$DEST/places" && "$(cat "$STAMP" 2>/dev/null)" == "$TARGET" ]]; then
   :
 else
   python3 "$CONFIG_DIR/recolor.py" sync "$TARGET" "$SRC" "$DEST" --bodies "$CONFIG_DIR/bodies.tsv"
@@ -62,20 +76,23 @@ fi
 # ----------------------------------------------------------- theme switch ----
 
 ini_get() {
-  [[ -f "$1" ]] || return 0
-  sed -n -E "s|^[[:space:]]*$2[[:space:]]*=[[:space:]]*||p" "$1" | head -n1
+  local file="$1" key="$2"
+  [[ -f "$file" ]] || return 0
+  file="$(readlink -f "$file" 2>/dev/null || echo "$file")"
+  sed -n -E "s|^[[:space:]]*$key[[:space:]]*=[[:space:]]*||p" "$file" | head -n1
 }
 
 ini_set() { # file group key value
   local file="$1" group="$2" key="$3" value="$4"
+  file="$(readlink -f "$file" 2>/dev/null || echo "$file")"
   mkdir -p "$(dirname "$file")"
   [[ -f "$file" ]] || printf '[%s]\n' "$group" > "$file"
   if grep -qE "^[[:space:]]*${key}[[:space:]]*=" "$file"; then
     if ! grep -qxF "${key}=${value}" "$file"; then
       sed -i -E "s|^[[:space:]]*${key}[[:space:]]*=.*|${key}=${value}|" "$file"
     fi
-  elif grep -qxF "[${group}]" "$file"; then
-    sed -i -E "0,/^\[${group}\]\$/s//[${group}]\n${key}=${value}/" "$file"
+  elif grep -qE "^\[${group}\][[:space:]]*$" "$file"; then
+    sed -i -E "0,/^\[${group}\][[:space:]]*$/s//[${group}]\n${key}=${value}/" "$file"
   else
     printf '\n[%s]\n%s=%s\n' "$group" "$key" "$value" >> "$file"
   fi
@@ -89,16 +106,16 @@ remember() { # key value
 
 # 1. GSettings (GNOME / Cinnamon / budgie / sway / niri / hyprland)
 if command -v gsettings >/dev/null 2>&1; then
-  current_gsettings="$(gsettings get org.gnome.desktop.interface icon-theme 2>/dev/null || true)"
-  clean_gsettings="${current_gsettings//\'/}"
-  if [[ -n "$clean_gsettings" ]]; then
+  if current_gsettings="$(gsettings get org.gnome.desktop.interface icon-theme 2>/dev/null)"; then
+    clean_gsettings="${current_gsettings//\'/}"
     if [[ "$clean_gsettings" != "$THEME_NAME" ]]; then
-      remember gsettings "$clean_gsettings"
+      if command -v dconf >/dev/null 2>&1 && [[ -z "$(dconf read /org/gnome/desktop/interface/icon-theme 2>/dev/null)" ]]; then
+        remember gsettings "__RESET__"
+      else
+        remember gsettings "$clean_gsettings"
+      fi
       gsettings set org.gnome.desktop.interface icon-theme "'$THEME_NAME'" 2>/dev/null || true
     fi
-  else
-    remember gsettings "__UNSET__"
-    gsettings set org.gnome.desktop.interface icon-theme "'$THEME_NAME'" 2>/dev/null || true
   fi
 fi
 
@@ -106,6 +123,8 @@ fi
 GTK3="$CONFIG_HOME/gtk-3.0/settings.ini"
 if [[ -f "$GTK3" ]]; then
   current_gtk3="$(ini_get "$GTK3" gtk-icon-theme-name)"
+  current_gtk3="${current_gtk3#[\"\']}"
+  current_gtk3="${current_gtk3%[\"\']}"
   if [[ -n "$current_gtk3" ]]; then
     if [[ "$current_gtk3" != "$THEME_NAME" ]]; then
       remember gtk3 "$current_gtk3"
@@ -125,6 +144,8 @@ fi
 GTK4="$CONFIG_HOME/gtk-4.0/settings.ini"
 if [[ -f "$GTK4" ]]; then
   current_gtk4="$(ini_get "$GTK4" gtk-icon-theme-name)"
+  current_gtk4="${current_gtk4#[\"\']}"
+  current_gtk4="${current_gtk4%[\"\']}"
   if [[ -n "$current_gtk4" ]]; then
     if [[ "$current_gtk4" != "$THEME_NAME" ]]; then
       remember gtk4 "$current_gtk4"
@@ -144,6 +165,8 @@ fi
 QT5="$CONFIG_HOME/qt5ct/qt5ct.conf"
 if [[ -f "$QT5" ]]; then
   current_qt5="$(ini_get "$QT5" icon_theme)"
+  current_qt5="${current_qt5#[\"\']}"
+  current_qt5="${current_qt5%[\"\']}"
   if [[ -n "$current_qt5" ]]; then
     if [[ "$current_qt5" != "$THEME_NAME" ]]; then
       remember qt5 "$current_qt5"
@@ -158,6 +181,8 @@ fi
 QT6="$CONFIG_HOME/qt6ct/qt6ct.conf"
 if [[ -f "$QT6" ]]; then
   current_qt6="$(ini_get "$QT6" icon_theme)"
+  current_qt6="${current_qt6#[\"\']}"
+  current_qt6="${current_qt6%[\"\']}"
   if [[ -n "$current_qt6" ]]; then
     if [[ "$current_qt6" != "$THEME_NAME" ]]; then
       remember qt6 "$current_qt6"

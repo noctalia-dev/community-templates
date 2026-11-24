@@ -167,7 +167,7 @@ def recolor_file(path, target, body=None, dry_run=False):
 def load_bodies(path):
     """Read the ``<size>/<file>\\t#rrggbb`` body table."""
     bodies = {}
-    if not path:
+    if not path or not os.path.isfile(path):
         return bodies
     with open(path, encoding="utf-8") as fh:
         for line in fh:
@@ -180,7 +180,7 @@ def load_bodies(path):
 
 
 def make_symlink(src_path, dst_path, src_root, dst_root):
-    """Create a symlink pointing to the corresponding file or rewritten path."""
+    """Create or update a symlink pointing to the corresponding file or rewritten path."""
     if not os.path.islink(src_path):
         target = os.path.realpath(src_path)
     else:
@@ -193,7 +193,16 @@ def make_symlink(src_path, dst_path, src_root, dst_root):
                 target = resolved
         else:
             target = link
-    if not os.path.lexists(dst_path):
+
+    if os.path.islink(dst_path):
+        if os.readlink(dst_path) != target:
+            os.unlink(dst_path)
+            os.symlink(target, dst_path)
+    elif os.path.lexists(dst_path):
+        if not os.path.isdir(dst_path):
+            os.unlink(dst_path)
+            os.symlink(target, dst_path)
+    else:
         os.symlink(target, dst_path)
 
 
@@ -206,10 +215,21 @@ def sync_theme(src, dest, target, bodies_path=None):
     target = target.lstrip("#").lower()
     os.makedirs(dest, exist_ok=True)
     theme_name = "Slot-Beauty-Dark-Icons-V-2-Noctalia"
+    base_theme = os.path.basename(os.path.abspath(src))
 
     # 1. index.theme
     index_dst = os.path.join(dest, "index.theme")
-    if not os.path.exists(index_dst):
+    needs_index = True
+    if os.path.isfile(index_dst):
+        try:
+            with open(index_dst, "r", encoding="utf-8") as fh:
+                existing_idx = fh.read()
+            if theme_name in existing_idx and base_theme in existing_idx:
+                needs_index = False
+        except OSError:
+            pass
+
+    if needs_index:
         index_src = os.path.join(src, "index.theme")
         if os.path.exists(index_src):
             with open(index_src, "r", encoding="utf-8") as fh:
@@ -220,7 +240,6 @@ def sync_theme(src, dest, target, bodies_path=None):
                 idx_content,
                 flags=re.MULTILINE,
             )
-            base_theme = os.path.basename(os.path.abspath(src))
             if base_theme not in idx_content and re.search(r"^Inherits=", idx_content, flags=re.MULTILINE):
                 idx_content = re.sub(
                     r"^Inherits=(.*)",
@@ -235,8 +254,7 @@ def sync_theme(src, dest, target, bodies_path=None):
         if entry in ("places", "index.theme", ".icon-theme.cache") or entry.startswith("."):
             continue
         dest_entry = os.path.join(dest, entry)
-        if not os.path.lexists(dest_entry):
-            make_symlink(os.path.join(src, entry), dest_entry, src, dest)
+        make_symlink(os.path.join(src, entry), dest_entry, src, dest)
 
     # 3. places directory structure and non-folder symlinks
     src_places = os.path.join(src, "places")
@@ -251,8 +269,13 @@ def sync_theme(src, dest, target, bodies_path=None):
         ddir = os.path.join(dst_places, sname)
 
         if os.path.islink(sdir):
-            if not os.path.lexists(ddir):
-                os.symlink(os.readlink(sdir), ddir)
+            target_link = os.readlink(sdir)
+            if os.path.islink(ddir):
+                if os.readlink(ddir) != target_link:
+                    os.unlink(ddir)
+                    os.symlink(target_link, ddir)
+            elif not os.path.lexists(ddir):
+                os.symlink(target_link, ddir)
             continue
         if not os.path.isdir(sdir):
             continue
@@ -265,8 +288,7 @@ def sync_theme(src, dest, target, bodies_path=None):
 
             # Never treat symlinks as files to recolour; replicate the symlink instead
             if os.path.islink(fsrc):
-                if not os.path.lexists(fdst):
-                    make_symlink(fsrc, fdst, src, dest)
+                make_symlink(fsrc, fdst, src, dest)
                 continue
 
             # Folder SVGs include regular folder*.svg and user-desktop.svg / user-home.svg
@@ -279,8 +301,7 @@ def sync_theme(src, dest, target, bodies_path=None):
             )
 
             if not is_folder_svg:
-                if not os.path.lexists(fdst):
-                    make_symlink(fsrc, fdst, src, dest)
+                make_symlink(fsrc, fdst, src, dest)
             else:
                 # If fdst was previously a symlink, unlink it so atomic replace writes a real file
                 if os.path.islink(fdst):
