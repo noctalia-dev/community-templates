@@ -1,6 +1,6 @@
 # Herdr App
 
-Themes [Herdr App](https://github.com/herdrdev/herdr-app) using Noctalia's terminal palette, including the 16 ANSI colors. Herdr derives its panel colors from the theme. This is for Herdr App, not the separate `herdr` TUI.
+Synchronizes [Herdr App](https://github.com/herdrdev/herdr-app)'s terminal background, foreground, selection, cursor, and 16 ANSI colors with Noctalia's terminal palette. The sidebar and tabs instead use Noctalia's UI color roles, including separate surfaces for the active tab and selected rows. This is for Herdr App, not the separate `herdr` TUI.
 
 ## Setup
 
@@ -11,4 +11,4 @@ Noctalia writes `$XDG_CONFIG_HOME/herdr-app/themes/noctalia.json` (normally `~/.
 
 The output path assumes the default Herdr App home. If `HERDR_APP_HOME` points elsewhere, this community template does not write there; use a Noctalia user template with an output path under `$HERDR_APP_HOME/themes/noctalia.json` instead (specify the actual path, as community template paths do not expand `HERDR_APP_HOME`).
 
-Tested with Herdr App v0.1.11.
+Tested with Herdr App v0.1.16.
