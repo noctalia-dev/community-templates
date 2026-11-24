@@ -35,17 +35,18 @@ Only the colourful folder icons under `places/` are rewritten:
 The derived theme stays in sync with the original pack without re-creating
 static directory trees on every theme change.
 
-## Performance and Atomicity
+## Performance, Security, and Atomicity
 
-- **Atomic File Updates**: Each recoloured folder SVG is written to a temporary file
-  and atomically swapped into place via `os.replace`. Active directories and files
-  are never deleted in-place, eliminating desktop icon flicker and temporary fallback
-  to default/Adwaita icons during wallpaper changes.
+- **Secure Atomic File Updates**: Each recoloured folder SVG is written to an unguessable
+  temporary file created securely via `tempfile.NamedTemporaryFile` in the same directory,
+  and atomically swapped into place via `os.replace`. Active directories and files are
+  never deleted in-place, eliminating desktop icon flicker and temporary fallback to
+  default/Adwaita icons during wallpaper changes.
 - **Fast Synchronization**: Theme synchronization and in-memory recoloring runs in
-  under 100ms in a single pass.
-- **Idempotent Pins**: GSettings, GTK 3/4, Qt 5/6, and external pins (rofi,
-  xsettingsd, niri, hyprland, etc.) are only modified when their values actually differ
-  from the target theme, avoiding spurious config reloads.
+  under 100ms in a single pass. Symlinks are preserved rather than traversed or overwritten.
+- **Idempotent Configuration**: GSettings, GTK 3/4 (`settings.ini`), and Qt 5/6 (`qt5ct`/`qt6ct`)
+  icon theme settings are only modified when their values actually differ from the target
+  theme, avoiding spurious config reloads.
 
 ## How the colour is chosen
 
@@ -86,18 +87,16 @@ never when the template runs.
 Enabling the template:
 
 - creates `~/.local/share/icons/Slot-Beauty-Dark-Icons-V-2-Noctalia`;
-- sets the GTK 3/4 icon theme (`gtk-icon-theme-name`) and the qt5ct/qt6ct
-  icon theme (`icon_theme`) to the derived theme;
 - sets the GSettings icon theme (`org.gnome.desktop.interface icon-theme`);
-- updates the icon-theme pins kept by rofi (`icon-theme`), xsettingsd
-  (`Net/IconThemeName`), KDE (`[Icons] Theme`), hyprfm (`icon_theme`) and the
-  niri / Hyprland startup lines that set the GSettings icon theme. Only pins
-  that already exist are rewritten — the template never adds a pin that was
-  not there before;
-- records the previous values in `~/.config/noctalia/slot-beauty-icons.state`.
+- sets the GTK 3/4 icon theme (`gtk-icon-theme-name`);
+- sets the qt5ct/qt6ct icon theme (`icon_theme`) if the respective config file exists;
+- records previous values and unset state in `~/.config/noctalia/slot-beauty-icons.state`.
 
-Disabling the template (`undo_hook`) restores every recorded value and removes
-the state file. The derived theme is left on disk, so re-enabling is instant.
+Disabling the template (`undo_hook`):
+
+- restores each recorded setting to its exact previous value;
+- removes any setting that was originally unset (and removes generated `settings.ini` if created);
+- removes the state file. The derived theme directory is left on disk so re-enabling is instant.
 
 ## Notes
 
