@@ -21,6 +21,10 @@ dark = "noctalia"
 light = "noctalia"
 ```
 
-Existing dark/light flavor choices are replaced; missing keys or the section itself are added. Other settings are retained. The hook uses `awk`, `mktemp` and `cmp`, writes through symlinks, and makes no backup. Back up an existing `theme.toml` before enabling the template. Existing explicit theme overrides remain in place.
+Existing dark/light flavor choices are replaced; missing keys or the section itself are added. Other settings are retained. The hook uses `awk`, `mktemp`, `cmp` and `sort`, writes through symlinks, and makes no backup. Back up an existing `theme.toml` before enabling the template. Existing explicit theme overrides remain in place.
 
-The hook does not restart Yazi or send a reload command. With `XDG_CONFIG_HOME` unset, the hook uses `~/.config`.
+With `XDG_CONFIG_HOME` unset, the hook uses `~/.config`.
+
+## Live reload
+
+With Yazi 26.5.6 or newer, the hook then runs `ya emit-to 0 app:theme`, which makes every running Yazi instance reload its theme in place, so colors follow wallpaper changes without restarting Yazi. Older versions are detected through `ya --version` and skipped; restart Yazi to see new colors there. When no Yazi is running, the command does nothing.
