@@ -1,0 +1,8 @@
+[catalog.tinkerwell]
+name = "Tinkerwell"
+category = "editor"
+
+[templates.tinkerwell]
+input_path = "tinkerwell.json"
+output_path = "~/.config/tinkerwell/themes/noctalia.json"
+requires_path = "$XDG_CONFIG_HOME/Tinkerwell"
