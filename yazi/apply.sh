@@ -4,6 +4,21 @@ set -euo pipefail
 config_file="${XDG_CONFIG_HOME:-$HOME/.config}/yazi/theme.toml"
 config_dir="$(dirname "$config_file")"
 
+# Live-reload running Yazi instances so they pick up the new flavor without a
+# restart. `app:theme` (Yazi >= 26.5.6) re-reads theme.toml and the flavor;
+# receiver 0 broadcasts to every instance. Noctalia runs post-hooks after it has
+# written all outputs, so tmtheme.xml is already in place here.
+reload_yazi() {
+    command -v ya >/dev/null 2>&1 || return 0
+    local version
+    version="$(ya --version 2>/dev/null | awk '/Version:/ { print $2; exit }')" || return 0
+    [ -n "$version" ] || return 0
+    # Older Yazi has no `app:theme`; skip rather than send an unknown action.
+    [ "$(printf '%s\n' 26.5.6 "$version" | sort -V | head -n 1)" = 26.5.6 ] || return 0
+    # Fails when no Yazi is running; that is fine.
+    ya emit-to 0 app:theme >/dev/null 2>&1 || true
+}
+
 mkdir -p "$config_dir"
 
 # If the config does not exist yet, create a minimal one and stop here.
@@ -13,6 +28,7 @@ if [ ! -f "$config_file" ]; then
 dark = "noctalia"
 light = "noctalia"
 EOF
+    reload_yazi
     exit 0
 fi
 
@@ -121,3 +137,5 @@ if ! cmp -s "$config_file" "$tmp_file"; then
     cat "$tmp_file" >"$config_file"
 fi
 rm -f "$tmp_file"
+
+reload_yazi
