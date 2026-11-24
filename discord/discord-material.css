@@ -92,3 +92,37 @@
         calc(var(--accent-lightness) * var(--lightness-modifier) * var(--ui-darkness-modifier) * var(--text-lightness-modifier) * 3.0)
     ) !important;
 }
+
+/* Chat code blocks: Material uses --attachment-color (on_primary) as the code
+   surface, while Discord's --text-code-* defaults still come from its dark
+   theme. Map them to the palette and blend the syntax hues toward the surface
+   text color so both light and dark palettes stay readable. */
+body {
+  --text-code: {{colors.on_surface.default.hex}} !important;
+  --text-code-variable: {{colors.on_surface.default.hex}} !important;
+  --text-code-operator: color-mix(in srgb, {{colors.on_surface_variant.default.hex}} 80%, {{colors.on_primary.default.hex}}) !important;
+  --text-code-comment: color-mix(in srgb, {{colors.on_surface_variant.default.hex}} 80%, {{colors.on_primary.default.hex}}) !important;
+  --text-code-keyword: color-mix(in srgb, {{colors.primary.default.hex}} 75%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-section: color-mix(in srgb, {{colors.primary.default.hex}} 75%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-link: color-mix(in srgb, {{colors.primary.default.hex}} 75%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-bullet: color-mix(in srgb, {{colors.primary.default.hex}} 75%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-title: color-mix(in srgb, {{colors.secondary.default.hex}} 75%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-type: color-mix(in srgb, hsl(267deg, 83%, 75%) 36%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-string: color-mix(in srgb, hsl(105deg, 48%, 67%) 36%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-regexp: color-mix(in srgb, hsl(105deg, 48%, 67%) 36%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-addition: color-mix(in srgb, hsl(105deg, 48%, 67%) 36%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-number: color-mix(in srgb, hsl(40deg, 70%, 73%) 36%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-builtin: color-mix(in srgb, hsl(40deg, 70%, 73%) 36%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-decorator: color-mix(in srgb, hsl(40deg, 70%, 73%) 36%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-attribute: color-mix(in srgb, hsl(199deg, 66%, 64%) 36%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-property: color-mix(in srgb, hsl(199deg, 66%, 64%) 36%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-namespace: color-mix(in srgb, hsl(199deg, 66%, 64%) 36%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-tag: color-mix(in srgb, hsl(351deg, 74%, 68%) 36%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-error: color-mix(in srgb, hsl(351deg, 74%, 68%) 36%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-deletion: color-mix(in srgb, hsl(351deg, 74%, 68%) 36%, {{colors.on_surface.default.hex}}) !important;
+  --text-code-escape: color-mix(in srgb, hsl(267deg, 83%, 75%) 36%, {{colors.on_surface.default.hex}}) !important;
+}
+
+[class*="codeBlockLang"] {
+  color: color-mix(in srgb, hsl(105deg, 48%, 67%) 36%, {{colors.on_surface.default.hex}}) !important;
+}

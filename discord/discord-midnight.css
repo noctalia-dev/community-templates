@@ -153,6 +153,36 @@ body {
   --purple-5: hsl(267deg, 83%, 70%);
 }
 
+/* Code syntax colors. Discord's --text-code-* defaults are dark-theme pastels
+   that lose contrast on Noctalia's light surfaces. Declare them on body (and
+   importantly) so they win whether Discord puts the theme class on html or
+   body. Mixing with --text-1 keeps both light and dark palettes legible. */
+body {
+  --text-code: var(--text-3) !important;
+  --text-code-variable: var(--text-3) !important;
+  --text-code-operator: var(--text-3) !important;
+  --text-code-comment: color-mix(in srgb, var(--text-3) 75%, var(--bg-4)) !important;
+  --text-code-keyword: var(--accent-1) !important;
+  --text-code-section: var(--accent-1) !important;
+  --text-code-link: var(--accent-1) !important;
+  --text-code-bullet: var(--accent-1) !important;
+  --text-code-title: var(--accent-3) !important;
+  --text-code-type: color-mix(in srgb, var(--purple-4) 36%, var(--text-1)) !important;
+  --text-code-string: color-mix(in srgb, var(--green-4) 36%, var(--text-1)) !important;
+  --text-code-regexp: color-mix(in srgb, var(--green-4) 36%, var(--text-1)) !important;
+  --text-code-addition: color-mix(in srgb, var(--green-4) 36%, var(--text-1)) !important;
+  --text-code-number: color-mix(in srgb, var(--yellow-4) 36%, var(--text-1)) !important;
+  --text-code-builtin: color-mix(in srgb, var(--yellow-4) 36%, var(--text-1)) !important;
+  --text-code-decorator: color-mix(in srgb, var(--yellow-4) 36%, var(--text-1)) !important;
+  --text-code-attribute: color-mix(in srgb, var(--blue-4) 36%, var(--text-1)) !important;
+  --text-code-property: color-mix(in srgb, var(--blue-4) 36%, var(--text-1)) !important;
+  --text-code-namespace: color-mix(in srgb, var(--blue-4) 36%, var(--text-1)) !important;
+  --text-code-tag: color-mix(in srgb, var(--red-4) 36%, var(--text-1)) !important;
+  --text-code-error: color-mix(in srgb, var(--red-4) 36%, var(--text-1)) !important;
+  --text-code-deletion: color-mix(in srgb, var(--red-4) 36%, var(--text-1)) !important;
+  --text-code-escape: color-mix(in srgb, var(--purple-4) 36%, var(--text-1)) !important;
+}
+
 /* Dividers (Channel list and messages) */
 [class*="divider"]:not([class*="isUnread"]) {
   border-color: var(--bg-2) !important;
@@ -367,4 +397,10 @@ body {
 [class*="inviteButton_"]:hover svg path {
     fill: var(--accent-3) !important;
     color: var(--accent-3) !important;
+}
+
+/* Code-block language label uses --text-feedback-positive (a pastel green);
+   match the syntax string color instead. */
+[class*="codeBlockLang"] {
+    color: color-mix(in srgb, var(--green-4) 36%, var(--text-1)) !important;
 }
