@@ -1,0 +1,4 @@
+{
+  "tile": "{{ colors.primary.default.hex }}",
+  "glyph": "{{ colors.on_primary.default.hex }}"
+}

@@ -1,0 +1,9 @@
+[catalog.dux-icons-color]
+name     = "Dux Icons Color"
+category = "system"
+
+[templates.dux-icons-color]
+input_path  = "dux-icons.json"
+output_path = "$XDG_CACHE_HOME/dux-icons/noctalia-palette.json"
+post_hook   = "bash '{{ config_dir }}/apply.sh'"
+
