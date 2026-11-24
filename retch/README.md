@@ -26,6 +26,7 @@ by default) setting `theme = "custom"` and `[custom_theme]`:
 ## Prerequisites
 
 - **retch 0.23.0 or newer** (for `include_optional` support and CLI `--theme` override precedence).
+- **Python 3.11 or newer** (`tomllib`, used by `apply.sh` and `undo.sh` to validate `config.toml` before replacing it).
 - A retch config file at `$XDG_CONFIG_HOME/retch/config.toml` (`~/.config/retch/config.toml`). Generate the stock
   annotated config once if you do not have one yet:
 
@@ -62,8 +63,11 @@ by default) setting `theme = "custom"` and `[custom_theme]`:
     appends `"themes/noctalia.toml"` to an existing array.
   - Leaves `config.toml` untouched (byte-identical no-op) if top-level `include_optional` already loads
     `"themes/noctalia.toml"`.
+  - Parses and validates the rewritten TOML with `python3` (`tomllib`) before updating `config.toml`, leaving the live
+    config untouched on any parse or validation error.
 - **`undo.sh`** removes `"themes/noctalia.toml"` from top-level `include_optional` (preserving any other included files,
-  or dropping `include_optional` if nothing remains) and deletes `$XDG_CONFIG_HOME/retch/themes/noctalia.toml`.
+  or dropping `include_optional` if nothing remains), validates the rewritten TOML before modifying `config.toml`, and
+  deletes `$XDG_CONFIG_HOME/retch/themes/noctalia.toml`.
 
 ## Tested against
 
