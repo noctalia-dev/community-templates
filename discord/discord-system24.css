@@ -364,3 +364,42 @@ body {
   width: 4px !important;
   border-radius: 0px !important;
 }
+
+/* --- CODE BLOCKS --- */
+/* Discord's --text-code-* defaults are dark-theme pastels, and its code
+   surface is not remapped. Theme both, blending syntax hues toward --text-1
+   so the same rules work for light and dark palettes. */
+body {
+  --background-code: var(--bg-2) !important;
+  --text-code: var(--text-2) !important;
+  --text-code-variable: var(--text-2) !important;
+  --text-code-operator: var(--text-3) !important;
+  --text-code-comment: color-mix(in srgb, var(--text-1) 70%, var(--bg-2)) !important;
+  --text-code-keyword: color-mix(in srgb, var(--accent-1) 75%, var(--text-1)) !important;
+  --text-code-section: color-mix(in srgb, var(--accent-1) 75%, var(--text-1)) !important;
+  --text-code-link: color-mix(in srgb, var(--accent-1) 75%, var(--text-1)) !important;
+  --text-code-bullet: color-mix(in srgb, var(--accent-1) 75%, var(--text-1)) !important;
+  --text-code-title: color-mix(in srgb, var(--accent-3) 75%, var(--text-1)) !important;
+  --text-code-type: color-mix(in srgb, var(--accent-5) 70%, var(--text-1)) !important;
+  --text-code-string: color-mix(in srgb, hsl(105deg, 48%, 67%) 28%, var(--text-1)) !important;
+  --text-code-regexp: color-mix(in srgb, hsl(105deg, 48%, 67%) 28%, var(--text-1)) !important;
+  --text-code-addition: color-mix(in srgb, hsl(105deg, 48%, 67%) 28%, var(--text-1)) !important;
+  --text-code-number: color-mix(in srgb, hsl(40deg, 70%, 73%) 28%, var(--text-1)) !important;
+  --text-code-builtin: color-mix(in srgb, hsl(40deg, 70%, 73%) 28%, var(--text-1)) !important;
+  --text-code-decorator: color-mix(in srgb, hsl(40deg, 70%, 73%) 28%, var(--text-1)) !important;
+  --text-code-attribute: color-mix(in srgb, hsl(199deg, 66%, 64%) 28%, var(--text-1)) !important;
+  --text-code-property: color-mix(in srgb, hsl(199deg, 66%, 64%) 28%, var(--text-1)) !important;
+  --text-code-namespace: color-mix(in srgb, hsl(199deg, 66%, 64%) 28%, var(--text-1)) !important;
+  --text-code-tag: color-mix(in srgb, hsl(351deg, 74%, 68%) 28%, var(--text-1)) !important;
+  --text-code-error: color-mix(in srgb, hsl(351deg, 74%, 68%) 28%, var(--text-1)) !important;
+  --text-code-deletion: color-mix(in srgb, hsl(351deg, 74%, 68%) 28%, var(--text-1)) !important;
+  --text-code-escape: color-mix(in srgb, hsl(267deg, 83%, 75%) 28%, var(--text-1)) !important;
+}
+
+.hljs {
+  background: var(--bg-2) !important;
+}
+
+[class*="codeBlockLang"] {
+  color: color-mix(in srgb, hsl(105deg, 48%, 67%) 28%, var(--text-1)) !important;
+}
