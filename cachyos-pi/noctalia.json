@@ -1,0 +1,30 @@
+{
+    "name": "Noctalia",
+    "description": "Colours from your Noctalia wallpaper",
+    "dark": {
+        "window": "{{colors.surface.dark.hex}}",
+        "sidebar": "{{colors.surface_container_lowest.dark.hex}}",
+        "surface": "{{colors.surface_container.dark.hex}}",
+        "surfaceHover": "{{colors.surface_container_high.dark.hex}}",
+        "surfaceAlt": "{{colors.surface_container_highest.dark.hex}}",
+        "border": "{{colors.outline_variant.dark.hex}}",
+        "text": "{{colors.on_surface.dark.hex}}",
+        "textMuted": "{{colors.on_surface_variant.dark.hex}}",
+        "accent": "{{colors.primary.dark.hex}}",
+        "arch": "{{colors.tertiary.dark.hex}}",
+        "danger": "{{colors.error.dark.hex}}"
+    },
+    "light": {
+        "window": "{{colors.surface_container.light.hex}}",
+        "sidebar": "{{colors.surface_container_high.light.hex}}",
+        "surface": "{{colors.surface_container_lowest.light.hex}}",
+        "surfaceHover": "{{colors.surface_container_low.light.hex}}",
+        "surfaceAlt": "{{colors.surface_container_high.light.hex}}",
+        "border": "{{colors.outline_variant.light.hex}}",
+        "text": "{{colors.on_surface.light.hex}}",
+        "textMuted": "{{colors.on_surface_variant.light.hex}}",
+        "accent": "{{colors.primary.light.hex}}",
+        "arch": "{{colors.tertiary.light.hex}}",
+        "danger": "{{colors.error.light.hex}}"
+    }
+}

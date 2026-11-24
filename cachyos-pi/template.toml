@@ -1,0 +1,10 @@
+[catalog.cachyos-pi]
+name = "CachyOS Package Installer"
+category = "system"
+
+# The app watches its theme folder and applies a changed theme at once, so no hook is needed.
+# It creates the folder on start, which also tells that a version with theme files is installed.
+[templates.cachyos_pi]
+input_path = "noctalia.json"
+output_path = "$XDG_CONFIG_HOME/CachyOS/cachyos-pi/themes/noctalia.json"
+requires_path = "~/.config/CachyOS/cachyos-pi/themes"
