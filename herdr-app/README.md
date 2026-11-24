@@ -1,6 +1,6 @@
 # Herdr App
 
-Synchronizes [Herdr App](https://github.com/herdrdev/herdr-app)'s terminal background, foreground, selection, cursor, and 16 ANSI colors with Noctalia's terminal palette. The sidebar and tabs instead use Noctalia's UI color roles, including separate surfaces for the active tab and selected rows. This is for Herdr App, not the separate `herdr` TUI.
+Synchronizes [Herdr App](https://github.com/herdrdev/herdr-app)'s terminal background, foreground, selection, cursor, and 16 ANSI colors with Noctalia's terminal palette. The sidebar and tabs instead use Noctalia's UI color roles, including separate surfaces for the active tab and selected rows. Herdr keeps its default separators. This is for Herdr App, not the separate `herdr` TUI.
 
 ## Setup
 
