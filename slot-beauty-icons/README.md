@@ -32,21 +32,29 @@ Only the colourful folder icons under `places/` are rewritten:
 | `places/symbolic/*` | Untouched |
 | every other file in the pack | Shared with the original through a symlink |
 
-The derived theme stays in sync with the original pack without re-creating
-static directory trees on every theme change.
+The derived theme stays in sync with the original pack: a rebuild reuses the
+existing symlink tree, rewrites only the recoloured folder icons, and removes
+entries the pack no longer ships.
 
 ## Performance, Security, and Atomicity
 
 - **Secure Atomic File Updates**: Each recoloured folder SVG is written to an unguessable
   temporary file created securely via `tempfile.NamedTemporaryFile` in the same directory,
-  and atomically swapped into place via `os.replace`. Active directories and files are
-  never deleted in-place, eliminating desktop icon flicker and temporary fallback to
-  default/Adwaita icons during wallpaper changes.
-- **Fast Synchronization**: Theme synchronization and in-memory recoloring runs in
-  under 100ms in a single pass. Symlinks are preserved rather than traversed or overwritten.
+  and atomically swapped into place via `os.replace`. Icons are never truncated in place,
+  so the desktop does not flicker or fall back to default icons mid-write.
+- **Fast Synchronization**: A run first fingerprints the source pack, the derived theme,
+  and this template's scripts (path, type, size, mtime and link target). When all three
+  still match the recorded stamp, the whole sync is skipped, so changing the wallpaper
+  only rewrites the folder icons that actually need it.
+- **Freshness, not guesswork**: the stamp covers the source pack, the derived theme and
+  `recolor.py`/`bodies.tsv`. An icon-pack update, a template edit or a damaged derived
+  theme therefore forces a rebuild, while a plain re-run stays free.
+- **No stale icons**: after a sync, entries that the pack no longer ships are pruned from
+  the derived theme, so a pack update cannot leave renamed or removed icons behind.
 - **Idempotent Configuration**: GSettings, GTK 3/4 (`settings.ini`), and Qt 5/6 (`qt5ct`/`qt6ct`)
   icon theme settings are only modified when their values actually differ from the target
-  theme, avoiding spurious config reloads.
+  theme, avoiding spurious config reloads. Previous values are recorded only after the
+  write succeeded, and INI edits are scoped to the exact group and key.
 
 ## How the colour is chosen
 
@@ -95,11 +103,15 @@ Enabling the template:
 Disabling the template (`undo_hook`):
 
 - restores each recorded setting to its exact previous value;
-- removes any setting that was originally unset (and removes generated `settings.ini` if created);
-- removes the state file. The derived theme directory is left on disk so re-enabling is instant.
+- removes any setting that was originally unset;
+- removes a `settings.ini` that the template created, but keeps it if you have added
+  settings of your own since;
+- deletes the state file only once every restore succeeded — if one fails, the state is
+  kept so `undo` can simply be run again;
+- leaves the derived theme directory on disk so re-enabling is instant.
 
 ## Notes
 
-- The template is safe to re-run: it rebuilds only when the target colour
-  changes, and the rebuild is idempotent.
+- The template is safe to re-run: it rebuilds only when the colour, the icon pack or the
+  template itself changed, and the rebuild is idempotent.
 - The original pack stays untouched at all times.
