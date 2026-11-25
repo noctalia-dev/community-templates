@@ -4,6 +4,8 @@ Recolors the Dux Icons theme so its tiles and glyphs follow the Noctalia palette
 
 Uses background-free, category-colored file and folder icons.
 
+> **Mutually exclusive with Dux Icons Standard.** Both styles write the same palette file and rebuild the same theme (`$XDG_DATA_HOME/icons/dux-icons`). Enable only one; if both are enabled, the result depends on which hook runs last.
+
 ## What is themed
 
 | Dux Icons option | Noctalia token |
@@ -20,4 +22,4 @@ File and folder icons use the Dux Icons color style. App icons retain their orig
 
 ## Setup
 
-Enable **Dux Icons Color** in Noctalia under Settings → Templates.
+Enable **Dux Icons Color** in Noctalia under Settings → Templates, and keep Dux Icons Standard disabled.
