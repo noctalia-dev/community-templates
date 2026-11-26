@@ -1,6 +1,6 @@
 # Zellij
 
-Generates a `noctalia` theme for Zellij using Noctalia's terminal colors.
+Generates a `noctalia` theme for Zellij and the built-in Zellij terminal from Noctalia's terminal colors.
 
 ## Setup
 
@@ -10,8 +10,10 @@ Install Zellij and enable **Zellij** in **Noctalia Settings -> Templates**. Sele
 theme "noctalia"
 ```
 
+For the Zellij terminal, colors set under `terminal { theme { ... } }` in `config.kdl` override the generated ones.
+
 ## Output
 
 - `$XDG_CONFIG_HOME/zellij/themes/noctalia.kdl`
 
-Back up any existing custom theme at this path before enabling it. The template does not edit `config.kdl`. Its example reload hook is commented out, so no hook runs and no configuration touch or reload is requested automatically.
+Back up any existing custom theme at this path before enabling it. The template does not edit `config.kdl` and runs no hooks.

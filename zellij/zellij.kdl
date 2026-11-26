@@ -1,15 +1,146 @@
 themes {
   noctalia {
-    fg "{{colors.terminal_foreground.default.hex}}"
-    bg "{{colors.terminal_background.default.hex}}"
-    black "{{colors.terminal_normal_black.default.hex}}"
-    red "{{colors.terminal_normal_red.default.hex}}"
-    green "{{colors.terminal_normal_green.default.hex}}"
-    yellow "{{colors.terminal_normal_yellow.default.hex}}"
-    blue "{{colors.terminal_normal_blue.default.hex}}"
-    magenta "{{colors.terminal_normal_magenta.default.hex}}"
-    cyan "{{colors.terminal_normal_cyan.default.hex}}"
-    white "{{colors.terminal_normal_white.default.hex}}"
-    orange "{{colors.terminal_normal_red.default.hex | rotate_hue 30}}"
+    text_unselected {
+      base "{{colors.terminal_foreground.default.hex}}"
+      background "{{colors.terminal_background.default.hex}}"
+      emphasis_0 "{{colors.primary.default.hex}}"
+      emphasis_1 "{{colors.terminal_normal_cyan.default.hex}}"
+      emphasis_2 "{{colors.terminal_normal_green.default.hex}}"
+      emphasis_3 "{{colors.terminal_normal_magenta.default.hex}}"
+    }
+    text_selected {
+      base "{{colors.terminal_selection_fg.default.hex}}"
+      background "{{colors.terminal_selection_bg.default.hex}}"
+      emphasis_0 "{{colors.primary.default.hex}}"
+      emphasis_1 "{{colors.terminal_normal_cyan.default.hex}}"
+      emphasis_2 "{{colors.terminal_normal_green.default.hex}}"
+      emphasis_3 "{{colors.terminal_normal_magenta.default.hex}}"
+    }
+    ribbon_unselected {
+      base "{{colors.on_surface.default.hex}}"
+      background "{{colors.surface_container_highest.default.hex}}"
+      emphasis_0 "{{colors.primary.default.hex}}"
+      emphasis_1 "{{colors.tertiary.default.hex}}"
+      emphasis_2 "{{colors.secondary.default.hex}}"
+      emphasis_3 "{{colors.error.default.hex}}"
+    }
+    ribbon_hover {
+      base "{{colors.on_hover.default.hex}}"
+      background "{{colors.hover.default.hex}}"
+      emphasis_0 "{{colors.on_hover.default.hex}}"
+      emphasis_1 "{{colors.on_hover.default.hex}}"
+      emphasis_2 "{{colors.on_hover.default.hex}}"
+      emphasis_3 "{{colors.on_hover.default.hex}}"
+    }
+    ribbon_selected {
+      base "{{colors.on_primary.default.hex}}"
+      background "{{colors.primary.default.hex}}"
+      emphasis_0 "{{colors.on_primary.default.hex}}"
+      emphasis_1 "{{colors.on_primary.default.hex}}"
+      emphasis_2 "{{colors.on_primary.default.hex}}"
+      emphasis_3 "{{colors.on_primary.default.hex}}"
+    }
+    exit_code_success {
+      base "{{colors.terminal_normal_green.default.hex}}"
+      background 0
+      emphasis_0 "{{colors.terminal_normal_cyan.default.hex}}"
+      emphasis_1 "{{colors.terminal_normal_black.default.hex}}"
+      emphasis_2 "{{colors.terminal_normal_magenta.default.hex}}"
+      emphasis_3 "{{colors.terminal_normal_blue.default.hex}}"
+    }
+    exit_code_error {
+      base "{{colors.terminal_normal_red.default.hex}}"
+      background 0
+      emphasis_0 "{{colors.terminal_normal_yellow.default.hex}}"
+      emphasis_1 0
+      emphasis_2 0
+      emphasis_3 0
+    }
+    frame_selected {
+      base "{{colors.terminal_normal_green.default.hex}}"
+      background 0
+      emphasis_0 "{{colors.primary.default.hex}}"
+      emphasis_1 "{{colors.terminal_normal_cyan.default.hex}}"
+      emphasis_2 "{{colors.terminal_normal_magenta.default.hex}}"
+      emphasis_3 0
+    }
+    frame_highlight {
+      base "{{colors.primary.default.hex}}"
+      background 0
+      emphasis_0 "{{colors.terminal_normal_magenta.default.hex}}"
+      emphasis_1 0
+      emphasis_2 "{{colors.primary.default.hex}}"
+      emphasis_3 "{{colors.primary.default.hex}}"
+    }
+    table_title {
+      base "{{colors.terminal_normal_green.default.hex}}"
+      background 0
+      emphasis_0 "{{colors.primary.default.hex}}"
+      emphasis_1 "{{colors.terminal_normal_cyan.default.hex}}"
+      emphasis_2 "{{colors.terminal_normal_green.default.hex}}"
+      emphasis_3 "{{colors.terminal_normal_magenta.default.hex}}"
+    }
+    table_cell_unselected {
+      base "{{colors.terminal_foreground.default.hex}}"
+      background "{{colors.terminal_normal_black.default.hex}}"
+      emphasis_0 "{{colors.primary.default.hex}}"
+      emphasis_1 "{{colors.terminal_normal_cyan.default.hex}}"
+      emphasis_2 "{{colors.terminal_normal_green.default.hex}}"
+      emphasis_3 "{{colors.terminal_normal_magenta.default.hex}}"
+    }
+    table_cell_selected {
+      base "{{colors.terminal_foreground.default.hex}}"
+      background "{{colors.terminal_background.default.hex}}"
+      emphasis_0 "{{colors.primary.default.hex}}"
+      emphasis_1 "{{colors.terminal_normal_cyan.default.hex}}"
+      emphasis_2 "{{colors.terminal_normal_green.default.hex}}"
+      emphasis_3 "{{colors.terminal_normal_magenta.default.hex}}"
+    }
+    list_unselected {
+      base "{{colors.terminal_normal_white.default.hex}}"
+      background "{{colors.terminal_normal_black.default.hex}}"
+      emphasis_0 "{{colors.primary.default.hex}}"
+      emphasis_1 "{{colors.terminal_normal_cyan.default.hex}}"
+      emphasis_2 "{{colors.terminal_normal_green.default.hex}}"
+      emphasis_3 "{{colors.terminal_normal_magenta.default.hex}}"
+    }
+    list_selected {
+      base "{{colors.terminal_normal_white.default.hex}}"
+      background "{{colors.terminal_background.default.hex}}"
+      emphasis_0 "{{colors.primary.default.hex}}"
+      emphasis_1 "{{colors.terminal_normal_cyan.default.hex}}"
+      emphasis_2 "{{colors.terminal_normal_green.default.hex}}"
+      emphasis_3 "{{colors.terminal_normal_magenta.default.hex}}"
+    }
+    multiplayer_user_colors {
+      player_1 "{{colors.terminal_normal_magenta.default.hex}}"
+      player_2 "{{colors.terminal_normal_blue.default.hex}}"
+      player_3 0
+      player_4 "{{colors.terminal_normal_yellow.default.hex}}"
+      player_5 "{{colors.terminal_normal_cyan.default.hex}}"
+      player_6 0
+      player_7 "{{colors.terminal_normal_red.default.hex}}"
+      player_8 0
+      player_9 0
+      player_10 0
+    }
+    terminal_colors {
+      black "{{colors.terminal_normal_black.default.hex}}"
+      red "{{colors.terminal_normal_red.default.hex}}"
+      green "{{colors.terminal_normal_green.default.hex}}"
+      yellow "{{colors.terminal_normal_yellow.default.hex}}"
+      blue "{{colors.terminal_normal_blue.default.hex}}"
+      magenta "{{colors.terminal_normal_magenta.default.hex}}"
+      cyan "{{colors.terminal_normal_cyan.default.hex}}"
+      white "{{colors.terminal_normal_white.default.hex}}"
+      bright_black "{{colors.terminal_bright_black.default.hex}}"
+      bright_red "{{colors.terminal_bright_red.default.hex}}"
+      bright_green "{{colors.terminal_bright_green.default.hex}}"
+      bright_yellow "{{colors.terminal_bright_yellow.default.hex}}"
+      bright_blue "{{colors.terminal_bright_blue.default.hex}}"
+      bright_magenta "{{colors.terminal_bright_magenta.default.hex}}"
+      bright_cyan "{{colors.terminal_bright_cyan.default.hex}}"
+      bright_white "{{colors.terminal_bright_white.default.hex}}"
+    }
   }
 }
