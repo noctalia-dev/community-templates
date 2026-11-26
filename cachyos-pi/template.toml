@@ -7,4 +7,4 @@ category = "system"
 [templates.cachyos_pi]
 input_path = "noctalia.json"
 output_path = "$XDG_CONFIG_HOME/CachyOS/cachyos-pi/themes/noctalia.json"
-requires_path = "~/.config/CachyOS/cachyos-pi/themes"
+requires_path = "$XDG_CONFIG_HOME/CachyOS/cachyos-pi/themes"
