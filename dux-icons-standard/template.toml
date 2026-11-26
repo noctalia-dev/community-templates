@@ -1,0 +1,8 @@
+[catalog.dux-icons-standard]
+name     = "Dux Icons Standard"
+category = "system"
+
+[templates.dux-icons-standard]
+input_path  = "dux-icons.json"
+output_path = "$XDG_CACHE_HOME/dux-icons/noctalia-palette.json"
+post_hook   = "bash '{{ config_dir }}/apply.sh'"
