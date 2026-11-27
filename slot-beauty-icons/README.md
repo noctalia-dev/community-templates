@@ -6,6 +6,15 @@ palette, so folders follow your wallpaper instead of staying blue.
 The original icon pack is never modified. The template builds a sibling theme,
 `Slot-Beauty-Dark-Icons-V-2-Noctalia`, next to it and selects that one.
 
+## Screenshots
+
+Before (the pack as shipped) and after (the generated theme) with the same
+palette colour, `#cba6f7`:
+
+![Folder icons recoloured in dark mode](screenshot.png)
+
+![Folder icons recoloured in light mode](light-screenshot.png)
+
 ## Requirements
 
 The **Slot Beauty Dark Icons V2** pack should be installed in standard icon paths:
@@ -51,6 +60,10 @@ entries the pack no longer ships.
   theme therefore forces a rebuild, while a plain re-run stays free.
 - **No stale icons**: after a sync, entries that the pack no longer ships are pruned from
   the derived theme, so a pack update cannot leave renamed or removed icons behind.
+- **Writes stay inside the derived theme**: if the pack changes a size from a
+  symlink to a real directory, a leftover destination symlink is replaced
+  before anything is written, so a recolour can never follow it into the
+  original pack.
 - **Idempotent Configuration**: GSettings, GTK 3/4 (`settings.ini`), and Qt 5/6 (`qt5ct`/`qt6ct`)
   icon theme settings are only modified when their values actually differ from the target
   theme, avoiding spurious config reloads. Previous values are recorded only after the
