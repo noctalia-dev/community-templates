@@ -30,6 +30,7 @@ historyUnreadBarBorder: {{colors.shadow.default.hex}}00; // Unread messages bann
 botKbBg: {{colors.surface_variant.default.hex}}; // Inline bot keyboard button background
 botKbDownBg: {{colors.secondary_container.default.hex}}; // Inline bot keyboard button pressed
 msgBotKbIconFg: {{colors.on_surface_variant.default.hex}}; // Inline bot keyboard button icon
+msgInBgSelected: {{colors.surface_container_high.default.hex}};
 msgOutBg: {{colors.secondary_container.default.hex}};
 msgOutBgSelected: {{colors.surface_container_high.default.hex}};
 msgOutServiceFg: {{colors.on_surface.default.hex}};
@@ -161,6 +162,3 @@ contactsStatusFgOnline: {{colors.primary.default.hex}}; // Online contact status
 
 photoCropFadeBg: {{colors.surface.default.hex}}cc; // Photo crop fade background
 photoCropPointFg: {{colors.primary.default.hex}}; // Photo crop points
-
-chat_inBubbleSelected: #313244; // inbox selected chat background
-chat_outBubbleSelected: #313244; // outbox selected chat background
